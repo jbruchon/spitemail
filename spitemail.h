@@ -46,6 +46,7 @@ extern "C" {
  #define DBG(a)
 #endif
 
+
 /*** Resource definitions for icons, menus, etc. ***/
 
 #define WINRES_MANIFEST 1
@@ -54,6 +55,21 @@ extern "C" {
 
 #define IDM_FILE_EXIT  9001
 #define IDM_HELP_ABOUT 9002
+
+
+/*** Constants ***/
+#define SM_WINDOW_WIDTH 800
+#define SM_WINDOW_HEIGHT 600
+#define SM_MIN_WINDOW_WIDTH 600
+#define SM_MIN_WINDOW_HEIGHT 300
+/* The next 3 numbers should add up to SM_WINDOW_WIDTH */
+#define SM_FOLDER_PANE_WIDTH 200
+#define SM_MESSAGE_PANE_WIDTH 240
+#define SM_READING_PANE_WIDTH 360
+/* The next 3 numbers should add up to SM_MIN_WINDOW_WIDTH */
+#define SM_MIN_FOLDER_PANE_WIDTH 120
+#define SM_MIN_MESSAGE_PANE_WIDTH 140
+#define SM_MIN_READING_PANE_WIDTH 340
 
 
 #ifdef __cplusplus

@@ -23,8 +23,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	int col1Width;
 	int col2Width;
 	int col3Width;
+	MINMAXINFO *minMax;
 
 	switch (uMsg) {
+		case WM_GETMINMAXINFO:
+			minMax = (MINMAXINFO *)lParam;
+			minMax->ptMinTrackSize.x = SM_MIN_WINDOW_WIDTH;
+			minMax->ptMinTrackSize.y = SM_MIN_WINDOW_HEIGHT;
+			return 0;
+
 		case WM_CREATE:
 			pCreate = (CREATESTRUCT *)lParam;
 			hInstance = pCreate->hInstance;
@@ -82,10 +89,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			contentHeight = cy - contentTop;
 
 			/* Divide horizontal across three vertical panes */
-			col1Width = 200;  /* Folder tree */
-			col2Width = 250;  /* Message list */
-			col3Width = cx - col1Width - col2Width;  /* Reading pane */
-			if (col3Width < 100) col3Width = 100; /* Minimum width */
+			col1Width = SM_FOLDER_PANE_WIDTH;
+			col2Width = SM_MESSAGE_PANE_WIDTH;
+			/* Flexible resize if width drops below standard width */
+			if (cx < SM_WINDOW_WIDTH) {
+				col1Width = ((long)cx * SM_FOLDER_PANE_WIDTH) / SM_WINDOW_WIDTH;
+				col2Width = ((long)cx * SM_MESSAGE_PANE_WIDTH) / SM_WINDOW_WIDTH;
+				if (col1Width < SM_MIN_FOLDER_PANE_WIDTH) col1Width = SM_MIN_FOLDER_PANE_WIDTH;
+				if (col2Width < SM_MIN_MESSAGE_PANE_WIDTH) col2Width = SM_MIN_MESSAGE_PANE_WIDTH;
+			}
+
+			col3Width = cx - col1Width - col2Width;
+			if (col3Width < SM_MIN_READING_PANE_WIDTH) col3Width = SM_MIN_READING_PANE_WIDTH;
 
 			MoveWindow(hwndFolderTree, 0, contentTop, col1Width, contentHeight, TRUE);
 			MoveWindow(hwndMessageList, col1Width, contentTop, col2Width, contentHeight, TRUE);
@@ -131,7 +146,7 @@ int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 
 	HWND hwnd = CreateWindowEx(
 		0, CLASS_NAME, L"Spite Mail", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
+		CW_USEDEFAULT, CW_USEDEFAULT, SM_WINDOW_WIDTH, SM_WINDOW_HEIGHT,
 		NULL, NULL, hInstance, NULL
 	);
 
