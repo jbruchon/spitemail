@@ -9,10 +9,7 @@ extern "C" {
 #endif
 
 /* Spite Mail is a Win32 application only */
-#if defined _WIN32 || defined __MINGW32__
- #ifndef ON_WINDOWS
-  #define ON_WINDOWS 1
- #endif
+#if defined _WIN32 || defined __MINGW32__ || defined __MINGW64__
  #ifndef WIN32_LEAN_AND_MEAN
   #define WIN32_LEAN_AND_MEAN
  #endif
@@ -21,15 +18,6 @@ extern "C" {
 #else
 #error This is a Win32 application.
 #endif /* Win32 */
-
-#include <limits.h>
-#include <stdint.h>
-#include <sys/types.h>
-#include "libjodycode.h"
-
-/* Some types are different on Windows */
-typedef uint64_t spitemail_ino_t;
-typedef uint32_t spitemail_mode_t;
 
 #define ISFLAG(a,b) ((a & b) == b)
 #define SETFLAG(a,b) (a |= b)
