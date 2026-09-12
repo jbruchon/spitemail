@@ -13,7 +13,7 @@ RMDIR   = rmdir -p
 MKDIR   = mkdir -p
 
 # Main object files
-OBJS += spitemail.o libjodycode_check.o
+OBJS += spitemail.o
 
 # Configuration section
 COMPILER_OPTIONS = -Wall -Wwrite-strings -Wcast-align -Wstrict-aliasing -Wstrict-prototypes -Wpointer-arith -Wundef
@@ -78,44 +78,15 @@ endif
 BDYNAMIC = -Wl,-Bdynamic
 BSTATIC = -Wl,-Bstatic
 
-### Find and use nearby libjodycode by default
-ifndef IGNORE_NEARBY_JC
- ifneq ("$(wildcard ../libjodycode/libjodycode.h)","")
-  $(info Found and using nearby libjodycode at ../libjodycode)
-  COMPILER_OPTIONS += -I../libjodycode -L../libjodycode
-  ifeq ("$(wildcard ../libjodycode/version.o)","")
-   $(error You must build libjodycode before building spitemail)
-  endif
-  ifneq ("$(wildcard ../libjodycode/libjodycode.a)","")
-   $(info Overriding static library extension .lib for found extension .a)
-   LIB_EXT=.a
-  endif
-  STATIC_LDFLAGS += ../libjodycode/libjodycode$(LIB_EXT)
- else
-  STATIC_LDFLAGS += -ljodycode
- endif
-else
- STATIC_LDFLAGS += -ljodycode
-endif
-
-
 CFLAGS += $(COMPILER_OPTIONS) $(CFLAGS_EXTRA)
 LDFLAGS += $(LINK_OPTIONS) $(LDFLAGS_EXTRA)
 
 
-all: libjodycode_hint $(PROGRAM_NAME) static_jc
-
-static_jc: $(PROGRAM_NAME) ljc_vercheck_static
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(BSTATIC) $(STATIC_LDFLAGS) $(BDYNAMIC) -o $(PROGRAM_NAME)$(SUFFIX)
-
-static: $(PROGRAM_NAME) ljc_vercheck_static
-	$(CC) $(CFLAGS) $(OBJS) -static $(LDFLAGS) $(BSTATIC) $(STATIC_LDFLAGS) -o $(PROGRAM_NAME)$(SUFFIX)
-
-static_stripped: $(PROGRAM_NAME) static_jc
+all: $(PROGRAM_NAME)
 	-strip $(PROGRAM_NAME)$(SUFFIX)
 
 $(PROGRAM_NAME): $(OBJS)
-	@:
+	$(CC) $(CFLAGS) $(OBJS) -static $(LDFLAGS) $(BSTATIC) $(STATIC_LDFLAGS) -o $(PROGRAM_NAME)$(SUFFIX)
 
 winres.o: winres.rc winres.manifest.xml
 	./tune_winres.sh
@@ -130,46 +101,18 @@ installdirs:
 	test -e $(DESTDIR)$(MAN_DIR) || $(MKDIR) $(DESTDIR)$(MAN_DIR)
 
 install:
-	#error
+	@echo "It's just one binary, bro. Installation is not supported."
+	exit 1
 
 test:
 	./test.sh
 
-stripped: $(PROGRAM_NAME) static_jc
+stripped: $(PROGRAM_NAME) static
 	strip $(PROGRAM_NAME)$(SUFFIX)
 
 clean:
-	$(RM) $(OBJS) $(OBJS_CLEAN) build_date.h \
-		$(PROGRAM_NAME)$(SUFFIX) hashdb_util$(SUFFIX) ljc_vercheck$(SUFFIX) \
+	$(RM) $(OBJS) $(OBJS_CLEAN) $(PROGRAM_NAME)$(SUFFIX) \
 		*~ .*.un~ *.gcno *.gcda *.gcov *.obj
 
 distclean: clean
-	$(RM) -rf *.pkg.tar* spitemail-*-*/ spitemail-*-*.zip
-
-chrootpackage:
-	+./chroot_build.sh
-
-package:
-	+./generate_packages.sh $(ARCH)
-
-
-.PHONY: ljc_vercheck_static
-
-ifeq ($(NOVERCHECK),)
-ljc_vercheck_static:
-	$(CC) $(CFLAGS) $(CPPFLAGS) libjodycode_check.c -DSTANDALONE $(LDFLAGS) $(BSTATIC) $(STATIC_LDFLAGS) $(BDYNAMIC) -o ljc_vercheck$(SUFFIX)
-	@echo
-	@./ljc_vercheck 2>/dev/null
-	@if [ `(./ljc_vercheck$(SUFFIX) 2>/dev/null || echo ":0:0:0:0") | cut -d: -f4` -lt `grep MY_FEATURELEVEL_REQ libjodycode_check.h | cut -d" " -f3` ]; \
-		then echo "The linked libjodycode feature level is too old. Get the latest libjodycode and try again."; \
-		else echo "The linked libjodycode feature level is OK."; \
-	fi
-	@echo
-else
-ljc_vercheck_static:
-	@echo "Version check skipped by request (NOVERCHECK set)"
-endif
-
-
-libjodycode_hint:
-	$(info hint: if ../libjodycode is built but spitemail won't run, try doing 'make static_jc')
+	$(RM) -rf spitemail-*-*/ spitemail-*-*.zip
