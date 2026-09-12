@@ -15,6 +15,7 @@ extern "C" {
  #endif
  #include <windows.h>
  #include <io.h>
+ #include <wchar.h>
 #else
 #error This is a Win32 application.
 #endif /* Win32 */
@@ -44,6 +45,15 @@ extern "C" {
 #else
  #define DBG(a)
 #endif
+
+/*** Resource definitions for icons, menus, etc. ***/
+
+#define WINRES_MANIFEST 1
+#define ICON_SPITEMAIL 2
+#define IDM_MENU 3
+
+#define IDM_FILE_EXIT  9001
+#define IDM_HELP_ABOUT 9002
 
 
 #ifdef __cplusplus

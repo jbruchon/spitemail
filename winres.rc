@@ -1,7 +1,7 @@
-#include "winver.h"
+#include "spitemail.h"
 
-1 24 winres.manifest.xml
-2 ICON icon/icon_spitemail_all.ico
+WINRES_MANIFEST 24 winres.manifest.xml
+ICON_SPITEMAIL ICON icon/icon_spitemail_all.ico
 
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION 0,0,0,1
@@ -12,23 +12,35 @@ VS_VERSION_INFO VERSIONINFO
  FILETYPE 0x1L
  FILESUBTYPE 0x0L
 BEGIN
-    BLOCK "StringFileInfo"
-    BEGIN
+	BLOCK "StringFileInfo"
+	BEGIN
 		BLOCK "040904b0"
 		BEGIN
-		    VALUE "Comments", "(C) 2026 Jody Bruchon <jody@jodybruchon.com>, published under GNU GPL v2"
-		    VALUE "CompanyName", "Jody Bruchon"
-		    VALUE "FileDescription", "Spite Mail email client"
-		    VALUE "FileVersion", "0,0,0,1"
-		    VALUE "InternalName", "spitemail"
-		    VALUE "LegalCopyright", "(C) 2026 Jody Bruchon <jody@jodybruchon.com>"
-		    VALUE "OriginalFilename", "spitemail.exe"
-		    VALUE "ProductName", "Spite Mail"
-		    VALUE "ProductVersion", "0,0,0,1"
+			VALUE "Comments", "(C) 2026 Jody Bruchon <jody@jodybruchon.com>, published under GNU GPL v2"
+			VALUE "CompanyName", "Jody Bruchon"
+			VALUE "FileDescription", "Spite Mail email client"
+			VALUE "FileVersion", "0,0,0,1"
+			VALUE "InternalName", "spitemail"
+			VALUE "LegalCopyright", "(C) 2026 Jody Bruchon <jody@jodybruchon.com>"
+			VALUE "OriginalFilename", "spitemail.exe"
+			VALUE "ProductName", "Spite Mail"
+			VALUE "ProductVersion", "0,0,0,1"
 		END
-    END
-    BLOCK "VarFileInfo"
-    BEGIN
+	END
+	BLOCK "VarFileInfo"
+	BEGIN
 		VALUE "Translation", 0x409, 1200
-    END
+	END
+END
+
+IDM_MENU MENU
+BEGIN
+	POPUP "&File"
+	BEGIN
+		MENUITEM "E&xit", IDM_FILE_EXIT
+	END
+	POPUP "&Help"
+	BEGIN
+		MENUITEM "&About Spite Mail...", IDM_HELP_ABOUT
+	END
 END
