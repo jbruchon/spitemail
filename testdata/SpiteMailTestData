@@ -1,0 +1,2550 @@
+From - Sun Sep 13 13:14:07 2026
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+Return-Path: <connectalb@n8n.connectalb.org>
+Authentication-Results: perfora.net; dkim=pass header.i=@n8n.connectalb.org
+ header.s=aliyun-eu-central-1; spf=pass
+ smtp.mailfrom=connectalb@n8n.connectalb.org; dmarc=pass
+ header.from=n8n.connectalb.org policy.dmarc=none; iprev=pass
+ policy.iprev=47.245.195.139
+Received: from static195-139.de.dm.aliyun.com ([47.245.195.139]) by
+ mx.perfora.net (mxeueus004 [74.208.114.65]) with ESMTPS (Nemesis) id
+ 1MMnfc-1xLzPC2d76-00JQQ5 for <meow@gazingcat.com>; Sun, 13 Sep 2026 02:52:03
+ +0200
+X-AliDM-RcptTo: bWVvd0BnYXppbmdjYXQuY29t
+Feedback-ID: default:connectalb@n8n.connectalb.org:alibabak_SmtpBatch:286481
+DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=n8n.connectalb.org; s=aliyun-eu-central-1;
+	t=1789260721; h=Content-Type:MIME-Version:From:To:Subject:Date:Message-ID;
+	bh=c1lPoLIEv75qgkuzLesUmybNzl55auJPZdVq+0T81Tk=;
+	b=SHfG/R83JP2j3pYAhE3wrYg2E7lrM4AEGTIx5co0q0JFJyOc1aqAJiV33MhqJfHty84rFbiFqpMBIc3gaRJZyf4N3/OrPoXCPN1K7Xfl+rIP28kfvRdxEKOWZngZuKAnu7+ud4Jo5+X3WT8IwFpTBZlxYorLPaEdIxQrqVWisSU=
+Received: from 2.28.79.229(mailfrom:connectalb@n8n.connectalb.org fp:SMTPD_-----NWDXWk cluster:dm-ay35de-a)
+          by smtp.aliyun-inc.com(33.3.155.177);
+          Sun, 13 Sep 2026 08:52:00 +0800
+X-EnvId: 27418048689
+Content-Type: multipart/alternative; boundary="===============4805529818079580763=="
+MIME-Version: 1.0
+From: CIoud Security <connectalb@n8n.connectalb.org>
+To: meow@gazingcat.com
+Subject: =?utf-8?b?RmluYUkgTtC+dGljZTogQWNjb3VudCBEZWFjdGl2YXRpb24gfCDQoGjQvnTQvtGVICYgVtGWZNC10L7RlSBSZW1vdmVkIFRvZGF5?=
+Date: Sat, 12 Sep 2026 17:51:59 -0700
+Message-ID: <178926071986.6364.9872130397531845649@n8n.connectalb.org>
+Envelope-To: <meow@gazingcat.com>
+X-Spam-Flag: NO
+UI-InboundReport: notjunk:1;M01:P0:rlywAr5iSuA=;GeX111ywxO65XkEYqruNaFbtf+1h
+ 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
+ 3OQ2VL88JqLVkRV+IzkxMxDA==
+
+--===============4805529818079580763==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+SW1wb3J0YW50IG5vdGljZS4gUGxlYXNlIHZpZXcgdGhpcyBtZXNzYWdlIHVzaW5nIGFuIEhUTUwt
+Y29tcGF0aWJsZSBjbGllbnQu
+
+--===============4805529818079580763==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+77u/PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNl
+dD0idXRmLTgiPgogIDxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Ut
+d2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj4KICA8dGl0bGU+c2VjdXQ8L3RpdGxlPgo8L2hlYWQ+
+Cjxib2R5IHN0eWxlPSJtYXJnaW46IDA7IHBhZGRpbmc6IDA7IGJhY2tncm91bmQtY29sb3I6ICMw
+NzA5MGU7IC13ZWJraXQtdGV4dC1zaXplLWFkanVzdDogMTAwJTsgLW1zLXRleHQtc2l6ZS1hZGp1
+c3Q6IDEwMCU7Ij4KICA8dGFibGUgcm9sZT0icHJlc2VudGF0aW9uIiB3aWR0aD0iMTAwJSIgY2Vs
+bHBhZGRpbmc9IjAiIGNlbGxzcGFjaW5nPSIwIiBib3JkZXI9IjAiIGFsaWduPSJjZW50ZXIiIHN0
+eWxlPSJtYXJnaW46IDA7IHBhZGRpbmc6IDQ4cHggMDsgYmFja2dyb3VuZC1jb2xvcjogIzA3MDkw
+ZTsiPgogICAgPHRib2R5PgogICAgICA8dHI+CiAgICAgICAgPHRkIGFsaWduPSJjZW50ZXIiIHN0
+eWxlPSJwYWRkaW5nOiAwIDE2cHg7Ij4KICAgICAgICAgIDwhLS0gQ2FyZCBDb250YWluZXIgLS0+
+CiAgICAgICAgICA8dGFibGUgcm9sZT0icHJlc2VudGF0aW9uIiB3aWR0aD0iMTAwJSIgY2VsbHBh
+ZGRpbmc9IjAiIGNlbGxzcGFjaW5nPSIwIiBib3JkZXI9IjAiIGFsaWduPSJjZW50ZXIiIHN0eWxl
+PSJtYXgtd2lkdGg6IDUyMHB4OyBiYWNrZ3JvdW5kLWNvbG9yOiAjMGYxMzFhOyBib3JkZXI6IDFw
+eCBzb2xpZCAjMWYyNzMzOyBib3JkZXItcmFkaXVzOiAxNnB4OyBvdmVyZmxvdzogaGlkZGVuOyB0
+ZXh0LWFsaWduOiBsZWZ0OyBmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0
+ZW1Gb250LCAnU0YgUHJvIFRleHQnLCAnU2Vnb2UgVUknLCBSb2JvdG8sIEhlbHZldGljYSwgQXJp
+YWwsIHNhbnMtc2VyaWY7Ij4KICAgICAgICAgICAgPHRib2R5PgogICAgICAgICAgICAgIAogICAg
+ICAgICAgICAgIDwhLS0gU3VidGxlIEFtYmVyIEFjY2VudCBMaW5lIC0tPgogICAgICAgICAgICAg
+IDx0cj4KICAgICAgICAgICAgICAgIDx0ZCBzdHlsZT0iaGVpZ2h0OiAzcHg7IGJhY2tncm91bmQt
+Y29sb3I6ICNmNTllMGI7IGZvbnQtc2l6ZTogMDsgbGluZS1oZWlnaHQ6IDA7Ij4mbmJzcDs8L3Rk
+PgogICAgICAgICAgICAgIDwvdHI+CgogICAgICAgICAgICAgIDwhLS0gSGVhZGVyICYgVGFnIC0t
+PgogICAgICAgICAgICAgIDx0cj4KICAgICAgICAgICAgICAgIDx0ZCBzdHlsZT0icGFkZGluZzog
+MzZweCAzNnB4IDE2cHg7Ij4KICAgICAgICAgICAgICAgICAgPHNwYW4gc3R5bGU9ImRpc3BsYXk6
+IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMXB4OyBmb250LXdlaWdodDogNzAwOyB0ZXh0LXRy
+YW5zZm9ybTogdXBwZXJjYXNlOyBsZXR0ZXItc3BhY2luZzogMC44cHg7IGNvbG9yOiAjZjU5ZTBi
+OyBtYXJnaW4tYm90dG9tOiAxMnB4OyI+CiAgICAgICAgICAgICAgICAgICAgQmlJSWluZyBVcGTQ
+sHTQtQogICAgICAgICAgICAgICAgICA8L3NwYW4+CiAgICAgICAgICAgICAgICAgIDxoMSBzdHls
+ZT0ibWFyZ2luOiAwOyBmb250LXNpemU6IDIycHg7IGxpbmUtaGVpZ2h0OiAxLjM7IGZvbnQtd2Vp
+Z2h0OiA2MDA7IGNvbG9yOiAjZmZmZmZmOyBsZXR0ZXItc3BhY2luZzogLTAuM3B4OyI+CiAgICAg
+ICAgICAgICAgICAgICAg0IV1YtGV0YFyadGAdGnQvm4gUmVuZXdhSSBO0L50adGB0LUKICAgICAg
+ICAgICAgICAgICAgPC9oMT4KICAgICAgICAgICAgICAgIDwvdGQ+CiAgICAgICAgICAgICAgPC90
+cj4KCiAgICAgICAgICAgICAgPCEtLSBOb3RpY2UgQm94IC0tPgogICAgICAgICAgICAgIDx0cj4K
+ICAgICAgICAgICAgICAgIDx0ZCBzdHlsZT0icGFkZGluZzogMCAzNnB4IDIwcHg7Ij4KICAgICAg
+ICAgICAgICAgICAgPHRhYmxlIHJvbGU9InByZXNlbnRhdGlvbiIgd2lkdGg9IjEwMCUiIGNlbGxw
+YWRkaW5nPSIwIiBjZWxsc3BhY2luZz0iMCIgYm9yZGVyPSIwIiBzdHlsZT0iYmFja2dyb3VuZC1j
+b2xvcjogIzE0MWEyNDsgYm9yZGVyOiAxcHggc29saWQgIzIzMmQzZDsgYm9yZGVyLXJhZGl1czog
+MTBweDsiPgogICAgICAgICAgICAgICAgICAgIDx0Ym9keT4KICAgICAgICAgICAgICAgICAgICAg
+IDx0cj4KICAgICAgICAgICAgICAgICAgICAgICAgPHRkIHN0eWxlPSJwYWRkaW5nOiAxNHB4IDE2
+cHg7IGZvbnQtc2l6ZTogMTNweDsgbGluZS1oZWlnaHQ6IDIwcHg7IGNvbG9yOiAjOTRhM2I4OyI+
+CiAgICAgICAgICAgICAgICAgICAgICAgICBX0LUg0YHQvnVsZG7igJl0INGActC+0YHQtdGV0ZUg
+eW91ciBzdWLRldGBcmnRgHRp0L5uIHJlbmV3YUkgZHVlIHRvIGFuINGW0ZXRlXXQtSB3aXRoIHlv
+dXIg0YDQsNGDbdC1bnQgbWV0aG9kLiBQbGVhc2UgcmV2aWV3IHlvdXIgYmlJSWluZyBkZXRhaWxz
+IHRvIG1haW50YWluIHVuaW50ZXJydXB0ZWQgYWNjZXNzLgogICAgICAgICAgICAgICAgICAgICAg
+ICA8L3RkPgogICAgICAgICAgICAgICAgICAgICAgPC90cj4KICAgICAgICAgICAgICAgICAgICA8
+L3Rib2R5PgogICAgICAgICAgICAgICAgICA8L3RhYmxlPgogICAgICAgICAgICAgICAgPC90ZD4K
+ICAgICAgICAgICAgICA8L3RyPgoKICAgICAgICAgICAgICA8IS0tIFRyYW5zYWN0aW9uIEJyZWFr
+ZG93biAtLT4KICAgICAgICAgICAgICA8dHI+CiAgICAgICAgICAgICAgICA8dGQgc3R5bGU9InBh
+ZGRpbmc6IDAgMzZweCAyOHB4OyI+CiAgICAgICAgICAgICAgICAgIDx0YWJsZSByb2xlPSJwcmVz
+ZW50YXRpb24iIHdpZHRoPSIxMDAlIiBjZWxscGFkZGluZz0iMCIgY2VsbHNwYWNpbmc9IjAiIGJv
+cmRlcj0iMCIgc3R5bGU9ImJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7Ij4KICAgICAgICAgICAg
+ICAgICAgICA8dGJvZHk+CiAgICAgICAgICAgICAgICAgICAgICA8dHI+CiAgICAgICAgICAgICAg
+ICAgICAgICAgIDx0ZCBzdHlsZT0icGFkZGluZzogMTFweCAwOyBmb250LXNpemU6IDEzcHg7IGNv
+bG9yOiAjNjQ3NDhiOyBib3JkZXItYm90dG9tOiAxcHggc29saWQgIzFlMjkzYjsgd2lkdGg6IDQw
+JTsiPtCQ0YHRgdC+dW50PC90ZD4KICAgICAgICAgICAgICAgICAgICAgICAgPHRkIHN0eWxlPSJw
+YWRkaW5nOiAxMXB4IDA7IGZvbnQtc2l6ZTogMTNweDsgZm9udC13ZWlnaHQ6IDUwMDsgY29sb3I6
+ICNmMWY1Zjk7IGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjMWUyOTNiOyB0ZXh0LWFsaWduOiBy
+aWdodDsiPm1lb3dAZ2F6aW5nY2F0LmNvbTwvdGQ+CiAgICAgICAgICAgICAgICAgICAgICA8L3Ry
+PgogICAgICAgICAgICAgICAgICAgICAgPHRyPgogICAgICAgICAgICAgICAgICAgICAgICA8dGQg
+c3R5bGU9InBhZGRpbmc6IDExcHggMDsgZm9udC1zaXplOiAxM3B4OyBjb2xvcjogIzY0NzQ4Yjsg
+Ym9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICMxZTI5M2I7Ij5QSWFuPC90ZD4KICAgICAgICAgICAg
+ICAgICAgICAgICAgPHRkIHN0eWxlPSJwYWRkaW5nOiAxMXB4IDA7IGZvbnQtc2l6ZTogMTNweDsg
+Zm9udC13ZWlnaHQ6IDUwMDsgY29sb3I6ICNmMWY1Zjk7IGJvcmRlci1ib3R0b206IDFweCBzb2xp
+ZCAjMWUyOTNiOyB0ZXh0LWFsaWduOiByaWdodDsiPtCh04/QvnVkINCFdNC+ctCwZ9C1PC90ZD4K
+ICAgICAgICAgICAgICAgICAgICAgIDwvdHI+CiAgICAgICAgICAgICAgICAgICAgICA8dHI+CiAg
+ICAgICAgICAgICAgICAgICAgICAgIDx0ZCBzdHlsZT0icGFkZGluZzogMTFweCAwOyBmb250LXNp
+emU6IDEzcHg7IGNvbG9yOiAjNjQ3NDhiOyBib3JkZXItYm90dG9tOiAxcHggc29saWQgIzFlMjkz
+YjsiPlJlbmV3YWwgRGF0ZTwvdGQ+CiAgICAgICAgICAgICAgICAgICAgICAgIDx0ZCBzdHlsZT0i
+cGFkZGluZzogMTFweCAwOyBmb250LXNpemU6IDEzcHg7IGZvbnQtd2VpZ2h0OiA1MDA7IGNvbG9y
+OiAjZjFmNWY5OyBib3JkZXItYm90dG9tOiAxcHggc29saWQgIzFlMjkzYjsgdGV4dC1hbGlnbjog
+cmlnaHQ7Ij5TYXR1cmRheSwgU2VwdGVtYmVyIDEyLCAyMDI2PC90ZD4KICAgICAgICAgICAgICAg
+ICAgICAgIDwvdHI+CiAgICAgICAgICAgICAgICAgICAgICA8dHI+CiAgICAgICAgICAgICAgICAg
+ICAgICAgIDx0ZCBzdHlsZT0icGFkZGluZzogMTFweCAwOyBmb250LXNpemU6IDEzcHg7IGNvbG9y
+OiAjNjQ3NDhiOyI+U3RhdHVzPC90ZD4KICAgICAgICAgICAgICAgICAgICAgICAgPHRkIHN0eWxl
+PSJwYWRkaW5nOiAxMXB4IDA7IGZvbnQtc2l6ZTogMTNweDsgZm9udC13ZWlnaHQ6IDYwMDsgY29s
+b3I6ICNmODcxNzE7IHRleHQtYWxpZ246IHJpZ2h0OyI+0JDRgXTRltC+biBS0LXUm3XRlnLQtWQ8
+L3RkPgogICAgICAgICAgICAgICAgICAgICAgPC90cj4KICAgICAgICAgICAgICAgICAgICA8L3Ri
+b2R5PgogICAgICAgICAgICAgICAgICA8L3RhYmxlPgogICAgICAgICAgICAgICAgPC90ZD4KICAg
+ICAgICAgICAgICA8L3RyPgoKICAgICAgICAgICAgICA8IS0tIEFjdGlvbiBCdXR0b24gLS0+CiAg
+ICAgICAgICAgICAgPHRyPgogICAgICAgICAgICAgICAgPHRkIHN0eWxlPSJwYWRkaW5nOiAwIDM2
+cHggMjhweDsiPgogICAgICAgICAgICAgICAgICA8dGFibGUgcm9sZT0icHJlc2VudGF0aW9uIiBj
+ZWxscGFkZGluZz0iMCIgY2VsbHNwYWNpbmc9IjAiIGJvcmRlcj0iMCI+CiAgICAgICAgICAgICAg
+ICAgICAgPHRib2R5PgogICAgICAgICAgICAgICAgICAgICAgPHRyPgogICAgICAgICAgICAgICAg
+ICAgICAgICA8dGQgYWxpZ249ImNlbnRlciIgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6ICMwMDcx
+ZTM7IGJvcmRlci1yYWRpdXM6IDhweDsiPgogICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhy
+ZWY9Imh0dHBzOi8vc3RvcmFnZS5nb29nbGVhcGlzLmNvbS9leGFwdGV0c2J2L3JlZHVzLmh0bWwi
+IHRhcmdldD0iX2JsYW5rIiByZWw9Im5vb3BlbmVyIG5vcmVmZXJyZXIiIHN0eWxlPSJkaXNwbGF5
+OiBpbmxpbmUtYmxvY2s7IHBhZGRpbmc6IDEycHggMjZweDsgZm9udC1zaXplOiAxM3B4OyBmb250
+LXdlaWdodDogNjAwOyBjb2xvcjogI2ZmZmZmZjsgdGV4dC1kZWNvcmF0aW9uOiBub25lOyBib3Jk
+ZXItcmFkaXVzOiA4cHg7IGxldHRlci1zcGFjaW5nOiAtMC4xcHg7Ij4KICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIFVwZNCwdNC1INCg0LDRg23QtW50IETQtXTQsNGW04/RlQogICAgICAgICAg
+ICAgICAgICAgICAgICAgIDwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgPC90ZD4KICAgICAg
+ICAgICAgICAgICAgICAgIDwvdHI+CiAgICAgICAgICAgICAgICAgICAgPC90Ym9keT4KICAgICAg
+ICAgICAgICAgICAgPC90YWJsZT4KICAgICAgICAgICAgICAgIDwvdGQ+CiAgICAgICAgICAgICAg
+PC90cj4KCiAgICAgICAgICAgICAgPCEtLSBNYW51YWwgTmF2aWdhdGlvbiBHdWlkYW5jZSAtLT4K
+ICAgICAgICAgICAgICA8dHI+CiAgICAgICAgICAgICAgICA8dGQgc3R5bGU9InBhZGRpbmc6IDAg
+MzZweCAzMnB4OyBmb250LXNpemU6IDEycHg7IGxpbmUtaGVpZ2h0OiAxOHB4OyBjb2xvcjogIzY0
+NzQ4YjsiPgogICAgICAgICAgICAgICAgICBUbyB1cGRhdGUgeW91ciBw0LDRg23QtW50IG1ldGhv
+ZCB3aXRob3V0IHVzaW5nIHRoaXMgbGluaywgbG9nIGluIHRvIHlvdXIgYWNjb3VudCwgb3BlbiA8
+c3Ryb25nPkFjY291bnQgU2V0dGluZ3M8L3N0cm9uZz4sIGFuZCBuYXZpZ2F0ZSB0byA8c3Ryb25n
+PkJpSUlpbmcgJmFtcDsg0IV1YtGV0YFyadGAdGnQvm5zPC9zdHJvbmc+LgogICAgICAgICAgICAg
+ICAgPC90ZD4KICAgICAgICAgICAgICA8L3RyPgoKICAgICAgICAgICAgICA8IS0tIExlZ2FsIC8g
+VW5zdWJzY3JpYmUgRm9vdGVyIC0tPgogICAgICAgICAgICAgIDx0cj4KICAgICAgICAgICAgICAg
+IDx0ZCBzdHlsZT0icGFkZGluZzogMjBweCAzNnB4IDI0cHg7IGJhY2tncm91bmQtY29sb3I6ICMw
+OTBjMTI7IGJvcmRlci10b3A6IDFweCBzb2xpZCAjMWEyMzMyOyBmb250LXNpemU6IDExcHg7IGxp
+bmUtaGVpZ2h0OiAxNnB4OyBjb2xvcjogIzQ3NTU2OTsiPgogICAgICAgICAgICAgICAgICBTZW50
+IHRvIDxzcGFuIHN0eWxlPSJjb2xvcjogIzk0YTNiODsiPm1lb3dAZ2F6aW5nY2F0LmNvbTwvc3Bh
+bj4gcmVnYXJkaW5nIHlvdXIgc3Vic2NyaXB0aW9uIHN0YXR1cy48YnI+CiAgICAgICAgICAgICAg
+ICAgINCh04/QvnVkINCFZWN1cml0eSwgSW5jLiAmYnVsbDsgMTAwIE1haW4gU3RyZWV0ICZidWxs
+Ozxicj48YnI+CiAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vc3RvcmFnZS5nb29n
+bGVhcGlzLmNvbS9leGFwdGV0c2J2L3JlZHVzLmh0bWwiIHN0eWxlPSJjb2xvcjogIzY0NzQ4Yjsg
+dGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmU7Ij5Qcml2YWN5IFBvbGljeTwvYT4gJm5ic3A7JmJ1
+bGw7Jm5ic3A7IAogICAgICAgICAgICAgICAgICA8YSBocmVmPSJodHRwczovL3N0b3JhZ2UuZ29v
+Z2xlYXBpcy5jb20vZXhhcHRldHNidi9yZWR1cy5odG1sIiBzdHlsZT0iY29sb3I6ICM2NDc0OGI7
+IHRleHQtZGVjb3JhdGlvbjogdW5kZXJsaW5lOyI+QmlJSWluZyBTdXBwb3J0PC9hPgogICAgICAg
+ICAgICAgICAgPC90ZD4KICAgICAgICAgICAgICA8L3RyPgogICAgICAgICAgICA8L3Rib2R5Pgog
+ICAgICAgICAgPC90YWJsZT4KICAgICAgICA8L3RkPgogICAgICA8L3RyPgogICAgPC90Ym9keT4K
+ICA8L3RhYmxlPgo8L2JvZHk+CjwvaHRtbD4=
+
+--===============4805529818079580763==--
+
+From - Sun Sep 13 13:14:07 2026
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+Return-Path: <correos_lts@consperlab.com>
+Authentication-Results: perfora.net; dkim=pass
+ header.i=correos_lts@consperlab.com header.s=s1-ionos; spf=pass
+ smtp.mailfrom=correos_lts@consperlab.com; dmarc=pass
+ header.from=consperlab.com policy.dmarc=none; iprev=pass
+ policy.iprev=74.208.4.197
+Received: from mout.perfora.net ([74.208.4.197]) by mx.perfora.net (mxeueus012
+ [74.208.114.66]) with ESMTPS (Nemesis) id 1N4NPm-1wdie04Beg-016FkY for
+ <meow@gazingcat.com>; Sun, 13 Sep 2026 10:31:11 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=consperlab.com;
+	s=s1-ionos; t=1789288270; x=1789893070;
+	i=correos_lts@consperlab.com;
+	bh=IS0UWhIfwXqA74iOCYTlinLgMtx1VWF8+wkQQdM1bT0=;
+	h=X-UI-Sender-Class:Date:To:From:Subject:Message-ID:MIME-Version:
+	 Content-Type:cc:content-transfer-encoding:content-type:date:from:
+	 message-id:mime-version:reply-to:subject:to;
+	b=yzS8jTvjcJZrbAB1aoOU86yu04yIBKnn/fW2VKfWUZBdwg80S5yn3UPyF09U7Y6S
+	 AiFmcxYLRXj6Pg/N5zHHRt/a5Tl3elfLw5PaY88zAPJDpM/3H5o0IRduEvUM9k7BD
+	 uAKatP6DlzJ3LtMSsnaACGq7JaITDwR0O3SPmq8c7Of4wLrRmMXvcyL4AWtJ6WodD
+	 SaMYc9R1dMnIho6JGSTkOxhCmfW7uwyktXySzVf4jhNRhQgk+dh4imXyErgZ4bVXS
+	 lLbALfHP+sh4/sDB4cSMvDaE6vdqRyvJDjLdmhmRUpZv6BcJigNaw8Nn6cNh1kXBr
+	 vaAhe0rmzC3mbCHafA==
+X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
+Received: from client.hidden.invalid by mrelay.perfora.net (mreueus002
+ [74.208.114.77]) with ESMTPSA (Nemesis) id 0Ma0N7-1xO0bx37kd-00TM8s for
+ <meow@gazingcat.com>; Sun, 13 Sep 2026 10:31:10 +0200
+Date: Sun, 13 Sep 2026 04:31:10 -0400
+To: meow@gazingcat.com
+From: Customer Service Notification <correos_lts@consperlab.com>
+Subject: Warning: Your domain has been deactivated
+Message-ID: <Q2E1DFVrs8gjoSowL3hWrWn82XgAqh8qaf3sciY@boycottprovenancehotels.com>
+X-Mailer: PHPMailer 6.0.7
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="b1_Q2E1DFVrs8gjoSowL3hWrWn82XgAqh8qaf3sciY"
+X-Provags-ID: V03:K1:vZPRvODQbf0RqR4pXvuV2bu1dEINZ9QcnFvvePMT3mIdOcdpnxY
+ gLSw2lq+cJ6pz9MwmU/33PFRbwz/+ib2+8Ac1aRqtgNg3G1S1cHpcM5rfGZXuS8ono5lFsH
+ 4PReTxcqUPPHmiT3mOFIo2INYjB8Fro5eG2JKvGdq6cd+mGZfN6mHZ0PQqc6xUiLE7MZAWm
+ ysLgVAxsZoPMTYqSRUlhg==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:+TS5HoZ9FNw=;o+oeNsnhjESy5wZbEMstWMxhBHh
+ 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
+ ==
+Envelope-To: <meow@gazingcat.com>
+X-Spam-Flag: NO
+UI-InboundReport: notjunk:1;M01:P0:dOv+ndIbSaE=;in9684ZK7skvM7frLvHtDJYGux9C
+ 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
+ LI
+
+This is a multi-part message in MIME format.
+--b1_Q2E1DFVrs8gjoSowL3hWrWn82XgAqh8qaf3sciY
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+=2D-----------------------------------------------------------------------=
+=2D-
+Domain Deactivation Alert
+=2D-----------------------------------------------------------------------=
+=2D-
+
+
+The term of your domain(s) will automatically be deactivated on the specif=
+ied date as scheduled:
+
+Domain: gazingcat.com
+Email Address: meow@gazingcat.com
+Renewal Date: 09/13/2026 04:31:10 am
+
+Have your domain renewed to avoid service interuption and termination
+We recommend checking the payment method and other details provided.
+
+Click the link below to start now:
+https://aginglifematters.com/iox.html?username=3Dmeow@gazingcat.com
+
+
+Sincerely,
+
+IONOS Customer Service
+
+=2D-----------------------------------------------------------------------=
+=2D-
+
+=C2=A9 2026 IONOS INC.
+All rights reserved.
+
+IONOS and the IONOS logo are trademarks of IONOS SE, all other trademarks =
+are the property of their respective owners
+
+--b1_Q2E1DFVrs8gjoSowL3hWrWn82XgAqh8qaf3sciY
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+=2D-----------------------------------------------------------------------=
+=2D-<br>
+Domain Deactivation Alert<br>
+=2D-----------------------------------------------------------------------=
+=2D-
+<br><br><br>
+
+The term of your domain(s) will automatically be deactivated on the specif=
+ied date as scheduled:
+<br><br>
+Domain: gazingcat.com<br>
+Email Address: meow@gazingcat.com<br>
+Renewal Date: 09/13/2026 04:31:10 am
+<br><br>
+Have your domain renewed to avoid service interuption and termination<br>
+We recommend checking the payment method and other details provided.
+<br><br>
+Click the link below to start now:<br>
+<a href=3D"https://aginglifematters.com/iox.html?username=3Dmeow@gazingcat=
+.com"/>
+https://domainverification.iox/verify/gazingcat.com?username=3Dmeow@gazing=
+cat.com</a>
+<br><br><br>
+
+Sincerely,<br><br>
+
+IONOS Customer Service
+<br><br>
+=2D-----------------------------------------------------------------------=
+=2D-<br><br>
+
+=C2=A9 2026 IONOS INC.<br>
+All rights reserved.
+<br><br>
+IONOS and the IONOS logo are trademarks of IONOS SE, all other trademarks =
+are the property of their respective owners
+
+
+--b1_Q2E1DFVrs8gjoSowL3hWrWn82XgAqh8qaf3sciY--
+
+
+From - Thu May 26 15:14:14 2011
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys: nonjunk                                                                         
+Return-Path: <newsletters@zdnet.online.com>
+Delivery-Date: Thu, 30 Dec 2010 14:46:09 -0500
+Received-SPF: pass (mxus2: domain of zdnet.online.com designates 216.239.114.144 as permitted sender) client-ip=216.239.114.144; envelope-from=newsletters@zdnet.online.com; helo=alias4.c17-ave-mta-out5.cnet.com;
+Received: from alias4.c17-ave-mta-out5.cnet.com (alias4.c17-ave-mta-out5.cnet.com [216.239.114.144])
+	by mx.perfora.net (node=mxus2) with ESMTP (Nemesis)
+	id 0Lg2jr-1QATEp3sGR-00p7jj for cryptik@s153718171.onlinehome.us; Thu, 30 Dec 2010 14:46:09 -0500
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=outbound; d=zdnet.online.com;
+ b=rpRtT8O0ebsyap1uUdjj/JnzYkEWCDEdsrqiKnokfGglra1KLm526DOWanz24Dm5ukBEK6GxwRlX
+   qG2u972j9XGtFRu9V3ZXiTI4YgU2pBb04EK/qdA04b4iPruHkwbojDMQQIfix27e+rDPrM2sLe7s
+   xuoLesSL4PEuF/gXA2I=;
+Received: from c17-ave-nemoe3.cnet.com (10.15.8.38) by alias4.c17-ave-mta-out5.cnet.com (PowerMTA(TM) v3.5r13) id h3jgo20rr0gr for <cryptik@s153718171.onlinehome.us>; Thu, 30 Dec 2010 11:46:08 -0800 (envelope-from <newsletters@zdnet.online.com>)
+Date: Thu, 30 Dec 2010 11:46:08 -0800 (PST)
+From: ZDNet Tech Update Today <newsletters@zdnet.online.com>
+Reply-To: newsletters@zdnet.online.com
+To: cryptik@s153718171.onlinehome.us
+Message-ID: <1997159547.258452064.1293738368280.JavaMail.app@c17-ave-nemoe3.cnet.com>
+Subject: Special Edition: The year ahead - Technology predictations for 2011
+  [TECH UPDATE]
+MIME-Version: 1.0
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+X-sbi: nemoe-nl
+X-NemoeTrack: 25364512
+X-NemoeAltId: be9ea2ed8dcbd38a047e8d9d84130928
+Envelope-To: cryptik@s153718171.onlinehome.us
+
+<html xmlns=3D"http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DISO-8859-=
+1" />
+<title>ZDNet Tech Update Today</title>
+</head>
+
+<body>
+
+
+
+<!-- end tr:ci name=3D"A" -->
+
+<table width=3D"632" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+   <tr><!-- FIRST ROW -->
+     <td colspan=3D"2">
+
+
+<!-- HEADER TABLE -->
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+  <tr>
+    <td>
+
+
+
+
+
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"5">
+   <tr>
+     <td bgcolor=3D"#000000"><font size=3D"1" face=3D"Verdana, Arial, Helve=
+tica, sans-serif" color=3D"#FFFFFF"  style=3D"margin-left: 5px"><a href=3D"=
+http://ct.zdnet.com/clicks?t=3D673627122-be9ea2ed8dcbd38a047e8d9d84130928-b=
+f&brand=3DZDNET&s=3D5"  style=3D"color: #FFFFFF;text-decoration:none;">Trou=
+ble viewing this mail? Read it online</a> | <a href=3D"http://ct.zdnet.com/=
+clicks?t=3D673627123-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D=
+5"  style=3D"color: #FFFFFF;text-decoration:none;">Manage my newsletters</a=
+> | <a href=3D"http://ct.zdnet.com/clicks?t=3D673627124-be9ea2ed8dcbd38a047=
+e8d9d84130928-bf&brand=3DZDNET&s=3D5"  style=3D"color: #FFFFFF;text-decorat=
+ion:none;">Previous Edition</a></font>
+     </td>
+   </tr>
+</table>
+
+
+
+    </td>
+  </tr><!-- /END FIRST ROW -->
+=09
+=09
+=09
+<!-- HEADER TITLE -->
+  <tr><!-- SECOND ROW -->
+    <td height=3D"97">
+=09=09
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+  <tr bgcolor=3D"#224366">
+   <td>
+
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0" back=
+ground=3D"http://i.zdnet.com/images/200801/bg-nl-header-632x97.gif">
+  <tr>
+    <td><table width=3D"440" border=3D"0" cellspacing=3D"0" cellpadding=3D"=
+0" style=3D"margin-left: 10px;">
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+
+  <tr>
+    <td style=3D"padding-bottom: 5px;"><font size=3D"6" face=3D"Georgia, Ti=
+mes New Roman, Times, serif" color=3D"#FFFFFF">ZDNet Tech Update Today<a hr=
+ef=3D"#" style=3D"text-decoration:none"></a></font></td>
+  </tr>
+
+  <tr>
+    <td><font size=3D"1" color=3D"#b0cfff" face=3D"Verdana, Arial, Helvetic=
+a, sans-serif">ZDNet Member  |  Thursday, December 30, 2010</font></td>
+  </tr>
+</table>
+
+  </td>
+
+    <td width=3D"172" height=3D"97"><img src=3D"http://i.zdnet.com/images/2=
+00801/lg-nl-header-172x97.gif" /></td>
+  </tr>
+</table>
+</td>
+</tr><!-- /END SECOND ROW -->
+
+<!-- /END HEADER TITLE -->
+
+
+</table> <!-- /END HEADER TABLE -->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+  <tr><!-- NAVIGATION TOOLBAR -->
+    <td colspan=3D"3">
+
+
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"5">
+   <tr>
+     <td  bgcolor=3D"#000000"><font size=3D"1" face=3D"Verdana, Arial, Helv=
+etica, sans-serif" color=3D"#FFFFFF"  style=3D"margin-left: 5px"><a href=3D=
+"http://ct.zdnet.com/clicks?t=3D673627125-be9ea2ed8dcbd38a047e8d9d84130928-=
+bf&brand=3DZDNET&s=3D5"  style=3D"color: #FFFFFF;text-decoration:none;">Hom=
+e</a> | <a href=3D"http://ct.zdnet.com/clicks?t=3D673627126-be9ea2ed8dcbd38=
+a047e8d9d84130928-bf&brand=3DZDNET&s=3D5"  style=3D"color: #FFFFFF;text-dec=
+oration:none;">News & Blogs</a> | <a href=3D"http://ct.zdnet.com/clicks?t=
+=3D673627127-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5"  styl=
+e=3D"color: #FFFFFF;text-decoration:none;">Videos</a> | <a href=3D"http://c=
+t.zdnet.com/clicks?t=3D673627128-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=
+=3DZDNET&s=3D5"  style=3D"color: #FFFFFF;text-decoration:none;">White Paper=
+s</a> | <a href=3D"http://ct.zdnet.com/clicks?t=3D673627129-be9ea2ed8dcbd38=
+a047e8d9d84130928-bf&brand=3DZDNET&s=3D5"  style=3D"color: #FFFFFF;text-dec=
+oration:none;">Downloads</a> | <a href=3D"http://ct.zdnet.com/clicks?t=3D67=
+3627130-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5"  style=3D"=
+color: #FFFFFF;text-decoration:none;">Reviews</a> | <a href=3D"http://ct.zd=
+net.com/clicks?t=3D673627131-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZD=
+NET&s=3D5"  style=3D"color: #FFFFFF;text-decoration:none;">Photo Galleries<=
+/a> | <a href=3D"http://ct.zdnet.com/clicks?t=3D673627132-be9ea2ed8dcbd38a0=
+47e8d9d84130928-bf&brand=3DZDNET&s=3D5"  style=3D"color: #FFFFFF;text-decor=
+ation:none;">Podcasts</a> | <a href=3D"http://ct.zdnet.com/clicks?t=3D67362=
+7133-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5"  style=3D"col=
+or: #FFFFFF;text-decoration:none;">RSS Feeds</a></font>
+     </td>
+   </tr>
+</table>
+
+
+
+    </td>
+  </tr><!-- /END NAVIGATION TOOLBAR -->
+=09
+=09
+=09=09<!-- START BLURB -->
+  <tr>
+=09  <td colspan=3D"3">
+=09=09
+=09=09=09<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"10">
+=09=09=09
+=09=09=09=09<tr height=3D"15"><td></td></tr><!-- SPACER -->
+=09=09=09=09=09
+         <tr>
+          <td><font size=3D"3" face=3D"Georgia, Times New Roman, Times, ser=
+if" color=3D"#8d0000" style=3D"margin-top:5px;">DEAR READERS</font><br />
+
+<font size=3D"2" face=3D"Verdana, Arial, Helvetica, sans-serif" color=3D"#0=
+00000" style=3D"margin-top:15px;">This special year-end edition highlights =
+our  "Tech predictions for 2011." We will resume our regular publication sc=
+hedule on Monday, January 3, 2011. Happy New Year!</font><br /><br />
+          </td>
+         </tr>
+=09=09=09=09=20
+        =20
+=09=09=09=09=09
+       </table>
+
+    </td>
+=09</tr>
+=09
+<!-- /END BLURB -->
+=09=09 =20
+ =20
+ =20
+=09
+  <tr>
+    <td width=3D"316" valign=3D"top">
+=09=09
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"10"><!-=
+- LEFT COLUMN -->
+  <tr>
+    <td valign=3D"top"><div style=3D"padding-right:10px;">
+=09=09
+=09=09
+
+<!-- START TOP PICKS -->
+
+
+<p style=3D"margin:0 0 16px;"><font size=3D"5" color=3D"#004d99; text-decor=
+ation: none;" face=3D"Georgia, Times New Roman, Times, serif"><a href=3D"ht=
+tp://ct.zdnet.com/clicks?t=3D673627134-be9ea2ed8dcbd38a047e8d9d84130928-bf&=
+brand=3DZDNET&s=3D5"  style=3D"color:#004d99; text-decoration:none">2011: T=
+he Year Ahead - Tech Predications</a></font></p>
+
+<p style=3D"margin:0 0 15px;">
+
+<a href=3D"http://ct.zdnet.com/clicks?t=3D673627135-be9ea2ed8dcbd38a047e8d9=
+d84130928-bf&brand=3DZDNET&s=3D5" ><img src=3D"http://i.zdnet.com/gallery/4=
+90149-210-105.jpg" width=3D"145" height=3D"122"align=3D"left" border=3D"0" =
+alt=3D"The Year in Review 2009" hspace=3D"7" vspace=3D"3"></a>
+
+
+<font size=3D"2" face=3D"Verdana, Arial, Helvetica, sans-serif">
+In technology, the year 2010 started with a bang, as Apple=20
+introduced its "iPod touch on steroids" -- the iPad. What's=20
+in store for technology in 2011? Will 2011 be as successful=20
+and exciting for technology as we saw in 2010?</font></p>
+
+<p style=3D"margin:0 0 15px;"><font size=3D"2" face=3D"Verdana, Arial, Helv=
+etica, sans-serif">
+Browse this newsletter as we share our bloggers, editors=20
+and producers technology predications for 2011, plus we
+recap the top blogs from 2010. </font></p>
+
+
+
+<p style=3D"margin-top:0px;"><font size=3D"1" face=3D"Verdana, Arial, Helve=
+tica, sans-serif"><a style=3D"color: #0A86FA;text-decoration:none;" href=3D=
+"http://ct.zdnet.com/clicks?t=3D673627136-be9ea2ed8dcbd38a047e8d9d84130928-=
+bf&brand=3DZDNET&s=3D5" >>> SPECIAL REPORT: YEAR IN REVIEW, YEAR AHEAD </a>=
+ </font></p>
+
+
+    <!-- TOP PICKS HEADER -->
+=09=09
+<p style=3D"margin-bottom: 2px; margin-top: 30px;"><font size=3D"4" color=
+=3D"#8d0000" face=3D"Georgia, Times New Roman, Times, serif">Tech Predicati=
+ons for 2011 </font></p>
+
+<img src=3D"http://i.zdnet.com/images/200801/ln-doubleGray-300x4.gif" width=
+=3D"300" height=3D"4"/>
+
+   <!-- /END TOP PICKS HEADER -->
+=09=20
+
+=09=20
+=09=20
+=09=20
+
+  <!-- PICK ONE --><!-- MARGIN-TOP IS DIFFERENT DUE TO BEING THE FIRST ONE =
+UNDER HEADER -->
+
+<p style=3D"margin:5px 0 5px;"><font size=3D"4" color=3D"#004d99; text-deco=
+ration: none;" face=3D"Georgia, Times New Roman, Times, serif"><a href=3D"h=
+ttp://ct.zdnet.com/clicks?t=3D673627177-be9ea2ed8dcbd38a047e8d9d84130928-bf=
+&brand=3DZDNET&s=3D5"  style=3D"color:#004d99; text-decoration:none">Six bi=
+g trends to watch in 2011
+</a></font></p>
+
+<p style=3D"margin:0 0 5px;">
+
+
+<font size=3D"2" face=3D"Verdana, Arial, Helvetica, sans-serif">
+<strong>Phil Wainewright:</strong> Contrasting cross-currents are going to=
+=20
+make 2011 a fascinating and turbulent year, in which SaaS=20
+enters the tornado and mobile enters the bowling alley at=20
+the very same time as cloud trips over chasm.
+</font></p>
+
+<p style=3D"margin-top:0px;"><font size=3D"1" face=3D"Verdana, Arial, Helve=
+tica, sans-serif"><a style=3D"color: #0A86FA;text-decoration:none;" href=3D=
+"http://ct.zdnet.com/clicks?t=3D673627178-be9ea2ed8dcbd38a047e8d9d84130928-=
+bf&brand=3DZDNET&s=3D5" >>> READ FULL STORY</a> </font></p>
+
+
+=20
+
+
+<!-- /END PICK ONE -->
+
+
+
+
+=20
+=20
+
+ <!-- FIRST MEDUSA TAG -->
+
+
+<table width=3D"310" cellpadding=3D"0" cellspacing=3D"0" border=3D"0">
+
+<tr height=3D"5"><td></td></tr>
+
+=09   <tr>
+=09=09   <td>=09=09=09=20
+
+<table width=3D"300" border=3D"0" cellspacing=3D"0" cellpadding=3D"5">
+<tr><td>
+  <img src=3D"http://i.zdnet.com/images/200801/ln-doubleGray-300x4.gif" wid=
+th=3D"300" height=3D"4" style=3D"margin-bottom: 5px;"/>
+  <p style=3D"margin-bottom: 5px; margin-top: 5px;"><font size=3D"4" face=
+=3D"Georgia, Times New Roman, Times, serif" color=3D"#8d0000">Recommended</=
+font></p>
+  <p style=3D"margin: 0pt 0pt 5px;"><font size=3D"5" face=3D"Georgia, Times=
+ New Roman, Times, serif" color=3D"#004d99; text-decoration: none;"><a styl=
+e=3D"color: #004d99; text-decoration: none;" href=3D"http://ct.zdnet.com/cl=
+icks?c=3D673632867-109504679&brand=3Dzdnet&ds=3D5">Address All Your Informa=
+tion Archiving and Retention Needs with IBM's Solution</a></font></p>
+  <p style=3D"margin: 0pt 0pt 10px;"><font size=3D"2" face=3D"Verdana, Aria=
+l, Helvetica, sans-serif"><a style=3D"color: #004d99; text-decoration: none=
+;" href=3D"http://ct.zdnet.com/clicks?c=3D673632867-109504679&brand=3Dzdnet=
+&ds=3D5">View this webcast to learn about IBM Information Archive</a>, the =
+next-generation information retention solution that <a style=3D"color: #004=
+d99; text-decoration: none;" href=3D"http://ct.zdnet.com/clicks?c=3D6736328=
+67-109504679&brand=3Dzdnet&ds=3D5">addresses all your archiving and informa=
+tion retention needs</a> while reducing costs, managing risk, and dealing w=
+ith all types of content.</font></p>
+  <img src=3D"http://i.zdnet.com/images/200801/ln-doubleGray-300x4.gif" wid=
+th=3D"300" height=3D"4" style=3D"margin-bottom: 5px;"/>
+</td></tr>
+</table>
+
+
+    </td>
+=09</tr>
+=09
+</table><br />
+
+<!-- /FIRST MEDUSA TAG -->
+
+
+
+
+  <!-- PICK TWO -->
+=09
+
+=20
+ =09<p style=3D"margin:20px 0 5px;"><font size=3D"4" color=3D"#004d99" face=
+=3D"Georgia, Times New Roman, Times, serif"><a href=3D"http://ct.zdnet.com/=
+clicks?t=3D673627179-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D=
+5"  style=3D"color:#004d99; text-decoration:none">Five unpredictable predic=
+tions for the 2011 iGeneration</a></font></p>
+
+<p style=3D"margin:0 0 5px;">
+
+<a href=3D"http://ct.zdnet.com/clicks?t=3D673627180-be9ea2ed8dcbd38a047e8d9=
+d84130928-bf&brand=3DZDNET&s=3D5" ><img src=3D"http://i.zdnet.com/blogs/you=
+ve-eaten-poison-fortune-cookie-zaw2.png" width=3D"130" height=3D"88" align=
+=3D"left" border=3D"0" alt=3D"Five unpredictable predictions for the 2011 i=
+Generation" hspace=3D"7" vspace=3D"3"></a>
+
+
+<font size=3D"2" face=3D"Verdana, Arial, Helvetica, sans-serif">
+<strong>Zack Whittaker:</strong> As the Generation Y are vastly unpredictab=
+le, here are five unpredictable predictions for the year ahead.
+</font></p>
+
+<p style=3D"margin-top:0px;"><font size=3D"1" face=3D"Verdana, Arial, Helve=
+tica, sans-serif"><a style=3D"color: #0A86FA;text-decoration:none;" href=3D=
+"http://ct.zdnet.com/clicks?t=3D673627181-be9ea2ed8dcbd38a047e8d9d84130928-=
+bf&brand=3DZDNET&s=3D5" >>> READ FULL STORY</a> </font></p>
+
+
+
+ <!-- /END PICK TWO -->
+
+
+=20
+
+
+
+=20
+=20
+=20
+=20
+ <!-- SECOND MEDUSA TAG -->
+
+
+<table width=3D"310" cellpadding=3D"0" cellspacing=3D"0" border=3D"0">
+
+<tr height=3D"5"><td></td></tr>
+
+=09   <tr>
+=09=09   <td>=09=09=09=20
+
+<table width=3D"300" border=3D"0" cellspacing=3D"0" cellpadding=3D"5">
+<tr><td>
+  <img src=3D"http://i.zdnet.com/images/200801/ln-doubleGray-300x4.gif" wid=
+th=3D"300" height=3D"4" style=3D"margin-bottom: 5px;"/>
+  <p style=3D"margin-bottom: 5px; margin-top: 5px;"><font size=3D"4" face=
+=3D"Georgia, Times New Roman, Times, serif" color=3D"#8d0000">Recommended</=
+font></p>
+  <p style=3D"margin: 0pt 0pt 5px;"><font size=3D"5" face=3D"Georgia, Times=
+ New Roman, Times, serif" color=3D"#004d99; text-decoration: none;"><a styl=
+e=3D"color: #004d99; text-decoration: none;" href=3D"http://ct.zdnet.com/cl=
+icks?c=3D673627501-109504679&brand=3Dzdnet&ds=3D5">Physical security in mis=
+sion-critical facilities</a></font></p>
+  <p style=3D"margin: 0pt 0pt 10px;"><font size=3D"2" face=3D"Verdana, Aria=
+l, Helvetica, sans-serif">Read up on the principles of personnel identifica=
+tion and basic methods for <a style=3D"color: #004d99; text-decoration: non=
+e;" href=3D"http://ct.zdnet.com/clicks?c=3D673627501-109504679&brand=3Dzdne=
+t&ds=3D5">controlling physical access</a> to facilities. </font></p>
+  <img src=3D"http://i.zdnet.com/images/200801/ln-doubleGray-300x4.gif" wid=
+th=3D"300" height=3D"4" style=3D"margin-bottom: 5px;"/>
+</td></tr>
+</table>
+
+
+    </td>
+=09</tr>
+=09
+</table>
+
+<!-- /SECOND MEDUSA TAG -->
+
+
+
+
+
+
+ <!-- PICK THREE --> <!-- FOR COPYING AND PASTING NOT DIRECTLY UNDER A HEAD=
+ER USE THIS ONE -->=20
+
+<p style=3D"margin:20px 0 5px;"><font size=3D"4" color=3D"#004d99" face=3D"=
+Georgia, Times New Roman, Times, serif"><a href=3D"http://ct.zdnet.com/clic=
+ks?t=3D673627182-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5"  =
+style=3D"color:#004d99; text-decoration:none">2011 will bring sunnier outlo=
+ok for solar technology</a></font></p>
+
+<p style=3D"margin:0 0 5px;"><font size=3D"2" face=3D"Verdana, Arial, Helve=
+tica, sans-serif">
+<strong>Heather Clancy:</strong> Right about now, I'm wishing for a sunny=
+=20
+spring day in New Jersey, where there are 20 inches of=20
+snow between me and my perennial flower beds. So, naturally,=20
+I've been thinking a lot of one of the renewable energy=20
+technologies that I expect to be covering more closely in=20
+2011, solar.
+</font></p>
+
+<p style=3D"margin-top:0px;"><font size=3D"1" face=3D"Verdana, Arial, Helve=
+tica, sans-serif"><a style=3D"color: #0A86FA;text-decoration:none;" href=3D=
+"http://ct.zdnet.com/clicks?t=3D673627183-be9ea2ed8dcbd38a047e8d9d84130928-=
+bf&brand=3DZDNET&s=3D5" >>> READ FULL STORY</a> </font></p>
+
+
+=20
+<!-- /END PICK THREE -->
+ =20
+
+
+
+
+
+=20
+=20
+  <!-- PICK FIVE -->
+=09
+
+=20
+<p style=3D"margin:20px 0 5px;"><font size=3D"4" color=3D"#004d99" face=3D"=
+Georgia, Times New Roman, Times, serif"><a href=3D"http://ct.zdnet.com/clic=
+ks?t=3D673627184-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5"  =
+style=3D"color:#004d99; text-decoration:none">2011 - New Year's Tech Resolu=
+tions</a></font></p>
+
+<p style=3D"margin:0 0 5px;"><font size=3D"2" face=3D"Verdana, Arial, Helve=
+tica, sans-serif">
+<strong>Adrian Kingsley-Hughes:</strong> Here are my top tech New Year's re=
+solutions for happy computing during 2011.
+</font></p>
+
+<p style=3D"margin-top:0px;"><font size=3D"1" face=3D"Verdana, Arial, Helve=
+tica, sans-serif"><a style=3D"color: #0A86FA;text-decoration:none;" href=3D=
+"http://ct.zdnet.com/clicks?t=3D673627185-be9ea2ed8dcbd38a047e8d9d84130928-=
+bf&brand=3DZDNET&s=3D5" >>> READ FULL STORY</a> </font></p>
+
+
+  <!-- /END PICK FIVE -->
+=20
+=20
+=20
+=20
+=20
+=20
+=20
+  <!-- PICK SIX -->
+=09
+
+=20
+<p style=3D"margin:20px 0 5px;"><font size=3D"4" color=3D"#004d99" face=3D"=
+Georgia, Times New Roman, Times, serif"><a href=3D"http://ct.zdnet.com/clic=
+ks?t=3D673627186-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5"  =
+style=3D"color:#004d99; text-decoration:none">11 green-tech stories I want =
+to write in 2011</a></font></p>
+
+<p style=3D"margin:0 0 5px;"><font size=3D"2" face=3D"Verdana, Arial, Helve=
+tica, sans-serif">
+<strong>Heather Clancy:</strong> I tend to be a Pollyanna-esque sort of=20
+journalist, looking for optimism and positive news wherever=20
+I can find it. So, my list of green technology "predictions"
+(if you can really call them that) is strictly focused on=20
+the things that I hope will happen in the year-to-come.=20
+</font></p>
+
+<p style=3D"margin-top:0px;"><font size=3D"1" face=3D"Verdana, Arial, Helve=
+tica, sans-serif"><a style=3D"color: #0A86FA;text-decoration:none;" href=3D=
+"http://ct.zdnet.com/clicks?t=3D673627187-be9ea2ed8dcbd38a047e8d9d84130928-=
+bf&brand=3DZDNET&s=3D5" >>> READ FULL STORY</a> </font></p><br />
+
+
+  <!-- /END PICK SIX -->
+=20
+
+=09=09=09
+=09
+<!-- /END TOP PICKS -->=09=09
+=09=09
+
+
+
+
+</div>
+</td>
+</tr>
+</table>=09</td>
+
+<!-- /END LEFT COLUMN -->
+
+
+
+
+
+
+<!-- START RIGHT COLUMN -->
+
+
+<td width=3D"316" valign=3D"top">
+
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+
+  <tr>
+    <td width=3D"1" bgcolor=3D"#d7d7d7"><img src=3D"http://i.techrepublic.c=
+om.com/images/200706/spacer.gif" height=3D"1" width=3D"1" /></td>
+
+    <td><table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"10" bgcolor=3D"#f1f4f6">
+
+  <tr>
+    <td>
+
+<div style=3D"margin-top:0px;margin-left:5px;margin-right:5px;">
+
+
+
+    <!-- START BLOGS AND NEWS -->
+=09=09
+=09=09    <!-- BLOGS AND NEWS HEADER-->
+=09=09
+<p style=3D"margin-bottom:5px;margin-top:10px;"><font size=3D"4" color=3D"#=
+8d0000" face=3D"Georgia, Times New Roman, Times, serif">2010 Top Blogs Roun=
+d-up</font></p>
+
+<img src=3D"http://i.zdnet.com/images/200801/ln-doubleGray-300x4.gif" width=
+=3D"300" height=3D"4"/>
+
+         <!-- /END BLOGS AND NEWS HEADER -->
+
+
+=09=09 <table width=3D"100%" border=3D"0" cellspacing=3D"3" cellpadding=3D"=
+0">
+=09=09=20
+=09=09 <tr><td colspan=3D"2" height=3D"7" align=3D"left"></td></tr> <!-- SP=
+ACER -->
+=09=20
+=09=09 =09=09=09=09=09 =09=09=09<!-- ONE -->
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right:15px;"><a style=3D"color: #004d99;text-de=
+coration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627188-be9ea2ed8=
+dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >The year in review: 10 tec=
+hnology surprises in 2010</a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>=09=09=09=09=09=09=09=09
+=09=09=20
+=09=09=20
+<!-- TWO -->
+=09=09=09=09=20
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right:15px;"><a style=3D"color: #004d99;text-de=
+coration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627189-be9ea2ed8=
+dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Cheap Windows, pirate conf=
+essions, slim iTunes: my 2010 top 10</a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>=09=09
+=09=09 =09=09=20
+=09=09=20
+=09=09=20
+
+  <!-- THREE -->
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627190-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >OpenOffice dead? Netbooks=
+ alive? My top 10 Ed Tech posts of 2010</a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+=09=09=09=09=20
+=09=09=09<!-- FOUR -->
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627191-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Server-free architectures=
+, .NET, vanishing IT departments: top 10 posts for 2010</a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+=09
+=09
+  <!-- FIVE -->=09
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627192-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Readers vote with their c=
+licks: The 20 hottest Microsoft stories in 2010</a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+=09
+=09=09
+=09
+
+=09=09<!-- SIX -->
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627193-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Top posts, devices, and s=
+martphone awards for 2010</a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09<!-- SEVEN -->
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627194-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Digital Cameras: Top 10 m=
+ost popular posts of 2010</a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+=09
+=09
+
+=09=09<!-- EIGHT -->
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627195-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >2010's Top Five Linux and=
+ Open-Source Stories</a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+ =20
+
+ =20
+  =09=09
+=09=09<!-- NINE -->
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627196-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Vote for the biggest tech=
+ blunder of 2010</a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- TEN -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627197-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >2010: The Year of Whining=
+ About Women In Tech </a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- ELEVEN -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627198-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Ebook readers and the iPa=
+d dominated my 2010 posts </a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- TWELVE -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627199-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >5 things you're telling m=
+e about greentech</a></font></td>
+  </tr>
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- THIRTEEN -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627200-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >2010: The virtual year</a=
+></font></td>
+  </tr>
+
+
+  <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- FOURTEEN -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627201-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Hey, how'd your Apple get=
+ into my Wikileaks? 2010's Top 15 ZDNet Government posts</a></font></td>
+  </tr>
+ =20
+ =20
+    <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- FIFTEEN -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627202-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >2010's top 5 storage stor=
+ies</a></font></td>
+  </tr>
+ =20
+ =20
+    <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- SIXTEEN -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627203-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >This List Goes to Eleven:=
+ The Top Tech Broiler Posts of 2010</a></font></td>
+  </tr>
+=09
+  <tr>
+    <td colspan=3D"2" width=3D"30" valign=3D"top"></td><!-- BOTTOM SPACE HO=
+LDER -->
+  </tr>
+ =20
+ =20
+   =20
+    <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- SEVENTEEN -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627204-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Spycams, Antennagate and =
+Comcast Ruling: A look back at 10 high profile stories of 2010</a></font></=
+td>
+  </tr>
+=09
+  <tr>
+    <td colspan=3D"2" width=3D"30" valign=3D"top"></td><!-- BOTTOM SPACE HO=
+LDER -->
+  </tr>
+ =20
+ =20
+   =20
+    <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- EIGHTEEN -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627205-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Ten great software glitch=
+es for 2010</a></font></td>
+  </tr>
+=09
+  <tr>
+    <td colspan=3D"2" width=3D"30" valign=3D"top"></td><!-- BOTTOM SPACE HO=
+LDER -->
+  </tr>
+ =20
+ =20
+   =20
+    <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- NINTEEN -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627206-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >The Datacenter Story for =
+2010</a></font></td>
+  </tr>
+=09
+  <tr>
+    <td colspan=3D"2" width=3D"30" valign=3D"top"></td><!-- BOTTOM SPACE HO=
+LDER -->
+  </tr>
+ =20
+ =20
+   =20
+    <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- TWENTY -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627207-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Android! Oracle! Self-dri=
+ving cars! Oh my! My top 10 Google posts of 2010
+</a></font></td>
+  </tr>
+=09
+  <tr>
+    <td colspan=3D"2" width=3D"30" valign=3D"top"></td><!-- BOTTOM SPACE HO=
+LDER -->
+  </tr>
+ =20
+ =20
+   =20
+    <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- TWENTY-ONE -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627208-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >The Top 5 Networking Stor=
+ies of 2010</a></font></td>
+  </tr>
+ =20
+ =20
+   =20
+   =20
+    <tr>
+    <td colspan=3D"2" valign=3D"top"><hr style=3D"color: #bfbfbf; backgroun=
+d-color: #bfbfbf; height: 1px; width: 95%; border:0; margin:5px 0 5px 5px" =
+/></td>
+  </tr>
+
+
+
+=09=09
+=09<!-- TWENTY-TWO -->=20
+
+   <tr>
+      <td valign=3D"top" align=3D"left" width=3D"16" style=3D"margin-top:5p=
+x;"><img src=3D"http://i.zdnet.com/images/200801/icn_bullet.gif" style=3D"m=
+argin: 5px 0 0 0px;"/></td>
+
+    <td align=3D"left"><font size=3D"2" face=3D"Verdana, Arial, Helvetica, =
+sans-serif" style=3D"margin-right: 15px;"><a style=3D"color: #004d99;text-d=
+ecoration: none;" href=3D"http://ct.zdnet.com/clicks?t=3D673627209-be9ea2ed=
+8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Top 10 posts on The Apple=
+ Core in 2010</a></font></td>
+  </tr>
+ =20
+=09
+  <tr>
+    <td colspan=3D"2" height=3D"20" valign=3D"top"></td><!-- BOTTOM SPACE H=
+OLDER -->
+  </tr>
+
+=20
+
+</table><br />
+
+
+<!-- /END BLOGS AND NEWS -->
+
+
+
+
+  <!-- CONNECT WITH ZDNET HEADER -->
+<p style=3D"margin-bottom: 2px; margin-top: 30px;"><font size=3D"4" color=
+=3D"#8d0000" face=3D"Georgia, Times New Roman, Times, serif">Connect with Z=
+DNet </font></p>
+
+<img src=3D"http://i.zdnet.com/images/200801/ln-doubleGray-300x4.gif" width=
+=3D"305" height=3D"4"  />
+  <!-- /END CONNECT WITH ZDNET HEADER -->
+=09
+
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+
+        <tr><td height=3D"10"></td></tr><!-- SPACING -->
+
+        <tr>
+           <td valign=3D"left" align=3D"left" style=3D"margin-top:5px;"><a =
+href=3D"http://ct.zdnet.com/clicks?t=3D673627210-be9ea2ed8dcbd38a047e8d9d84=
+130928-bf&brand=3DZDNET&s=3D5" ><img src=3D"http://i.zdnet.com/blogs/facebo=
+ok_marc_150px_border.jpg" width=3D"150" height=3D"60" border=3D"0"></a><a h=
+ref=3D"http://ct.zdnet.com/clicks?t=3D673627211-be9ea2ed8dcbd38a047e8d9d841=
+30928-bf&brand=3DZDNET&s=3D5" ><img src=3D"http://i.zdnet.com/blogs/twitter=
+_marc_150px_border.jpg" width=3D"150" height=3D"60" border=3D"0"></a></td>
+=20
+        </tr>
+=09
+=09        <tr><td height=3D"10"></td></tr><!-- SPACING -->
+
+    </table>
+
+
+<!-- /END CONNECT WITH ZDNET -->
+
+
+
+
+
+
+=09=09
+<!-- FEATURED TALKBACK -->
+
+<!-- FEATURED TALKBACK HEADER --><!-- MARGIN-TOP FOR THIS HEADER IS DIFFERE=
+NT DUE TO NOT BEING THE FIRST IN THE COLUMN -->
+<p style=3D"margin-bottom: 2px; margin-top: 30px;"><font size=3D"4" color=
+=3D"#8d0000" face=3D"Georgia, Times New Roman, Times, serif">ZDNet Poll</fo=
+nt></p>
+
+<img src=3D"http://i.zdnet.com/images/200801/ln-doubleGray-300x4.gif" width=
+=3D"300" height=3D"4"/>
+
+<!-- /END FEATURED TALKBACK HEADER -->
+
+
+<p style=3D"margin-top:5px;margin-bottom:5px;"><font size=3D"4" color=3D"#0=
+04d99; text-decoration: none;" face=3D"Georgia, Times New Roman, Times, ser=
+if"><a href=3D"http://ct.zdnet.com/clicks?t=3D673627212-be9ea2ed8dcbd38a047=
+e8d9d84130928-bf&brand=3DZDNET&s=3D5"  style=3D"color:#004d99; text-decorat=
+ion:none">What tech are you looking forward to the most in 2011?</a></font>=
+</p>
+
+<p style=3D"margin:0 0 5px;">
+
+
+<font size=3D"2" face=3D"Verdana, Arial, Helvetica, sans-serif">
+2011 is nearly upon us, and it's a sure thing that the=20
+new year will bring with it a lot of new and exciting=20
+tech to tempt us into whipping out our wallets and=20
+charging that credit card like here's no tomorrow.
+</font></p>
+
+<p style=3D"margin-top:0px;"><font size=3D"1" face=3D"Verdana, Arial, Helve=
+tica, sans-serif"><a style=3D"color: #0A86FA;text-decoration:none;" href=3D=
+"http://ct.zdnet.com/clicks?t=3D673627213-be9ea2ed8dcbd38a047e8d9d84130928-=
+bf&brand=3DZDNET&s=3D5" >>> TAKE THE POLL</a> </font></p><br />
+
+
+<!-- /END FEATURED TALKBACK -->
+
+=09=09
+   =20
+  =09=09 <!-- START TOP PRODUCTS HEADER -->
+
+=09=09
+=09=09=09
+
+<!-- placeholder: Adjust the height of this placeholder if it's too short o=
+n the right side. You can remove it if the right side is taller than the le=
+ft --><div style=3D"height:20px;"><img src=3D"http://i.techrepublic.com.com=
+/images/200706/spacer.gif" height=3D"20" width=3D"1" /></div>
+<!-- end placeholder -->
+
+
+</div>
+</td>
+</tr>
+</table></td>
+</tr>
+</table>=09</td>
+</tr>
+<tr>
+<td colspan=3D"2" align=3D"center" height=3D"5"><img src=3D"http://i.techre=
+public.com.com/images/200706/spacer.gif" height=3D"1" width=3D"1" /></td>
+</tr>
+<tr>
+<td colspan=3D"2" align=3D"left"><img src=3D"http://i.zdnet.com/images/2008=
+01/bg-zdAlert-footerShadow-629x26.gif" width=3D"629" height=3D"26"/>
+
+<!-- START FOOTER - SUBSCRIPTION -->
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tr>
+<td width=3D"26" align=3D"left" valign=3D"top"><img src=3D"http://i.zdnet.c=
+om/images/200801/icn-zdAlerts-envelope-16x14.gif" width=3D"16" height=3D"14=
+" style=3D"padding-top:3px" /></td>
+<td width=3D"10">&nbsp;</td>
+<td><p style=3D"margin: 0"><font size=3D"4" face=3D"Georgia, Times New Roma=
+n, Times, serif">Send us your feedback <a style=3D"color: #0A86FA;"href=3D"=
+http://ct.zdnet.com/clicks?t=3D673627214-be9ea2ed8dcbd38a047e8d9d84130928-b=
+f&brand=3DZDNET&s=3D5" >here</a>.</font></p>
+<p style=3D"margin-bottom: 0"><font size=3D"2" face=3D"Verdana, Arial, Helv=
+etica, sans-serif">Sign up for more <a style=3D"color: #0A86FA;" href=3D"ht=
+tp://ct.zdnet.com/clicks?t=3D673627215-be9ea2ed8dcbd38a047e8d9d84130928-bf&=
+brand=3DZDNET&s=3D5" >free newsletters</a> from ZDNet! | To manage your acc=
+ount settings or to remove yourself from all ZDNet communications, please v=
+isit our <a style=3D"color: #0A86FA;" href=3D"http://ct.zdnet.com/clicks?t=
+=3D673627216-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Subs=
+cription Center</a>.</font></p>
+<p style=3D"margin-bottom: 0"><font size=3D"2" face=3D"Verdana, Arial, Helv=
+etica, sans-serif">The e-mail address for your subscription is cryptik@s153=
+718171.onlinehome.us.<br />
+<a style=3D"color: #0A86FA;"  href=3D"http://nl.com.com/global_unsub?email=
+=3Dcryptik%40s153718171.onlinehome.us&id=3D109504679&trial_id=3D25364512&li=
+st_id=3De539&unsub=3D1">Unsubscribe from this e-mail</a> | <a style=3D"colo=
+r: #0A86FA;" href=3D"http://ct.zdnet.com/clicks?t=3D673627217-be9ea2ed8dcbd=
+38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >FAQ</a> | <a style=3D"color: #=
+0A86FA;" href=3D"http://ct.zdnet.com/clicks?t=3D673627218-be9ea2ed8dcbd38a0=
+47e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Advertise</a> | <a style=3D"color:=
+ #0A86FA;" href=3D"http://ct.zdnet.com/clicks?t=3D673627219-be9ea2ed8dcbd38=
+a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Privacy Policy</a></font></p>
+<!-- /END FOOTER - SUBSCRIPTION -->
+
+
+<!-- START COPYRIGHT -->
+<p style=3D"margin-bottom: 0"><font size=3D"1" face=3D"Verdana, Arial, Helv=
+etica, sans-serif">Copyright CBS Interactive, Inc. All rights reserved. <br=
+ />
+ZDNet is a registered service mark of CBS Interactive, Inc.</font></p>
+
+<p style=3D"margin-bottom: 0"><font size=3D"1" face=3D"Verdana, Arial, Helv=
+etica, sans-serif">ZDNet<br=20
+
+/>
+235 Second Street<br />
+San Francisco, CA 94105
+<br />
+U.S.A.</font></p></td>
+</tr>
+</table
+<!-- /END COPYRIGHT -->
+
+
+
+<!-- end tr:ci name=3D"Z" -->
+
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+<img src=3D"http://ct.cnet.com/opens?t=3D25364512-be9ea2ed8dcbd38a047e8d9d8=
+4130928-bf&s=3D5" height=3D"0" width=3D"0"></body>
+</html>
+
+
+
+From - Sun Mar 23 10:39:47 2008
+X-Account-Key: account1
+X-UIDL: <5be27ce95455deada31da4c1fb83130d@bugs.uclibc.org>
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+Return-Path: <busybox@busybox.net>
+Received: from cdptpa-mxlb.mail.rr.com ([10.127.255.11])
+          by cdptpa-imta07.mail.rr.com with ESMTP
+          id <20080323143947.CNUJ3094.cdptpa-imta07.mail.rr.com@cdptpa-mxlb.mail.rr.com>
+          for <jbruchon@nc.rr.com>; Sun, 23 Mar 2008 14:39:47 +0000
+X-IronPort: cdptpa-mx08.mail.rr.com 326846414
+X-RR-Connecting-IP: 140.211.166.42
+Received: from busybox.net ([140.211.166.42])
+  by cdptpa-mxlb.mail.rr.com with ESMTP; 23 Mar 2008 14:39:47 +0000
+Received: by busybox.net (BusyBox.net Mail Daemon, from userid 33)
+	id C02403C300; Sun, 23 Mar 2008 07:39:45 -0700 (PDT)
+To: jbruchon@nc.rr.com
+Subject: [BusyBox Bug and Patch Tracking] Account registration
+Date: Sun, 23 Mar 2008 07:39:45 -0700
+From: bugs@busybox.net
+Message-ID: <5be27ce95455deada31da4c1fb83130d@bugs.uclibc.org>
+X-Priority: 3
+X-Mailer: PHPMailer [version 1.72]
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="windows-1252"
+
+
+Thank you for registering. You have account with username 'jbruchon'. In order
+to complete your registration, visit the following URL (make sure it is entered
+as the single line) and set your own access password: 
+
+http://busybox.net/bugs/verify.php?id=3264&confirm_hash=5517d9f59bac861b921d2dd2d8ea208b
+
+
+If you didn't request any registration, ignore this message and nothing will
+happen.
+
+DO NOT REPLY TO THIS MESSAGE
+
+
+From - Thu Jun 04 22:33:22 2015
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+Return-Path: abuse@mail.chartercom.com
+Received: from mail.chartercom.com ([24.217.29.16]) by mx.perfora.net
+ (mxeueus001) with ESMTP (Nemesis) id 0LsAmH-1ZDJEe0Bup-013sTy for
+ <jody@jodybruchon.com>; Fri, 05 Jun 2015 04:33:20 +0200
+X-IronPort-AV: E=Sophos;i="5.13,555,1427778000"; 
+   d="scan'208";a="446440650"
+Received: from unknown (HELO osscats.corp.chartercom.com) ([192.168.152.129])
+  by mail.chartercom.com with ESMTP; 04 Jun 2015 21:30:44 -0500
+Received: from osscats.corp.chartercom.com (localhost [127.0.0.1])
+	by osscats.corp.chartercom.com (8.14.4/8.14.4) with ESMTP id t552XIST006951
+	for <jody@jodybruchon.com>; Fri, 5 Jun 2015 02:33:18 GMT
+Received: (from abuse@localhost)
+	by osscats.corp.chartercom.com (8.14.4/8.14.4/Submit) id t552XI8l006950;
+	Fri, 5 Jun 2015 02:33:18 GMT
+Date: Fri, 5 Jun 2015 02:33:18 GMT
+Message-Id: <201506050233.t552XI8l006950@osscats.corp.chartercom.com>
+From: abuse@charter.net
+To: jody@jodybruchon.com
+CC: 
+Subject: [6.4.2015 Reference ID: 29277000] Notice of Copyright Infringement
+Envelope-To: <jody@jodybruchon.com>
+X-UI-Filterresults: notjunk:1;V01:K0:FuSyfJtZjjo=:YMBbGU7ZeiAUakRQiHwNyLzovw
+ 3ovyox6rMvQoQYVuUhDXe4yJWAXxj+FMD86anTH0AE8GJLr+pDe4DgD4skdMoLp0EVo8mJdEB
+ AUY51YCvYBSoSzciLQ6cbMqWgVuOPh7/AK6bcXOWUYZ4wufCjCxZC5exiuNuOUAbmiFKhdn4V
+ OBGNZ6+MZSzJljuo/s+0mnjWw/Boabjq6c4duCIvrWY2TMg30kqSPnVxgSComK/jPxeD090j6
+ TtYJr0PK1Ej9A4iLT+P3uKkikY+E6O94PBiuOhWjh5geWOhG4Y3xhWbSiGZA52tAclmPMZS3i
+ 1gF2MxxZv2M+whpazbXH3qh9Ksau+W/ij50QR0J+Ji8AtzwvUVZhq0yoy3O1l0TJxtfxzYev6
+ uBXtIPG1rfFMw6M9RBmnsQwGfWA034eZUOzehSDXEKqRhCPB7heNn9zl+tmTcMcllcTGWLEbt
+ pfsSKICcP3P6kfsI+nleMlOCiXStFrAWpMEpii0hsUO6QUWO3oJscml6r+z0T6qw4hEZl1mlf
+ KTkgnxOXMOJyQ8setQi8INy4ySC3tCq+qpWVwuA5SVzkgoPXnYRRBAheNba5mUJYoTFG+d7nm
+ AVV7X/1bwlSJ0QeSjBt1hmnkDeBxTWsezmdrEcumzMlyzDgF7L3Hi9wsPNAz6SqCocoomr0fe
+ Ye9yZ2BhKqRrKI1bbjjxUUdm/iZvoih37H3fXwFtSlytIHKGNdstPeb3Xk/T035cFnShKPUTo
+ y8OKDFpy0VoRn2Bmia9L8RUV3uiy3azpPFniC/DCKX6hLi6tf901ItMEbWz5cbyCuAguOMwx/
+ voaMRMirVC8CWKoekK6UFYVdh9c9fM9iEGmwX0DJD/a9fTdOn/4TKorEf9n2Y4btKRtxyYx7K
+ 0C4kHGugGurx3rExme31DtJNJpTDMacyzEvD4bYpI9yoHt1vYDlUv7TLySZ+xoBlsLtPaD/Nl
+ VDG+9dF+4xyRyCc1w1S2z2u0tkf2U9IBEdWXBrQCyzoYLbvcPO+EyOODOfP1n0ingLQF/ArCw
+ IUg+qla195E2/AdvZBXHAx15s94yIRYtJhHc4hOaYszjqfgNjvCUOYlwRsxKP+ZQ3UzO0uD+c
+ FdTwRHxlqPnEBtgQs3c27sJIbNK9ZyWYnXF6rJimHgRmjrd4qQdwi6+ZbXsJ8aOiq1J2/7Rol
+ Y6joIOes/mNG+rrztTWqjwhimgHlcPuURJCN/DRWh75Y7UhyVODici91GBd+n3jF0zheejgxd
+ 91P4gqtbplMRoTpuBaZi1jsz68Ajqa00NyfHBSFlXd6njzaa7immhFKYKhghldMWd8qNn/yAp
+ DfpXKblXPMRhRrT6XoB0HHONzg==
+
+
+
+Dear Charter Internet Customer:  
+
+Charter Communications ("Charter") has been notified by a copyright owner, or its authorized agent, that your Internet account may have been involved in the exchange of unauthorized copies of copyrighted material (e.g., music, movies, or software).  We are attaching a copy of the Digital Millennium Copyright Act (DMCA) notice that Charter received from the copyright holder which includes the specific allegation.
+
+Under the DMCA, copyright owners have the right to notify Charter’s registered agent if they believe that a Charter customer has infringed on their work(s).  When Charter receives a complaint notice from a copyright owner, Charter will notify the identified customer of the alleged infringement by providing them a copy of the submitted DMCA notice.  As required by law, Charter may determine that the customer is a repeat copyright infringer and reserves the right to suspend or terminate the accounts of repeat copyright infringers.
+
+Please be aware that Charter is not responsible for the content of the attached DMCA notice.  Charter is not affiliated with the copyright holder or its agent and Charter is only forwarding the same notice we received.  Any settlement or other offers contained in the attached notice come directly from the copyright holder or its agent, not from Charter.  Charter does not recommend and cannot advise you on whether to accept any offers contained in the notice; you should consult with your own legal advisors before acting.  Please note that if you contact the sender directly, they will have your contact information and may contact you directly with requests, offers or demands.  Charter has not disclosed your name or contact information to the copyright owner or its agent as a result of this notice. 
+
+It is possible that this activity has occurred without your permission or knowledge by an unauthorized user, a minor who may not fully understand the copyright laws, or even as a result of a computer virus.  However, as the named subscriber on the account, you may be held responsible for any misuse of your account.  Please be aware that using Charter’s service to engage in any form of copyright infringement is expressly prohibited by Charter's Acceptable Use Policy and that repeat copyright infringement, or violations of any other Charter policy, may result in the suspension or termination of your service.  You may view Charter's rules and policies, including Charter’s Acceptable Use Policy, at http://www.charter.com/aup . 
+
+We ask that you take immediate action to stop the exchange of any infringing material. For additional information regarding copyright infringement and for a list of frequently asked questions, please visit http://www.charter.com/dmca . 
+
+For more information about this DMCA notice, or to view any other recent DMCA notices on this account, please visit https://notices.charter.com .  You will be prompted to login using your Charter account number and the reference number listed in the subject line of this email, following the date.
+
+If you have questions about this notice, you may contact us at 1-866-229-7286.  Representatives will be available to take your call Monday through Friday 8am - 8pm, Saturday and Sunday 8am - 5pm (CST).
+
+
+Sincerely,
+
+Charter Communications Subscriber Services Security Team 
+http://www.charter.com/security
+
+Enclosure:  DMCA Notice
+
+--- The following material was provided to us as evidence ---
+
+
+
+**NOTE TO ISP: PLEASE FORWARD THE ENTIRE NOTICE***
+
+Re: Unauthorized Use of Copyrights Owned Exclusively by BMG Rights Management (US) LLC
+
+Reference#: TC-b6f28e6a-0fd4-4640-99e6-798c7f08ab86 2015-05-25 04:07:25.0
+
+Dear Sir or Madam:
+
+	Your ISP has forwarded you this notice.
+	Your ISP account has been used to download, upload or offer for upload copyrighted content in a manner that infringes on the rights of the copyright owner.
+	Your ISP service could be suspended if this matter is not resolved.
+	You could be liable for up to $150,000 per infringement in civil penalties.
+
+The file 1989 - Indigo Girls10. History Of Us - Indigo Girls.mp3  was infringed upon by a computer at IP Address 96.36.152.228 on 2015-05-25 04:07:25.0 GMT.
+
+	We represent the copyright owner.
+	This notice is an offer of settlement.
+	If you follow the link below and login to the Rightscorp, Inc. automated settlement system, for $20 per infringement, you will receive a legal release from the copyright owner.
+
+	Follow this link or copy and paste into your browser:
+
+https://secure.digitalrightscorp.com/settle/TC-b6f28e6a-0fd4-4640-99e6-798c7f08ab86
+
+	
+
+Rightscorp, Inc. represents the following 'copyright owner(s)' BMG Rights Management (US) LLC ('BMG').
+
+BMG is the exclusive owners of copyrights for Indigo Girls musical compositions, including the musical compositions listed below. It has come to our attention that Charter Communications is the service provider for the IP address listed below, from which unauthorized copying and distribution (downloading, uploading, file serving, file 'swapping' or other similar activities) of BMG's exclusive copyrights listed below is taking place.
+
+This unauthorized copying and/or distribution constitutes copyright infringement under the U.S. Copyright Act. Pursuant to 17 U.S.C. 512(c), this letter serves as actual notice of infringement. We hereby demand you immediately and permanently cease and desist the unauthorized copying and/or distribution (including, but not limited to downloading, uploading, file sharing, file 'swapping' or other similar activities) of recordings of  Indigo Girls compositions, including but not limited to those items listed in this correspondence.
+
+BMG will pursue every available remedy including injunctions and recovery of attorney's fees, costs and any and all other damages which are incurred by BMG as a result of any action that is commenced against you. Nothing contained or omitted from this letter is, or shall be deemed to be either a full statement of the facts or applicable law, an admission of any fact, or a waiver or limitation of any of BMG's rights or remedies, all of which are specifically retained and reserved. The information in this notification is accurate.
+
+We have a good faith belief that use of the material in the manner complained of herein is not authorized by the copyright owner, its agent, or by operation of law. I swear, under penalty of perjury, that I am authorized to act on behalf of the owner of the exclusive rights that have been infringed. While BMG is entitled to monetary damages from the infringing party under 17 U.S.C. Section 504, The BMG believes that it may be expeditious to settle this matter without the need of costly and time-consuming litigation.
+
+In order to help you avoid further legal action from BMG, we have been authorized to offer a settlement solution that we believe is reasonable for everyone.
+
+To access this settlement offer, please copy and paste the URL below into a browser and follow the instructions for the settlement offer:
+
+https://secure.digitalrightscorp.com/settle/TC-b6f28e6a-0fd4-4640-99e6-798c7f08ab86
+
+
+
+Very truly yours,
+
+Christopher Sabec
+
+CEO
+
+Rightscorp, Inc.
+3100 Donald Douglas Loop, North,
+Santa Monica, CA 90405
+Telephone: (310) 751-7510
+
+** For any correspondence regarding this case, please send your emails to DMCA@DigitalRightsCorp.com and refer to Notice ID: TC-b6f28e6a-0fd4-4640-99e6-798c7f08ab86.
+
+If you need immediate assistance or if you have general questions please call the number listed above.
+
+Infringement Source: Torrent
+
+Timestamp: 2015-05-25 04:07:25.0 GMT
+
+Infringers IP Address: 96.36.152.228
+
+Infringers Port: 31337
+
+Listing of infringement(s) (Title/Filename/Timestamp/Hash): History Of Us | 1989 - Indigo Girls10. History Of Us - Indigo Girls.mp3 | 2015-05-25 04:07:25.0 | SHA1 |
+
+ --Start ACNS XML
+
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Infringement>
+<Case>
+<ID>TC-b6f28e6a-0fd4-4640-99e6-798c7f08ab86</ID>
+<Ref_URL>https://secure.digitalrightscorp.com/settle/TC-b6f28e6a-0fd4-4640-99e6-798c7f08ab86</Ref_URL>
+<Status>Pending</Status>
+</Case>
+<Complainant>
+<Entity>Rightscorp, Inc.</Entity>
+<Contact>Rightscorp Manager</Contact>
+<Address>3100 Donald Douglas Loop, North, Santa Monica, CA 90405 UNITED STATES</Address>
+<Phone>(310) 751-7510</Phone>
+<Email>contact@digitalrightscorp.com</Email>
+</Complainant>
+<Service_Provider>
+<Entity>Charter Communications</Entity>
+<Email>DMCA@charter.net</Email>
+</Service_Provider>
+<Source>
+<TimeStamp>2015-05-25 04:07:25.0 GMT</TimeStamp>
+<IP_Address>96.36.152.228</IP_Address>
+<Port>31337</Port>
+<DNS_Name>96.36.152.228:31337</DNS_Name>
+<Type>Torrent</Type>
+<URL_Base>https://secure.digitalrightscorp.com/settle/TC-b6f28e6a-0fd4-4640-99e6-798c7f08ab86</URL_Base>
+<UserName>TC-b6f28e6a-0fd4-4640-99e6-798c7f08ab86</UserName>
+<Number_Files>1</Number_Files>
+<Login Username="TC-b6f28e6a-0fd4-4640-99e6-798c7f08ab86" />
+</Source>
+<Content>
+<Item>
+<TimeStamp>2015-05-25 04:07:25.0 GMT</TimeStamp>
+<Title>History Of Us</Title>
+<Artist>Indigo Girls</Artist>
+<FileName>1989 - Indigo Girls10. History Of Us - Indigo Girls.mp3</FileName>
+<FileSize>9495840</FileSize>
+<Hash Type="Hash">D0E68379AC4C9F0A74F3C72E0519CF72EBA2AE45</Hash>
+</Item>
+</Content>
+</Infringement>
+
+ --End ACNS XML
+
+
+
+
+
+From - Wed Sep 02 08:05:06 2015
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+Return-Path: abuse@mail.chartercom.com
+Received: from mail.chartercom.com ([24.217.29.16]) by mx.perfora.net
+ (mxeueus004) with ESMTP (Nemesis) id 0Lk9TI-1Yzu9l1hWc-00c9Fk for
+ <JODY@jodybruchon.com>; Mon, 31 Aug 2015 21:37:03 +0200
+X-IronPort-AV: E=Sophos;i="5.17,443,1437454800"; 
+   d="scan'208";a="489460214"
+Received: from unknown (HELO osscats.corp.chartercom.com) ([192.168.152.129])
+  by mail.chartercom.com with ESMTP; 31 Aug 2015 14:32:15 -0500
+Received: from osscats.corp.chartercom.com (localhost [127.0.0.1])
+	by osscats.corp.chartercom.com (8.14.4/8.14.4) with ESMTP id t7VJam6J014657
+	for <JODY@JODYBRUCHON.COM>; Mon, 31 Aug 2015 19:36:48 GMT
+Received: (from abuse@localhost)
+	by osscats.corp.chartercom.com (8.14.4/8.14.4/Submit) id t7VJamTG014654;
+	Mon, 31 Aug 2015 19:36:48 GMT
+Date: Mon, 31 Aug 2015 19:36:48 GMT
+Message-Id: <201508311936.t7VJamTG014654@osscats.corp.chartercom.com>
+From: abuse@charter.net
+To: JODY@JODYBRUCHON.COM
+CC: 
+Subject: [8.31.2015 Reference ID: 34352973] Notice of Copyright Infringement
+Envelope-To: <JODY@jodybruchon.com>
+X-UI-Filterresults: notjunk:1;V01:K0:NnxN4p4PBN0=:6lrFXddtw0fgr50jqaYg9GnchR
+ C1oRJ+q3i7m1r0gvHGNtLEu3WSM49LzAVUzCjY6jKqpHwan2MOYlSLB314P7AUEDkgpnh0+24
+ XVFU7UkSAKNcCJWomPAxZxO9R23JS/NCxE7glkKYknTt+fSZl76Jpwy6lrLtexInO8gXtMW9b
+ a0busklYsFtMdenEuMx5XQ/0LgELsnZImqRGIUKGTg+HqmlpCHJs41YLd81/NHTR5UgtV6vKH
+ LzmXIc3y2XdLmzLMHy3i046ngzpPn8dhRB7DbHiR+iErNkG5XhGqERhaJJr1/dd8PC/S2H494
+ StxPcH8UtZCusTmXrhRNeY8jcaSOQHh6ec/UzwOSRt5+uNJjwZVtj7jXlyO7WBxBxJFiUVw3c
+ oak/n5LR/U9f1+IpLyC5MYOiN11Th3BFKhCxCLudnaBLDgCOJdr5j4IbeBKkuk6HA7GVb9wYy
+ ExBefJG68yuZWP/i30tZ1BfcRIpMniwrf6wah1OpQKxJEHMWiRzoNbLxI1QaJ0mGL5Q9Mvafm
+ pHzLioo66g3L/2mvkd++IWyRDGZ9fYsuOVbWflWin7txwFuL4XxFAmzBfmv7wdxIAHL1twOOO
+ 44MtDrw+4pCob1/pSVuj13g6aFhDoqUTZPRYS+HYEkRGG8Jqv7hiLG4wt7kCnJQjSVoBddQEC
+ 8Twe96SwNnm7pDGpi0j/9Uj7LGKpUuCm54ImdGB/NBTGX7DtecvpUtOuR8u6knqYDXavRsqy0
+ JQkBJ+m/ZQW3Cn9Jru0tSxirhLNokym+yqirSMUh7lbasFkq94xdlNh7xlvU7NlPyjy9Y3Ixs
+ vqZRVPEZuidxCxNOcrLuQbyu0m2eIe1GXCwcagXHzdvOPMkcBwPYfsOT1enV+NPuT2VKy6ALW
+ GDzRW9mRTvprymgU5oveFzu151LnLpafGesbbrlnYqooweSqO4jJ57hXjOkrTVhCl7mI4MCUb
+ ggBOBLr6uD5U4vO8Hrw6RC+MTr61dxNx93+4Zjri14OOo6riyJv3Vy9dr54mTV9QmPDSCa2K1
+ XF5esDczBtdnBK4M/EGjokCzYHUwEPLSS4xs2bd4skk/kU2UjvEj9T7XrT0gncYa4iABxf9xx
+ ZoDjynPFfwM7HdqIMINOQZCevn59QIL0XfjBPNzctiCAjn2nRXVhvw2XUOuwf2jBZnRM1dmE2
+ 0nzAW3D8CriMZjXtcCHMFzzjwd8AGGE63yeIRgIVEkRSQjQP87qjRtgX9ij2/CnLTcpDVaAny
+ 72neSCv6PE8U16Uv8SvndTaWP8lGOhx4M8YEX/Rt87LHyMlqPjBug7IjCNqLubzUedNR25KDh
+ FZeUKxA1me1cJUf9jnIPwSh55g==
+
+
+
+Dear Spectrum Internet Subscriber:  
+
+Charter Communications ("Charter") has received a notice from a copyright owner, or its authorized agent, that your Internet account may have been involved in the exchange of unauthorized copies of copyrighted material (e.g., music, movies, or software).  
+
+To view the Digital Millennium Copyright Act (“DMCA”) notice that Charter received from the copyright holder or its agent, which includes the specific allegation, or to view any other recent DMCA notices on this account, please visit https://notices.charter.com.  You will be prompted to login using your Charter account number and the reference number listed in the subject line of this email, following the date.
+
+The DMCA permits copyright owners to notify Charter if they believe that a Charter customer has infringed their work(s).  When Charter receives a notice from a copyright owner, Charter will notify the identified customer of the alleged infringement by providing them a copy of the notice.  As required by law, Charter may determine that the customer is a repeat copyright infringer and reserves the right to suspend or terminate the accounts of repeat copyright infringers.
+
+Please consider the following when reviewing this notice:
+
+•	Charter has received this notice from the copyright holder or its agent and is not responsible for the content of any notice.
+•	Any settlement offers contained in the notice come directly from the copyright holder or its agent, not from Charter.
+•	Charter cannot advise you on whether to accept any offers contained in the notice; you may want to consult your own legal advisors before acting.
+•	If you contact the copyright holder or its agent directly, they will have your contact information and may contact you with requests, offers or demands.
+•	Charter has not disclosed your name or contact information to the copyright holder or its agent as a result of this notice.
+
+It is possible that this activity has occurred without your permission or knowledge by an unauthorized user, a minor who may not fully understand the copyright laws, or even as a result of a computer virus.  However, as the named subscriber on the account, you may be held responsible for any misuse of your account.  Please be aware that using Charter’s service to engage in any form of copyright infringement is expressly prohibited by Charter's Acceptable Use Policy and that repeat copyright infringement, or violations of any other Charter policy, may result in the suspension or termination of your service.  You may view Charter's rules and policies, including Charter’s Acceptable Use Policy, at http://www.charter.com/aup . 
+
+We ask that you take immediate action to stop the exchange of any infringing material. For additional information regarding copyright infringement and for a list of frequently asked questions, please visit http://www.charter.com/dmca . 
+
+If you have questions about this notice, you may contact us at 1-866-229-7286.  Representatives will be available to take your call Monday through Friday 8am - 8pm, Saturday and Sunday 8am - 5pm (CST).
+
+
+Sincerely,
+
+Charter Communications Subscriber Services Security Team 
+http://www.charter.com/security
+
+
+
+
+
+From - Tue Aug 23 00:24:15 2005
+X-Account-Key: account3
+X-UIDL: 437-1090612908
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+Return-path: <root@worldslist.com>
+Received: from ms-mta-01-eri0 (ms-mta-01-qfe1 [10.10.5.70])
+ by ms-mss-02.southeast.rr.com
+ (iPlanet Messaging Server 5.2 HotFix 2.04 (built Feb  8 2005))
+ with ESMTP id <0ILN00BWVQSLGW@ms-mss-02.southeast.rr.com> for
+ computersolutions@nc.rr.com; Tue, 23 Aug 2005 00:21:57 -0400 (EDT)
+Received: from hrndva-mx-12.mgw.rr.com (hrndva-mx-12.mgw.rr.com [24.28.204.35])
+ by ms-mta-01.southeast.rr.com
+ (iPlanet Messaging Server 5.2 HotFix 2.04 (built Feb  8 2005))
+ with ESMTP id <0ILN00D62QSB34@ms-mta-01.southeast.rr.com> for
+ computersolutions@nc.rr.com (ORCPT computersolutions@nc.rr.com); Tue,
+ 23 Aug 2005 00:21:57 -0400 (EDT)
+Received: from worldslist.com (69.36.176.118) by hrndva-mx-12.mgw.rr.com with
+ ESMTP; Tue, 23 Aug 2005 00:21:57 -0400
+Received: (from root@localhost)	by worldslist.com (8.11.6/8.11.6)
+ id j7N4M8p31661; Mon, 22 Aug 2005 22:22:08 -0600
+Date: Mon, 22 Aug 2005 22:22:08 -0600
+From: "worldslist.com" <questions@worldslist.com>
+Subject: Post/Edit/Delete - Home Computer Repair EXPERT
+To: ComputerSolutions@nc.rr.com
+Message-id: <e848f9c4fd35df2c20a483969d86e5c8@www.worldslist.com>
+MIME-version: 1.0
+X-Mailer: PHPMailer [version 1.72]
+Content-type: multipart/alternative;
+ boundary=b1_e848f9c4fd35df2c20a483969d86e5c8
+X-Priority: 3
+Original-recipient: rfc822;computersolutions@nc.rr.com
+
+
+--b1_e848f9c4fd35df2c20a483969d86e5c8
+Content-Type: text/plain; charset = "iso-8859-1"
+Content-Transfer-Encoding: 8bit
+
+
+Worldslist.com
+--------------
+
+IMPORTANT - YOU MUST TAKE FURTHER ACTION TO GET THIS POSTED !!!
+
+CLICK ON THE WEB ADDRESS BELOW TO PUBLISH, EDIT, OR DELETE THIS POSTING.
+
+If your email program doesn't recognize the web address below as an active link, please copy and paste the following
+address into your web browser:
+
+http://www.worldslist.com/us/services/monitor/?userid=770&id=577f538efc74baf2346c4ae05e0abb21 
+
+PLEASE KEEP THIS EMAIL - you will need it to publish and manage your posting!
+
+Your posting will expire off the site 15 days after it was created.
+
+Thanks for using Worldslist!
+http://www.worldslist.com
+
+  
+Copyright 2005 'Worldslist , Inc ' All rights reserved. | Contact us @ info@worldslist.com
+
+
+--b1_e848f9c4fd35df2c20a483969d86e5c8
+Content-Type: text/html; charset = "iso-8859-1"
+Content-Transfer-Encoding: 8bit
+
+<html>
+<head>
+</head>
+<body>
+  <table cellSpacing='0' cellPadding='0' width='565' bgColor='#ffffff' border='0' style='border-collapse: collapse' bordercolor='#111111'>
+    <tr>
+      <td>
+      <table cellSpacing='0' cellPadding='0' width='565' border='0'>
+        <tr>
+          <td>
+          <img src='http://www.worldslist.com/images/Let1.gif' border='0' width='565' height='14'></td>
+        </tr>
+      </table>
+      <table height='260' cellSpacing='0' cellPadding='0' width='565' background='http://www.worldslist.com/images/Let2.gif' border='0'>
+        <tr>
+          <td vAlign='top' height='260'>
+          <table cellSpacing='0' background-color:transparent cellPadding='3' width='554' border='0' height='1' style='border-collapse: collapse' bordercolor='#111111'>
+            <tr>
+              <td vAlign='top' width='9' height='35'>&nbsp;</td>
+              <td vAlign='top' width='154' bgColor='#ffffff' height='35'>
+              <img border='0' src='http://www.worldslist.com/images/name1.gif'></td>
+              <td vAlign='top' width='347' height='35'>&nbsp;</td>
+              <td vAlign='top' width='93' height='35' align='center'>
+              <img border='0' src='http://www.worldslist.com/images/us-t.gif' width='35' height='22'><br>
+              <font face='Verdana' size='1'><b>USA</b></font></td>
+            </tr>
+
+            <tr>
+              <td vAlign='top' width='9' height='1'></td>
+              <td vAlign='top' width='580' bgColor='#3988F2' colspan='3' height='1'>
+			</td>
+            </tr>
+            <tr>
+              <td vAlign='top' width='9' height='128'>&nbsp;</td>
+              <td vAlign='top' width='580' height='128' colspan='3'>
+              <font color='red' face='Verdana' ><br>
+              </font>
+              <font face='Verdana' size='1'><b>IMPORTANT - YOU MUST TAKE FURTHER 
+              ACTION TO GET THIS POSTED !!!</b><br>
+              <br>
+              CLICK ON THE WEB ADDRESS BELOW TO PUBLISH, EDIT, OR DELETE THIS 
+              POSTING.<br>
+              <br>
+              If your email program doesn't recognize the web address below as 
+              an active link, please copy and paste the following address into 
+              your web browser:<br>
+              <br>
+             <a href='http://www.worldslist.com/us/services/monitor/?userid=770&id=577f538efc74baf2346c4ae05e0abb21'>http://www.worldslist.com/us/services/monitor/?userid=770&id=577f538efc74baf2346c4ae05e0abb21</a>
+              <br>
+              <br>
+              PLEASE KEEP THIS EMAIL - you will need it to publish and manage 
+              your posting!<br>
+              <br>
+              Your posting will expire off the site 15 days after it was 
+              created.<br>
+              <br>
+              Thanks for using Worldslist!<br>
+              <a href='http://www.worldslist.com'>http://www.worldslist.com</a><br>
+              <br>
+&nbsp;</font></td>
+            </tr>
+            <tr>
+              <td vAlign='top' width='9' height='1'></td>
+              <td vAlign='top' width='580' bgColor='#3988F2' colspan='3' height='1'>
+			</td>
+            </tr>
+
+            <tr>
+              <td vAlign='top' width='9' height='18'></td>
+              <td vAlign='top' width='580' height='18' colspan='3'>
+              <font face='Verdana' size='1'>Copyright 2005 &quot;Worldslist , 
+    Inc &quot; All rights reserved. | Contact us @
+    <a href='mailto:info@worldslist.com'>info@worldslist.com</a></font></td>
+            </tr>
+          </table>
+          </td>
+        </tr>
+      </table>
+      <table cellSpacing='0' cellPadding='0' width='549' border='0'>
+        <tr>
+          <td>
+          <img src='http://www.worldslist.com/images/Let3.gif' border='0' width='565' height='15'></td>
+        </tr>
+      </table>
+     
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
+
+
+--b1_e848f9c4fd35df2c20a483969d86e5c8--
+
+
+
+From - Tue Oct 14 10:38:03 2025
+X-Mozilla-Status: 0009
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+FCC: imap://jody%40nctritech.com@imap.1and1.com/Sent
+X-Identity-Key: id1
+X-Account-Key: account1
+Subject: "Private" email
+To: Chatham Chatlist <chatlist@bellsouth.net>
+References: <CABKbeEFNZgOC6DE_g9LyZ9Va4NEVant427OOHjUX8oiCmG=w+w@mail.gmail.com>
+ <71901E1F-D47B-439A-B51F-6CC84274F607@nctritech.com>
+ <CABKbeEFpUS6-CXxQz_pG-1QiTAVJ5wc3WJKNvCnzvQA4gLLbNg@mail.gmail.com>
+ <CABKbeEGucWPTr6YiK8ezEfwf7-uxDr4KR-tUGUQZkWuaAFs5Sw@mail.gmail.com>
+From: Tritech - Jody <jody@nctritech.com>
+Message-ID: <6620acb7-f9e8-1b61-cf49-2d55bac69e17@nctritech.com>
+Date: Wed, 8 Nov 2023 09:02:21 -0500
+X-Mozilla-Draft-Info: internal/draft; vcard=0; receipt=0; DSN=0; uuencode=0;
+ attachmentreminder=0; deliveryformat=4
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.1
+MIME-Version: 1.0
+In-Reply-To: <CABKbeEGucWPTr6YiK8ezEfwf7-uxDr4KR-tUGUQZkWuaAFs5Sw@mail.gmail.com>
+Content-Type: text/html; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    I recently received this complaint. If you send a message to
+    someone, it's not "private." I can do as I please with anything that
+    arrives in my mailbox. Don't argue with me about political or
+    philosophical issues if you can't or won't stand by your arguments.
+    Good ideas can and will survive scrutiny.<br>
+    <br>
+    Plus, you were the one who made the argument supporting reposting
+    your email to the Chatlist: "Everyone in county is affected by
+    his/her decisions." In your "private" response to me, you also said
+    this: "The whole county is affected by decisions of the board made
+    of reps." If the whole county is affected by the political arguments
+    you're sending to me then the whole county should be able to read
+    them and be able to say their piece. Why do you insist that
+    "everyone should have a say in everything that affects them" but
+    then get offended when you present an idea that affects everyone and
+    that idea is then made available to everyone? By doing so, I'm
+    actively following the superior ethical system you've chosen to lay
+    out: everyone who is affected should also be involved.<br>
+    <br>
+    This kind of hypocrisy really annoys me. You don't get to lay out a
+    collectivist ethical framework but then complain about being held to
+    your own standards by having your superior ideas spread to a wider
+    audience. Why did you send me a so-called "private" email in the
+    first place? Why didn't you reply to the public Chatlist yourself?
+    What about this idea makes you hesitate to stand by it?<br>
+    <br>
+    <div class="moz-cite-prefix">On 2023-11-08 8:45 AM, Duck Decoy
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:CABKbeEGucWPTr6YiK8ezEfwf7-uxDr4KR-tUGUQZkWuaAFs5Sw@mail.gmail.com">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <div dir="ltr">You did not ask permission before you posted my
+        private email to you on a public chatlist.</div>
+    </blockquote>
+  </body>
+</html>
+
+From - Tue Oct 14 10:38:03 2025
+X-Mozilla-Status: 0000
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+FCC: imap://jody%40nctritech.com@imap.1and1.com/Sent
+X-Identity-Key: id1
+X-Account-Key: account1
+Subject: "Private" email
+To: Chatham Chatlist <chatlist@bellsouth.net>
+References: <CABKbeEFNZgOC6DE_g9LyZ9Va4NEVant427OOHjUX8oiCmG=w+w@mail.gmail.com>
+ <71901E1F-D47B-439A-B51F-6CC84274F607@nctritech.com>
+ <CABKbeEFpUS6-CXxQz_pG-1QiTAVJ5wc3WJKNvCnzvQA4gLLbNg@mail.gmail.com>
+ <CABKbeEGucWPTr6YiK8ezEfwf7-uxDr4KR-tUGUQZkWuaAFs5Sw@mail.gmail.com>
+From: Tritech - Jody <jody@nctritech.com>
+Message-ID: <6620acb7-f9e8-1b61-cf49-2d55bac69e17@nctritech.com>
+Date: Wed, 8 Nov 2023 09:02:21 -0500
+X-Mozilla-Draft-Info: internal/draft; vcard=0; receipt=0; DSN=0; uuencode=0;
+ attachmentreminder=0; deliveryformat=4
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.1
+MIME-Version: 1.0
+In-Reply-To: <CABKbeEGucWPTr6YiK8ezEfwf7-uxDr4KR-tUGUQZkWuaAFs5Sw@mail.gmail.com>
+Content-Type: text/html; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    I recently received this complaint. If you send a message to
+    someone, it's not "private." I can do as I please with anything that
+    arrives in my mailbox. Don't argue with me about political or
+    philosophical issues if you can't or won't stand by your arguments.
+    Good ideas can and will survive scrutiny.<br>
+    <br>
+    Plus, you were the one who made the argument supporting reposting
+    your email to the Chatlist: "Everyone in county is affected by
+    his/her decisions." In your "private" response to me, you also said
+    this: "The whole county is affected by decisions of the board made
+    of reps." If the whole county is affected by the political arguments
+    you're sending to me then the whole county should be able to read
+    them and be able to say their piece. Why do you insist that
+    "everyone should have a say in everything that affects them" but
+    then get offended when you present an idea that affects everyone and
+    that idea is then made available to everyone? By doing so, I'm
+    actively following the superior ethical system you've chosen to lay
+    out: everyone who is affected should also be involved.<br>
+    <br>
+    This kind of hypocrisy really annoys me. You don't get to lay out a
+    collectivist ethical framework but then complain about being held to
+    your own standards by having your superior ideas spread to a wider
+    audience. Why did you send me a so-called "private" email in the
+    first place? Why didn't you reply to the public Chatlist yourself?
+    What about this idea makes you hesitate to stand by it?<br>
+    <br>
+    <div class="moz-cite-prefix">On 2023-11-08 8:45 AM, Duck Decoy
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:CABKbeEGucWPTr6YiK8ezEfwf7-uxDr4KR-tUGUQZkWuaAFs5Sw@mail.gmail.com">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <div dir="ltr">You did not ask permission before you posted my
+        private email to you on a public chatlist.</div>
+    </blockquote>
+  </body>
+</html>
+
+From - Sun Sep 13 13:41:59 2026
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+BCC: Lisa Barbee <lisa7958@outlook.com>
+Subject: FOR LEASE: Professional Offices in REDACTED
+From: Tritech - Jody <jody@nctritech.com>
+To: Chatham Chatlist <chatlist@bellsouth.net>
+References: <f631fe39-e591-e431-d839-92f3b43f3001@nctritech.com>
+ <1927a76b-9c29-241d-1894-19fddf7223a9@nctritech.com>
+Message-ID: <4f708518-392b-47a2-8e46-1dfd115b952b@nctritech.com>
+Date: Sat, 18 Oct 2025 09:58:30 -0400
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.1
+MIME-Version: 1.0
+In-Reply-To: <1927a76b-9c29-241d-1894-19fddf7223a9@nctritech.com>
+Content-Type: multipart/alternative;
+ boundary="------------EECB0C252AAD859229CB9E45"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------EECB0C252AAD859229CB9E45
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+For lease: 12' x 12' and 11' x 13' (143-144 sq. ft.) offices, up to 6 
+available. $350 per office per month (month-to-month) with negotiable 
+yearly lease terms also available. Building amenities include:
+
+- 24-hour keyed access with security/alarm system, cameras, and several 
+entrances
+- Front lobby entrance with plenty of seating, building directory, and 
+natural light
+- Shared kitchen/break room, two bathrooms, and conference room
+- Paved front parking for visitors; huge and discreet gravel lot in the rear
+- High-speed internet access (Wi-Fi and Ethernet)
+- We will gladly paint your office to suit your needs
+
+These offices are ideal for working professionals and small businesses 
+with relatively low foot traffic. For example, a massage therapist, 
+remote tech worker, or business administrator such as a 
+charity/non-profit director or contracting firm owner would all be good 
+fits. Our existing tenants are friendly and respectful professionals, 
+some of whom have leased from us for several years! Photos are available 
+by email on request.
+
+Offices are located at REDACTED in REDACTED, beside Pelican 
+Sno-Balls, across the street from Black Tractor and Cockman Appliance. 
+Google Maps link: https://maps.app.goo.gl/cc5dBE1sLHs3mDEf9
+
+Contact Jody at Tritech Computers for more information or to schedule a 
+visit:
+email: jody@nctritech.com
+phone: (919) REDACTEDÂ  (text or call)
+
+Previous listings had the building owner's contact info, but I've been 
+given the green light to handle first contacts and showing the offices 
+to new renters. I'm also far more likely to be in or near the building, 
+so this works out well for everyone!
+
+--------------EECB0C252AAD859229CB9E45
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div class="moz-text-html" lang="x-unicode">
+      <div class="moz-text-flowed" style="font-family: -moz-fixed;
+        font-size: 13px;" lang="x-unicode">For lease: 12' x 12' and 11'
+        x 13' (143-144 sq. ft.) offices, up to 6 available. $350 per
+        office per month (month-to-month) with negotiable yearly lease
+        terms also available. Building amenities include:<br>
+        <br>
+        - 24-hour keyed access with security/alarm system, cameras, and
+        several entrances<br>
+        - Front lobby entrance with plenty of seating, building
+        directory, and natural light<br>
+        - Shared kitchen/break room, two bathrooms, and conference room<br>
+        - Paved front parking for visitors; huge and discreet gravel lot
+        in the rear<br>
+        - High-speed internet access (Wi-Fi and Ethernet)<br>
+        - We will gladly paint your office to suit your needs<br>
+        <br>
+        These offices are ideal for working professionals and small
+        businesses with relatively low foot traffic. For example, a
+        massage therapist, remote tech worker, or business administrator
+        such as a charity/non-profit director or contracting firm owner
+        would all be good fits. Our existing tenants are friendly and
+        respectful professionals, some of whom have leased from us for
+        several years! Photos are available by email on request.<br>
+        <br>
+        Offices are located at REDACTED in REDACTED, beside
+        Pelican Sno-Balls, across the street from Black Tractor and
+        Cockman Appliance. Google Maps link:
+        <a class="moz-txt-link-freetext" href="https://maps.app.goo.gl/cc5dBE1sLHs3mDEf9">https://maps.app.goo.gl/cc5dBE1sLHs3mDEf9</a><br>
+        <br>
+        Contact Jody at Tritech Computers for more information or to
+        schedule a visit:<br>
+        email: <a class="moz-txt-link-abbreviated" href="mailto:jody@nctritech.com">jody@nctritech.com</a><br>
+        phone: (919) REDACTEDÂ  (text or call)<br>
+        <br>
+        Previous listings had the building owner's contact info, but
+        I've been given the green light to handle first contacts and
+        showing the offices to new renters. I'm also far more likely to
+        be in or near the building, so this works out well for everyone!<br>
+      </div>
+    </div>
+  </body>
+</html>
+
+--------------EECB0C252AAD859229CB9E45--
+
