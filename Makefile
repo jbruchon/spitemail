@@ -20,6 +20,7 @@ COMPILER_OPTIONS = -Wall -Wwrite-strings -Wcast-align -Wstrict-aliasing -Wstrict
 COMPILER_OPTIONS += -Wshadow -Wfloat-equal -Waggregate-return -Wcast-qual -Wswitch-default -Wswitch-enum -Wunreachable-code -Wformat=2
 COMPILER_OPTIONS += -Wextra -Wstrict-overflow=5 -Winit-self
 COMPILER_OPTIONS += -std=gnu11 -D_FILE_OFFSET_BITS=64 -fstrict-aliasing -pipe
+COMPILER_OPTIONS += -mwindows
 
 ifdef USE_LTO
  COMPILER_OPTIONS += -flto
