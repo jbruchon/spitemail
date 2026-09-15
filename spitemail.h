@@ -20,9 +20,16 @@ extern "C" {
 #error This is a Win32 application.
 #endif /* Win32 */
 
+#include <stdint.h>
+
+
+/*** Helpful general-purpose definitions *///
+
 #define ISFLAG(a,b) ((a & b) == b)
 #define SETFLAG(a,b) (a |= b)
 #define CLEARFLAG(a,b) (a &= (~b))
+
+#define INVALID_INDEX (-1)
 
 /* Chunk sizing */
 #ifndef CHUNK_SIZE
@@ -45,6 +52,17 @@ extern "C" {
 #else
  #define DBG(a)
 #endif
+
+
+/*** Data context definitions - we favor SoA (struct-of-arrays) layouts ***/
+
+/* Single large arena for account/folder/path string storage */
+typedef struct StringPool {
+	wchar_t *data;
+	uint32_t used;
+	uint32_t capacity;
+} StringPool;
+
 
 
 /*** Resource definitions for icons, menus, etc. ***/
