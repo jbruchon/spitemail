@@ -23,6 +23,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	int col1Width;
 	int col2Width;
 	int col3Width;
+	HDWP hdwp;
 	MINMAXINFO *minMax;
 
 	switch (uMsg) {
@@ -102,9 +103,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			col3Width = cx - col1Width - col2Width;
 			if (col3Width < SM_MIN_READING_PANE_WIDTH) col3Width = SM_MIN_READING_PANE_WIDTH;
 
+			hdwp = BeginDeferWindowPos(3);
 			MoveWindow(hwndFolderTree, 0, contentTop, col1Width, contentHeight, TRUE);
 			MoveWindow(hwndMessageList, col1Width, contentTop, col2Width, contentHeight, TRUE);
 			MoveWindow(hwndReadingPane, col1Width + col2Width, contentTop, col3Width, contentHeight, TRUE);
+			EndDeferWindowPos(hdwp);
 			return 0;
 
 		case WM_DESTROY:
