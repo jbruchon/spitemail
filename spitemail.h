@@ -64,10 +64,18 @@ typedef struct StringPool {
 	uint32_t capacity;
 } StringPool;
 
+/* Folder role flags */
+#define SM_FOLDER_INBOX   (1 << 0)
+#define SM_FOLDER_SENT    (1 << 1)
+#define SM_FOLDER_DRAFTS  (1 << 2)
+#define SM_FOLDER_TRASH   (1 << 3)
+#define SM_FOLDER_CUSTOM  (1 << 4)
+
 typedef struct FolderTable {
 	uint32_t  *name_offsets;
 	uint32_t  *path_offsets;
 	uint32_t  *unread_counts;
+	uint32_t  *flags;
 	int32_t   *parent_idx;
 	int32_t   *first_child_idx;
 	int32_t   *next_sibling_idx;
@@ -91,6 +99,7 @@ typedef struct MailContext {
 } MailContext;
 
 
+
 /*** Resource definitions for icons, menus, etc. ***/
 
 #define WINRES_MANIFEST 1
@@ -104,16 +113,20 @@ typedef struct MailContext {
 /*** Constants ***/
 #define SM_WINDOW_WIDTH 800
 #define SM_WINDOW_HEIGHT 600
-#define SM_MIN_WINDOW_WIDTH 600
+#define SM_MIN_WINDOW_WIDTH 640
 #define SM_MIN_WINDOW_HEIGHT 300
 /* The next 3 numbers should add up to SM_WINDOW_WIDTH */
-#define SM_FOLDER_PANE_WIDTH 200
-#define SM_MESSAGE_PANE_WIDTH 240
-#define SM_READING_PANE_WIDTH 360
+#define SM_FOLDER_PANE_WIDTH 100
+#define SM_MESSAGE_PANE_WIDTH 380
+#define SM_READING_PANE_WIDTH 320
 /* The next 3 numbers should add up to SM_MIN_WINDOW_WIDTH */
 #define SM_MIN_FOLDER_PANE_WIDTH 120
-#define SM_MIN_MESSAGE_PANE_WIDTH 140
-#define SM_MIN_READING_PANE_WIDTH 340
+#define SM_MIN_MESSAGE_PANE_WIDTH 300
+#define SM_MIN_READING_PANE_WIDTH 240
+/* Message pane default widths - must add up to SM_MESSAGE_PANE_WIDTH - 10 */
+#define SM_MP_SUBJECT_WIDTH 170
+#define SM_MP_FROMTO_WIDTH 100
+#define SM_MP_DATE_WIDTH 100
 
 
 /*** Function prototypes ***/

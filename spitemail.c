@@ -75,13 +75,14 @@ void mail_context_init(MailContext *ctx)
 	ctx->folders.name_offsets = (uint32_t *)malloc(4 * sizeof(uint32_t));
 	ctx->folders.path_offsets = (uint32_t *)malloc(4 * sizeof(uint32_t));
 	ctx->folders.unread_counts = (uint32_t *)malloc(4 * sizeof(uint32_t));
+	ctx->folders.flags = (uint32_t *)malloc(4 * sizeof(uint32_t));
 	ctx->folders.parent_idx = (int32_t *)malloc(4 * sizeof(int32_t));
 	ctx->folders.first_child_idx = (int32_t *)malloc(4 * sizeof(int32_t));
 	ctx->folders.next_sibling_idx = (int32_t *)malloc(4 * sizeof(int32_t));
 	ctx->folders.htree_items = (HTREEITEM *)malloc(4 * sizeof(HTREEITEM));
 
 	/* 2. Add sample strings to UTF-16 pool */
-	acc_name_off = pool_add_utf8(&ctx->pool, "Spite Mail (RAM Store)");
+	acc_name_off = pool_add_utf8(&ctx->pool, "root@spitemail.com");
 	inbox_name_off = pool_add_utf8(&ctx->pool, "Inbox");
 	sent_name_off = pool_add_utf8(&ctx->pool, "Sent");
 
@@ -95,6 +96,7 @@ void mail_context_init(MailContext *ctx)
 	ctx->folders.name_offsets[0] = inbox_name_off;
 	ctx->folders.path_offsets[0] = inbox_name_off;
 	ctx->folders.unread_counts[0] = 3;
+	ctx->folders.flags[0] = SM_FOLDER_INBOX;
 	ctx->folders.parent_idx[0] = INVALID_INDEX;
 	ctx->folders.first_child_idx[0] = INVALID_INDEX;
 	ctx->folders.next_sibling_idx[0] = 1; /* Points to Sent */
@@ -104,10 +106,32 @@ void mail_context_init(MailContext *ctx)
 	ctx->folders.name_offsets[1] = sent_name_off;
 	ctx->folders.path_offsets[1] = sent_name_off;
 	ctx->folders.unread_counts[1] = 0;
+	ctx->folders.flags[1] = SM_FOLDER_SENT;
 	ctx->folders.parent_idx[1] = INVALID_INDEX;
 	ctx->folders.first_child_idx[1] = INVALID_INDEX;
 	ctx->folders.next_sibling_idx[1] = INVALID_INDEX;
 	ctx->folders.count++;
+}
+
+
+void mail_context_free(MailContext *ctx)
+{
+	if (!ctx) {
+		return;
+	}
+	free(ctx->pool.data);
+	free(ctx->accounts.name_offsets);
+	free(ctx->accounts.root_folder_idx);
+	free(ctx->accounts.store_flags);
+	free(ctx->folders.name_offsets);
+	free(ctx->folders.path_offsets);
+	free(ctx->folders.unread_counts);
+	free(ctx->folders.flags);
+	free(ctx->folders.parent_idx);
+	free(ctx->folders.first_child_idx);
+	free(ctx->folders.next_sibling_idx);
+	free(ctx->folders.htree_items);
+	memset(ctx, 0, sizeof(MailContext));
 }
 
 
@@ -189,11 +213,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	int tbHeight;
 	int contentTop;
 	int contentHeight;
-	int col1Width;
-	int col2Width;
-	int col3Width;
+	static int col1Width;
+	static int col2Width;
+	static int col3Width;
+	static int mp_subject_width = SM_MP_SUBJECT_WIDTH;
+	static int mp_fromto_width = SM_MP_FROMTO_WIDTH;
+	static int mp_date_width = SM_MP_DATE_WIDTH;
 	HDWP hdwp;
 	MINMAXINFO *minMax;
+	LVCOLUMNW lvc;
 
 	switch (uMsg) {
 		case WM_GETMINMAXINFO:
@@ -210,16 +238,34 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				0, L"STATIC", L"Toolbar", WS_CHILD | WS_VISIBLE | WS_BORDER,
 				0, 0, 0, 0, hwnd, (HMENU)1, hInstance, NULL
 			);
+
 			hwndFolderTree = CreateWindowEx(
 				0, WC_TREEVIEW, L"Folders",
 				WS_CHILD | WS_VISIBLE | TVS_HASLINES | TVS_HASBUTTONS | TVS_LINESATROOT | WS_BORDER,
 				0, 0, 0, 0, hwnd, (HMENU)2, hInstance, NULL
 			);
+
 			hwndMessageList = CreateWindowEx(
 				0, WC_LISTVIEW, L"Messages",
 				WS_CHILD | WS_VISIBLE | LVS_REPORT | LVS_SINGLESEL | WS_BORDER,
 				0, 0, 0, 0, hwnd, (HMENU)3, hInstance, NULL
 			);
+
+			memset(&lvc, 0, sizeof(lvc));
+			lvc.mask = LVCF_TEXT | LVCF_WIDTH;
+
+			lvc.pszText = (LPWSTR)(uintptr_t)L"Subject";
+			lvc.cx = mp_subject_width;
+			ListView_InsertColumn(hwndMessageList, 0, &lvc);
+
+			lvc.pszText = (LPWSTR)(uintptr_t)L"From";
+			lvc.cx = mp_fromto_width;
+			ListView_InsertColumn(hwndMessageList, 1, &lvc);
+
+			lvc.pszText = (LPWSTR)(uintptr_t)L"Date";
+			lvc.cx = mp_date_width;
+			ListView_InsertColumn(hwndMessageList, 2, &lvc);
+
 			hwndReadingPane = CreateWindowEx(
 				0, L"EDIT", L"Reading Pane",
 				WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_BORDER,
@@ -229,6 +275,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			/* Init fake data for testing */
 			mail_context_init(&g_mail_ctx);
 			tree_view_refresh(hwndFolderTree, &g_mail_ctx);
+
+			/* Select the Inbox (index 0) by default on launch */
+			TreeView_SelectItem(hwndFolderTree, g_mail_ctx.folders.htree_items[0]);
 
 			return 0;
 
@@ -273,6 +322,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				if (col1Width < SM_MIN_FOLDER_PANE_WIDTH) col1Width = SM_MIN_FOLDER_PANE_WIDTH;
 				if (col2Width < SM_MIN_MESSAGE_PANE_WIDTH) col2Width = SM_MIN_MESSAGE_PANE_WIDTH;
 			}
+			
+			/* Size the reading pane columns */
+
 
 			col3Width = cx - col1Width - col2Width;
 			if (col3Width < SM_MIN_READING_PANE_WIDTH) col3Width = SM_MIN_READING_PANE_WIDTH;
@@ -282,6 +334,70 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			MoveWindow(hwndMessageList, col1Width, contentTop, col2Width, contentHeight, TRUE);
 			MoveWindow(hwndReadingPane, col1Width + col2Width, contentTop, col3Width, contentHeight, TRUE);
 			EndDeferWindowPos(hdwp);
+			return 0;
+
+			case WM_NOTIFY:
+			{
+				NMHDR *pNmhdr;
+				NMTREEVIEWW *pnmtv;
+				int32_t folder_idx;
+				uint32_t folder_flags;
+				LVITEMW lvi;
+				LVCOLUMNW lvcCol;
+				int row;
+
+				pNmhdr = (NMHDR *)lParam;
+				if (pNmhdr->hwndFrom == hwndFolderTree && pNmhdr->code == TVN_SELCHANGEDW) {
+					pnmtv = (NMTREEVIEWW *)lParam;
+					folder_idx = (int32_t)(intptr_t)pnmtv->itemNew.lParam;
+
+					/* Handle root account click (lParam is -1) */
+					if (folder_idx == INVALID_INDEX) {
+						return 0;
+					}
+
+					folder_flags = g_mail_ctx.folders.flags[folder_idx];
+
+					/* Clear existing items from the list view */
+					ListView_DeleteAllItems(hwndMessageList);
+
+					memset(&lvcCol, 0, sizeof(lvcCol));
+					lvcCol.mask = LVCF_TEXT;
+
+					if (ISFLAG(folder_flags, SM_FOLDER_SENT)) { /* Outgoing Mail */
+						lvcCol.pszText = (LPWSTR)L"To";
+						ListView_SetColumn(hwndMessageList, 1, &lvcCol);
+
+						memset(&lvi, 0, sizeof(lvi));
+						lvi.mask = LVIF_TEXT;
+						lvi.iItem = 0;
+						lvi.iSubItem = 0;
+						lvi.pszText = (LPWSTR)L"Re: Bug report on jdupes memory usage";
+						row = ListView_InsertItem(hwndMessageList, &lvi);
+						ListView_SetItemText(hwndMessageList, row, 1, (LPWSTR)L"Jody Bruchon");
+						ListView_SetItemText(hwndMessageList, row, 2, (LPWSTR)L"Mon, 5 Oct 2026");
+
+					} else { /* Incoming Mail (Inbox, etc.) */
+						lvcCol.pszText = (LPWSTR)L"From";
+						ListView_SetColumn(hwndMessageList, 1, &lvcCol);
+
+						memset(&lvi, 0, sizeof(lvi));
+						lvi.mask = LVIF_TEXT;
+						lvi.iItem = 0;
+						lvi.iSubItem = 0;
+						lvi.pszText = (LPWSTR)L"Bend It Like Bloomberg: Micklethwait's Epic Soccer Mishap";
+						row = ListView_InsertItem(hwndMessageList, &lvi);
+						ListView_SetItemText(hwndMessageList, row, 1, (LPWSTR)L"Heat Street Staff");
+						ListView_SetItemText(hwndMessageList, row, 2, (LPWSTR)L"Fri, 29 Apr 2016");
+
+						lvi.iItem = 1;
+						lvi.pszText = (LPWSTR)L"Welcome to Spite Mail (RAM Store)";
+						row = ListView_InsertItem(hwndMessageList, &lvi);
+						ListView_SetItemText(hwndMessageList, row, 1, (LPWSTR)L"Jody Bruchon");
+						ListView_SetItemText(hwndMessageList, row, 2, (LPWSTR)L"Tue, 6 Oct 2026");
+					}
+				}
+			}
 			return 0;
 
 		case WM_DESTROY:
