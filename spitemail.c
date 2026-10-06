@@ -407,6 +407,27 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 					LPARAM sortParam = (last_col << 1) | (ascending ? 1 : 0);
 					ListView_SortItems(hwndMessageList, MessageListCompare, sortParam);
+
+					/* Update header sort direction arrows */
+					HWND hwndHeader = ListView_GetHeader(hwndMessageList);
+					if (hwndHeader) {
+						int i, colCount = Header_GetItemCount(hwndHeader);
+						for (i = 0; i < colCount; i++) {
+							HDITEMW hdi;
+							memset(&hdi, 0, sizeof(hdi));
+							hdi.mask = HDI_FORMAT;
+							Header_GetItem(hwndHeader, i, &hdi);
+
+							if (i == last_col) {
+								hdi.fmt &= ~(HDF_SORTUP | HDF_SORTDOWN);
+								hdi.fmt |= ascending ? HDF_SORTUP : HDF_SORTDOWN;
+							} else {
+								hdi.fmt &= ~(HDF_SORTUP | HDF_SORTDOWN);
+							}
+							Header_SetItem(hwndHeader, i, &hdi);
+						}
+					}
+
 					return 0;
 				}
 
