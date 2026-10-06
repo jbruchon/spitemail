@@ -16,6 +16,7 @@ extern "C" {
  #include <windows.h>
  #include <io.h>
  #include <wchar.h>
+ #include <commctrl.h>
 #else
 #error This is a Win32 application.
 #endif /* Win32 */
@@ -23,7 +24,7 @@ extern "C" {
 #include <stdint.h>
 
 
-/*** Helpful general-purpose definitions *///
+/*** Helpful general-purpose definitions ***/
 
 #define ISFLAG(a,b) ((a & b) == b)
 #define SETFLAG(a,b) (a |= b)
@@ -63,6 +64,31 @@ typedef struct StringPool {
 	uint32_t capacity;
 } StringPool;
 
+typedef struct FolderTable {
+	uint32_t  *name_offsets;
+	uint32_t  *path_offsets;
+	uint32_t  *unread_counts;
+	int32_t   *parent_idx;
+	int32_t   *first_child_idx;
+	int32_t   *next_sibling_idx;
+	HTREEITEM *htree_items;
+	uint32_t   count;
+	uint32_t   capacity;
+} FolderTable;
+
+typedef struct AccountTable {
+	uint32_t *name_offsets;
+	int32_t  *root_folder_idx;
+	uint32_t *store_flags;
+	uint32_t  count;
+	uint32_t  capacity;
+} AccountTable;
+
+typedef struct MailContext {
+	StringPool   pool;
+	FolderTable  folders;
+	AccountTable accounts;
+} MailContext;
 
 
 /*** Resource definitions for icons, menus, etc. ***/
@@ -88,6 +114,14 @@ typedef struct StringPool {
 #define SM_MIN_FOLDER_PANE_WIDTH 120
 #define SM_MIN_MESSAGE_PANE_WIDTH 140
 #define SM_MIN_READING_PANE_WIDTH 340
+
+
+/*** Function prototypes ***/
+uint32_t pool_add_utf8(StringPool *pool, const char *utf8_str);
+wchar_t *pool_get_wstr(const StringPool *pool, uint32_t offset);
+void mail_context_init(MailContext *ctx);
+void mail_context_free(MailContext *ctx);
+void tree_view_refresh(HWND hwndTree, MailContext *ctx);
 
 
 #ifdef __cplusplus
