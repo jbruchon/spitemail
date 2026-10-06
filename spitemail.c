@@ -250,6 +250,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				WS_CHILD | WS_VISIBLE | LVS_REPORT | LVS_SINGLESEL | WS_BORDER,
 				0, 0, 0, 0, hwnd, (HMENU)3, hInstance, NULL
 			);
+			/* Message list selections should span all columns */
+			ListView_SetExtendedListViewStyle(hwndMessageList, LVS_EX_FULLROWSELECT);
 
 			memset(&lvc, 0, sizeof(lvc));
 			lvc.mask = LVCF_TEXT | LVCF_WIDTH;
