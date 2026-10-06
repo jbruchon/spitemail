@@ -512,6 +512,31 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 							ListView_SetItemText(hwndMessageList, row, 2, (LPWSTR)L"Tue, 6 Oct 2026");
 						}
 					}
+
+					/* Default sort: date (index 2), descending (ascending = 0) */
+					{
+						LPARAM defaultSortParam = (2 << 1) | 0;
+						ListView_SortItems(hwndMessageList, MessageListCompare, defaultSortParam);
+
+						HWND hwndHeader = ListView_GetHeader(hwndMessageList);
+						if (hwndHeader) {
+							int i, colCount = Header_GetItemCount(hwndHeader);
+							for (i = 0; i < colCount; i++) {
+								HDITEMW hdi;
+								memset(&hdi, 0, sizeof(hdi));
+								hdi.mask = HDI_FORMAT;
+								Header_GetItem(hwndHeader, i, &hdi);
+
+								if (i == 2) {
+									hdi.fmt &= ~(HDF_SORTUP | HDF_SORTDOWN);
+									hdi.fmt |= HDF_SORTDOWN;
+								} else {
+									hdi.fmt &= ~(HDF_SORTUP | HDF_SORTDOWN);
+								}
+								Header_SetItem(hwndHeader, i, &hdi);
+							}
+						}
+					}
 				}
 			}
 
