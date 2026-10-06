@@ -401,6 +401,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			return 0;
 
 		case WM_DESTROY:
+			mail_context_free(&g_mail_ctx);
 			PostQuitMessage(0);
 			return 0;
 
