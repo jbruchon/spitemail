@@ -235,19 +235,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			hInstance = pCreate->hInstance;
 
 			hwndToolbar = CreateWindowEx(
-				0, L"STATIC", L"Toolbar", WS_CHILD | WS_VISIBLE | WS_BORDER,
+				0, L"STATIC", L"Toolbar", WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP,
 				0, 0, 0, 0, hwnd, (HMENU)1, hInstance, NULL
 			);
 
 			hwndFolderTree = CreateWindowEx(
 				0, WC_TREEVIEW, L"Folders",
-				WS_CHILD | WS_VISIBLE | TVS_HASLINES | TVS_HASBUTTONS | TVS_LINESATROOT | WS_BORDER,
+				WS_CHILD | WS_VISIBLE | TVS_HASLINES | TVS_HASBUTTONS | TVS_LINESATROOT | WS_BORDER | WS_TABSTOP,
 				0, 0, 0, 0, hwnd, (HMENU)2, hInstance, NULL
 			);
 
 			hwndMessageList = CreateWindowEx(
 				0, WC_LISTVIEW, L"Messages",
-				WS_CHILD | WS_VISIBLE | LVS_REPORT | LVS_SINGLESEL | WS_BORDER,
+				WS_CHILD | WS_VISIBLE | LVS_REPORT | LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,
 				0, 0, 0, 0, hwnd, (HMENU)3, hInstance, NULL
 			);
 			/* Message list selections should span all columns */
@@ -270,7 +270,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			hwndReadingPane = CreateWindowEx(
 				0, L"EDIT", L"Reading Pane",
-				WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_BORDER,
+				WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_BORDER | WS_TABSTOP,
 				0, 0, 0, 0, hwnd, (HMENU)4, hInstance, NULL
 			);
 
@@ -463,8 +463,10 @@ int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 
 	MSG msg = { 0 };
 	while (GetMessage(&msg, NULL, 0, 0)) {
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		if (!IsDialogMessage(hwnd, &msg)) {
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
 	}
 
 	return (int)msg.wParam;
