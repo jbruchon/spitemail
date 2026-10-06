@@ -202,6 +202,39 @@ void tree_view_refresh(HWND hwndTree, MailContext *ctx)
 }
 
 
+/* For sorting the message list */
+static int CALLBACK MessageListCompare(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
+{
+	MailItem *item1 = (MailItem *)lParam1;
+	MailItem *item2 = (MailItem *)lParam2;
+
+	int col = (lParamSort >> 1) & 0xFF;
+	int ascending = lParamSort & 1;
+	int cmp = 0;
+
+	switch (col) {
+		case 0:
+		cmp = _wcsicmp(item1->subject, item2->subject);
+		break;
+
+		case 1:
+		cmp = _wcsicmp(item1->sender, item2->sender);
+		break;
+
+		case 2:
+		if (item1->timestamp < item2->timestamp) cmp = -1;
+		else if (item1->timestamp > item2->timestamp) cmp = 1;
+		else cmp = 0;
+		break;
+
+		default:
+		return 0;
+	}
+
+	return ascending ? cmp : -cmp;
+}
+
+
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	CREATESTRUCT *pCreate;
@@ -349,6 +382,35 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				int row;
 
 				pNmhdr = (NMHDR *)lParam;
+
+				/* Automatically free MailItem structs when list items are deleted */
+				if (pNmhdr->hwndFrom == hwndMessageList && pNmhdr->code == LVN_DELETEITEM) {
+					NMLISTVIEW *pnmv = (NMLISTVIEW *)lParam;
+					if (pnmv->lParam) {
+						free((void *)pnmv->lParam);
+					}
+					return 0;
+				}
+
+				/* Handle message list column header clicks for sorting */
+				if (pNmhdr->hwndFrom == hwndMessageList && pNmhdr->code == LVN_COLUMNCLICK) {
+					NMLISTVIEW *pnmv = (NMLISTVIEW *)lParam;
+					static int last_col = -1;
+					static int ascending = 1;
+
+					if (last_col == pnmv->iSubItem) {
+						ascending = !ascending;  /* Toggle direction on repeat clicks */
+					} else {
+						last_col = pnmv->iSubItem;
+						ascending = 1;  /* Default to ascending for new column */
+					}
+
+					LPARAM sortParam = (last_col << 1) | (ascending ? 1 : 0);
+					ListView_SortItems(hwndMessageList, MessageListCompare, sortParam);
+					return 0;
+				}
+
+				/* Folder tree population */
 				if (pNmhdr->hwndFrom == hwndFolderTree && pNmhdr->code == TVN_SELCHANGEDW) {
 					pnmtv = (NMTREEVIEWW *)lParam;
 					folder_idx = (int32_t)(intptr_t)pnmtv->itemNew.lParam;
@@ -367,39 +429,71 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					lvcCol.mask = LVCF_TEXT;
 
 					if (ISFLAG(folder_flags, SM_FOLDER_SENT)) { /* Outgoing Mail */
+						MailItem *m1;
+
 						lvcCol.pszText = (LPWSTR)L"To";
 						ListView_SetColumn(hwndMessageList, 1, &lvcCol);
 
-						memset(&lvi, 0, sizeof(lvi));
-						lvi.mask = LVIF_TEXT;
-						lvi.iItem = 0;
-						lvi.iSubItem = 0;
-						lvi.pszText = (LPWSTR)L"Re: Bug report on jdupes memory usage";
-						row = ListView_InsertItem(hwndMessageList, &lvi);
-						ListView_SetItemText(hwndMessageList, row, 1, (LPWSTR)L"Jody Bruchon");
-						ListView_SetItemText(hwndMessageList, row, 2, (LPWSTR)L"Mon, 5 Oct 2026");
+						m1 = (MailItem *)malloc(sizeof(MailItem));
+						if (m1) {
+							wcscpy_s(m1->subject, 128, L"Re: Bug report on jdupes memory usage");
+							wcscpy_s(m1->sender, 128, L"Jody Bruchon");
+							m1->timestamp = 20261005;
+
+							memset(&lvi, 0, sizeof(lvi));
+							lvi.mask = LVIF_TEXT | LVIF_PARAM;
+							lvi.iItem = 0;
+							lvi.iSubItem = 0;
+							lvi.pszText = m1->subject;
+							lvi.lParam = (LPARAM)m1;
+							row = ListView_InsertItem(hwndMessageList, &lvi);
+							ListView_SetItemText(hwndMessageList, row, 1, m1->sender);
+							ListView_SetItemText(hwndMessageList, row, 2, (LPWSTR)L"Mon, 5 Oct 2026");
+						}
 
 					} else { /* Incoming Mail (Inbox, etc.) */
+						MailItem *m1, *m2;
+
 						lvcCol.pszText = (LPWSTR)L"From";
 						ListView_SetColumn(hwndMessageList, 1, &lvcCol);
 
-						memset(&lvi, 0, sizeof(lvi));
-						lvi.mask = LVIF_TEXT;
-						lvi.iItem = 0;
-						lvi.iSubItem = 0;
-						lvi.pszText = (LPWSTR)L"Bend It Like Bloomberg: Micklethwait's Epic Soccer Mishap";
-						row = ListView_InsertItem(hwndMessageList, &lvi);
-						ListView_SetItemText(hwndMessageList, row, 1, (LPWSTR)L"Heat Street Staff");
-						ListView_SetItemText(hwndMessageList, row, 2, (LPWSTR)L"Fri, 29 Apr 2016");
+						m1 = (MailItem *)malloc(sizeof(MailItem));
+						if (m1) {
+							wcscpy_s(m1->subject, 128, L"Bend It Like Bloomberg: Micklethwait's Epic Soccer Mishap");
+							wcscpy_s(m1->sender, 128, L"Heat Street Staff");
+							m1->timestamp = 20160429;
 
-						lvi.iItem = 1;
-						lvi.pszText = (LPWSTR)L"Welcome to Spite Mail (RAM Store)";
-						row = ListView_InsertItem(hwndMessageList, &lvi);
-						ListView_SetItemText(hwndMessageList, row, 1, (LPWSTR)L"Jody Bruchon");
-						ListView_SetItemText(hwndMessageList, row, 2, (LPWSTR)L"Tue, 6 Oct 2026");
+							memset(&lvi, 0, sizeof(lvi));
+							lvi.mask = LVIF_TEXT | LVIF_PARAM;
+							lvi.iItem = 0;
+							lvi.iSubItem = 0;
+							lvi.pszText = m1->subject;
+							lvi.lParam = (LPARAM)m1;
+							row = ListView_InsertItem(hwndMessageList, &lvi);
+							ListView_SetItemText(hwndMessageList, row, 1, m1->sender);
+							ListView_SetItemText(hwndMessageList, row, 2, (LPWSTR)L"Fri, 29 Apr 2016");
+						}
+
+						m2 = (MailItem *)malloc(sizeof(MailItem));
+						if (m2) {
+							wcscpy_s(m2->subject, 128, L"Welcome to Spite Mail (RAM Store)");
+							wcscpy_s(m2->sender, 128, L"Jody Bruchon");
+							m2->timestamp = 20261006;
+
+							memset(&lvi, 0, sizeof(lvi));
+							lvi.mask = LVIF_TEXT | LVIF_PARAM;
+							lvi.iItem = 1;
+							lvi.iSubItem = 0;
+							lvi.pszText = m2->subject;
+							lvi.lParam = (LPARAM)m2;
+							row = ListView_InsertItem(hwndMessageList, &lvi);
+							ListView_SetItemText(hwndMessageList, row, 1, m2->sender);
+							ListView_SetItemText(hwndMessageList, row, 2, (LPWSTR)L"Tue, 6 Oct 2026");
+						}
 					}
 				}
 			}
+
 			return 0;
 
 		case WM_DESTROY:

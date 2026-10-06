@@ -98,6 +98,12 @@ typedef struct MailContext {
 	AccountTable accounts;
 } MailContext;
 
+typedef struct {
+    wchar_t subject[128];
+    wchar_t sender[128];
+    uint32_t timestamp; /* Numeric for fast sorting */
+} MailItem;
+
 
 
 /*** Resource definitions for icons, menus, etc. ***/
