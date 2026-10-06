@@ -235,7 +235,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			hInstance = pCreate->hInstance;
 
 			hwndToolbar = CreateWindowEx(
-				0, L"STATIC", L"Toolbar", WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP,
+				0, L"STATIC", L"Toolbar", WS_CHILD | WS_VISIBLE | WS_BORDER,
 				0, 0, 0, 0, hwnd, (HMENU)1, hInstance, NULL
 			);
 
@@ -418,6 +418,10 @@ int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 	const wchar_t CLASS_NAME[] = L"SpiteMailWindowClass";
 	HMENU hMenu;
 	INITCOMMONCONTROLSEX icc;
+	MSG msg;
+	HWND hwndFocus;
+	BOOL bShift;
+	HWND hwndNext;
 
 	(void)hPrevInstance;
 	(void)lpCmdLine;
@@ -461,12 +465,20 @@ int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 	ShowWindow(hwnd, nShowCmd);
 	UpdateWindow(hwnd);
 
-	MSG msg = { 0 };
+	memset(&msg, 0, sizeof(msg));
 	while (GetMessage(&msg, NULL, 0, 0)) {
-		if (!IsDialogMessage(hwnd, &msg)) {
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+		/* Intercept TAB and handle it ourselves */
+		if (msg.message == WM_KEYDOWN && msg.wParam == VK_TAB) {
+			hwndFocus = GetFocus();
+			bShift = (GetKeyState(VK_SHIFT) & 0x8000) != 0;
+			hwndNext = GetNextDlgTabItem(hwnd, hwndFocus, bShift);
+			if (hwndNext) {
+				SetFocus(hwndNext);
+				continue;
+			}
 		}
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
 	}
 
 	return (int)msg.wParam;
