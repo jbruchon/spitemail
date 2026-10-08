@@ -17,6 +17,7 @@ extern "C" {
  #include <io.h>
  #include <wchar.h>
  #include <commctrl.h>
+ #include <uxtheme.h>
 #else
 #error This is a Win32 application.
 #endif /* Win32 */

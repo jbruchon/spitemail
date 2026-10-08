@@ -81,7 +81,7 @@ BSTATIC = -Wl,-Bstatic
 
 CFLAGS += $(COMPILER_OPTIONS) $(CFLAGS_EXTRA)
 LDFLAGS += $(LINK_OPTIONS) $(LDFLAGS_EXTRA)
-DYNLIBS += -lcomctl32
+DYNLIBS += -lcomctl32 -luxtheme
 
 all: $(PROGRAM_NAME)
 	-strip $(PROGRAM_NAME)$(SUFFIX)

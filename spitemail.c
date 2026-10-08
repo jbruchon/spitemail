@@ -285,7 +285,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				0, 0, 0, 0, hwnd, (HMENU)3, hInstance, NULL
 			);
 			/* Message list selections should span all columns */
-			ListView_SetExtendedListViewStyle(hwndMessageList, LVS_EX_FULLROWSELECT);
+			ListView_SetExtendedListViewStyle(hwndMessageList, LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+ 
+			/* Disable visual styles on the header control to restore classic 3D appearance */
+			{
+				HWND hwndHeader = ListView_GetHeader(hwndMessageList);
+				if (hwndHeader) SetWindowTheme(hwndHeader, L"", L"");
+			}
 
 			memset(&lvc, 0, sizeof(lvc));
 			lvc.mask = LVCF_TEXT | LVCF_WIDTH;
