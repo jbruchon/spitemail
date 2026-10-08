@@ -13,7 +13,7 @@ RMDIR   = rmdir -p
 MKDIR   = mkdir -p
 
 # Main object files
-OBJS += spitemail.o
+OBJS += spitemail.o datastore.o
 
 # Configuration section
 COMPILER_OPTIONS = -Wall -Wwrite-strings -Wcast-align -Wstrict-aliasing -Wstrict-prototypes -Wpointer-arith -Wundef
