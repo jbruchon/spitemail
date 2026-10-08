@@ -540,6 +540,49 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					}
 					return 0;
 				}
+
+				/* Alternating row colors and custom inactive selection color via Custom Draw */
+				if (pNmhdr->hwndFrom == hwndMessageList && pNmhdr->code == NM_CUSTOMDRAW) {
+					NMLVCUSTOMDRAW *pLVCD = (NMLVCUSTOMDRAW *)lParam;
+					switch (pLVCD->nmcd.dwDrawStage) {
+						case CDDS_PREPAINT:
+							return CDRF_NOTIFYITEMDRAW;
+
+						case CDDS_ITEMPREPAINT:
+							return CDRF_NOTIFYSUBITEMDRAW;
+
+						case CDDS_SUBITEM | CDDS_ITEMPREPAINT:
+						{
+							int is_selected = (ListView_GetItemState(hwndMessageList, pLVCD->nmcd.dwItemSpec, LVIS_SELECTED) != 0);
+							int is_inactive = (GetFocus() != hwndMessageList);
+
+							if (is_selected && is_inactive) {
+								/* Custom inactive selection background (e.g., light gray/silver) */
+								pLVCD->nmcd.uItemState &= ~(CDIS_SELECTED | CDIS_FOCUS);
+								pLVCD->clrTextBk = RGB(240, 240, 255);
+								pLVCD->clrText = RGB(0, 0, 0);
+								return CDRF_NEWFONT;
+							} else if (!is_selected) {
+								/* Zebra striping for unselected rows */
+								if (pLVCD->nmcd.dwItemSpec % 2 != 0) {
+									pLVCD->clrTextBk = RGB(240, 240, 240);
+								} else {
+									pLVCD->clrTextBk = RGB(255, 255, 255);
+								}
+								pLVCD->clrText = RGB(0, 0, 0);
+								return CDRF_NEWFONT;
+							}
+							return CDRF_DODEFAULT;
+						}
+
+						default:
+							break;
+					}
+					return CDRF_DODEFAULT;
+				}
+
+				/* End of WM_NOTIFY */
+
 			}
 			return 0;
 
