@@ -15,7 +15,7 @@ static int g_reading_pane_has_error = 0;
 static HBRUSH hbrErrorBg = NULL;
 
 
-/* UTF-16 String Pool Ingestion (C89 Declarations) */
+/* UTF-16 string pool */
 uint32_t pool_add_utf8(StringPool *pool, const char *utf8_str)
 {
 	int req_chars;
@@ -23,14 +23,10 @@ uint32_t pool_add_utf8(StringPool *pool, const char *utf8_str)
 	uint32_t new_cap;
 	wchar_t *new_data;
 
-	if (!utf8_str || *utf8_str == '\0') {
-		return 0;
-	}
+	if (!utf8_str || *utf8_str == '\0') return 0;
 
 	req_chars = MultiByteToWideChar(CP_UTF8, 0, utf8_str, -1, NULL, 0);
-	if (req_chars <= 0) {
-		return 0;
-	}
+	if (req_chars <= 0) return 0;
 
 	if (pool->used + (uint32_t)req_chars > pool->capacity) {
 		new_cap = pool->capacity ? pool->capacity * 2 : 4096;
@@ -39,9 +35,7 @@ uint32_t pool_add_utf8(StringPool *pool, const char *utf8_str)
 		}
 
 		new_data = (wchar_t *)realloc(pool->data, new_cap * sizeof(wchar_t));
-		if (!new_data) {
-			return 0;
-		}
+		if (!new_data) return 0;
 
 		pool->data = new_data;
 		pool->capacity = new_cap;
@@ -61,114 +55,182 @@ wchar_t *pool_get_wstr(const StringPool *pool, uint32_t offset)
 }
 
 
+/* Add wide strings directly to the UTF-16 string pool */
+uint32_t pool_add_wstr(StringPool *pool, const wchar_t *w_str)
+{
+	uint32_t req_chars;
+	uint32_t offset;
+	uint32_t new_cap;
+	wchar_t *new_data;
+
+	if (!w_str || *w_str == L'\0') return 0;
+
+	req_chars = (uint32_t)wcslen(w_str) + 1;
+
+	if (pool->used + req_chars > pool->capacity) {
+		new_cap = pool->capacity ? pool->capacity * 2 : 4096;
+		while (pool->used + req_chars > new_cap) {
+			new_cap *= 2;
+		}
+
+		new_data = (wchar_t *)realloc(pool->data, new_cap * sizeof(wchar_t));
+		if (!new_data) return 0;
+
+		pool->data = new_data;
+		pool->capacity = new_cap;
+	}
+
+	offset = pool->used;
+	wcscpy_s(pool->data + offset, pool->capacity - offset, w_str);
+	pool->used += req_chars;
+
+	return offset;
+}
+
+
 void mail_context_init(MailContext *ctx)
 {
-	uint32_t acc0_name_off, acc1_name_off;
-	uint32_t acc0_srv_off, acc1_srv_off;
-	uint32_t acc0_usr_off, acc1_usr_off;
-	uint32_t inbox0_name_off, sent0_name_off;
-	uint32_t inbox1_name_off, sent1_name_off;
+	wchar_t config_path[MAX_PATH];
+	wchar_t section_names[4096];
+	DWORD sec_len;
+	wchar_t *pSec;
+	uint32_t acc_capacity = 4;
+	uint32_t fld_capacity = 8;
+	uint32_t acc_idx = 0;
+	uint32_t folder_idx = 0;
 
 	memset(ctx, 0, sizeof(MailContext));
 
-	/* 1. Allocate initial capacities for SoA tables (capacity 4 for accounts, 8 for folders) */
-	ctx->accounts.capacity = 4;
-	ctx->accounts.name_offsets = (uint32_t *)malloc(4 * sizeof(uint32_t));
-	ctx->accounts.server_offsets = (uint32_t *)malloc(4 * sizeof(uint32_t));
-	ctx->accounts.username_offsets = (uint32_t *)malloc(4 * sizeof(uint32_t));
-	ctx->accounts.ports = (uint32_t *)malloc(4 * sizeof(uint32_t));
-	ctx->accounts.root_folder_idx = (int32_t *)malloc(4 * sizeof(int32_t));
-	ctx->accounts.store_flags = (uint32_t *)malloc(4 * sizeof(uint32_t));
+	/* Allocate initial capacities for SoA tables */
+	ctx->accounts.capacity = acc_capacity;
+	ctx->accounts.name_offsets = (uint32_t *)malloc(acc_capacity * sizeof(uint32_t));
+	ctx->accounts.server_offsets = (uint32_t *)malloc(acc_capacity * sizeof(uint32_t));
+	ctx->accounts.username_offsets = (uint32_t *)malloc(acc_capacity * sizeof(uint32_t));
+	ctx->accounts.ports = (uint32_t *)malloc(acc_capacity * sizeof(uint32_t));
+	ctx->accounts.root_folder_idx = (int32_t *)malloc(acc_capacity * sizeof(int32_t));
+	ctx->accounts.store_flags = (uint32_t *)malloc(acc_capacity * sizeof(uint32_t));
 
-	ctx->folders.capacity = 8;
-	ctx->folders.name_offsets = (uint32_t *)malloc(8 * sizeof(uint32_t));
-	ctx->folders.path_offsets = (uint32_t *)malloc(8 * sizeof(uint32_t));
-	ctx->folders.unread_counts = (uint32_t *)malloc(8 * sizeof(uint32_t));
-	ctx->folders.flags = (uint32_t *)malloc(8 * sizeof(uint32_t));
-	ctx->folders.parent_idx = (int32_t *)malloc(8 * sizeof(int32_t));
-	ctx->folders.first_child_idx = (int32_t *)malloc(8 * sizeof(int32_t));
-	ctx->folders.next_sibling_idx = (int32_t *)malloc(8 * sizeof(int32_t));
-	ctx->folders.htree_items = (HTREEITEM *)malloc(8 * sizeof(HTREEITEM));
+	ctx->folders.capacity = fld_capacity;
+	ctx->folders.name_offsets = (uint32_t *)malloc(fld_capacity * sizeof(uint32_t));
+	ctx->folders.path_offsets = (uint32_t *)malloc(fld_capacity * sizeof(uint32_t));
+	ctx->folders.unread_counts = (uint32_t *)malloc(fld_capacity * sizeof(uint32_t));
+	ctx->folders.flags = (uint32_t *)malloc(fld_capacity * sizeof(uint32_t));
+	ctx->folders.parent_idx = (int32_t *)malloc(fld_capacity * sizeof(int32_t));
+	ctx->folders.first_child_idx = (int32_t *)malloc(fld_capacity * sizeof(int32_t));
+	ctx->folders.next_sibling_idx = (int32_t *)malloc(fld_capacity * sizeof(int32_t));
+	ctx->folders.htree_items = (HTREEITEM *)malloc(fld_capacity * sizeof(HTREEITEM));
 
-	/* 2. Add sample strings and auth/server info to UTF-16 pool */
-	acc0_name_off = pool_add_utf8(&ctx->pool, "root@spitemail.com");
-	acc0_srv_off = pool_add_utf8(&ctx->pool, "imap.spitemail.com");
-	acc0_usr_off = pool_add_utf8(&ctx->pool, "root@spitemail.com");
+	/* Resolve path to spitemail.ini beside spitemail.exe */
+	GetModuleFileNameW(NULL, config_path, MAX_PATH);
+	{
+		wchar_t *last_slash = wcsrchr(config_path, L'\\');
+		if (last_slash) {
+			wcscpy_s(last_slash + 1, MAX_PATH - (last_slash + 1 - config_path), L"spitemail.ini");
+		} else {
+			wcscpy_s(config_path, MAX_PATH, L".\\spitemail.ini");
+		}
+	}
 
-	acc1_name_off = pool_add_utf8(&ctx->pool, "jody@gazingcat.com");
-	acc1_srv_off = pool_add_utf8(&ctx->pool, "mail.gazingcat.com");
-	acc1_usr_off = pool_add_utf8(&ctx->pool, "jody@gazingcat.com");
+	/* Read section names */
+	sec_len = GetPrivateProfileSectionNamesW(section_names, sizeof(section_names) / sizeof(wchar_t), config_path);
+	if (sec_len > 0) {
+		pSec = section_names;
+		while (*pSec != L'\0') {
+			if (_wcsnicmp(pSec, L"Account", 7) == 0) {
+				wchar_t name_buf[128];
+				wchar_t serv_buf[128];
+				wchar_t user_buf[128];
+				wchar_t store_buf[32];
+				int port;
+				uint32_t name_off, serv_off, user_off;
+				uint32_t inbox_name_off, sent_name_off;
+				int32_t inbox_idx, sent_idx;
 
-	inbox0_name_off = pool_add_utf8(&ctx->pool, "Inbox");
-	sent0_name_off = pool_add_utf8(&ctx->pool, "Sent");
+				GetPrivateProfileStringW(pSec, L"Name", L"user@spitemail.com", name_buf, 128, config_path);
+				GetPrivateProfileStringW(pSec, L"Server", L"imap.spitemail.com", serv_buf, 128, config_path);
+				GetPrivateProfileStringW(pSec, L"Username", name_buf, user_buf, 128, config_path);
+				GetPrivateProfileStringW(pSec, L"Store", L"ram", store_buf, 32, config_path);
+				port = GetPrivateProfileIntW(pSec, L"Port", 993, config_path);
 
-	inbox1_name_off = pool_add_utf8(&ctx->pool, "Inbox");
-	sent1_name_off = pool_add_utf8(&ctx->pool, "Sent");
+				/* Reallocate account arrays if needed */
+				if (acc_idx >= ctx->accounts.capacity) {
+					uint32_t new_cap = ctx->accounts.capacity * 2;
+					ctx->accounts.name_offsets = (uint32_t *)realloc(ctx->accounts.name_offsets, new_cap * sizeof(uint32_t));
+					ctx->accounts.server_offsets = (uint32_t *)realloc(ctx->accounts.server_offsets, new_cap * sizeof(uint32_t));
+					ctx->accounts.username_offsets = (uint32_t *)realloc(ctx->accounts.username_offsets, new_cap * sizeof(uint32_t));
+					ctx->accounts.ports = (uint32_t *)realloc(ctx->accounts.ports, new_cap * sizeof(uint32_t));
+					ctx->accounts.root_folder_idx = (int32_t *)realloc(ctx->accounts.root_folder_idx, new_cap * sizeof(int32_t));
+					ctx->accounts.store_flags = (uint32_t *)realloc(ctx->accounts.store_flags, new_cap * sizeof(uint32_t));
+					ctx->accounts.capacity = new_cap;
+				}
 
-	/* 3. Populate account 0 */
-	ctx->accounts.name_offsets[0] = acc0_name_off;
-	ctx->accounts.server_offsets[0] = acc0_srv_off;
-	ctx->accounts.username_offsets[0] = acc0_usr_off;
-	ctx->accounts.ports[0] = 993;
-	ctx->accounts.root_folder_idx[0] = 0; /* Index of Account 0 Inbox */
-	ctx->accounts.store_flags[0] = 1;     /* RAM store flag */
+				/* Reallocate folder arrays if needed (Inbox + Sent per account) */
+				if (folder_idx + 2 > ctx->folders.capacity) {
+					uint32_t new_cap = ctx->folders.capacity * 2;
+					while (folder_idx + 2 > new_cap) new_cap *= 2;
+					ctx->folders.name_offsets = (uint32_t *)realloc(ctx->folders.name_offsets, new_cap * sizeof(uint32_t));
+					ctx->folders.path_offsets = (uint32_t *)realloc(ctx->folders.path_offsets, new_cap * sizeof(uint32_t));
+					ctx->folders.unread_counts = (uint32_t *)realloc(ctx->folders.unread_counts, new_cap * sizeof(uint32_t));
+					ctx->folders.flags = (uint32_t *)realloc(ctx->folders.flags, new_cap * sizeof(uint32_t));
+					ctx->folders.parent_idx = (int32_t *)realloc(ctx->folders.parent_idx, new_cap * sizeof(int32_t));
+					ctx->folders.first_child_idx = (int32_t *)realloc(ctx->folders.first_child_idx, new_cap * sizeof(int32_t));
+					ctx->folders.next_sibling_idx = (int32_t *)realloc(ctx->folders.next_sibling_idx, new_cap * sizeof(int32_t));
+					ctx->folders.htree_items = (HTREEITEM *)realloc(ctx->folders.htree_items, new_cap * sizeof(HTREEITEM));
+					ctx->folders.capacity = new_cap;
+				}
 
-	/* 4. Populate account 1 */
-	ctx->accounts.name_offsets[1] = acc1_name_off;
-	ctx->accounts.server_offsets[1] = acc1_srv_off;
-	ctx->accounts.username_offsets[1] = acc1_usr_off;
-	ctx->accounts.ports[1] = 993;
-	ctx->accounts.root_folder_idx[1] = 2; /* Index of Account 1 Inbox */
-	ctx->accounts.store_flags[1] = 1;     /* RAM store flag */
-	ctx->accounts.count = 2;
+				name_off = pool_add_wstr(&ctx->pool, name_buf);
+				serv_off = pool_add_wstr(&ctx->pool, serv_buf);
+				user_off = pool_add_wstr(&ctx->pool, user_buf);
 
-	/* 5. Populate folder 0: Account 0 Inbox */
-	ctx->folders.name_offsets[0] = inbox0_name_off;
-	ctx->folders.path_offsets[0] = inbox0_name_off;
-	ctx->folders.unread_counts[0] = 3;
-	ctx->folders.flags[0] = SM_FOLDER_INBOX;
-	ctx->folders.parent_idx[0] = INVALID_INDEX;
-	ctx->folders.first_child_idx[0] = INVALID_INDEX;
-	ctx->folders.next_sibling_idx[0] = 1; /* Points to Sent */
-	ctx->folders.count++;
+				inbox_name_off = pool_add_wstr(&ctx->pool, L"Inbox");
+				sent_name_off = pool_add_wstr(&ctx->pool, L"Sent");
 
-	/* 6. Populate folder 1: Account 0 Sent */
-	ctx->folders.name_offsets[1] = sent0_name_off;
-	ctx->folders.path_offsets[1] = sent0_name_off;
-	ctx->folders.unread_counts[1] = 0;
-	ctx->folders.flags[1] = SM_FOLDER_SENT;
-	ctx->folders.parent_idx[1] = INVALID_INDEX;
-	ctx->folders.first_child_idx[1] = INVALID_INDEX;
-	ctx->folders.next_sibling_idx[1] = INVALID_INDEX;
-	ctx->folders.count++;
+				inbox_idx = (int32_t)folder_idx++;
+				sent_idx = (int32_t)folder_idx++;
 
-	/* 7. Populate folder 2: Account 1 Inbox */
-	ctx->folders.name_offsets[2] = inbox1_name_off;
-	ctx->folders.path_offsets[2] = inbox1_name_off;
-	ctx->folders.unread_counts[2] = 1;
-	ctx->folders.flags[2] = SM_FOLDER_INBOX;
-	ctx->folders.parent_idx[2] = INVALID_INDEX;
-	ctx->folders.first_child_idx[2] = INVALID_INDEX;
-	ctx->folders.next_sibling_idx[2] = 3; /* Points to Sent */
-	ctx->folders.count++;
+				/* Populate Account SoA */
+				ctx->accounts.name_offsets[acc_idx] = name_off;
+				ctx->accounts.server_offsets[acc_idx] = serv_off;
+				ctx->accounts.username_offsets[acc_idx] = user_off;
+				ctx->accounts.ports[acc_idx] = (uint32_t)port;
+				ctx->accounts.root_folder_idx[acc_idx] = inbox_idx;
+				ctx->accounts.store_flags[acc_idx] = (_wcsicmp(store_buf, L"ram") == 0) ? 1 : 1;
+				acc_idx++;
 
-	/* 8. Populate folder 3: Account 1 Sent */
-	ctx->folders.name_offsets[3] = sent1_name_off;
-	ctx->folders.path_offsets[3] = sent1_name_off;
-	ctx->folders.unread_counts[3] = 0;
-	ctx->folders.flags[3] = SM_FOLDER_SENT;
-	ctx->folders.parent_idx[3] = INVALID_INDEX;
-	ctx->folders.first_child_idx[3] = INVALID_INDEX;
-	ctx->folders.next_sibling_idx[3] = INVALID_INDEX;
-	ctx->folders.count++;
+				/* Populate Inbox Folder */
+				ctx->folders.name_offsets[inbox_idx] = inbox_name_off;
+				ctx->folders.path_offsets[inbox_idx] = inbox_name_off;
+				ctx->folders.unread_counts[inbox_idx] = 1;
+				ctx->folders.flags[inbox_idx] = SM_FOLDER_INBOX;
+				ctx->folders.parent_idx[inbox_idx] = INVALID_INDEX;
+				ctx->folders.first_child_idx[inbox_idx] = INVALID_INDEX;
+				ctx->folders.next_sibling_idx[inbox_idx] = sent_idx;
+				ctx->folders.count++;
+
+				/* Populate Sent Folder */
+				ctx->folders.name_offsets[sent_idx] = sent_name_off;
+				ctx->folders.path_offsets[sent_idx] = sent_name_off;
+				ctx->folders.unread_counts[sent_idx] = 0;
+				ctx->folders.flags[sent_idx] = SM_FOLDER_SENT;
+				ctx->folders.parent_idx[sent_idx] = INVALID_INDEX;
+				ctx->folders.first_child_idx[sent_idx] = INVALID_INDEX;
+				ctx->folders.next_sibling_idx[sent_idx] = INVALID_INDEX;
+				ctx->folders.count++;
+			}
+			pSec += wcslen(pSec) + 1;
+		}
+	}
+
+	ctx->accounts.count = acc_idx;
+
 }
 
 
 void mail_context_free(MailContext *ctx)
 {
-	if (!ctx) {
-		return;
-	}
+	if (!ctx) return;
+
 	free(ctx->pool.data);
 	free(ctx->accounts.name_offsets);
 	free(ctx->accounts.server_offsets);
@@ -196,9 +258,7 @@ static HTREEITEM populate_folder_branch_w(HWND hwndTree, HTREEITEM hParent,
 	HTREEITEM hItem;
 	int32_t child_idx;
 
-	if (folder_idx == INVALID_INDEX) {
-		return NULL;
-	}
+	if (folder_idx == INVALID_INDEX) return NULL;
 
 	wname = pool_get_wstr(&ctx->pool, ctx->folders.name_offsets[folder_idx]);
 
@@ -231,6 +291,19 @@ void tree_view_refresh(HWND hwndTree, MailContext *ctx)
 	int32_t curr_f_idx;
 
 	TreeView_DeleteAllItems(hwndTree);
+
+	if (ctx->accounts.count == 0) {
+		memset(&tvis_acc, 0, sizeof(tvis_acc));
+		tvis_acc.hParent = TVI_ROOT;
+		tvis_acc.hInsertAfter = TVI_LAST;
+		tvis_acc.item.mask = TVIF_TEXT | TVIF_PARAM;
+		tvis_acc.item.pszText = (LPWSTR)(uintptr_t)L"(no accounts)";
+		tvis_acc.item.lParam = (LPARAM)(intptr_t)-1;
+
+		TreeView_InsertItem(hwndTree, &tvis_acc);
+		return;
+	}
+
 
 	for (i = 0; i < ctx->accounts.count; i++) {
 		acc_name = pool_get_wstr(&ctx->pool, ctx->accounts.name_offsets[i]);
@@ -374,8 +447,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			store_init(&g_mail_ctx);
 			tree_view_refresh(hwndFolderTree, &g_mail_ctx);
 
-			/* Select the Inbox (index 0) by default on launch */
-			TreeView_SelectItem(hwndFolderTree, g_mail_ctx.folders.htree_items[0]);
+			/* Select the Inbox (index 0) by default on launch if accounts exist */
+			if (g_mail_ctx.accounts.count > 0) {
+				TreeView_SelectItem(hwndFolderTree, g_mail_ctx.folders.htree_items[0]);
+			}
 
 			return 0;
 			/* End of WM_CREATE */
@@ -463,9 +538,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				/* Free MessageListItem allocations when items are deleted */
 				if (pNmhdr->hwndFrom == hwndMessageList && pNmhdr->code == LVN_DELETEITEM) {
 					pnmv = (NMLISTVIEW *)lParam;
-					if (pnmv->lParam) {
-						free((void *)pnmv->lParam);
-					}
+					if (pnmv->lParam) free((void *)pnmv->lParam);
 					return 0;
 				}
 
@@ -484,7 +557,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 								store_free_message(eml_data);
 							} else {
 								g_reading_pane_has_error = 1;
-								SetWindowTextW(hwndReadingPane, L"[Error: Could not load message content]");
+								SetWindowTextW(hwndReadingPane, L"\r\n  <error: can't load message content>\r\n");
 							}
 						}
 					} else if ((pnmv->uChanged & LVIF_STATE) && !(pnmv->uNewState & LVIS_SELECTED) && (pnmv->uOldState & LVIS_SELECTED)) {
@@ -538,9 +611,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					pnmtv = (NMTREEVIEWW *)lParam;
 					folder_idx = (int32_t)(intptr_t)pnmtv->itemNew.lParam;
 
-					if (folder_idx == INVALID_INDEX) {
-						return 0;
-					}
+					if (folder_idx == INVALID_INDEX) return 0;
 
 					folder_flags = g_mail_ctx.folders.flags[folder_idx];
 
@@ -703,9 +774,7 @@ int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 	wc.hIcon   = LoadIcon(hInstance, MAKEINTRESOURCE(2));
 	wc.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(2));
 
-	if (!RegisterClassEx(&wc)) {
-		return 0;
-	}
+	if (!RegisterClassEx(&wc)) return 0;
 
 	HWND hwnd = CreateWindowEx(
 		0, CLASS_NAME, L"Spite Mail", WS_OVERLAPPEDWINDOW,
