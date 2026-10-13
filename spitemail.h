@@ -108,6 +108,7 @@ typedef struct {
     uint32_t timestamp; /* Numeric for fast sorting */
 } MailItem;
 
+extern MailContext g_mail_ctx;
 
 
 /*** Resource definitions for icons, menus, etc. ***/
@@ -149,6 +150,7 @@ typedef struct {
 /*** Function prototypes ***/
 uint32_t pool_add_utf8(StringPool *pool, const char *utf8_str);
 wchar_t *pool_get_wstr(const StringPool *pool, uint32_t offset);
+void load_app_configuration(MailContext *ctx);
 void mail_context_init(MailContext *ctx);
 void mail_context_free(MailContext *ctx);
 void tree_view_refresh(HWND hwndTree, MailContext *ctx);

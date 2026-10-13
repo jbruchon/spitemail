@@ -13,7 +13,7 @@ RMDIR   = rmdir -p
 MKDIR   = mkdir -p
 
 # Main object files
-OBJS += spitemail.o datastore.o store_ram.o
+OBJS += spitemail.o datastore.o store_ram.o ui-win32.o
 
 # Configuration section
 COMPILER_OPTIONS = -Wall -Wwrite-strings -Wcast-align -Wstrict-aliasing -Wstrict-prototypes -Wpointer-arith -Wundef
