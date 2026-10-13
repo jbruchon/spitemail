@@ -23,11 +23,11 @@ typedef struct ToolbarButtonSpec {
 } ToolbarButtonSpec;
 
 static ToolbarButtonSpec g_tb_specs[] = {
-	{ IDM_TOOLBAR_SYNC,     L"Sync",      55, 1, 0, NULL },
+	{ IDM_TOOLBAR_SYNC,     L"Sync",      45, 1, 0, NULL },
 	{ IDM_TOOLBAR_REPLY,    L"Reply",     55, 1, 0, NULL },
 	{ IDM_TOOLBAR_REPLYALL, L"Reply All", 75, 1, 0, NULL },
 	{ IDM_TOOLBAR_FORWARD,  L"Forward",   65, 1, 0, NULL },
-	{ IDM_TOOLBAR_DELETE,   L"Delete",    60, 1, 0, NULL }
+	{ IDM_TOOLBAR_DELETE,   L"Delete",    75, 1, 0, NULL }
 };
 static const int g_tb_spec_count = sizeof(g_tb_specs) / sizeof(g_tb_specs[0]);
 
@@ -290,12 +290,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	LVCOLUMNW lvc;
 
 	switch (uMsg) {
-		case WM_GETMINMAXINFO:
-			minMax = (MINMAXINFO *)lParam;
-			minMax->ptMinTrackSize.x = SM_MIN_WINDOW_WIDTH;
-			minMax->ptMinTrackSize.y = SM_MIN_WINDOW_HEIGHT;
-			return 0;
-
 		case WM_CREATE:
 			pCreate = (CREATESTRUCT *)lParam;
 			hInstance = pCreate->hInstance;
@@ -311,8 +305,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 				for (i = 0; i < g_tb_spec_count; i++) {
 					const wchar_t *btn_text = g_tb_specs[i].show_text ? g_tb_specs[i].label : L"";
+					DWORD btn_style = WS_CHILD | WS_VISIBLE | WS_TABSTOP;
+					if (g_tb_specs[i].id == IDM_TOOLBAR_DELETE) btn_style |= BS_OWNERDRAW;
+					else btn_style |= BS_PUSHBUTTON;
+
 					g_tb_specs[i].hwnd = CreateWindowEx(
-						0, L"BUTTON", btn_text, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | WS_TABSTOP,
+						0, L"BUTTON", btn_text, btn_style,
 						x_offset, 3, g_tb_specs[i].default_width, 24,
 						hwnd, (HMENU)(intptr_t)g_tb_specs[i].id, hInstance, NULL
 					);
@@ -371,6 +369,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 
 			return 0;
+		/* End of WM_CREATE */
 
 		case WM_CTLCOLORSTATIC:
 			if ((HWND)lParam == hwndReadingPane && g_reading_pane_has_error) {
@@ -378,6 +377,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				return (INT_PTR)hbrErrorBg;
 			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
+		/* End of WM_CTLCOLORSTATIC */
 
 		case WM_COMMAND:
 			wmId = LOWORD(wParam);
@@ -413,6 +413,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					return DefWindowProc(hwnd, uMsg, wParam, lParam);
 			}
 			return 0;
+		/* End of WM_COMMAND */
 
 		case WM_SIZE:
 			GetClientRect(hwnd, &rc);
@@ -442,6 +443,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			MoveWindow(hwndReadingPane, col1Width + col2Width, contentTop, col3Width, contentHeight, TRUE);
 			EndDeferWindowPos(hdwp);
 			return 0;
+		/* End of WM_SIZE */
 
 		case WM_NOTIFY:
 			{
@@ -581,6 +583,56 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				}
 			}
 			return 0;
+		/* End of WM_NOTIFY */
+
+		case WM_DRAWITEM:
+		{
+			DRAWITEMSTRUCT *pDI = (DRAWITEMSTRUCT *)lParam;
+			if (pDI->CtlID == IDM_TOOLBAR_DELETE) {
+				HDC hdc = pDI->hDC;
+				int state = pDI->itemState;
+
+				rc = pDI->rcItem;
+				/* Draw standard button background/frame based on state */
+				DrawFrameControl(hdc, &rc, DFC_BUTTON, (state & ODS_SELECTED) ? DFCS_BUTTONPUSH | DFCS_PUSHED : DFCS_BUTTONPUSH);
+
+				/* Set up background transparency for text */
+				SetBkMode(hdc, TRANSPARENT);
+
+				/* Draw the red 'X' and text */
+				{
+					HFONT hFont = (HFONT)SendMessage(pDI->hwndItem, WM_GETFONT, 0, 0);
+					HFONT hOldFont = (HFONT)SelectObject(hdc, hFont);
+					COLORREF oldColor = SetTextColor(hdc, RGB(200, 0, 0)); /* Classic Outlook Red */
+
+					TextOutW(hdc, rc.left + 8, rc.top + 4, L"X", 1);
+
+					SetTextColor(hdc, RGB(0, 0, 0));
+					TextOutW(hdc, rc.left + 22, rc.top + 4, L"Delete", 6);
+
+					SelectObject(hdc, hOldFont);
+					SetTextColor(hdc, oldColor);
+				}
+
+				/* Draw focus rect if focused */
+				if (state & ODS_FOCUS) {
+					RECT rcFocus = rc;
+					InflateRect(&rcFocus, -3, -3);
+					DrawFocusRect(hdc, &rcFocus);
+				}
+
+				return TRUE;
+			}
+			return DefWindowProc(hwnd, uMsg, wParam, lParam);
+		}
+		/* End of WM_DRAWITEM */
+
+		case WM_GETMINMAXINFO:
+			minMax = (MINMAXINFO *)lParam;
+			minMax->ptMinTrackSize.x = SM_MIN_WINDOW_WIDTH;
+			minMax->ptMinTrackSize.y = SM_MIN_WINDOW_HEIGHT;
+			return 0;
+		/* End of WM_GETMINMAXINFO */
 
 		case WM_DESTROY:
 			if (hbrErrorBg) DeleteObject(hbrErrorBg);
@@ -588,6 +640,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			store_cleanup();
 			PostQuitMessage(0);
 			return 0;
+		/* End of WM_DESTROY */
 
 		default:
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
