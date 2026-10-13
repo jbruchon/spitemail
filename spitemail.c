@@ -130,7 +130,7 @@ static int CALLBACK MessageListCompare(LPARAM lParam1, LPARAM lParam2, LPARAM lP
 }
 
 
-static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *ctx, int32_t folder_idx)
+static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *ctx, int32_t folder_idx, int select_row)
 {
 	uint32_t folder_flags;
 	LVCOLUMNW lvcCol;
@@ -139,6 +139,7 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 	uint32_t i;
 	int row;
 	LVITEMW lvi;
+	int total_items;
 
 	if (folder_idx == INVALID_INDEX) return;
 
@@ -203,8 +204,11 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 		}
 	}
 
-	if (ListView_GetItemCount(hwndList) > 0) {
-		ListView_SetItemState(hwndList, 0, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
+	total_items = ListView_GetItemCount(hwndList);
+	if (total_items > 0) {
+		if (select_row < 0) select_row = 0;
+		if (select_row >= total_items) select_row = total_items - 1;
+		ListView_SetItemState(hwndList, select_row, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
 	}
 }
 
@@ -234,7 +238,8 @@ static void delete_selected_message(HWND hwndTree, HWND hwndList, HWND hwndReadi
 				tvti.mask = TVIF_PARAM;
 				if (TreeView_GetItem(hwndTree, &tvti)) {
 					folder_idx = (int32_t)(intptr_t)tvti.lParam;
-					load_folder_messages(hwndList, hwndReading, ctx, folder_idx);
+					int target_row = (sel_idx > 0) ? (sel_idx - 1) : 0;
+					load_folder_messages(hwndList, hwndReading, ctx, folder_idx, target_row);
 				}
 			}
 		}
@@ -794,7 +799,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					pnmtv = (NMTREEVIEWW *)lParam;
 					folder_idx = (int32_t)(intptr_t)pnmtv->itemNew.lParam;
 
-					load_folder_messages(hwndMessageList, hwndReadingPane, &g_mail_ctx, folder_idx);
+					load_folder_messages(hwndMessageList, hwndReadingPane, &g_mail_ctx, folder_idx, 0);
 					return 0;
 				}
 
