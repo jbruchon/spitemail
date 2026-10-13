@@ -11,6 +11,8 @@ static HWND hwndFolderTree = NULL;
 static HWND hwndMessageList = NULL;
 static HWND hwndReadingPane = NULL;
 static MailContext g_mail_ctx;  /* global application mail context instance */
+static int g_reading_pane_has_error = 0;
+static HBRUSH hbrErrorBg = NULL;
 
 
 /* UTF-16 String Pool Ingestion (C89 Declarations) */
@@ -270,7 +272,7 @@ static int CALLBACK MessageListCompare(LPARAM lParam1, LPARAM lParam2, LPARAM lP
 			cmp = _wcsicmp(item1->subject, item2->subject);
 			break;
 		case 1:
-			cmp = _wcsicmp(item1->sender, item2->sender);
+			cmp = _wcsicmp(item1->participant, item2->participant);
 			break;
 		case 2:
 			if (item1->timestamp < item2->timestamp) cmp = -1;
@@ -305,6 +307,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	HDWP hdwp;
 	MINMAXINFO *minMax;
 	LVCOLUMNW lvc;
+	LVITEMW lvi;
 
 	switch (uMsg) {
 		case WM_GETMINMAXINFO:
@@ -312,6 +315,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			minMax->ptMinTrackSize.x = SM_MIN_WINDOW_WIDTH;
 			minMax->ptMinTrackSize.y = SM_MIN_WINDOW_HEIGHT;
 			return 0;
+			/* End of WM_GETMINMAXINFO */
 
 		case WM_CREATE:
 			pCreate = (CREATESTRUCT *)lParam;
@@ -363,6 +367,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				0, 0, 0, 0, hwnd, (HMENU)4, hInstance, NULL
 			);
 
+			/* Create a pink brush for highlighting error text */
+			hbrErrorBg = CreateSolidBrush(RGB(255, 192, 192));
+
 			/* Initialize data backing store */
 			store_init(&g_mail_ctx);
 			tree_view_refresh(hwndFolderTree, &g_mail_ctx);
@@ -371,6 +378,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			TreeView_SelectItem(hwndFolderTree, g_mail_ctx.folders.htree_items[0]);
 
 			return 0;
+			/* End of WM_CREATE */
+
+		case WM_CTLCOLORSTATIC:
+			if ((HWND)lParam == hwndReadingPane && g_reading_pane_has_error) {
+				SetBkColor((HDC)wParam, RGB(255, 224, 224));
+				return (INT_PTR)hbrErrorBg;
+			}
+			return DefWindowProc(hwnd, uMsg, wParam, lParam);
+			/* End of WM_CTLCOLORSTATIC */
 
 		case WM_COMMAND:
 			wmId = LOWORD(wParam);
@@ -390,6 +406,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					return DefWindowProc(hwnd, uMsg, wParam, lParam);
 			}
 			return 0;
+			/* End of WM_COMMAND */
 
 		case WM_SIZE:
 			GetClientRect(hwnd, &rc);
@@ -426,6 +443,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			MoveWindow(hwndReadingPane, col1Width + col2Width, contentTop, col3Width, contentHeight, TRUE);
 			EndDeferWindowPos(hdwp);
 			return 0;
+			/* End of WM_SIZE */
 
 		case WM_NOTIFY:
 			{
@@ -434,7 +452,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				NMLISTVIEW *pnmv;
 				int32_t folder_idx;
 				uint32_t folder_flags;
-				LVITEMW lvi;
 				LVCOLUMNW lvcCol;
 				StoreMsgHeader *headers = NULL;
 				uint32_t msg_count = 0;
@@ -459,15 +476,22 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					if ((pnmv->uChanged & LVIF_STATE) && (pnmv->uNewState & LVIS_SELECTED) && !(pnmv->uOldState & LVIS_SELECTED)) {
 						MessageListItem *item = (MessageListItem *)pnmv->lParam;
 						if (item) {
-							wchar_t *body_text = NULL;
-							if (store_fetch_message_body(item->id, &body_text) == 0 && body_text) {
-								SetWindowTextW(hwndReadingPane, body_text);
-								store_free_message_body(body_text);
+							wchar_t *eml_data = NULL;
+							size_t eml_size = 0;
+							if (store_fetch_message(item->id, &eml_data, &eml_size) == 0 && eml_data) {
+								g_reading_pane_has_error = 0;
+								SetWindowTextW(hwndReadingPane, eml_data);
+								store_free_message(eml_data);
+							} else {
+								g_reading_pane_has_error = 1;
+								SetWindowTextW(hwndReadingPane, L"[Error: Could not load message content]");
 							}
 						}
 					} else if ((pnmv->uChanged & LVIF_STATE) && !(pnmv->uNewState & LVIS_SELECTED) && (pnmv->uOldState & LVIS_SELECTED)) {
 						/* Clear pane if item is deselected */
+						g_reading_pane_has_error = 0;
 						SetWindowTextW(hwndReadingPane, L"");
+						InvalidateRect(hwndReadingPane, NULL, TRUE);
 					}
 					return 0;
 				}
@@ -524,13 +548,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					ListView_DeleteAllItems(hwndMessageList);
 					SetWindowTextW(hwndReadingPane, L"");
 
-					/* Dynamic Column Labeling */
+					/* Dynamic column labeling */
 					memset(&lvcCol, 0, sizeof(lvcCol));
 					lvcCol.mask = LVCF_TEXT;
 					lvcCol.pszText = ISFLAG(folder_flags, SM_FOLDER_SENT) ? (LPWSTR)(uintptr_t)L"To" : (LPWSTR)(uintptr_t)L"From";
 					ListView_SetColumn(hwndMessageList, 1, &lvcCol);
 
-					/* Query Data Store for Messages in Folder */
+					/* Query data store for messages in folder */
 					if (store_fetch_folder_messages(folder_idx, &headers, &msg_count) == 0 && headers) {
 						for (i = 0; i < msg_count; i++) {
 							MessageListItem *mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
@@ -538,7 +562,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 							mItem->id = headers[i].id;
 							wcscpy_s(mItem->subject, 128, headers[i].subject);
-							wcscpy_s(mItem->sender, 128, headers[i].sender);
+							wcscpy_s(mItem->participant, 128, headers[i].participant);
 							wcscpy_s(mItem->date_str, 32, headers[i].date_str);
 							mItem->timestamp = headers[i].timestamp;
 
@@ -550,11 +574,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 							lvi.lParam = (LPARAM)mItem;
 
 							row = ListView_InsertItem(hwndMessageList, &lvi);
-							ListView_SetItemText(hwndMessageList, row, 1, mItem->sender);
+							ListView_SetItemText(hwndMessageList, row, 1, mItem->participant);
 							ListView_SetItemText(hwndMessageList, row, 2, mItem->date_str);
 						}
 
-						/* Release Store Query Memory */
 						store_free_folder_messages(headers);
 					}
 
@@ -605,6 +628,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 							int is_selected = (ListView_GetItemState(hwndMessageList, pLVCD->nmcd.dwItemSpec, LVIS_SELECTED) != 0);
 							int is_inactive = (GetFocus() != hwndMessageList);
 
+							/* If loading a message returns an error, change list highlight color */
+							if (is_selected && g_reading_pane_has_error) {
+								pLVCD->nmcd.uItemState &= ~(CDIS_SELECTED | CDIS_FOCUS);
+								pLVCD->clrTextBk = RGB(255, 160, 160);
+								pLVCD->clrText = RGB(0, 0, 0);
+								return CDRF_NEWFONT;
+							}
+
 							if (is_selected && is_inactive) {
 								/* Custom inactive selection background (e.g., light gray/silver) */
 								pLVCD->nmcd.uItemState &= ~(CDIS_SELECTED | CDIS_FOCUS);
@@ -629,13 +660,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					}
 					return CDRF_DODEFAULT;
 				}
-
-				/* End of WM_NOTIFY */
-
-			}
+			}  /* End of WM_NOTIFY */
 			return 0;
 
 		case WM_DESTROY:
+			if (hbrErrorBg) DeleteObject(hbrErrorBg);
 			mail_context_free(&g_mail_ctx);
 			store_cleanup();
 			PostQuitMessage(0);
