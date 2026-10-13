@@ -119,7 +119,7 @@ typedef struct {
 
 /*** Constants ***/
 #define SM_WINDOW_WIDTH 800
-#define SM_WINDOW_HEIGHT 600
+#define SM_WINDOW_HEIGHT 480
 #define SM_MIN_WINDOW_WIDTH 640
 #define SM_MIN_WINDOW_HEIGHT 300
 /* The next 3 numbers should add up to SM_WINDOW_WIDTH */

@@ -349,7 +349,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			/* Position the top toolbar, 30px */
 			tbHeight = 30;
-			MoveWindow(hwndToolbar, 0, 0, cx, tbHeight, TRUE);
 			/* Calculate remaining vertical space for panes */
 			contentTop = tbHeight;
 			contentHeight = cy - contentTop;
@@ -372,6 +371,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			if (col3Width < SM_MIN_READING_PANE_WIDTH) col3Width = SM_MIN_READING_PANE_WIDTH;
 
 			hdwp = BeginDeferWindowPos(3);
+			MoveWindow(hwndToolbar, 0, 0, cx, tbHeight, TRUE);
 			MoveWindow(hwndFolderTree, 0, contentTop, col1Width, contentHeight, TRUE);
 			MoveWindow(hwndMessageList, col1Width, contentTop, col2Width, contentHeight, TRUE);
 			MoveWindow(hwndReadingPane, col1Width + col2Width, contentTop, col3Width, contentHeight, TRUE);
@@ -631,7 +631,7 @@ int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 
 	HWND hwnd = CreateWindowEx(
 		0, CLASS_NAME, L"Spite Mail", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, SM_WINDOW_WIDTH, SM_WINDOW_HEIGHT,
+		0, 0, SM_WINDOW_WIDTH, SM_WINDOW_HEIGHT,
 		NULL, NULL, hInstance, NULL
 	);
 
