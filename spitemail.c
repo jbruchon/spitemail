@@ -14,45 +14,15 @@ static MailContext g_mail_ctx;  /* global application mail context instance */
 static int g_reading_pane_has_error = 0;
 static HBRUSH hbrErrorBg = NULL;
 
-
-/* UTF-16 string pool */
-uint32_t pool_add_utf8(StringPool *pool, const char *utf8_str)
-{
-	int req_chars;
-	uint32_t offset;
-	uint32_t new_cap;
-	wchar_t *new_data;
-
-	if (!utf8_str || *utf8_str == '\0') return 0;
-
-	req_chars = MultiByteToWideChar(CP_UTF8, 0, utf8_str, -1, NULL, 0);
-	if (req_chars <= 0) return 0;
-
-	if (pool->used + (uint32_t)req_chars > pool->capacity) {
-		new_cap = pool->capacity ? pool->capacity * 2 : 4096;
-		while (pool->used + (uint32_t)req_chars > new_cap) {
-			new_cap *= 2;
-		}
-
-		new_data = (wchar_t *)realloc(pool->data, new_cap * sizeof(wchar_t));
-		if (!new_data) return 0;
-
-		pool->data = new_data;
-		pool->capacity = new_cap;
-	}
-
-	offset = pool->used;
-	MultiByteToWideChar(CP_UTF8, 0, utf8_str, -1, pool->data + offset, req_chars);
-	pool->used += (uint32_t)req_chars;
-
-	return offset;
-}
-
-
-wchar_t *pool_get_wstr(const StringPool *pool, uint32_t offset)
-{
-	return pool->data + offset;
-}
+/* Default color preferences (overridden by INI if present) */
+static COLORREF g_color_text         = RGB(  0,   0,   0);
+static COLORREF g_color_error_bg     = RGB(255, 192, 192);
+static COLORREF g_color_error_bg_hi  = RGB(255, 224, 224);
+static COLORREF g_color_error_hi     = RGB(255, 160, 160);
+static COLORREF g_color_error_text   = RGB(  0,   0,   0);
+static COLORREF g_color_inactive_sel = RGB(240, 240, 255);
+static COLORREF g_color_zebra_odd    = RGB(240, 240, 240);
+static COLORREF g_color_zebra_even   = RGB(255, 255, 255);
 
 
 /* Add wide strings directly to the UTF-16 string pool */
@@ -88,7 +58,25 @@ uint32_t pool_add_wstr(StringPool *pool, const wchar_t *w_str)
 }
 
 
-void mail_context_init(MailContext *ctx)
+wchar_t *pool_get_wstr(const StringPool *pool, uint32_t offset)
+{
+	return pool->data + offset;
+}
+
+
+/* Translate hex color to Windows RGB values */
+static COLORREF parse_hex_color(const wchar_t *hex_str, COLORREF default_color)
+{
+	unsigned int r = 0, g = 0, b = 0;
+	if (!hex_str || *hex_str == L'\0') return default_color;
+	if (*hex_str == L'#') hex_str++;
+	if (wcslen(hex_str) != 6) return default_color;
+	if (swscanf_s(hex_str, L"%2x%2x%2x", &r, &g, &b) == 3) return RGB(r, g, b);
+	return default_color;
+}
+
+
+void load_app_configuration(MailContext *ctx)
 {
 	wchar_t config_path[MAX_PATH];
 	wchar_t section_names[4096];
@@ -124,11 +112,41 @@ void mail_context_init(MailContext *ctx)
 	GetModuleFileNameW(NULL, config_path, MAX_PATH);
 	{
 		wchar_t *last_slash = wcsrchr(config_path, L'\\');
+
 		if (last_slash) {
 			wcscpy_s(last_slash + 1, MAX_PATH - (last_slash + 1 - config_path), L"spitemail.ini");
 		} else {
 			wcscpy_s(config_path, MAX_PATH, L".\\spitemail.ini");
 		}
+	}
+
+	/* Read global color preferences once */
+	{
+		wchar_t color_buf[32];
+
+		GetPrivateProfileStringW(L"Preferences", L"TextColor", L"", color_buf, 32, config_path);
+		if (color_buf[0] != L'\0') g_color_text = parse_hex_color(color_buf, g_color_text);
+
+		GetPrivateProfileStringW(L"Preferences", L"ErrorBgColor", L"", color_buf, 32, config_path);
+		if (color_buf[0] != L'\0') g_color_error_bg = parse_hex_color(color_buf, g_color_error_bg);
+
+		GetPrivateProfileStringW(L"Preferences", L"ErrorBgHighlightColor", L"", color_buf, 32, config_path);
+		if (color_buf[0] != L'\0') g_color_error_bg_hi = parse_hex_color(color_buf, g_color_error_bg_hi);
+
+		GetPrivateProfileStringW(L"Preferences", L"ErrorHighlightColor", L"", color_buf, 32, config_path);
+		if (color_buf[0] != L'\0') g_color_error_hi = parse_hex_color(color_buf, g_color_error_hi);
+
+		GetPrivateProfileStringW(L"Preferences", L"ErrorTextColor", L"", color_buf, 32, config_path);
+		if (color_buf[0] != L'\0') g_color_error_text = parse_hex_color(color_buf, g_color_error_text);
+
+		GetPrivateProfileStringW(L"Preferences", L"InactiveSelColor", L"", color_buf, 32, config_path);
+		if (color_buf[0] != L'\0') g_color_inactive_sel = parse_hex_color(color_buf, g_color_inactive_sel);
+
+		GetPrivateProfileStringW(L"Preferences", L"ZebraOddColor", L"", color_buf, 32, config_path);
+		if (color_buf[0] != L'\0') g_color_zebra_odd = parse_hex_color(color_buf, g_color_zebra_odd);
+
+		GetPrivateProfileStringW(L"Preferences", L"ZebraEvenColor", L"", color_buf, 32, config_path);
+		if (color_buf[0] != L'\0') g_color_zebra_even = parse_hex_color(color_buf, g_color_zebra_even);
 	}
 
 	/* Read section names */
@@ -164,7 +182,7 @@ void mail_context_init(MailContext *ctx)
 					ctx->accounts.capacity = new_cap;
 				}
 
-				/* Reallocate folder arrays if needed (Inbox + Sent per account) */
+				/* Reallocate folder arrays if needed */
 				if (folder_idx + 2 > ctx->folders.capacity) {
 					uint32_t new_cap = ctx->folders.capacity * 2;
 					while (folder_idx + 2 > new_cap) new_cap *= 2;
@@ -172,9 +190,9 @@ void mail_context_init(MailContext *ctx)
 					ctx->folders.path_offsets = (uint32_t *)realloc(ctx->folders.path_offsets, new_cap * sizeof(uint32_t));
 					ctx->folders.unread_counts = (uint32_t *)realloc(ctx->folders.unread_counts, new_cap * sizeof(uint32_t));
 					ctx->folders.flags = (uint32_t *)realloc(ctx->folders.flags, new_cap * sizeof(uint32_t));
-					ctx->folders.parent_idx = (int32_t *)realloc(ctx->folders.parent_idx, new_cap * sizeof(int32_t));
-					ctx->folders.first_child_idx = (int32_t *)realloc(ctx->folders.first_child_idx, new_cap * sizeof(int32_t));
-					ctx->folders.next_sibling_idx = (int32_t *)realloc(ctx->folders.next_sibling_idx, new_cap * sizeof(int32_t));
+					ctx->folders.parent_idx = (int32_t *)realloc(ctx->folders.parent_idx, new_cap * sizeof(uint32_t));
+					ctx->folders.first_child_idx = (int32_t *)realloc(ctx->folders.first_child_idx, new_cap * sizeof(uint32_t));
+					ctx->folders.next_sibling_idx = (int32_t *)realloc(ctx->folders.next_sibling_idx, new_cap * sizeof(uint32_t));
 					ctx->folders.htree_items = (HTREEITEM *)realloc(ctx->folders.htree_items, new_cap * sizeof(HTREEITEM));
 					ctx->folders.capacity = new_cap;
 				}
@@ -223,7 +241,6 @@ void mail_context_init(MailContext *ctx)
 	}
 
 	ctx->accounts.count = acc_idx;
-
 }
 
 
@@ -440,8 +457,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				0, 0, 0, 0, hwnd, (HMENU)4, hInstance, NULL
 			);
 
+			/* Load INI configuration */
+			load_app_configuration(&g_mail_ctx);
+
 			/* Create a pink brush for highlighting error text */
-			hbrErrorBg = CreateSolidBrush(RGB(255, 192, 192));
+			hbrErrorBg = CreateSolidBrush(g_color_error_bg);
 
 			/* Initialize data backing store */
 			store_init(&g_mail_ctx);
@@ -457,7 +477,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		case WM_CTLCOLORSTATIC:
 			if ((HWND)lParam == hwndReadingPane && g_reading_pane_has_error) {
-				SetBkColor((HDC)wParam, RGB(255, 224, 224));
+				SetBkColor((HDC)wParam, g_color_error_bg_hi);
 				return (INT_PTR)hbrErrorBg;
 			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
@@ -702,25 +722,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 							/* If loading a message returns an error, change list highlight color */
 							if (is_selected && g_reading_pane_has_error) {
 								pLVCD->nmcd.uItemState &= ~(CDIS_SELECTED | CDIS_FOCUS);
-								pLVCD->clrTextBk = RGB(255, 160, 160);
-								pLVCD->clrText = RGB(0, 0, 0);
+								pLVCD->clrTextBk = g_color_error_hi;
+								pLVCD->clrText = g_color_error_text;
 								return CDRF_NEWFONT;
 							}
 
 							if (is_selected && is_inactive) {
 								/* Custom inactive selection background (e.g., light gray/silver) */
 								pLVCD->nmcd.uItemState &= ~(CDIS_SELECTED | CDIS_FOCUS);
-								pLVCD->clrTextBk = RGB(240, 240, 255);
-								pLVCD->clrText = RGB(0, 0, 0);
+								pLVCD->clrTextBk = g_color_inactive_sel;
+								pLVCD->clrText = g_color_text;
 								return CDRF_NEWFONT;
 							} else if (!is_selected) {
 								/* Zebra striping for unselected rows */
 								if (pLVCD->nmcd.dwItemSpec % 2 != 0) {
-									pLVCD->clrTextBk = RGB(240, 240, 240);
+									pLVCD->clrTextBk = g_color_zebra_odd;
 								} else {
-									pLVCD->clrTextBk = RGB(255, 255, 255);
+									pLVCD->clrTextBk = g_color_zebra_even;
 								}
-								pLVCD->clrText = RGB(0, 0, 0);
+								pLVCD->clrText = g_color_text;
 								return CDRF_NEWFONT;
 							}
 							return CDRF_DODEFAULT;

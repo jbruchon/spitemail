@@ -89,7 +89,7 @@ static const size_t ram_db_count = sizeof(ram_db) / sizeof(ram_db[0]);
 
 int store_ram_init(MailContext *ctx)
 {
-	mail_context_init(ctx);
+	(void)ctx;
 	return 0;
 }
 
