@@ -59,44 +59,70 @@ wchar_t *pool_get_wstr(const StringPool *pool, uint32_t offset)
 }
 
 
-
 void mail_context_init(MailContext *ctx)
 {
-	uint32_t acc_name_off;
-	uint32_t inbox_name_off, sent_name_off;
+	uint32_t acc0_name_off, acc1_name_off;
+	uint32_t acc0_srv_off, acc1_srv_off;
+	uint32_t acc0_usr_off, acc1_usr_off;
+	uint32_t inbox0_name_off, sent0_name_off;
+	uint32_t inbox1_name_off, sent1_name_off;
 
 	memset(ctx, 0, sizeof(MailContext));
 
-	/* 1. Allocate initial capacities for SoA tables */
-	ctx->accounts.capacity = 2;
-	ctx->accounts.name_offsets = (uint32_t *)malloc(2 * sizeof(uint32_t));
-	ctx->accounts.root_folder_idx = (int32_t *)malloc(2 * sizeof(int32_t));
-	ctx->accounts.store_flags = (uint32_t *)malloc(2 * sizeof(uint32_t));
+	/* 1. Allocate initial capacities for SoA tables (capacity 4 for accounts, 8 for folders) */
+	ctx->accounts.capacity = 4;
+	ctx->accounts.name_offsets = (uint32_t *)malloc(4 * sizeof(uint32_t));
+	ctx->accounts.server_offsets = (uint32_t *)malloc(4 * sizeof(uint32_t));
+	ctx->accounts.username_offsets = (uint32_t *)malloc(4 * sizeof(uint32_t));
+	ctx->accounts.ports = (uint32_t *)malloc(4 * sizeof(uint32_t));
+	ctx->accounts.root_folder_idx = (int32_t *)malloc(4 * sizeof(int32_t));
+	ctx->accounts.store_flags = (uint32_t *)malloc(4 * sizeof(uint32_t));
 
-	ctx->folders.capacity = 4;
-	ctx->folders.name_offsets = (uint32_t *)malloc(4 * sizeof(uint32_t));
-	ctx->folders.path_offsets = (uint32_t *)malloc(4 * sizeof(uint32_t));
-	ctx->folders.unread_counts = (uint32_t *)malloc(4 * sizeof(uint32_t));
-	ctx->folders.flags = (uint32_t *)malloc(4 * sizeof(uint32_t));
-	ctx->folders.parent_idx = (int32_t *)malloc(4 * sizeof(int32_t));
-	ctx->folders.first_child_idx = (int32_t *)malloc(4 * sizeof(int32_t));
-	ctx->folders.next_sibling_idx = (int32_t *)malloc(4 * sizeof(int32_t));
-	ctx->folders.htree_items = (HTREEITEM *)malloc(4 * sizeof(HTREEITEM));
+	ctx->folders.capacity = 8;
+	ctx->folders.name_offsets = (uint32_t *)malloc(8 * sizeof(uint32_t));
+	ctx->folders.path_offsets = (uint32_t *)malloc(8 * sizeof(uint32_t));
+	ctx->folders.unread_counts = (uint32_t *)malloc(8 * sizeof(uint32_t));
+	ctx->folders.flags = (uint32_t *)malloc(8 * sizeof(uint32_t));
+	ctx->folders.parent_idx = (int32_t *)malloc(8 * sizeof(int32_t));
+	ctx->folders.first_child_idx = (int32_t *)malloc(8 * sizeof(int32_t));
+	ctx->folders.next_sibling_idx = (int32_t *)malloc(8 * sizeof(int32_t));
+	ctx->folders.htree_items = (HTREEITEM *)malloc(8 * sizeof(HTREEITEM));
 
-	/* 2. Add sample strings to UTF-16 pool */
-	acc_name_off = pool_add_utf8(&ctx->pool, "root@spitemail.com");
-	inbox_name_off = pool_add_utf8(&ctx->pool, "Inbox");
-	sent_name_off = pool_add_utf8(&ctx->pool, "Sent");
+	/* 2. Add sample strings and auth/server info to UTF-16 pool */
+	acc0_name_off = pool_add_utf8(&ctx->pool, "root@spitemail.com");
+	acc0_srv_off = pool_add_utf8(&ctx->pool, "imap.spitemail.com");
+	acc0_usr_off = pool_add_utf8(&ctx->pool, "root@spitemail.com");
+
+	acc1_name_off = pool_add_utf8(&ctx->pool, "jody@gazingcat.com");
+	acc1_srv_off = pool_add_utf8(&ctx->pool, "mail.gazingcat.com");
+	acc1_usr_off = pool_add_utf8(&ctx->pool, "jody@gazingcat.com");
+
+	inbox0_name_off = pool_add_utf8(&ctx->pool, "Inbox");
+	sent0_name_off = pool_add_utf8(&ctx->pool, "Sent");
+
+	inbox1_name_off = pool_add_utf8(&ctx->pool, "Inbox");
+	sent1_name_off = pool_add_utf8(&ctx->pool, "Sent");
 
 	/* 3. Populate account 0 */
-	ctx->accounts.name_offsets[0] = acc_name_off;
-	ctx->accounts.root_folder_idx[0] = 0; /* Index of Inbox folder */
+	ctx->accounts.name_offsets[0] = acc0_name_off;
+	ctx->accounts.server_offsets[0] = acc0_srv_off;
+	ctx->accounts.username_offsets[0] = acc0_usr_off;
+	ctx->accounts.ports[0] = 993;
+	ctx->accounts.root_folder_idx[0] = 0; /* Index of Account 0 Inbox */
 	ctx->accounts.store_flags[0] = 1;     /* RAM store flag */
-	ctx->accounts.count = 1;
 
-	/* 4. Populate folder 0: Inbox */
-	ctx->folders.name_offsets[0] = inbox_name_off;
-	ctx->folders.path_offsets[0] = inbox_name_off;
+	/* 4. Populate account 1 */
+	ctx->accounts.name_offsets[1] = acc1_name_off;
+	ctx->accounts.server_offsets[1] = acc1_srv_off;
+	ctx->accounts.username_offsets[1] = acc1_usr_off;
+	ctx->accounts.ports[1] = 993;
+	ctx->accounts.root_folder_idx[1] = 2; /* Index of Account 1 Inbox */
+	ctx->accounts.store_flags[1] = 1;     /* RAM store flag */
+	ctx->accounts.count = 2;
+
+	/* 5. Populate folder 0: Account 0 Inbox */
+	ctx->folders.name_offsets[0] = inbox0_name_off;
+	ctx->folders.path_offsets[0] = inbox0_name_off;
 	ctx->folders.unread_counts[0] = 3;
 	ctx->folders.flags[0] = SM_FOLDER_INBOX;
 	ctx->folders.parent_idx[0] = INVALID_INDEX;
@@ -104,14 +130,34 @@ void mail_context_init(MailContext *ctx)
 	ctx->folders.next_sibling_idx[0] = 1; /* Points to Sent */
 	ctx->folders.count++;
 
-	/* 5. Populate folder 1: Sent */
-	ctx->folders.name_offsets[1] = sent_name_off;
-	ctx->folders.path_offsets[1] = sent_name_off;
+	/* 6. Populate folder 1: Account 0 Sent */
+	ctx->folders.name_offsets[1] = sent0_name_off;
+	ctx->folders.path_offsets[1] = sent0_name_off;
 	ctx->folders.unread_counts[1] = 0;
 	ctx->folders.flags[1] = SM_FOLDER_SENT;
 	ctx->folders.parent_idx[1] = INVALID_INDEX;
 	ctx->folders.first_child_idx[1] = INVALID_INDEX;
 	ctx->folders.next_sibling_idx[1] = INVALID_INDEX;
+	ctx->folders.count++;
+
+	/* 7. Populate folder 2: Account 1 Inbox */
+	ctx->folders.name_offsets[2] = inbox1_name_off;
+	ctx->folders.path_offsets[2] = inbox1_name_off;
+	ctx->folders.unread_counts[2] = 1;
+	ctx->folders.flags[2] = SM_FOLDER_INBOX;
+	ctx->folders.parent_idx[2] = INVALID_INDEX;
+	ctx->folders.first_child_idx[2] = INVALID_INDEX;
+	ctx->folders.next_sibling_idx[2] = 3; /* Points to Sent */
+	ctx->folders.count++;
+
+	/* 8. Populate folder 3: Account 1 Sent */
+	ctx->folders.name_offsets[3] = sent1_name_off;
+	ctx->folders.path_offsets[3] = sent1_name_off;
+	ctx->folders.unread_counts[3] = 0;
+	ctx->folders.flags[3] = SM_FOLDER_SENT;
+	ctx->folders.parent_idx[3] = INVALID_INDEX;
+	ctx->folders.first_child_idx[3] = INVALID_INDEX;
+	ctx->folders.next_sibling_idx[3] = INVALID_INDEX;
 	ctx->folders.count++;
 }
 
@@ -123,6 +169,9 @@ void mail_context_free(MailContext *ctx)
 	}
 	free(ctx->pool.data);
 	free(ctx->accounts.name_offsets);
+	free(ctx->accounts.server_offsets);
+	free(ctx->accounts.username_offsets);
+	free(ctx->accounts.ports);
 	free(ctx->accounts.root_folder_idx);
 	free(ctx->accounts.store_flags);
 	free(ctx->folders.name_offsets);

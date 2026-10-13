@@ -87,6 +87,9 @@ typedef struct FolderTable {
 
 typedef struct AccountTable {
 	uint32_t *name_offsets;
+	uint32_t *server_offsets;
+	uint32_t *username_offsets;
+	uint32_t *ports;
 	int32_t  *root_folder_idx;
 	uint32_t *store_flags;
 	uint32_t  count;
