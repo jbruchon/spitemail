@@ -49,6 +49,10 @@ int store_fetch_message(uint64_t msg_id, wchar_t **out_eml_data, size_t *out_siz
 /* General-purpose one-shot cleanup for store-allocated message data */
 void store_free_message(void *msg_data);
 
+/* Message mutation operations */
+int store_add_message(int32_t folder_idx, const wchar_t *subject, const wchar_t *participant, const wchar_t *date_str, uint32_t timestamp, const wchar_t *eml_data, uint64_t *out_msg_id);
+int store_delete_message(uint64_t msg_id);
+
 #ifdef __cplusplus
 }
 #endif

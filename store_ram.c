@@ -8,6 +8,7 @@
 #include "datastore.h"
 #include "store_ram.h"
 
+
 typedef struct RamRecord {
 	uint64_t id;
 	int32_t  folder_idx;
@@ -18,10 +19,16 @@ typedef struct RamRecord {
 	wchar_t  to_addr[128];
 	wchar_t  date_str[32];
 	uint32_t timestamp;
-	wchar_t  eml_blob[1024]; /* Combined EML format: headers + body */
+	wchar_t  eml_blob[2048];  /* Combined EML format: headers + body */
 } RamRecord;
 
-static const RamRecord ram_db[] = {
+
+static RamRecord *ram_db = NULL;
+static size_t ram_db_count = 0;
+static size_t ram_db_capacity = 0;
+static uint64_t next_msg_id = 5000;
+
+static const RamRecord initial_ram_db[] = {
 	{
 		1001, 0, 0, 450,
 		L"Welcome to Spite Mail (RAM Store)",
@@ -84,19 +91,33 @@ static const RamRecord ram_db[] = {
 	}
 };
 
-static const size_t ram_db_count = sizeof(ram_db) / sizeof(ram_db[0]);
+
+/*** End definitions, begin code ***/
 
 
 int store_ram_init(MailContext *ctx)
 {
+	size_t init_count = sizeof(initial_ram_db) / sizeof(initial_ram_db[0]);
 	(void)ctx;
+
+	ram_db_capacity = init_count + 8;
+	ram_db = (RamRecord *)malloc(ram_db_capacity * sizeof(RamRecord));
+	if (!ram_db) return -1;
+
+	memcpy(ram_db, initial_ram_db, init_count * sizeof(RamRecord));
+	ram_db_count = init_count;
 	return 0;
 }
 
 
 void store_ram_cleanup(void)
 {
-	/* Nothing persistent to close */
+	if (ram_db) {
+		free(ram_db);
+		ram_db = NULL;
+	}
+	ram_db_count = 0;
+	ram_db_capacity = 0;
 }
 
 
@@ -137,7 +158,6 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 	if (folder_idx == 0 && (start_id == 0 || start_id <= 9999)) {
 		count++;
 	}
-	/* XXX: End of simulated error */
 
 	if (count == 0) {
 		*out_headers = NULL;
@@ -152,7 +172,6 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 	{
 		uint32_t idx = 0;
 
-		/* XXX: Inject test error item into Inbox */
 		if (folder_idx == 0 && (start_id == 0 || start_id <= 9999)) {
 			if (idx < count) {
 				headers[idx].id = 9999;
@@ -165,7 +184,6 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 				idx++;
 			}
 		}
-		/* XXX: End of simulated error */
 
 		for (i = 0; i < ram_db_count; i++) {
 			if (ram_db[i].folder_idx == folder_idx) {
@@ -206,13 +224,11 @@ int store_ram_fetch_message(uint64_t msg_id, wchar_t **out_eml_data, size_t *out
 
 	if (!out_eml_data) return -1;
 
-	/* XXX: Deliberately trigger an error for testing */
 	if (msg_id == 9999) {
 		*out_eml_data = NULL;
 		if (out_size) *out_size = 0;
 		return -1;
 	}
-	/* XXX: End of simulated error */
 
 	for (i = 0; i < ram_db_count; i++) {
 		if (ram_db[i].id == msg_id) {
@@ -237,7 +253,73 @@ int store_ram_fetch_message(uint64_t msg_id, wchar_t **out_eml_data, size_t *out
 	return 0;
 }
 
+
 void store_ram_free_message(void *msg_data)
 {
 	if (msg_data) free(msg_data);
+}
+
+
+int store_ram_add_message(int32_t folder_idx, const wchar_t *subject, const wchar_t *participant, const wchar_t *date_str, uint32_t timestamp, const wchar_t *eml_data, uint64_t *out_msg_id)
+{
+	RamRecord *new_db;
+	int is_sent_folder;
+
+	if (!subject || !eml_data) return -1;
+
+	if (ram_db_count >= ram_db_capacity) {
+		size_t new_cap = ram_db_capacity * 2;
+		new_db = (RamRecord *)realloc(ram_db, new_cap * sizeof(RamRecord));
+		if (!new_db) return -1;
+		ram_db = new_db;
+		ram_db_capacity = new_cap;
+	}
+
+	is_sent_folder = (folder_idx == 1 || folder_idx == 3);
+
+	RamRecord *rec = &ram_db[ram_db_count];
+	memset(rec, 0, sizeof(RamRecord));
+	rec->id = next_msg_id++;
+	rec->folder_idx = folder_idx;
+	rec->timestamp = timestamp;
+	wcscpy_s(rec->subject, 128, subject);
+	if (date_str) {
+		wcscpy_s(rec->date_str, 32, date_str);
+	} else {
+		wcscpy_s(rec->date_str, 32, L"Today");
+	}
+
+	if (is_sent_folder) {
+		wcscpy_s(rec->to_addr, 128, participant ? participant : L"recipient@spitemail.com");
+		wcscpy_s(rec->from_addr, 128, L"root@spitemail.com");
+	} else {
+		wcscpy_s(rec->from_addr, 128, participant ? participant : L"sender@spitemail.com");
+		wcscpy_s(rec->to_addr, 128, L"root@spitemail.com");
+	}
+
+	wcscpy_s(rec->eml_blob, 2048, eml_data);
+	rec->mbox_length = (uint32_t)(wcslen(eml_data) * sizeof(wchar_t));
+
+	ram_db_count++;
+
+	if (out_msg_id) *out_msg_id = rec->id;
+	return 0;
+}
+
+
+int store_ram_delete_message(uint64_t msg_id)
+{
+	size_t i, j;
+
+	for (i = 0; i < ram_db_count; i++) {
+		if (ram_db[i].id == msg_id) {
+			/* Shift remaining records down */
+			for (j = i; j < ram_db_count - 1; j++) {
+				ram_db[j] = ram_db[j + 1];
+			}
+			ram_db_count--;
+			return 0;
+		}
+	}
+	return -1; /* Not found */
 }

@@ -25,6 +25,9 @@ static COLORREF g_color_zebra_odd    = RGB(240, 240, 240);
 static COLORREF g_color_zebra_even   = RGB(255, 255, 255);
 
 
+/*** End definitions, begin code ***/
+
+
 /* Add wide strings directly to the UTF-16 string pool */
 uint32_t pool_add_wstr(StringPool *pool, const wchar_t *w_str)
 {
