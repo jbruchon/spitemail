@@ -14,6 +14,25 @@ static MailContext g_mail_ctx;  /* global application mail context instance */
 static int g_reading_pane_has_error = 0;
 static HBRUSH hbrErrorBg = NULL;
 
+/* Toolbar button configuration */
+typedef struct ToolbarButtonSpec {
+	int id;
+	const wchar_t *label;
+	int default_width;
+	int show_text;     /* 1 = show text label, 0 = icon/blank only */
+	int show_icon;     /* Reserved for future icon loading */
+	HWND hwnd;
+} ToolbarButtonSpec;
+
+static ToolbarButtonSpec g_tb_specs[] = {
+	{ IDM_TOOLBAR_SYNC,     L"Sync",      55, 1, 0, NULL },
+	{ IDM_TOOLBAR_REPLY,    L"Reply",     55, 1, 0, NULL },
+	{ IDM_TOOLBAR_REPLYALL, L"Reply All", 75, 1, 0, NULL },
+	{ IDM_TOOLBAR_FORWARD,  L"Forward",   65, 1, 0, NULL },
+	{ IDM_TOOLBAR_DELETE,   L"Delete",    60, 1, 0, NULL }
+};
+static const int g_tb_spec_count = sizeof(g_tb_specs) / sizeof(g_tb_specs[0]);
+
 /* Default color preferences (overridden by INI if present) */
 static COLORREF g_color_text         = RGB(  0,   0,   0);
 static COLORREF g_color_error_bg     = RGB(255, 192, 192);
@@ -76,6 +95,150 @@ static COLORREF parse_hex_color(const wchar_t *hex_str, COLORREF default_color)
 	if (wcslen(hex_str) != 6) return default_color;
 	if (swscanf_s(hex_str, L"%2x%2x%2x", &r, &g, &b) == 3) return RGB(r, g, b);
 	return default_color;
+}
+
+
+/* For sorting the message list */
+static int CALLBACK MessageListCompare(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
+{
+	MessageListItem *item1 = (MessageListItem *)lParam1;
+	MessageListItem *item2 = (MessageListItem *)lParam2;
+
+	int col = (lParamSort >> 1) & 0xFF;
+	int ascending = lParamSort & 1;
+	int cmp = 0;
+
+	if (!item1 || !item2) return 0;
+
+	switch (col) {
+		case 0:
+			cmp = _wcsicmp(item1->subject, item2->subject);
+			break;
+		case 1:
+			cmp = _wcsicmp(item1->participant, item2->participant);
+			break;
+		case 2:
+			if (item1->timestamp < item2->timestamp) cmp = -1;
+			else if (item1->timestamp > item2->timestamp) cmp = 1;
+			else cmp = 0;
+			break;
+		default:
+			return 0;
+	}
+
+	return ascending ? cmp : -cmp;
+}
+
+
+static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *ctx, int32_t folder_idx)
+{
+	uint32_t folder_flags;
+	LVCOLUMNW lvcCol;
+	StoreMsgHeader *headers = NULL;
+	uint32_t msg_count = 0;
+	uint32_t i;
+	int row;
+	LVITEMW lvi;
+
+	if (folder_idx == INVALID_INDEX) return;
+
+	folder_flags = ctx->folders.flags[folder_idx];
+
+	ListView_DeleteAllItems(hwndList);
+	SetWindowTextW(hwndReading, L"");
+
+	memset(&lvcCol, 0, sizeof(lvcCol));
+	lvcCol.mask = LVCF_TEXT;
+	lvcCol.pszText = ISFLAG(folder_flags, SM_FOLDER_SENT) ? (LPWSTR)(uintptr_t)L"To" : (LPWSTR)(uintptr_t)L"From";
+	ListView_SetColumn(hwndList, 1, &lvcCol);
+
+	if (store_fetch_folder_messages(folder_idx, &headers, &msg_count) == 0 && headers) {
+		for (i = 0; i < msg_count; i++) {
+			MessageListItem *mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
+			if (!mItem) continue;
+
+			mItem->id = headers[i].id;
+			wcscpy_s(mItem->subject, 128, headers[i].subject);
+			wcscpy_s(mItem->participant, 128, headers[i].participant);
+			wcscpy_s(mItem->date_str, 32, headers[i].date_str);
+			mItem->timestamp = headers[i].timestamp;
+
+			memset(&lvi, 0, sizeof(lvi));
+			lvi.mask = LVIF_TEXT | LVIF_PARAM;
+			lvi.iItem = (int)i;
+			lvi.iSubItem = 0;
+			lvi.pszText = mItem->subject;
+			lvi.lParam = (LPARAM)mItem;
+
+			row = ListView_InsertItem(hwndList, &lvi);
+			ListView_SetItemText(hwndList, row, 1, mItem->participant);
+			ListView_SetItemText(hwndList, row, 2, mItem->date_str);
+		}
+
+		store_free_folder_messages(headers);
+	}
+
+	/* Default sort: Date column (index 2), Descending */
+	{
+		LPARAM defaultSortParam = (2 << 1) | 0;
+		ListView_SortItems(hwndList, MessageListCompare, defaultSortParam);
+
+		HWND hwndHeader = ListView_GetHeader(hwndList);
+		if (hwndHeader) {
+			int colCount = Header_GetItemCount(hwndHeader);
+			for (i = 0; i < (uint32_t)colCount; i++) {
+				HDITEMW hdi;
+				memset(&hdi, 0, sizeof(hdi));
+				hdi.mask = HDI_FORMAT;
+				Header_GetItem(hwndHeader, i, &hdi);
+
+				if (i == 2) {
+					hdi.fmt &= ~(HDF_SORTUP | HDF_SORTDOWN);
+					hdi.fmt |= HDF_SORTDOWN;
+				} else {
+					hdi.fmt &= ~(HDF_SORTUP | HDF_SORTDOWN);
+				}
+				Header_SetItem(hwndHeader, i, &hdi);
+			}
+		}
+	}
+
+	if (ListView_GetItemCount(hwndList) > 0) {
+		ListView_SetItemState(hwndList, 0, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
+	}
+}
+
+
+static void delete_selected_message(HWND hwndTree, HWND hwndList, HWND hwndReading, MailContext *ctx)
+{
+	int sel_idx = ListView_GetNextItem(hwndList, -1, LVNI_SELECTED);
+	HTREEITEM hSel;
+	TVITEMW tvti;
+	int32_t folder_idx;
+
+	if (sel_idx == -1) return;
+
+	LVITEMW lvi;
+	memset(&lvi, 0, sizeof(lvi));
+	lvi.iItem = sel_idx;
+	lvi.mask = LVIF_PARAM;
+	if (ListView_GetItem(hwndList, &lvi) && lvi.lParam) {
+		MessageListItem *item = (MessageListItem *)lvi.lParam;
+		uint64_t msg_id = item->id;
+
+		if (store_delete_message(msg_id) == 0) {
+			hSel = TreeView_GetSelection(hwndTree);
+			if (hSel) {
+				memset(&tvti, 0, sizeof(tvti));
+				tvti.hItem = hSel;
+				tvti.mask = TVIF_PARAM;
+				if (TreeView_GetItem(hwndTree, &tvti)) {
+					folder_idx = (int32_t)(intptr_t)tvti.lParam;
+					load_folder_messages(hwndList, hwndReading, ctx, folder_idx);
+				}
+			}
+		}
+	}
 }
 
 
@@ -348,38 +511,6 @@ void tree_view_refresh(HWND hwndTree, MailContext *ctx)
 }
 
 
-/* For sorting the message list */
-static int CALLBACK MessageListCompare(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
-{
-	MessageListItem *item1 = (MessageListItem *)lParam1;
-	MessageListItem *item2 = (MessageListItem *)lParam2;
-
-	int col = (lParamSort >> 1) & 0xFF;
-	int ascending = lParamSort & 1;
-	int cmp = 0;
-
-	if (!item1 || !item2) return 0;
-
-	switch (col) {
-		case 0:
-			cmp = _wcsicmp(item1->subject, item2->subject);
-			break;
-		case 1:
-			cmp = _wcsicmp(item1->participant, item2->participant);
-			break;
-		case 2:
-			if (item1->timestamp < item2->timestamp) cmp = -1;
-			else if (item1->timestamp > item2->timestamp) cmp = 1;
-			else cmp = 0;
-			break;
-		default:
-			return 0;
-	}
-
-	return ascending ? cmp : -cmp;
-}
-
-
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	CREATESTRUCT *pCreate;
@@ -400,7 +531,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	HDWP hdwp;
 	MINMAXINFO *minMax;
 	LVCOLUMNW lvc;
-	LVITEMW lvi;
 
 	switch (uMsg) {
 		case WM_GETMINMAXINFO:
@@ -414,17 +544,35 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			pCreate = (CREATESTRUCT *)lParam;
 			hInstance = pCreate->hInstance;
 
+			/* Create toolbar and load toolbar buttons */
 			hwndToolbar = CreateWindowEx(
-				0, L"STATIC", L"Toolbar", WS_CHILD | WS_VISIBLE | WS_BORDER,
+				0, L"STATIC", L"", WS_CHILD | WS_VISIBLE | WS_BORDER,
 				0, 0, 0, 0, hwnd, (HMENU)1, hInstance, NULL
 			);
 
+			{
+				int x_offset = 6;
+				int i;
+
+				for (i = 0; i < g_tb_spec_count; i++) {
+					const wchar_t *btn_text = g_tb_specs[i].show_text ? g_tb_specs[i].label : L"";
+					g_tb_specs[i].hwnd = CreateWindowEx(
+						0, L"BUTTON", btn_text, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | WS_TABSTOP,
+						x_offset, 3, g_tb_specs[i].default_width, 24,
+						hwnd, (HMENU)(intptr_t)g_tb_specs[i].id, hInstance, NULL
+					);
+					x_offset += g_tb_specs[i].default_width + 4;
+				}
+			}
+
+			/* Create folder tree pane */
 			hwndFolderTree = CreateWindowEx(
 				0, WC_TREEVIEW, L"Folders",
 				WS_CHILD | WS_VISIBLE | TVS_HASLINES | TVS_HASBUTTONS | TVS_LINESATROOT | TVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,
 				0, 0, 0, 0, hwnd, (HMENU)2, hInstance, NULL
 			);
 
+			/* Create message list view pane and set up tables*/
 			hwndMessageList = CreateWindowEx(
 				0, WC_LISTVIEW, L"Messages",
 				WS_CHILD | WS_VISIBLE | LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,
@@ -454,6 +602,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			lvc.cx = mp_date_width;
 			ListView_InsertColumn(hwndMessageList, 2, &lvc);
 
+			/* Create message reading pane */
 			hwndReadingPane = CreateWindowEx(
 				0, L"EDIT", L"Reading Pane",
 				WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_BORDER | WS_TABSTOP,
@@ -492,6 +641,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				case IDM_FILE_EXIT:
 					DestroyWindow(hwnd);
 					break;
+
 				case IDM_HELP_ABOUT:
 					wchar_t aboutText[512];
 					swprintf(aboutText, sizeof(aboutText) / sizeof(wchar_t),
@@ -500,6 +650,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						);
 					MessageBox(hwnd, aboutText, L"About Spite Mail", MB_OK | MB_ICONINFORMATION);
 					break;
+
+				case IDM_TOOLBAR_SYNC:
+					/* TODO: Trigger network sync */
+					break;
+
+				case IDM_TOOLBAR_REPLY:
+				case IDM_TOOLBAR_REPLYALL:
+				case IDM_TOOLBAR_FORWARD:
+					/* TODO: Message composition hooks */
+					break;
+
+				case IDM_TOOLBAR_DELETE:
+					delete_selected_message(hwndFolderTree, hwndMessageList, hwndReadingPane, &g_mail_ctx);
+					break;
+
 				default:
 					return DefWindowProc(hwnd, uMsg, wParam, lParam);
 			}
@@ -549,12 +714,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				NMTREEVIEWW *pnmtv;
 				NMLISTVIEW *pnmv;
 				int32_t folder_idx;
-				uint32_t folder_flags;
-				LVCOLUMNW lvcCol;
-				StoreMsgHeader *headers = NULL;
-				uint32_t msg_count = 0;
 				uint32_t i;
-				int row;
 
 				pNmhdr = (NMHDR *)lParam;
 
@@ -634,76 +794,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					pnmtv = (NMTREEVIEWW *)lParam;
 					folder_idx = (int32_t)(intptr_t)pnmtv->itemNew.lParam;
 
-					if (folder_idx == INVALID_INDEX) return 0;
-
-					folder_flags = g_mail_ctx.folders.flags[folder_idx];
-
-					/* Clear list view items and reading pane text */
-					ListView_DeleteAllItems(hwndMessageList);
-					SetWindowTextW(hwndReadingPane, L"");
-
-					/* Dynamic column labeling */
-					memset(&lvcCol, 0, sizeof(lvcCol));
-					lvcCol.mask = LVCF_TEXT;
-					lvcCol.pszText = ISFLAG(folder_flags, SM_FOLDER_SENT) ? (LPWSTR)(uintptr_t)L"To" : (LPWSTR)(uintptr_t)L"From";
-					ListView_SetColumn(hwndMessageList, 1, &lvcCol);
-
-					/* Query data store for messages in folder */
-					if (store_fetch_folder_messages(folder_idx, &headers, &msg_count) == 0 && headers) {
-						for (i = 0; i < msg_count; i++) {
-							MessageListItem *mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
-							if (!mItem) continue;
-
-							mItem->id = headers[i].id;
-							wcscpy_s(mItem->subject, 128, headers[i].subject);
-							wcscpy_s(mItem->participant, 128, headers[i].participant);
-							wcscpy_s(mItem->date_str, 32, headers[i].date_str);
-							mItem->timestamp = headers[i].timestamp;
-
-							memset(&lvi, 0, sizeof(lvi));
-							lvi.mask = LVIF_TEXT | LVIF_PARAM;
-							lvi.iItem = (int)i;
-							lvi.iSubItem = 0;
-							lvi.pszText = mItem->subject;
-							lvi.lParam = (LPARAM)mItem;
-
-							row = ListView_InsertItem(hwndMessageList, &lvi);
-							ListView_SetItemText(hwndMessageList, row, 1, mItem->participant);
-							ListView_SetItemText(hwndMessageList, row, 2, mItem->date_str);
-						}
-
-						store_free_folder_messages(headers);
-					}
-
-					/* Default sort: Date column (index 2), Descending */
-					{
-						LPARAM defaultSortParam = (2 << 1) | 0;
-						ListView_SortItems(hwndMessageList, MessageListCompare, defaultSortParam);
-
-						HWND hwndHeader = ListView_GetHeader(hwndMessageList);
-						if (hwndHeader) {
-							int colCount = Header_GetItemCount(hwndHeader);
-							for (i = 0; i < (uint32_t)colCount; i++) {
-								HDITEMW hdi;
-								memset(&hdi, 0, sizeof(hdi));
-								hdi.mask = HDI_FORMAT;
-								Header_GetItem(hwndHeader, i, &hdi);
-
-								if (i == 2) {
-									hdi.fmt &= ~(HDF_SORTUP | HDF_SORTDOWN);
-									hdi.fmt |= HDF_SORTDOWN;
-								} else {
-									hdi.fmt &= ~(HDF_SORTUP | HDF_SORTDOWN);
-								}
-								Header_SetItem(hwndHeader, i, &hdi);
-							}
-						}
-					}
-
-					/* Automatically select the first item in the sorted list */
-					if (ListView_GetItemCount(hwndMessageList) > 0) {
-						ListView_SetItemState(hwndMessageList, 0, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
-					}
+					load_folder_messages(hwndMessageList, hwndReadingPane, &g_mail_ctx, folder_idx);
 					return 0;
 				}
 
@@ -754,7 +845,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					}
 					return CDRF_DODEFAULT;
 				}
-			}  /* End of WM_NOTIFY */
+
+				/* Handle DELETE key in message list */
+				if (pNmhdr->hwndFrom == hwndMessageList && pNmhdr->code == LVN_KEYDOWN) {
+					NMLVKEYDOWN *pnkd = (NMLVKEYDOWN *)lParam;
+					if (pnkd->wVKey == VK_DELETE) {
+						delete_selected_message(hwndFolderTree, hwndMessageList, hwndReadingPane, &g_mail_ctx);
+						return 0;
+					}
+				}
+
+			}
+			/* End of WM_NOTIFY */
 			return 0;
 
 		case WM_DESTROY:

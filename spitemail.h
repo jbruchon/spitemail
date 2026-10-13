@@ -116,8 +116,15 @@ typedef struct {
 #define ICON_SPITEMAIL 2
 #define IDM_MENU 3
 
-#define IDM_FILE_EXIT  9001
-#define IDM_HELP_ABOUT 9002
+/* Menu bar */
+#define IDM_FILE_EXIT      9001
+#define IDM_HELP_ABOUT     9002
+/* Toolbar */
+#define IDM_TOOLBAR_SYNC     9023
+#define IDM_TOOLBAR_REPLY    9024
+#define IDM_TOOLBAR_REPLYALL 9025
+#define IDM_TOOLBAR_FORWARD  9026
+#define IDM_TOOLBAR_DELETE   9027
 
 
 /*** Constants ***/
