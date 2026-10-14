@@ -1,10 +1,11 @@
 /* Spite Mail user interface for the Win32 API
  * license: GPLv2; (C) 2026 Jody Bruchon <jody@jodybruchon.com> */
 
-#include "version.h"
+#include <stdio.h>
 #include "spitemail.h"
 #include "datastore.h"
 #include "ui-win32.h"
+#include "version.h"
 
 
 /*** Variables and type definitions ***/
@@ -780,6 +781,15 @@ int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 
 	(void)hPrevInstance;
 	(void)lpCmdLine;
+
+#ifndef NO_DEBUG_CONSOLE
+	/* Allocate a console window for debugging output */
+	AllocConsole();
+	FILE *fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	freopen_s(&fp, "CONOUT$", "w", stderr);
+	printf("Spite Mail debugging console\n");
+#endif
 
 	icc.dwSize = sizeof(INITCOMMONCONTROLSEX);
 	icc.dwICC = ICC_TREEVIEW_CLASSES | ICC_LISTVIEW_CLASSES;
