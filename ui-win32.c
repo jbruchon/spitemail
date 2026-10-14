@@ -4,12 +4,16 @@
 #include "version.h"
 #include "spitemail.h"
 #include "datastore.h"
+#include "ui-win32.h"
 
+
+/*** Variables and type definitions ***/
 static HWND hwndToolbar = NULL;
 static HWND hwndFolderTree = NULL;
 static HWND hwndMessageList = NULL;
 static HWND hwndReadingPane = NULL;
 static int g_reading_pane_state = 0;
+static HBRUSH hbrTextBg = NULL;
 static HBRUSH hbrErrorBg = NULL;
 static HBRUSH hbrNoMsgBg = NULL;
 
@@ -40,6 +44,7 @@ static const int g_tb_spec_count = sizeof(g_tb_specs) / sizeof(g_tb_specs[0]);
 /* For theme colors */
 #define TO_COLORREF(c) RGB((c).r, (c).g, (c).b)
 static COLORREF g_color_text;
+static COLORREF g_color_text_bg;
 static COLORREF g_color_error_bg;
 static COLORREF g_color_error_hi;
 static COLORREF g_color_error_text;
@@ -417,6 +422,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			/* Assign theme colors to UI */
 			g_color_text         = TO_COLORREF(g_mail_ctx.theme.text);
+			g_color_text_bg      = TO_COLORREF(g_mail_ctx.theme.text_bg);
 			g_color_error_bg     = TO_COLORREF(g_mail_ctx.theme.error_bg);
 			g_color_error_hi     = TO_COLORREF(g_mail_ctx.theme.error_hi);
 			g_color_error_text   = TO_COLORREF(g_mail_ctx.theme.error_text);
@@ -425,6 +431,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			g_color_zebra_odd    = TO_COLORREF(g_mail_ctx.theme.zebra_odd);
 			g_color_zebra_even   = TO_COLORREF(g_mail_ctx.theme.zebra_even);
 
+			hbrTextBg  = CreateSolidBrush(g_color_text_bg);
 			hbrErrorBg = CreateSolidBrush(g_color_error_bg);
 			hbrNoMsgBg = CreateSolidBrush(g_color_nomsg_bg);
 
@@ -442,13 +449,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		/* End of WM_CREATE */
 
 		case WM_CTLCOLORSTATIC:
-			if ((HWND)lParam == hwndReadingPane && g_reading_pane_state) {
-				if (g_reading_pane_state == 1) {
-					SetBkColor((HDC)wParam, g_color_error_bg);
-					return (INT_PTR)hbrErrorBg;
+			if ((HWND)lParam == hwndReadingPane) {
+				switch (g_reading_pane_state) {
+					default:
+					case 0:
+						SetBkColor((HDC)wParam, g_color_text_bg);
+						return (INT_PTR)hbrTextBg;
+					case 1:
+						SetBkColor((HDC)wParam, g_color_error_bg);
+						return (INT_PTR)hbrErrorBg;
+					case 2:
+						SetBkColor((HDC)wParam, g_color_nomsg_bg);
+						return (INT_PTR)hbrNoMsgBg;
 				}
-				if (g_reading_pane_state == 2) SetBkColor((HDC)wParam, g_color_nomsg_bg);
-				return (INT_PTR)hbrNoMsgBg;
 			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		/* End of WM_CTLCOLORSTATIC */
@@ -498,17 +511,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			contentTop = tbHeight;
 			contentHeight = cy - contentTop;
 
-			col1Width = SM_FOLDER_PANE_WIDTH;
-			col2Width = SM_MESSAGE_PANE_WIDTH;
+			col1Width = SM_VV_FOLDER_PANE_WIDTH;
+			col2Width = SM_VV_MESSAGE_PANE_WIDTH;
 			if (cx < SM_WINDOW_WIDTH) {
-				col1Width = (int)(((unsigned long)cx * SM_FOLDER_PANE_WIDTH) / SM_WINDOW_WIDTH);
-				col2Width = (int)(((unsigned long)cx * SM_MESSAGE_PANE_WIDTH) / SM_WINDOW_WIDTH);
-				if (col1Width < SM_MIN_FOLDER_PANE_WIDTH) col1Width = SM_MIN_FOLDER_PANE_WIDTH;
-				if (col2Width < SM_MIN_MESSAGE_PANE_WIDTH) col2Width = SM_MIN_MESSAGE_PANE_WIDTH;
+				col1Width = (int)(((unsigned long)cx * SM_VV_FOLDER_PANE_WIDTH) / SM_WINDOW_WIDTH);
+				col2Width = (int)(((unsigned long)cx * SM_VV_MESSAGE_PANE_WIDTH) / SM_WINDOW_WIDTH);
+				if (col1Width < SM_VV_MIN_FOLDER_PANE_WIDTH) col1Width = SM_VV_MIN_FOLDER_PANE_WIDTH;
+				if (col2Width < SM_VV_MIN_MESSAGE_PANE_WIDTH) col2Width = SM_VV_MIN_MESSAGE_PANE_WIDTH;
 			}
 
 			col3Width = cx - col1Width - col2Width;
-			if (col3Width < SM_MIN_READING_PANE_WIDTH) col3Width = SM_MIN_READING_PANE_WIDTH;
+			if (col3Width < SM_VV_MIN_READING_PANE_WIDTH) col3Width = SM_VV_MIN_READING_PANE_WIDTH;
 
 			hdwp = BeginDeferWindowPos(3);
 			MoveWindow(hwndToolbar, 0, 0, cx, tbHeight, TRUE);
@@ -711,6 +724,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		/* End of WM_GETMINMAXINFO */
 
 		case WM_DESTROY:
+			if (hbrTextBg) DeleteObject(hbrTextBg);
 			if (hbrErrorBg) DeleteObject(hbrErrorBg);
 			if (hbrNoMsgBg) DeleteObject(hbrNoMsgBg);
 			if (g_ui_htree_items) {

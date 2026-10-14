@@ -1,4 +1,4 @@
-#include "spitemail.h"
+#include "ui-win32.h"
 
 WINRES_MANIFEST 24 winres.manifest.xml
 ICON_SPITEMAIL ICON icon/icon_spitemail_all.ico

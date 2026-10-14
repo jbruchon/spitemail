@@ -189,10 +189,11 @@ void load_app_configuration(MailContext *ctx)
 	ctx->folders.next_sibling_idx = (int32_t *)malloc(fld_capacity * sizeof(int32_t));
 
 	/* Default platform-agnostic theme colors */
-	ctx->theme.text         = (ColorRGB){  0,   0,   0 };
+	ctx->theme.text         = (ColorRGB){   0,   0,   0 };
+	ctx->theme.text_bg      = (ColorRGB){ 255, 255, 255 };
 	ctx->theme.error_bg     = (ColorRGB){ 255, 192, 192 };
 	ctx->theme.error_hi     = (ColorRGB){ 255, 160, 160 };
-	ctx->theme.error_text   = (ColorRGB){  0,   0,   0 };
+	ctx->theme.error_text   = (ColorRGB){   0,   0,   0 };
 	ctx->theme.inactive_sel = (ColorRGB){ 240, 240, 255 };
 	ctx->theme.nomsg_bg     = (ColorRGB){ 224, 224, 255 };
 	ctx->theme.zebra_odd    = (ColorRGB){ 240, 240, 240 };
@@ -257,6 +258,7 @@ void load_app_configuration(MailContext *ctx)
 				ColorRGB rgb;
 				if (parse_hex_color_agnostic(val, &rgb) == 0) {
 					if (_stricmp(key, "TextColor") == 0) ctx->theme.text = rgb;
+					else if (_stricmp(key, "TextBgColor") == 0) ctx->theme.text_bg = rgb;
 					else if (_stricmp(key, "ErrorBgColor") == 0) ctx->theme.error_bg = rgb;
 					else if (_stricmp(key, "ErrorHighlightColor") == 0) ctx->theme.error_hi = rgb;
 					else if (_stricmp(key, "ErrorTextColor") == 0) ctx->theme.error_text = rgb;

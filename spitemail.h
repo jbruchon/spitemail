@@ -103,6 +103,7 @@ typedef struct ColorRGB {
 
 typedef struct ThemeConfig {
 	ColorRGB text;
+	ColorRGB text_bg;
 	ColorRGB error_bg;
 	ColorRGB error_hi;
 	ColorRGB error_text;
@@ -126,39 +127,6 @@ typedef struct {
 } MailItem;
 
 extern MailContext g_mail_ctx;
-
-
-/*** Resource definitions for icons, menus, etc. ***/
-
-#define WINRES_MANIFEST 1
-#define ICON_SPITEMAIL 2
-#define IDM_MENU 3
-
-/* Menu bar */
-#define IDM_FILE_EXIT      9001
-#define IDM_HELP_ABOUT     9002
-/* Toolbar */
-#define IDM_TOOLBAR_SYNC     9023
-#define IDM_TOOLBAR_REPLY    9024
-#define IDM_TOOLBAR_REPLYALL 9025
-#define IDM_TOOLBAR_FORWARD  9026
-#define IDM_TOOLBAR_DELETE   9027
-
-
-/*** Constants ***/
-#define SM_WINDOW_WIDTH 800
-#define SM_WINDOW_HEIGHT 480
-#define SM_MIN_WINDOW_WIDTH 640
-#define SM_MIN_WINDOW_HEIGHT 300
-#define SM_FOLDER_PANE_WIDTH 100
-#define SM_MESSAGE_PANE_WIDTH 380
-#define SM_READING_PANE_WIDTH 320
-#define SM_MIN_FOLDER_PANE_WIDTH 120
-#define SM_MIN_MESSAGE_PANE_WIDTH 300
-#define SM_MIN_READING_PANE_WIDTH 240
-#define SM_MP_SUBJECT_WIDTH 170
-#define SM_MP_FROMTO_WIDTH 100
-#define SM_MP_DATE_WIDTH 100
 
 
 /*** Function prototypes (Defined AFTER MailContext) ***/
