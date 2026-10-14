@@ -36,7 +36,7 @@ uint32_t pool_add_str(StringPool *pool, const char *str)
 	}
 
 	offset = pool->used;
-	strcpy_s(pool->data + offset, pool->capacity - offset, str);
+	snprintf(pool->data + offset, pool->capacity - offset, "%s", str);
 	pool->used += req_chars;
 
 	return offset;
@@ -126,7 +126,7 @@ static void add_parsed_account(MailContext *ctx, const char *name, const char *s
 	ctx->accounts.username_offsets[a_idx] = user_off;
 	ctx->accounts.ports[a_idx] = (uint32_t)port;
 	ctx->accounts.root_folder_idx[a_idx] = inbox_idx;
-	ctx->accounts.store_flags[a_idx] = (_stricmp(store, "ram") == 0) ? 1 : 1;
+	ctx->accounts.store_flags[a_idx] = (strcasecmp(store, "ram") == 0) ? 1 : 1;
 	(*acc_idx)++;
 
 	ctx->folders.name_offsets[inbox_idx] = inbox_off;
@@ -224,16 +224,17 @@ void load_app_configuration(MailContext *ctx)
 			char *end_bracket = strchr(p, ']');
 			if (end_bracket) {
 				*end_bracket = '\0';
-				strcpy_s(current_section, sizeof(current_section), p + 1);
+				/* Parse directly with a field width limit matching current_section's size */
+				sscanf(p + 1, "%127s", current_section);
 				trim_whitespace(current_section);
 			}
 
-			if (_stricmp(current_section, "Account") == 0 || _strnicmp(current_section, "Account ", 8) == 0) {
+			if (strcasecmp(current_section, "Account") == 0 || strncasecmp(current_section, "Account ", 8) == 0) {
 				has_active_account = 1;
-				strcpy_s(acc_name, sizeof(acc_name), "user@spitemail.com");
-				strcpy_s(acc_server, sizeof(acc_server), "imap.spitemail.com");
-				strcpy_s(acc_user, sizeof(acc_user), "user@spitemail.com");
-				strcpy_s(acc_store, sizeof(acc_store), "ram");
+				snprintf(acc_name, sizeof(acc_name), "%s", "user@spitemail.com");
+				snprintf(acc_server, sizeof(acc_server), "%s", "imap.spitemail.com");
+				snprintf(acc_user, sizeof(acc_user), "%s", "user@spitemail.com");
+				snprintf(acc_store, sizeof(acc_store), "%s", "ram");
 				acc_port = 993;
 			}
 			continue;
@@ -247,28 +248,28 @@ void load_app_configuration(MailContext *ctx)
 			trim_whitespace(key);
 			trim_whitespace(val);
 
-			if (_stricmp(current_section, "Account") == 0 || _strnicmp(current_section, "Account ", 8) == 0) {
+			if (strcasecmp(current_section, "Account") == 0 || strncasecmp(current_section, "Account ", 8) == 0) {
 				has_active_account = 1;
-				if (_stricmp(key, "Name") == 0) strcpy_s(acc_name, sizeof(acc_name), val);
-				else if (_stricmp(key, "Server") == 0) strcpy_s(acc_server, sizeof(acc_server), val);
-				else if (_stricmp(key, "Username") == 0) strcpy_s(acc_user, sizeof(acc_user), val);
-				else if (_stricmp(key, "Store") == 0) strcpy_s(acc_store, sizeof(acc_store), val);
-				else if (_stricmp(key, "Port") == 0) acc_port = atoi(val);
+				if (strcasecmp(key, "Name") == 0) snprintf(acc_name, sizeof(acc_name), "%s", val);
+				else if (strcasecmp(key, "Server") == 0) snprintf(acc_server, sizeof(acc_server), "%s", val);
+				else if (strcasecmp(key, "Username") == 0) snprintf(acc_user, sizeof(acc_user), "%s", val);
+				else if (strcasecmp(key, "Store") == 0) snprintf(acc_store, sizeof(acc_store), "%s", val);
+				else if (strcasecmp(key, "Port") == 0) acc_port = atoi(val);
 			}
-			else if (_stricmp(current_section, "Preferences") == 0) {
+			else if (strcasecmp(current_section, "Preferences") == 0) {
 				ColorRGB rgb;
-				if (_stricmp(key, "RpMarginSize") == 0) ctx->theme.rp_margin_size = atoi(val);
+				if (strcasecmp(key, "RpMarginSize") == 0) ctx->theme.rp_margin_size = atoi(val);
 				if (parse_hex_color_agnostic(val, &rgb) == 0) {
-					if (_stricmp(key, "TextColor") == 0) ctx->theme.text = rgb;
-					else if (_stricmp(key, "TextBgColor") == 0) ctx->theme.text_bg = rgb;
-					else if (_stricmp(key, "ErrorBgColor") == 0) ctx->theme.error_bg = rgb;
-					else if (_stricmp(key, "ErrorHighlightColor") == 0) ctx->theme.error_hi = rgb;
-					else if (_stricmp(key, "ErrorTextColor") == 0) ctx->theme.error_text = rgb;
-					else if (_stricmp(key, "InactiveSelColor") == 0) ctx->theme.inactive_sel = rgb;
-					else if (_stricmp(key, "InactiveSelColor") == 0) ctx->theme.inactive_sel = rgb;
-					else if (_stricmp(key, "NoMsgBgColor") == 0) ctx->theme.nomsg_bg = rgb;
-					else if (_stricmp(key, "ZebraOddColor") == 0) ctx->theme.zebra_odd = rgb;
-					else if (_stricmp(key, "ZebraEvenColor") == 0) ctx->theme.zebra_even = rgb;
+					if (strcasecmp(key, "TextColor") == 0) ctx->theme.text = rgb;
+					else if (strcasecmp(key, "TextBgColor") == 0) ctx->theme.text_bg = rgb;
+					else if (strcasecmp(key, "ErrorBgColor") == 0) ctx->theme.error_bg = rgb;
+					else if (strcasecmp(key, "ErrorHighlightColor") == 0) ctx->theme.error_hi = rgb;
+					else if (strcasecmp(key, "ErrorTextColor") == 0) ctx->theme.error_text = rgb;
+					else if (strcasecmp(key, "InactiveSelColor") == 0) ctx->theme.inactive_sel = rgb;
+					else if (strcasecmp(key, "InactiveSelColor") == 0) ctx->theme.inactive_sel = rgb;
+					else if (strcasecmp(key, "NoMsgBgColor") == 0) ctx->theme.nomsg_bg = rgb;
+					else if (strcasecmp(key, "ZebraOddColor") == 0) ctx->theme.zebra_odd = rgb;
+					else if (strcasecmp(key, "ZebraEvenColor") == 0) ctx->theme.zebra_even = rgb;
 				}
 			}
 		}

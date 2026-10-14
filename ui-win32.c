@@ -546,7 +546,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			/* Update reading pane padding rect dynamically on resize */
 			if (hwndReadingPane) {
-				RECT rcEdit;
 				GetClientRect(hwndReadingPane, &rcEdit);
 				rcEdit.left += g_rp_margin_size;
 				rcEdit.top += g_rp_margin_size;
