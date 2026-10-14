@@ -4,7 +4,7 @@
 #ifndef SPITEMAIL_VERSION_H
 #define SPITEMAIL_VERSION_H
 
-#define VER L"0.0.0.1"
-#define VERDATE L"2026-09-14"
+#define VER "0.0.0.1"
+#define VERDATE "2026-09-14"
 
 #endif /* SPITEMAIL_VERSION_H */

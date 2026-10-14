@@ -18,6 +18,10 @@ static HBRUSH hbrTextBg = NULL;
 static HBRUSH hbrErrorBg = NULL;
 static HBRUSH hbrNoMsgBg = NULL;
 
+/* Debugging console */
+int debugconsole = 1;  /* Set to 0 to disable debug console by default */
+HWND hwndConsole;
+
 static HTREEITEM *g_ui_htree_items = NULL;
 static uint32_t g_ui_htree_capacity = 0;
 
@@ -491,9 +495,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				case IDM_HELP_ABOUT:
 					{
 						wchar_t aboutText[512];
-						swprintf(aboutText, sizeof(aboutText) / sizeof(wchar_t),
+						wchar_t aboutVer[64];
+						wchar_t aboutVerDate[64];
+
+						MultiByteToWideChar(CP_UTF8, 0, VER, -1, aboutVer, sizeof(aboutVer) / sizeof(wchar_t));
+						MultiByteToWideChar(CP_UTF8, 0, VERDATE, -1, aboutVerDate, sizeof(aboutVerDate) / sizeof(wchar_t));
+						swprintf(aboutText,
+							sizeof(aboutText) / sizeof(wchar_t),
 							L"Spite Mail: made with hate\nVersion %S (%S)\n(C) 2026 Jody Bruchon <jody@jodybruchon.com>\nPublished under GNU GPL v2",
-							VER, VERDATE
+							aboutVer, aboutVerDate
 						);
 						MessageBox(hwnd, aboutText, L"About Spite Mail", MB_OK | MB_ICONINFORMATION);
 					}
@@ -778,18 +788,27 @@ int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 	HWND hwndFocus;
 	BOOL bShift;
 	HWND hwndNext;
+	/* Debug console */
+	FILE *fp;
+	int consoleWidth = 640;
+	int consoleHeight = 480;
+	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+	int posX = screenWidth - consoleWidth - 40;
+	int posY = screenHeight - consoleHeight - 80;
 
 	(void)hPrevInstance;
 	(void)lpCmdLine;
 
-#ifndef NO_DEBUG_CONSOLE
 	/* Allocate a console window for debugging output */
-	AllocConsole();
-	FILE *fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	freopen_s(&fp, "CONOUT$", "w", stderr);
-	printf("Spite Mail debugging console\n");
-#endif
+	if (debugconsole) {
+		AllocConsole();
+		hwndConsole = GetConsoleWindow();
+		if (hwndConsole) MoveWindow(hwndConsole, posX, posY, consoleWidth, consoleHeight, TRUE);
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		freopen_s(&fp, "CONOUT$", "w", stderr);
+		printf("Spite Mail version version %s (%s) debug console\n\n", VER, VERDATE);
+	}
 
 	icc.dwSize = sizeof(INITCOMMONCONTROLSEX);
 	icc.dwICC = ICC_TREEVIEW_CLASSES | ICC_LISTVIEW_CLASSES;
