@@ -34,16 +34,16 @@ static ToolbarButtonSpec g_tb_specs[] = {
 };
 static const int g_tb_spec_count = sizeof(g_tb_specs) / sizeof(g_tb_specs[0]);
 
-/* Default color preferences */
-static COLORREF g_color_text         = RGB(  0,   0,   0);
-static COLORREF g_color_error_bg     = RGB(255, 192, 192);
-static COLORREF g_color_error_bg_hi  = RGB(255, 224, 224);
-static COLORREF g_color_error_hi     = RGB(255, 160, 160);
-static COLORREF g_color_error_text   = RGB(  0,   0,   0);
-static COLORREF g_color_inactive_sel = RGB(240, 240, 255);
-static COLORREF g_color_zebra_odd    = RGB(240, 240, 240);
-static COLORREF g_color_zebra_even   = RGB(255, 255, 255);
-
+/* For theme colors */
+#define TO_COLORREF(c) RGB((c).r, (c).g, (c).b)
+static COLORREF g_color_text;
+static COLORREF g_color_error_bg;
+static COLORREF g_color_error_bg_hi;
+static COLORREF g_color_error_hi;
+static COLORREF g_color_error_text;
+static COLORREF g_color_inactive_sel;
+static COLORREF g_color_zebra_odd;
+static COLORREF g_color_zebra_even;
 
 /* For sorting the message list */
 static int CALLBACK MessageListCompare(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
@@ -302,6 +302,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	HDWP hdwp;
 	MINMAXINFO *minMax;
 	LVCOLUMNW lvc;
+	HFONT hUiFont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
 
 	switch (uMsg) {
 		case WM_CREATE:
@@ -328,6 +329,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						x_offset, 3, g_tb_specs[i].default_width, 24,
 						hwnd, (HMENU)(intptr_t)g_tb_specs[i].id, hInstance, NULL
 					);
+					/* The SendMessage(...WM_SETFONT...) calls set up the default font */
+					SendMessage(g_tb_specs[i].hwnd, WM_SETFONT, (WPARAM)hUiFont, TRUE);
 					x_offset += g_tb_specs[i].default_width + 4;
 				}
 			}
@@ -337,12 +340,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				WS_CHILD | WS_VISIBLE | TVS_HASLINES | TVS_HASBUTTONS | TVS_LINESATROOT | TVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,
 				0, 0, 0, 0, hwnd, (HMENU)2, hInstance, NULL
 			);
+			SendMessage(hwndFolderTree, WM_SETFONT, (WPARAM)hUiFont, TRUE);
 
 			hwndMessageList = CreateWindowEx(
 				0, WC_LISTVIEW, L"Messages",
 				WS_CHILD | WS_VISIBLE | LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,
 				0, 0, 0, 0, hwnd, (HMENU)3, hInstance, NULL
 			);
+			SendMessage(hwndMessageList, WM_SETFONT, (WPARAM)hUiFont, TRUE);
 			ListView_SetExtendedListViewStyle(hwndMessageList, LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
  
 			{
@@ -370,8 +375,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_BORDER | WS_TABSTOP,
 				0, 0, 0, 0, hwnd, (HMENU)4, hInstance, NULL
 			);
+			SendMessage(hwndReadingPane, WM_SETFONT, (WPARAM)hUiFont, TRUE);
 
 			load_app_configuration(&g_mail_ctx);
+
+			/* Assign theme colors to UI */
+			g_color_text         = TO_COLORREF(g_mail_ctx.theme.text);
+			g_color_error_bg     = TO_COLORREF(g_mail_ctx.theme.error_bg);
+			g_color_error_bg_hi  = TO_COLORREF(g_mail_ctx.theme.error_bg_hi);
+			g_color_error_hi     = TO_COLORREF(g_mail_ctx.theme.error_hi);
+			g_color_error_text   = TO_COLORREF(g_mail_ctx.theme.error_text);
+			g_color_inactive_sel = TO_COLORREF(g_mail_ctx.theme.inactive_sel);
+			g_color_zebra_odd    = TO_COLORREF(g_mail_ctx.theme.zebra_odd);
+			g_color_zebra_even   = TO_COLORREF(g_mail_ctx.theme.zebra_even);
 
 			hbrErrorBg = CreateSolidBrush(g_color_error_bg);
 

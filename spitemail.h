@@ -95,10 +95,28 @@ typedef struct AccountTable {
 	uint32_t  capacity;
 } AccountTable;
 
+typedef struct ColorRGB {
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+} ColorRGB;
+
+typedef struct ThemeConfig {
+	ColorRGB text;
+	ColorRGB error_bg;
+	ColorRGB error_bg_hi;
+	ColorRGB error_hi;
+	ColorRGB error_text;
+	ColorRGB inactive_sel;
+	ColorRGB zebra_odd;
+	ColorRGB zebra_even;
+} ThemeConfig;
+
 typedef struct MailContext {
 	StringPool   pool;
 	FolderTable  folders;
 	AccountTable accounts;
+	ThemeConfig  theme;
 } MailContext;
 
 typedef struct {
@@ -148,6 +166,7 @@ extern MailContext g_mail_ctx;
 
 /*** Function prototypes ***/
 uint32_t pool_add_utf8(StringPool *pool, const char *utf8_str);
+uint32_t pool_add_wstr(StringPool *pool, const wchar_t *w_str);
 wchar_t *pool_get_wstr(const StringPool *pool, uint32_t offset);
 void load_app_configuration(MailContext *ctx);
 void mail_context_init(MailContext *ctx);
