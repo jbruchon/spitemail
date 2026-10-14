@@ -41,7 +41,7 @@ static ToolbarButtonSpec g_tb_specs[] = {
 };
 static const int g_tb_spec_count = sizeof(g_tb_specs) / sizeof(g_tb_specs[0]);
 
-/* For theme colors */
+/* UI theme settings */
 #define TO_COLORREF(c) RGB((c).r, (c).g, (c).b)
 static COLORREF g_color_text;
 static COLORREF g_color_text_bg;
@@ -52,6 +52,7 @@ static COLORREF g_color_inactive_sel;
 static COLORREF g_color_nomsg_bg;
 static COLORREF g_color_zebra_odd;
 static COLORREF g_color_zebra_even;
+static int g_rp_margin_size;
 
 /* Convert a UTF-8 core string to a Win32 UTF-16 wide string */
 static wchar_t *utf8_to_wide_dup(const char *utf8_str)
@@ -343,6 +344,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	HDWP hdwp;
 	MINMAXINFO *minMax;
 	LVCOLUMNW lvc;
+	RECT rcEdit;
 	HFONT hUiFont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
 
 	switch (uMsg) {
@@ -418,9 +420,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			);
 			SendMessage(hwndReadingPane, WM_SETFONT, (WPARAM)hUiFont, TRUE);
 
+			/* Set 1-pixel left and right margins */
+			SendMessage(hwndReadingPane, EM_SETMARGINS, EC_LEFTMARGIN | EC_RIGHTMARGIN, MAKELONG(1, 1));
+
 			load_app_configuration(&g_mail_ctx);
 
-			/* Assign theme colors to UI */
+			/* Assign theme settings to UI settings */
 			g_color_text         = TO_COLORREF(g_mail_ctx.theme.text);
 			g_color_text_bg      = TO_COLORREF(g_mail_ctx.theme.text_bg);
 			g_color_error_bg     = TO_COLORREF(g_mail_ctx.theme.error_bg);
@@ -430,10 +435,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			g_color_nomsg_bg     = TO_COLORREF(g_mail_ctx.theme.nomsg_bg);
 			g_color_zebra_odd    = TO_COLORREF(g_mail_ctx.theme.zebra_odd);
 			g_color_zebra_even   = TO_COLORREF(g_mail_ctx.theme.zebra_even);
+			g_rp_margin_size     = g_mail_ctx.theme.rp_margin_size;
 
 			hbrTextBg  = CreateSolidBrush(g_color_text_bg);
 			hbrErrorBg = CreateSolidBrush(g_color_error_bg);
 			hbrNoMsgBg = CreateSolidBrush(g_color_nomsg_bg);
+
+			/* Set top and bottom formatting rectangle padding */
+			GetClientRect(hwndReadingPane, &rcEdit);
+			rcEdit.left += g_rp_margin_size;
+			rcEdit.top += g_rp_margin_size;
+			rcEdit.right -= g_rp_margin_size;
+			rcEdit.bottom -= g_rp_margin_size;
+			SendMessage(hwndReadingPane, EM_SETRECT, 0, (LPARAM)&rcEdit);
 
 			store_init(&g_mail_ctx);
 			tree_view_refresh(hwndFolderTree, &g_mail_ctx);
@@ -529,6 +543,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			MoveWindow(hwndMessageList, col1Width, contentTop, col2Width, contentHeight, TRUE);
 			MoveWindow(hwndReadingPane, col1Width + col2Width, contentTop, col3Width, contentHeight, TRUE);
 			EndDeferWindowPos(hdwp);
+
+			/* Update reading pane padding rect dynamically on resize */
+			if (hwndReadingPane) {
+				RECT rcEdit;
+				GetClientRect(hwndReadingPane, &rcEdit);
+				rcEdit.left += g_rp_margin_size;
+				rcEdit.top += g_rp_margin_size;
+				rcEdit.right -= g_rp_margin_size;
+				rcEdit.bottom -= g_rp_margin_size;
+				SendMessage(hwndReadingPane, EM_SETRECTNP, 0, (LPARAM)&rcEdit);
+			}
 			return 0;
 		/* End of WM_SIZE */
 

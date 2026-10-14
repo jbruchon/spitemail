@@ -188,7 +188,7 @@ void load_app_configuration(MailContext *ctx)
 	ctx->folders.first_child_idx = (int32_t *)malloc(fld_capacity * sizeof(int32_t));
 	ctx->folders.next_sibling_idx = (int32_t *)malloc(fld_capacity * sizeof(int32_t));
 
-	/* Default platform-agnostic theme colors */
+	/* Default theme settings */
 	ctx->theme.text         = (ColorRGB){   0,   0,   0 };
 	ctx->theme.text_bg      = (ColorRGB){ 255, 255, 255 };
 	ctx->theme.error_bg     = (ColorRGB){ 255, 192, 192 };
@@ -198,6 +198,7 @@ void load_app_configuration(MailContext *ctx)
 	ctx->theme.nomsg_bg     = (ColorRGB){ 224, 224, 255 };
 	ctx->theme.zebra_odd    = (ColorRGB){ 240, 240, 240 };
 	ctx->theme.zebra_even   = (ColorRGB){ 255, 255, 255 };
+	ctx->theme.rp_margin_size = 0;
 
 	fp = fopen("spitemail.ini", "r");
 	if (!fp) fp = fopen("./config/spitemail.ini", "r");
@@ -256,6 +257,7 @@ void load_app_configuration(MailContext *ctx)
 			}
 			else if (_stricmp(current_section, "Preferences") == 0) {
 				ColorRGB rgb;
+				if (_stricmp(key, "RpMarginSize") == 0) ctx->theme.rp_margin_size = atoi(val);
 				if (parse_hex_color_agnostic(val, &rgb) == 0) {
 					if (_stricmp(key, "TextColor") == 0) ctx->theme.text = rgb;
 					else if (_stricmp(key, "TextBgColor") == 0) ctx->theme.text_bg = rgb;

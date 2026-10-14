@@ -111,6 +111,7 @@ typedef struct ThemeConfig {
 	ColorRGB nomsg_bg;
 	ColorRGB zebra_odd;
 	ColorRGB zebra_even;
+	int rp_margin_size;
 } ThemeConfig;
 
 typedef struct MailContext {
