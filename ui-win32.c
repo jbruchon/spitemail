@@ -779,15 +779,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 }
 
 
-int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nShowCmd)
+/* Allocate a console window for debugging output */
+void init_debug_console(void)
 {
-	const wchar_t CLASS_NAME[] = L"SpiteMailWindowClass";
-	HMENU hMenu;
-	INITCOMMONCONTROLSEX icc;
-	MSG msg;
-	HWND hwndFocus;
-	BOOL bShift;
-	HWND hwndNext;
 	/* Debug console */
 	FILE *fp;
 	int consoleWidth = 640;
@@ -797,18 +791,37 @@ int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 	int posX = screenWidth - consoleWidth - 40;
 	int posY = screenHeight - consoleHeight - 80;
 
+	if (debugconsole != 1) return;
+	AllocConsole();
+	hwndConsole = GetConsoleWindow();
+	if (hwndConsole) {
+		MoveWindow(hwndConsole, posX, posY, consoleWidth, consoleHeight, TRUE);
+		if (freopen_s(&fp, "CONOUT$", "w", stdout) != 0) goto error_init_console;
+		if (freopen_s(&fp, "CONOUT$", "w", stderr) != 0) goto error_init_console;
+		printf("Spite Mail version %s (%s) debug console\n\n", VER, VERDATE);
+		debugconsole = 2;
+		return;
+	}
+error_init_console:
+	debugconsole = 0;
+	return;
+}
+
+
+int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nShowCmd)
+{
+	const wchar_t CLASS_NAME[] = L"SpiteMailWindowClass";
+	HMENU hMenu;
+	INITCOMMONCONTROLSEX icc;
+	MSG msg;
+	HWND hwndFocus;
+	BOOL bShift;
+	HWND hwndNext;
+
 	(void)hPrevInstance;
 	(void)lpCmdLine;
 
-	/* Allocate a console window for debugging output */
-	if (debugconsole) {
-		AllocConsole();
-		hwndConsole = GetConsoleWindow();
-		if (hwndConsole) MoveWindow(hwndConsole, posX, posY, consoleWidth, consoleHeight, TRUE);
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		freopen_s(&fp, "CONOUT$", "w", stderr);
-		printf("Spite Mail version version %s (%s) debug console\n\n", VER, VERDATE);
-	}
+	if (debugconsole == 1) init_debug_console();
 
 	icc.dwSize = sizeof(INITCOMMONCONTROLSEX);
 	icc.dwICC = ICC_TREEVIEW_CLASSES | ICC_LISTVIEW_CLASSES;
