@@ -9,11 +9,14 @@ static HWND hwndToolbar = NULL;
 static HWND hwndFolderTree = NULL;
 static HWND hwndMessageList = NULL;
 static HWND hwndReadingPane = NULL;
-static int g_reading_pane_has_error = 0;
+static int g_reading_pane_state = 0;
 static HBRUSH hbrErrorBg = NULL;
+static HBRUSH hbrNoMsgBg = NULL;
 
 static HTREEITEM *g_ui_htree_items = NULL;
 static uint32_t g_ui_htree_capacity = 0;
+
+static const wchar_t *rp_nomsg = L"\r\n  <no message selected>";
 
 /* Toolbar button configuration */
 typedef struct ToolbarButtonSpec {
@@ -38,10 +41,10 @@ static const int g_tb_spec_count = sizeof(g_tb_specs) / sizeof(g_tb_specs[0]);
 #define TO_COLORREF(c) RGB((c).r, (c).g, (c).b)
 static COLORREF g_color_text;
 static COLORREF g_color_error_bg;
-static COLORREF g_color_error_bg_hi;
 static COLORREF g_color_error_hi;
 static COLORREF g_color_error_text;
 static COLORREF g_color_inactive_sel;
+static COLORREF g_color_nomsg_bg;
 static COLORREF g_color_zebra_odd;
 static COLORREF g_color_zebra_even;
 
@@ -111,7 +114,8 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 	folder_flags = ctx->folders.flags[folder_idx];
 
 	ListView_DeleteAllItems(hwndList);
-	SetWindowTextW(hwndReading, L"");
+	SetWindowTextW(hwndReading, rp_nomsg);
+	g_reading_pane_state = 2;
 
 	memset(&lvcCol, 0, sizeof(lvcCol));
 	lvcCol.mask = LVCF_TEXT;
@@ -414,14 +418,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			/* Assign theme colors to UI */
 			g_color_text         = TO_COLORREF(g_mail_ctx.theme.text);
 			g_color_error_bg     = TO_COLORREF(g_mail_ctx.theme.error_bg);
-			g_color_error_bg_hi  = TO_COLORREF(g_mail_ctx.theme.error_bg_hi);
 			g_color_error_hi     = TO_COLORREF(g_mail_ctx.theme.error_hi);
 			g_color_error_text   = TO_COLORREF(g_mail_ctx.theme.error_text);
 			g_color_inactive_sel = TO_COLORREF(g_mail_ctx.theme.inactive_sel);
+			g_color_nomsg_bg     = TO_COLORREF(g_mail_ctx.theme.nomsg_bg);
 			g_color_zebra_odd    = TO_COLORREF(g_mail_ctx.theme.zebra_odd);
 			g_color_zebra_even   = TO_COLORREF(g_mail_ctx.theme.zebra_even);
 
 			hbrErrorBg = CreateSolidBrush(g_color_error_bg);
+			hbrNoMsgBg = CreateSolidBrush(g_color_nomsg_bg);
 
 			store_init(&g_mail_ctx);
 			tree_view_refresh(hwndFolderTree, &g_mail_ctx);
@@ -437,9 +442,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		/* End of WM_CREATE */
 
 		case WM_CTLCOLORSTATIC:
-			if ((HWND)lParam == hwndReadingPane && g_reading_pane_has_error) {
-				SetBkColor((HDC)wParam, g_color_error_bg_hi);
-				return (INT_PTR)hbrErrorBg;
+			if ((HWND)lParam == hwndReadingPane && g_reading_pane_state) {
+				if (g_reading_pane_state == 1) {
+					SetBkColor((HDC)wParam, g_color_error_bg);
+					return (INT_PTR)hbrErrorBg;
+				}
+				if (g_reading_pane_state == 2) SetBkColor((HDC)wParam, g_color_nomsg_bg);
+				return (INT_PTR)hbrNoMsgBg;
 			}
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		/* End of WM_CTLCOLORSTATIC */
@@ -536,18 +545,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 							size_t eml_size = 0;
 							if (store_fetch_message(item->id, &eml_data, &eml_size) == 0 && eml_data) {
 								wchar_t *w_eml = utf8_to_wide_dup(eml_data);
-								g_reading_pane_has_error = 0;
+								g_reading_pane_state = 0;
 								SetWindowTextW(hwndReadingPane, w_eml ? w_eml : L"");
 								free(w_eml);
 								store_free_message(eml_data);
 							} else {
-								g_reading_pane_has_error = 1;
+								g_reading_pane_state = 1;
 								SetWindowTextW(hwndReadingPane, L"\r\n  <error: can't load message content>\r\n");
 							}
 						}
 					} else if ((pnmv->uChanged & LVIF_STATE) && !(pnmv->uNewState & LVIS_SELECTED) && (pnmv->uOldState & LVIS_SELECTED)) {
-						g_reading_pane_has_error = 0;
-						SetWindowTextW(hwndReadingPane, L"");
+						g_reading_pane_state = 2;
+						SetWindowTextW(hwndReadingPane, rp_nomsg);
 						InvalidateRect(hwndReadingPane, NULL, TRUE);
 					}
 					return 0;
@@ -611,7 +620,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 							int is_selected = (ListView_GetItemState(hwndMessageList, pLVCD->nmcd.dwItemSpec, LVIS_SELECTED) != 0);
 							int is_inactive = (GetFocus() != hwndMessageList);
 
-							if (is_selected && g_reading_pane_has_error) {
+							if (is_selected && g_reading_pane_state) {
 								pLVCD->nmcd.uItemState &= ~(CDIS_SELECTED | CDIS_FOCUS);
 								pLVCD->clrTextBk = g_color_error_hi;
 								pLVCD->clrText = g_color_error_text;
@@ -703,6 +712,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		case WM_DESTROY:
 			if (hbrErrorBg) DeleteObject(hbrErrorBg);
+			if (hbrNoMsgBg) DeleteObject(hbrNoMsgBg);
 			if (g_ui_htree_items) {
 				free(g_ui_htree_items);
 				g_ui_htree_items = NULL;

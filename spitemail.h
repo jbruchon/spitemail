@@ -104,10 +104,10 @@ typedef struct ColorRGB {
 typedef struct ThemeConfig {
 	ColorRGB text;
 	ColorRGB error_bg;
-	ColorRGB error_bg_hi;
 	ColorRGB error_hi;
 	ColorRGB error_text;
 	ColorRGB inactive_sel;
+	ColorRGB nomsg_bg;
 	ColorRGB zebra_odd;
 	ColorRGB zebra_even;
 } ThemeConfig;

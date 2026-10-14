@@ -191,10 +191,10 @@ void load_app_configuration(MailContext *ctx)
 	/* Default platform-agnostic theme colors */
 	ctx->theme.text         = (ColorRGB){  0,   0,   0 };
 	ctx->theme.error_bg     = (ColorRGB){ 255, 192, 192 };
-	ctx->theme.error_bg_hi  = (ColorRGB){ 255, 224, 224 };
 	ctx->theme.error_hi     = (ColorRGB){ 255, 160, 160 };
 	ctx->theme.error_text   = (ColorRGB){  0,   0,   0 };
 	ctx->theme.inactive_sel = (ColorRGB){ 240, 240, 255 };
+	ctx->theme.nomsg_bg     = (ColorRGB){ 224, 224, 255 };
 	ctx->theme.zebra_odd    = (ColorRGB){ 240, 240, 240 };
 	ctx->theme.zebra_even   = (ColorRGB){ 255, 255, 255 };
 
@@ -258,10 +258,11 @@ void load_app_configuration(MailContext *ctx)
 				if (parse_hex_color_agnostic(val, &rgb) == 0) {
 					if (_stricmp(key, "TextColor") == 0) ctx->theme.text = rgb;
 					else if (_stricmp(key, "ErrorBgColor") == 0) ctx->theme.error_bg = rgb;
-					else if (_stricmp(key, "ErrorBgHighlightColor") == 0) ctx->theme.error_bg_hi = rgb;
 					else if (_stricmp(key, "ErrorHighlightColor") == 0) ctx->theme.error_hi = rgb;
 					else if (_stricmp(key, "ErrorTextColor") == 0) ctx->theme.error_text = rgb;
 					else if (_stricmp(key, "InactiveSelColor") == 0) ctx->theme.inactive_sel = rgb;
+					else if (_stricmp(key, "InactiveSelColor") == 0) ctx->theme.inactive_sel = rgb;
+					else if (_stricmp(key, "NoMsgBgColor") == 0) ctx->theme.nomsg_bg = rgb;
 					else if (_stricmp(key, "ZebraOddColor") == 0) ctx->theme.zebra_odd = rgb;
 					else if (_stricmp(key, "ZebraEvenColor") == 0) ctx->theme.zebra_even = rgb;
 				}
