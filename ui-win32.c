@@ -12,6 +12,9 @@ static HWND hwndReadingPane = NULL;
 static int g_reading_pane_has_error = 0;
 static HBRUSH hbrErrorBg = NULL;
 
+static HTREEITEM *g_ui_htree_items = NULL;
+static uint32_t g_ui_htree_capacity = 0;
+
 /* Toolbar button configuration */
 typedef struct ToolbarButtonSpec {
 	int id;
@@ -211,7 +214,10 @@ static HTREEITEM populate_folder_branch_w(HWND hwndTree, HTREEITEM hParent,
 	tvis.item.lParam = (LPARAM)(intptr_t)folder_idx;
 
 	hItem = TreeView_InsertItem(hwndTree, &tvis);
-	ctx->folders.htree_items[folder_idx] = hItem;
+
+	if (g_ui_htree_items && folder_idx < (int32_t)g_ui_htree_capacity) {
+		g_ui_htree_items[folder_idx] = hItem;
+	}
 
 	child_idx = ctx->folders.first_child_idx[folder_idx];
 	while (child_idx != INVALID_INDEX) {
@@ -232,6 +238,14 @@ void tree_view_refresh(HWND hwndTree, MailContext *ctx)
 	int32_t curr_f_idx;
 
 	TreeView_DeleteAllItems(hwndTree);
+
+	if (ctx->folders.capacity > g_ui_htree_capacity) {
+		HTREEITEM *new_items = (HTREEITEM *)realloc(g_ui_htree_items, ctx->folders.capacity * sizeof(HTREEITEM));
+		if (new_items) {
+			g_ui_htree_items = new_items;
+			g_ui_htree_capacity = ctx->folders.capacity;
+		}
+	}
 
 	if (ctx->accounts.count == 0) {
 		memset(&tvis_acc, 0, sizeof(tvis_acc));
@@ -364,8 +378,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			store_init(&g_mail_ctx);
 			tree_view_refresh(hwndFolderTree, &g_mail_ctx);
 
-			if (g_mail_ctx.accounts.count > 0) {
-				TreeView_SelectItem(hwndFolderTree, g_mail_ctx.folders.htree_items[0]);
+			if (g_mail_ctx.accounts.count > 0 && g_ui_htree_items) {
+				int32_t root_f_idx = g_mail_ctx.accounts.root_folder_idx[0];
+				if (root_f_idx != INVALID_INDEX) {
+					TreeView_SelectItem(hwndFolderTree, g_ui_htree_items[root_f_idx]);
+				}
 			}
 
 			return 0;
@@ -636,6 +653,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		case WM_DESTROY:
 			if (hbrErrorBg) DeleteObject(hbrErrorBg);
+			if (g_ui_htree_items) {
+				free(g_ui_htree_items);
+				g_ui_htree_items = NULL;
+				g_ui_htree_capacity = 0;
+			}
 			mail_context_free(&g_mail_ctx);
 			store_cleanup();
 			PostQuitMessage(0);

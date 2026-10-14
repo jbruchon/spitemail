@@ -80,7 +80,6 @@ typedef struct FolderTable {
 	int32_t   *parent_idx;
 	int32_t   *first_child_idx;
 	int32_t   *next_sibling_idx;
-	HTREEITEM *htree_items;
 	uint32_t   count;
 	uint32_t   capacity;
 } FolderTable;

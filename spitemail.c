@@ -69,7 +69,6 @@ void load_app_configuration(MailContext *ctx)
 	uint32_t folder_idx = 0;
 
 	memset(ctx, 0, sizeof(MailContext));
-
 	ctx->accounts.capacity = acc_capacity;
 	ctx->accounts.name_offsets = (uint32_t *)malloc(acc_capacity * sizeof(uint32_t));
 	ctx->accounts.server_offsets = (uint32_t *)malloc(acc_capacity * sizeof(uint32_t));
@@ -86,7 +85,6 @@ void load_app_configuration(MailContext *ctx)
 	ctx->folders.parent_idx = (int32_t *)malloc(fld_capacity * sizeof(int32_t));
 	ctx->folders.first_child_idx = (int32_t *)malloc(fld_capacity * sizeof(int32_t));
 	ctx->folders.next_sibling_idx = (int32_t *)malloc(fld_capacity * sizeof(int32_t));
-	ctx->folders.htree_items = (HTREEITEM *)malloc(fld_capacity * sizeof(HTREEITEM));
 
 	GetModuleFileNameW(NULL, config_path, MAX_PATH);
 	{
@@ -139,7 +137,6 @@ void load_app_configuration(MailContext *ctx)
 					ctx->folders.parent_idx = (int32_t *)realloc(ctx->folders.parent_idx, new_cap * sizeof(int32_t));
 					ctx->folders.first_child_idx = (int32_t *)realloc(ctx->folders.first_child_idx, new_cap * sizeof(uint32_t));
 					ctx->folders.next_sibling_idx = (int32_t *)realloc(ctx->folders.next_sibling_idx, new_cap * sizeof(uint32_t));
-					ctx->folders.htree_items = (HTREEITEM *)realloc(ctx->folders.htree_items, new_cap * sizeof(HTREEITEM));
 					ctx->folders.capacity = new_cap;
 				}
 
@@ -205,6 +202,5 @@ void mail_context_free(MailContext *ctx)
 	free(ctx->folders.parent_idx);
 	free(ctx->folders.first_child_idx);
 	free(ctx->folders.next_sibling_idx);
-	free(ctx->folders.htree_items);
 	memset(ctx, 0, sizeof(MailContext));
 }
