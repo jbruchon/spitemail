@@ -45,6 +45,24 @@ static COLORREF g_color_inactive_sel;
 static COLORREF g_color_zebra_odd;
 static COLORREF g_color_zebra_even;
 
+/* Convert a UTF-8 core string to a Win32 UTF-16 wide string */
+static wchar_t *utf8_to_wide_dup(const char *utf8_str)
+{
+	int wlen;
+	wchar_t *wbuf;
+
+	if (!utf8_str) return NULL;
+
+	wlen = MultiByteToWideChar(CP_UTF8, 0, utf8_str, -1, NULL, 0);
+	if (wlen <= 0) return NULL;
+
+	wbuf = (wchar_t *)malloc(wlen * sizeof(wchar_t));
+	if (!wbuf) return NULL;
+
+	MultiByteToWideChar(CP_UTF8, 0, utf8_str, -1, wbuf, wlen);
+	return wbuf;
+}
+
 /* For sorting the message list */
 static int CALLBACK MessageListCompare(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
 {
@@ -59,10 +77,10 @@ static int CALLBACK MessageListCompare(LPARAM lParam1, LPARAM lParam2, LPARAM lP
 
 	switch (col) {
 		case 0:
-			cmp = _wcsicmp(item1->subject, item2->subject);
+			cmp = _stricmp(item1->subject, item2->subject);
 			break;
 		case 1:
-			cmp = _wcsicmp(item1->participant, item2->participant);
+			cmp = _stricmp(item1->participant, item2->participant);
 			break;
 		case 2:
 			if (item1->timestamp < item2->timestamp) cmp = -1;
@@ -106,21 +124,29 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 			if (!mItem) continue;
 
 			mItem->id = headers[i].id;
-			wcscpy_s(mItem->subject, 128, headers[i].subject);
-			wcscpy_s(mItem->participant, 128, headers[i].participant);
-			wcscpy_s(mItem->date_str, 32, headers[i].date_str);
+			strcpy_s(mItem->subject, sizeof(mItem->subject), headers[i].subject);
+			strcpy_s(mItem->participant, sizeof(mItem->participant), headers[i].participant);
+			strcpy_s(mItem->date_str, sizeof(mItem->date_str), headers[i].date_str);
 			mItem->timestamp = headers[i].timestamp;
+
+			wchar_t *w_subject = utf8_to_wide_dup(mItem->subject);
+			wchar_t *w_participant = utf8_to_wide_dup(mItem->participant);
+			wchar_t *w_date = utf8_to_wide_dup(mItem->date_str);
 
 			memset(&lvi, 0, sizeof(lvi));
 			lvi.mask = LVIF_TEXT | LVIF_PARAM;
 			lvi.iItem = (int)i;
 			lvi.iSubItem = 0;
-			lvi.pszText = mItem->subject;
+			lvi.pszText = w_subject;
 			lvi.lParam = (LPARAM)mItem;
 
 			row = ListView_InsertItem(hwndList, &lvi);
-			ListView_SetItemText(hwndList, row, 1, mItem->participant);
-			ListView_SetItemText(hwndList, row, 2, mItem->date_str);
+			ListView_SetItemText(hwndList, row, 1, w_participant);
+			ListView_SetItemText(hwndList, row, 2, w_date);
+
+			free(w_subject);
+			free(w_participant);
+			free(w_date);
 		}
 
 		store_free_folder_messages(headers);
@@ -197,6 +223,7 @@ static void delete_selected_message(HWND hwndTree, HWND hwndList, HWND hwndReadi
 static HTREEITEM populate_folder_branch_w(HWND hwndTree, HTREEITEM hParent, 
                                           MailContext *ctx, int32_t folder_idx) 
 {
+	char *name_str;
 	wchar_t *wname;
 	TVINSERTSTRUCTW tvis;
 	HTREEITEM hItem;
@@ -204,7 +231,8 @@ static HTREEITEM populate_folder_branch_w(HWND hwndTree, HTREEITEM hParent,
 
 	if (folder_idx == INVALID_INDEX) return NULL;
 
-	wname = pool_get_wstr(&ctx->pool, ctx->folders.name_offsets[folder_idx]);
+	name_str = pool_get_str(&ctx->pool, ctx->folders.name_offsets[folder_idx]);
+	wname = utf8_to_wide_dup(name_str);
 
 	memset(&tvis, 0, sizeof(tvis));
 	tvis.hParent = hParent;
@@ -214,6 +242,7 @@ static HTREEITEM populate_folder_branch_w(HWND hwndTree, HTREEITEM hParent,
 	tvis.item.lParam = (LPARAM)(intptr_t)folder_idx;
 
 	hItem = TreeView_InsertItem(hwndTree, &tvis);
+	free(wname);
 
 	if (g_ui_htree_items && folder_idx < (int32_t)g_ui_htree_capacity) {
 		g_ui_htree_items[folder_idx] = hItem;
@@ -232,7 +261,8 @@ static HTREEITEM populate_folder_branch_w(HWND hwndTree, HTREEITEM hParent,
 void tree_view_refresh(HWND hwndTree, MailContext *ctx) 
 {
 	uint32_t i;
-	wchar_t *acc_name;
+	char *acc_name_str;
+	wchar_t *w_acc_name;
 	TVINSERTSTRUCTW tvis_acc;
 	HTREEITEM hAccItem;
 	int32_t curr_f_idx;
@@ -260,16 +290,18 @@ void tree_view_refresh(HWND hwndTree, MailContext *ctx)
 	}
 
 	for (i = 0; i < ctx->accounts.count; i++) {
-		acc_name = pool_get_wstr(&ctx->pool, ctx->accounts.name_offsets[i]);
+		acc_name_str = pool_get_str(&ctx->pool, ctx->accounts.name_offsets[i]);
+		w_acc_name = utf8_to_wide_dup(acc_name_str);
 
 		memset(&tvis_acc, 0, sizeof(tvis_acc));
 		tvis_acc.hParent = TVI_ROOT;
 		tvis_acc.hInsertAfter = TVI_LAST;
 		tvis_acc.item.mask = TVIF_TEXT | TVIF_PARAM;
-		tvis_acc.item.pszText = (LPWSTR)acc_name;
+		tvis_acc.item.pszText = (LPWSTR)w_acc_name;
 		tvis_acc.item.lParam = (LPARAM)(intptr_t)-1;
 
 		hAccItem = TreeView_InsertItem(hwndTree, &tvis_acc);
+		free(w_acc_name);
 
 		curr_f_idx = ctx->accounts.root_folder_idx[i];
 		while (curr_f_idx != INVALID_INDEX) {
@@ -500,11 +532,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					if ((pnmv->uChanged & LVIF_STATE) && (pnmv->uNewState & LVIS_SELECTED) && !(pnmv->uOldState & LVIS_SELECTED)) {
 						MessageListItem *item = (MessageListItem *)pnmv->lParam;
 						if (item) {
-							wchar_t *eml_data = NULL;
+							char *eml_data = NULL;
 							size_t eml_size = 0;
 							if (store_fetch_message(item->id, &eml_data, &eml_size) == 0 && eml_data) {
+								wchar_t *w_eml = utf8_to_wide_dup(eml_data);
 								g_reading_pane_has_error = 0;
-								SetWindowTextW(hwndReadingPane, eml_data);
+								SetWindowTextW(hwndReadingPane, w_eml ? w_eml : L"");
+								free(w_eml);
 								store_free_message(eml_data);
 							} else {
 								g_reading_pane_has_error = 1;
@@ -625,8 +659,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				HDC hdc = pDI->hDC;
 				int state = pDI->itemState;
 
-				rc = pDI->rcItem;
 				/* Draw standard button background/frame based on state */
+				rc = pDI->rcItem;
 				DrawFrameControl(hdc, &rc, DFC_BUTTON, (state & ODS_SELECTED) ? DFCS_BUTTONPUSH | DFCS_PUSHED : DFCS_BUTTONPUSH);
 
 				/* Set up background transparency for text */

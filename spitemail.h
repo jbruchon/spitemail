@@ -60,7 +60,7 @@ extern "C" {
 
 /* Single large arena for account/folder/path string storage */
 typedef struct StringPool {
-	wchar_t *data;
+	char *data;
 	uint32_t used;
 	uint32_t capacity;
 } StringPool;
@@ -120,9 +120,9 @@ typedef struct MailContext {
 } MailContext;
 
 typedef struct {
-    wchar_t subject[128];
-    wchar_t sender[128];
-    uint32_t timestamp; /* Numeric for fast sorting */
+    char     subject[128];
+    char     sender[128];
+    uint32_t timestamp;
 } MailItem;
 
 extern MailContext g_mail_ctx;
@@ -150,24 +150,20 @@ extern MailContext g_mail_ctx;
 #define SM_WINDOW_HEIGHT 480
 #define SM_MIN_WINDOW_WIDTH 640
 #define SM_MIN_WINDOW_HEIGHT 300
-/* The next 3 numbers should add up to SM_WINDOW_WIDTH */
 #define SM_FOLDER_PANE_WIDTH 100
 #define SM_MESSAGE_PANE_WIDTH 380
 #define SM_READING_PANE_WIDTH 320
-/* The next 3 numbers should add up to SM_MIN_WINDOW_WIDTH */
 #define SM_MIN_FOLDER_PANE_WIDTH 120
 #define SM_MIN_MESSAGE_PANE_WIDTH 300
 #define SM_MIN_READING_PANE_WIDTH 240
-/* Message pane default widths - must add up to SM_MESSAGE_PANE_WIDTH - 10 */
 #define SM_MP_SUBJECT_WIDTH 170
 #define SM_MP_FROMTO_WIDTH 100
 #define SM_MP_DATE_WIDTH 100
 
 
-/*** Function prototypes ***/
-uint32_t pool_add_utf8(StringPool *pool, const char *utf8_str);
-uint32_t pool_add_wstr(StringPool *pool, const wchar_t *w_str);
-wchar_t *pool_get_wstr(const StringPool *pool, uint32_t offset);
+/*** Function prototypes (Defined AFTER MailContext) ***/
+uint32_t pool_add_str(StringPool *pool, const char *str);
+char *pool_get_str(const StringPool *pool, uint32_t offset);
 void load_app_configuration(MailContext *ctx);
 void mail_context_init(MailContext *ctx);
 void mail_context_free(MailContext *ctx);

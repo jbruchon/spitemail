@@ -1,7 +1,6 @@
 /* Spite Mail data store - RAM-only/temporary dummy data store
  * license: GPLv2; (C) 2026 Jody Bruchon <jody@jodybruchon.com> */
 
-/* Spite Mail RAM storage backend driver */
 #include <stdlib.h>
 #include <string.h>
 #include "spitemail.h"
@@ -14,12 +13,12 @@ typedef struct RamRecord {
 	int32_t  folder_idx;
 	uint32_t mbox_offset;
 	uint32_t mbox_length;
-	wchar_t  subject[128];
-	wchar_t  from_addr[128];
-	wchar_t  to_addr[128];
-	wchar_t  date_str[32];
+	char     subject[128];
+	char     from_addr[128];
+	char     to_addr[128];
+	char     date_str[32];
 	uint32_t timestamp;
-	wchar_t  eml_blob[2048];  /* Combined EML format: headers + body */
+	char     eml_blob[2048];  /* Combined UTF-8 EML format: headers + body */
 } RamRecord;
 
 
@@ -31,63 +30,63 @@ static uint64_t next_msg_id = 5000;
 static const RamRecord initial_ram_db[] = {
 	{
 		1001, 0, 0, 450,
-		L"Welcome to Spite Mail (RAM Store)",
-		L"Jody Bruchon <jody@jodybruchon.com>",
-		L"root@spitemail.com",
-		L"Tue, 6 Oct 2026", 20261006,
-		L"From: Jody Bruchon <jody@jodybruchon.com>\r\n"
-		L"To: root@spitemail.com\r\n"
-		L"Subject: Welcome to Spite Mail\r\n"
-		L"Date: Tue, 6 Oct 2026\r\n\r\n"
-		L"Spite Mail is designed for speed, low overhead, and pure native Win32 controls."
+		"Welcome to Spite Mail (RAM Store)",
+		"Jody Bruchon <jody@jodybruchon.com>",
+		"root@spitemail.com",
+		"Tue, 6 Oct 2026", 20261006,
+		"From: Jody Bruchon <jody@jodybruchon.com>\r\n"
+		"To: root@spitemail.com\r\n"
+		"Subject: Welcome to Spite Mail\r\n"
+		"Date: Tue, 6 Oct 2026\r\n\r\n"
+		"Spite Mail is designed for speed, low overhead, and pure native Win32 controls."
 	},
 	{
 		1002, 0, 451, 320,
-		L"Bend It Like Bloomberg: Micklethwait's Epic Soccer Mishap",
-		L"Heat Street Staff <news@heatstreet.com>",
-		L"root@spitemail.com",
-		L"Fri, 29 Apr 2016", 20160429,
-		L"From: Heat Street Staff <news@heatstreet.com>\r\n"
-		L"To: root@spitemail.com\r\n"
-		L"Subject: Bend It Like Bloomberg\r\n"
-		L"Date: Fri, 29 Apr 2016\r\n\r\n"
-		L"Archived news piece regarding John Micklethwait's soccer story."
+		"Bend It Like Bloomberg: Micklethwait's Epic Soccer Mishap",
+		"Heat Street Staff <news@heatstreet.com>",
+		"root@spitemail.com",
+		"Fri, 29 Apr 2016", 20160429,
+		"From: Heat Street Staff <news@heatstreet.com>\r\n"
+		"To: root@spitemail.com\r\n"
+		"Subject: Bend It Like Bloomberg\r\n"
+		"Date: Fri, 29 Apr 2016\r\n\r\n"
+		"Archived news piece regarding John Micklethwait's soccer story."
 	},
 	{
 		2001, 1, 772, 280,
-		L"Re: Bug report on jdupes memory usage",
-		L"root@spitemail.com",
-		L"Bug Reporter <reporter@example.com>",
-		L"Mon, 5 Oct 2026", 20261005,
-		L"From: root@spitemail.com\r\n"
-		L"To: Bug Reporter <reporter@example.com>\r\n"
-		L"Subject: Re: Bug report on jdupes memory usage\r\n"
-		L"Date: Mon, 5 Oct 2026\r\n\r\n"
-		L"Thanks for the report. Memory layout optimizations are being applied."
+		"Re: Bug report on jdupes memory usage",
+		"root@spitemail.com",
+		"Bug Reporter <reporter@example.com>",
+		"Mon, 5 Oct 2026", 20261005,
+		"From: root@spitemail.com\r\n"
+		"To: Bug Reporter <reporter@example.com>\r\n"
+		"Subject: Re: Bug report on jdupes memory usage\r\n"
+		"Date: Mon, 5 Oct 2026\r\n\r\n"
+		"Thanks for the report. Memory layout optimizations are being applied."
 	},
 	{
 		3001, 2, 1052, 260,
-		L"Project Quark v0.1 released",
-		L"Jody Bruchon <jody@gazingcat.com>",
-		L"jody@gazingcat.com",
-		L"Sun, 11 Oct 2026", 20261011,
-		L"From: Jody Bruchon <jody@gazingcat.com>\r\n"
-		L"To: jody@gazingcat.com\r\n"
-		L"Subject: Project Quark v0.1 released\r\n"
-		L"Date: Sun, 11 Oct 2026\r\n\r\n"
-		L"Quark v0.1 source code and initial array iterators are now live."
+		"Project Quark v0.1 released",
+		"Jody Bruchon <jody@gazingcat.com>",
+		"jody@gazingcat.com",
+		"Sun, 11 Oct 2026", 20261011,
+		"From: Jody Bruchon <jody@gazingcat.com>\r\n"
+		"To: jody@gazingcat.com\r\n"
+		"Subject: Project Quark v0.1 released\r\n"
+		"Date: Sun, 11 Oct 2026\r\n\r\n"
+		"Quark v0.1 source code and initial array iterators are now live."
 	},
 	{
 		4001, 3, 1312, 290,
-		L"Inquiry regarding CRUX Linux package update",
-		L"jody@gazingcat.com",
-		L"CRUX Maintainer <maintainer@crux.nu>, Dev Team <dev@crux.nu>",
-		L"Sat, 10 Oct 2026", 20261010,
-		L"From: jody@gazingcat.com\r\n"
-		L"To: CRUX Maintainer <maintainer@crux.nu>, Dev Team <dev@crux.nu>\r\n"
-		L"Subject: Inquiry regarding CRUX Linux package update\r\n"
-		L"Date: Sat, 10 Oct 2026\r\n\r\n"
-		L"Checking on the status of the latest toolchain updates for port packaging."
+		"Inquiry regarding CRUX Linux package update",
+		"jody@gazingcat.com",
+		"CRUX Maintainer <maintainer@crux.nu>, Dev Team <dev@crux.nu>",
+		"Sat, 10 Oct 2026", 20261010,
+		"From: jody@gazingcat.com\r\n"
+		"To: CRUX Maintainer <maintainer@crux.nu>, Dev Team <dev@crux.nu>\r\n"
+		"Subject: Inquiry regarding CRUX Linux package update\r\n"
+		"Date: Sat, 10 Oct 2026\r\n\r\n"
+		"Checking on the status of the latest toolchain updates for port packaging."
 	}
 };
 
@@ -144,7 +143,6 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 
 	is_sent_folder = (folder_idx == 1 || folder_idx == 3);
 
-	/* Pass 1: Count matching records */
 	for (i = 0; i < ram_db_count; i++) {
 		if (ram_db[i].folder_idx == folder_idx) {
 			if (start_id == 0 || ram_db[i].id >= start_id) {
@@ -154,7 +152,6 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 		}
 	}
 
-	/* XXX: Add extra slot for test error item in the Inbox */
 	if (folder_idx == 0 && (start_id == 0 || start_id <= 9999)) {
 		count++;
 	}
@@ -168,7 +165,6 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 	headers = (StoreMsgHeader *)malloc(count * sizeof(StoreMsgHeader));
 	if (!headers) return -1;
 
-	/* Pass 2: Populate headers */
 	{
 		uint32_t idx = 0;
 
@@ -177,9 +173,9 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 				headers[idx].id = 9999;
 				headers[idx].mbox_offset = 9999;
 				headers[idx].mbox_length = 0;
-				wcscpy_s(headers[idx].subject, 128, L"[TEST] Trigger Error State");
-				wcscpy_s(headers[idx].participant, 128, L"Error Tester");
-				wcscpy_s(headers[idx].date_str, 32, L"Today");
+				strcpy_s(headers[idx].subject, sizeof(headers[idx].subject), "[TEST] Trigger Error State");
+				strcpy_s(headers[idx].participant, sizeof(headers[idx].participant), "Error Tester");
+				strcpy_s(headers[idx].date_str, sizeof(headers[idx].date_str), "Today");
 				headers[idx].timestamp = 20261013;
 				idx++;
 			}
@@ -191,15 +187,15 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 					headers[idx].id = ram_db[i].id;
 					headers[idx].mbox_offset = ram_db[i].mbox_offset;
 					headers[idx].mbox_length = ram_db[i].mbox_length;
-					wcscpy_s(headers[idx].subject, 128, ram_db[i].subject);
+					strcpy_s(headers[idx].subject, sizeof(headers[idx].subject), ram_db[i].subject);
 
 					if (is_sent_folder) {
-						wcscpy_s(headers[idx].participant, 128, ram_db[i].to_addr);
+						strcpy_s(headers[idx].participant, sizeof(headers[idx].participant), ram_db[i].to_addr);
 					} else {
-						wcscpy_s(headers[idx].participant, 128, ram_db[i].from_addr);
+						strcpy_s(headers[idx].participant, sizeof(headers[idx].participant), ram_db[i].from_addr);
 					}
 
-					wcscpy_s(headers[idx].date_str, 32, ram_db[i].date_str);
+					strcpy_s(headers[idx].date_str, sizeof(headers[idx].date_str), ram_db[i].date_str);
 					headers[idx].timestamp = ram_db[i].timestamp;
 					idx++;
 
@@ -215,10 +211,10 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 }
 
 
-int store_ram_fetch_message(uint64_t msg_id, wchar_t **out_eml_data, size_t *out_size)
+int store_ram_fetch_message(uint64_t msg_id, char **out_eml_data, size_t *out_size)
 {
-	const wchar_t *src = NULL;
-	wchar_t *eml_copy = NULL;
+	const char *src = NULL;
+	char *eml_copy = NULL;
 	size_t len;
 	size_t i;
 
@@ -243,13 +239,13 @@ int store_ram_fetch_message(uint64_t msg_id, wchar_t **out_eml_data, size_t *out
 		return -1;
 	}
 
-	len = wcslen(src) + 1;
-	eml_copy = (wchar_t *)malloc(len * sizeof(wchar_t));
+	len = strlen(src) + 1;
+	eml_copy = (char *)malloc(len);
 	if (!eml_copy) return -1;
 
-	wcscpy_s(eml_copy, len, src);
+	strcpy_s(eml_copy, len, src);
 	*out_eml_data = eml_copy;
-	if (out_size) *out_size = len * sizeof(wchar_t);
+	if (out_size) *out_size = len;
 	return 0;
 }
 
@@ -260,7 +256,7 @@ void store_ram_free_message(void *msg_data)
 }
 
 
-int store_ram_add_message(int32_t folder_idx, const wchar_t *subject, const wchar_t *participant, const wchar_t *date_str, uint32_t timestamp, const wchar_t *eml_data, uint64_t *out_msg_id)
+int store_ram_add_message(int32_t folder_idx, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id)
 {
 	RamRecord *new_db;
 	int is_sent_folder;
@@ -282,23 +278,23 @@ int store_ram_add_message(int32_t folder_idx, const wchar_t *subject, const wcha
 	rec->id = next_msg_id++;
 	rec->folder_idx = folder_idx;
 	rec->timestamp = timestamp;
-	wcscpy_s(rec->subject, 128, subject);
+	strcpy_s(rec->subject, sizeof(rec->subject), subject);
 	if (date_str) {
-		wcscpy_s(rec->date_str, 32, date_str);
+		strcpy_s(rec->date_str, sizeof(rec->date_str), date_str);
 	} else {
-		wcscpy_s(rec->date_str, 32, L"Today");
+		strcpy_s(rec->date_str, sizeof(rec->date_str), "Today");
 	}
 
 	if (is_sent_folder) {
-		wcscpy_s(rec->to_addr, 128, participant ? participant : L"recipient@spitemail.com");
-		wcscpy_s(rec->from_addr, 128, L"root@spitemail.com");
+		strcpy_s(rec->to_addr, sizeof(rec->to_addr), participant ? participant : "recipient@spitemail.com");
+		strcpy_s(rec->from_addr, sizeof(rec->from_addr), "root@spitemail.com");
 	} else {
-		wcscpy_s(rec->from_addr, 128, participant ? participant : L"sender@spitemail.com");
-		wcscpy_s(rec->to_addr, 128, L"root@spitemail.com");
+		strcpy_s(rec->from_addr, sizeof(rec->from_addr), participant ? participant : "sender@spitemail.com");
+		strcpy_s(rec->to_addr, sizeof(rec->to_addr), "root@spitemail.com");
 	}
 
-	wcscpy_s(rec->eml_blob, 2048, eml_data);
-	rec->mbox_length = (uint32_t)(wcslen(eml_data) * sizeof(wchar_t));
+	strcpy_s(rec->eml_blob, sizeof(rec->eml_blob), eml_data);
+	rec->mbox_length = (uint32_t)strlen(eml_data);
 
 	ram_db_count++;
 
@@ -313,7 +309,6 @@ int store_ram_delete_message(uint64_t msg_id)
 
 	for (i = 0; i < ram_db_count; i++) {
 		if (ram_db[i].id == msg_id) {
-			/* Shift remaining records down */
 			for (j = i; j < ram_db_count - 1; j++) {
 				ram_db[j] = ram_db[j + 1];
 			}
@@ -321,5 +316,5 @@ int store_ram_delete_message(uint64_t msg_id)
 			return 0;
 		}
 	}
-	return -1; /* Not found */
+	return -1;
 }

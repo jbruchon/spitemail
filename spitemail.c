@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <wchar.h>
 #include "version.h"
 #include "spitemail.h"
 #include "datastore.h"
@@ -12,16 +11,16 @@
 MailContext g_mail_ctx;  /* global application mail context instance */
 
 
-uint32_t pool_add_wstr(StringPool *pool, const wchar_t *w_str)
+uint32_t pool_add_str(StringPool *pool, const char *str)
 {
 	uint32_t req_chars;
 	uint32_t offset;
 	uint32_t new_cap;
-	wchar_t *new_data;
+	char *new_data;
 
-	if (!w_str || *w_str == L'\0') return 0;
+	if (!str || *str == '\0') return 0;
 
-	req_chars = (uint32_t)wcslen(w_str) + 1;
+	req_chars = (uint32_t)strlen(str) + 1;
 
 	if (pool->used + req_chars > pool->capacity) {
 		new_cap = pool->capacity ? pool->capacity * 2 : 4096;
@@ -29,7 +28,7 @@ uint32_t pool_add_wstr(StringPool *pool, const wchar_t *w_str)
 			new_cap *= 2;
 		}
 
-		new_data = (wchar_t *)realloc(pool->data, new_cap * sizeof(wchar_t));
+		new_data = (char *)realloc(pool->data, new_cap);
 		if (!new_data) return 0;
 
 		pool->data = new_data;
@@ -37,40 +36,40 @@ uint32_t pool_add_wstr(StringPool *pool, const wchar_t *w_str)
 	}
 
 	offset = pool->used;
-	wcscpy_s(pool->data + offset, pool->capacity - offset, w_str);
+	strcpy_s(pool->data + offset, pool->capacity - offset, str);
 	pool->used += req_chars;
 
 	return offset;
 }
 
 
-wchar_t *pool_get_wstr(const StringPool *pool, uint32_t offset)
+char *pool_get_str(const StringPool *pool, uint32_t offset)
 {
 	return pool->data + offset;
 }
 
 
-static void trim_whitespace(wchar_t *str)
+static void trim_whitespace(char *str)
 {
-	wchar_t *end;
-	while (*str == L' ' || *str == L'\t' || *str == L'\r' || *str == L'\n') str++;
-	if (*str == L'\0') return;
-	end = str + wcslen(str) - 1;
-	while (end > str && (*end == L' ' || *end == L'\t' || *end == L'\r' || *end == L'\n')) {
-		*end = L'\0';
+	char *end;
+	while (*str == ' ' || *str == '\t' || *str == '\r' || *str == '\n') str++;
+	if (*str == '\0') return;
+	end = str + strlen(str) - 1;
+	while (end > str && (*end == ' ' || *end == '\t' || *end == '\r' || *end == '\n')) {
+		*end = '\0';
 		end--;
 	}
 }
 
 
-static int parse_hex_color_agnostic(const wchar_t *hex_str, ColorRGB *out_color)
+static int parse_hex_color_agnostic(const char *hex_str, ColorRGB *out_color)
 {
 	unsigned int r = 0, g = 0, b = 0;
 	if (!hex_str || !out_color) return -1;
-	if (*hex_str == L'#') hex_str++;
-	if (wcslen(hex_str) != 6) return -1;
+	if (*hex_str == '#') hex_str++;
+	if (strlen(hex_str) != 6) return -1;
 
-	if (swscanf(hex_str, L"%2x%2x%2x", &r, &g, &b) == 3) {
+	if (sscanf(hex_str, "%2x%2x%2x", &r, &g, &b) == 3) {
 		out_color->r = (uint8_t)r;
 		out_color->g = (uint8_t)g;
 		out_color->b = (uint8_t)b;
@@ -80,8 +79,8 @@ static int parse_hex_color_agnostic(const wchar_t *hex_str, ColorRGB *out_color)
 }
 
 
-static void add_parsed_account(MailContext *ctx, const wchar_t *name, const wchar_t *server,
-                               const wchar_t *username, const wchar_t *store, int port,
+static void add_parsed_account(MailContext *ctx, const char *name, const char *server,
+                               const char *username, const char *store, int port,
                                uint32_t *acc_idx, uint32_t *folder_idx)
 {
 	uint32_t a_idx = *acc_idx;
@@ -113,11 +112,11 @@ static void add_parsed_account(MailContext *ctx, const wchar_t *name, const wcha
 		ctx->folders.capacity = new_cap;
 	}
 
-	uint32_t name_off = pool_add_wstr(&ctx->pool, name);
-	uint32_t serv_off = pool_add_wstr(&ctx->pool, server);
-	uint32_t user_off = pool_add_wstr(&ctx->pool, username);
-	uint32_t inbox_off = pool_add_wstr(&ctx->pool, L"Inbox");
-	uint32_t sent_off = pool_add_wstr(&ctx->pool, L"Sent");
+	uint32_t name_off = pool_add_str(&ctx->pool, name);
+	uint32_t serv_off = pool_add_str(&ctx->pool, server);
+	uint32_t user_off = pool_add_str(&ctx->pool, username);
+	uint32_t inbox_off = pool_add_str(&ctx->pool, "Inbox");
+	uint32_t sent_off = pool_add_str(&ctx->pool, "Sent");
 
 	int32_t inbox_idx = (int32_t)f_idx++;
 	int32_t sent_idx = (int32_t)f_idx++;
@@ -127,7 +126,7 @@ static void add_parsed_account(MailContext *ctx, const wchar_t *name, const wcha
 	ctx->accounts.username_offsets[a_idx] = user_off;
 	ctx->accounts.ports[a_idx] = (uint32_t)port;
 	ctx->accounts.root_folder_idx[a_idx] = inbox_idx;
-	ctx->accounts.store_flags[a_idx] = (_wcsicmp(store, L"ram") == 0) ? 1 : 1;
+	ctx->accounts.store_flags[a_idx] = (_stricmp(store, "ram") == 0) ? 1 : 1;
 	(*acc_idx)++;
 
 	ctx->folders.name_offsets[inbox_idx] = inbox_off;
@@ -151,16 +150,17 @@ static void add_parsed_account(MailContext *ctx, const wchar_t *name, const wcha
 	*folder_idx = f_idx;
 }
 
+
 void load_app_configuration(MailContext *ctx)
 {
 	FILE *fp = NULL;
-	wchar_t line[512];
-	wchar_t current_section[128] = L"";
+	char line[512];
+	char current_section[128] = "";
 
-	wchar_t acc_name[128] = L"user@spitemail.com";
-	wchar_t acc_server[128] = L"imap.spitemail.com";
-	wchar_t acc_user[128] = L"user@spitemail.com";
-	wchar_t acc_store[32] = L"ram";
+	char acc_name[128] = "user@spitemail.com";
+	char acc_server[128] = "imap.spitemail.com";
+	char acc_user[128] = "user@spitemail.com";
+	char acc_store[32] = "ram";
 	int acc_port = 993;
 	int has_active_account = 0;
 
@@ -202,68 +202,68 @@ void load_app_configuration(MailContext *ctx)
 	if (!fp) fp = fopen("./config/spitemail.ini", "r");
 
 	if (!fp) {
-		add_parsed_account(ctx, L"Default Account", L"localhost", L"default", L"ram", 993, &acc_idx, &folder_idx);
+		add_parsed_account(ctx, "Default Account", "localhost", "default", "ram", 993, &acc_idx, &folder_idx);
 		ctx->accounts.count = acc_idx;
 		return;
 	}
 
-	while (fgetws(line, sizeof(line) / sizeof(wchar_t), fp) != NULL) {
-		wchar_t *p = line;
+	while (fgets(line, sizeof(line), fp) != NULL) {
+		char *p = line;
 		trim_whitespace(p);
 
-		if (*p == L'\0' || *p == L';' || *p == L'#') continue;
+		if (*p == '\0' || *p == ';' || *p == '#') continue;
 
-		if (*p == L'[') {
+		if (*p == '[') {
 			if (has_active_account) {
 				add_parsed_account(ctx, acc_name, acc_server, acc_user, acc_store, acc_port, &acc_idx, &folder_idx);
 				has_active_account = 0;
 			}
 
-			wchar_t *end_bracket = wcschr(p, L']');
+			char *end_bracket = strchr(p, ']');
 			if (end_bracket) {
-				*end_bracket = L'\0';
-				wcscpy_s(current_section, 128, p + 1);
+				*end_bracket = '\0';
+				strcpy_s(current_section, sizeof(current_section), p + 1);
 				trim_whitespace(current_section);
 			}
 
-			if (_wcsnicmp(current_section, L"Account", 7) == 0) {
+			if (_stricmp(current_section, "Account") == 0 || _strnicmp(current_section, "Account ", 8) == 0) {
 				has_active_account = 1;
-				wcscpy_s(acc_name, 128, L"user@spitemail.com");
-				wcscpy_s(acc_server, 128, L"imap.spitemail.com");
-				wcscpy_s(acc_user, 128, L"user@spitemail.com");
-				wcscpy_s(acc_store, 32, L"ram");
+				strcpy_s(acc_name, sizeof(acc_name), "user@spitemail.com");
+				strcpy_s(acc_server, sizeof(acc_server), "imap.spitemail.com");
+				strcpy_s(acc_user, sizeof(acc_user), "user@spitemail.com");
+				strcpy_s(acc_store, sizeof(acc_store), "ram");
 				acc_port = 993;
 			}
 			continue;
 		}
 
-		wchar_t *eq = wcschr(p, L'=');
+		char *eq = strchr(p, '=');
 		if (eq) {
-			*eq = L'\0';
-			wchar_t *key = p;
-			wchar_t *val = eq + 1;
+			*eq = '\0';
+			char *key = p;
+			char *val = eq + 1;
 			trim_whitespace(key);
 			trim_whitespace(val);
 
-			if (_wcsnicmp(current_section, L"Account", 7) == 0) {
+			if (_stricmp(current_section, "Account") == 0 || _strnicmp(current_section, "Account ", 8) == 0) {
 				has_active_account = 1;
-				if (_wcsicmp(key, L"Name") == 0) wcscpy_s(acc_name, 128, val);
-				else if (_wcsicmp(key, L"Server") == 0) wcscpy_s(acc_server, 128, val);
-				else if (_wcsicmp(key, L"Username") == 0) wcscpy_s(acc_user, 128, val);
-				else if (_wcsicmp(key, L"Store") == 0) wcscpy_s(acc_store, 32, val);
-				else if (_wcsicmp(key, L"Port") == 0) acc_port = _wtoi(val);
+				if (_stricmp(key, "Name") == 0) strcpy_s(acc_name, sizeof(acc_name), val);
+				else if (_stricmp(key, "Server") == 0) strcpy_s(acc_server, sizeof(acc_server), val);
+				else if (_stricmp(key, "Username") == 0) strcpy_s(acc_user, sizeof(acc_user), val);
+				else if (_stricmp(key, "Store") == 0) strcpy_s(acc_store, sizeof(acc_store), val);
+				else if (_stricmp(key, "Port") == 0) acc_port = atoi(val);
 			}
-			else if (_wcsnicmp(current_section, L"Preferences", 11) == 0) {
+			else if (_stricmp(current_section, "Preferences") == 0) {
 				ColorRGB rgb;
 				if (parse_hex_color_agnostic(val, &rgb) == 0) {
-					if (_wcsicmp(key, L"TextColor") == 0) ctx->theme.text = rgb;
-					else if (_wcsicmp(key, L"ErrorBgColor") == 0) ctx->theme.error_bg = rgb;
-					else if (_wcsicmp(key, L"ErrorBgHighlightColor") == 0) ctx->theme.error_bg_hi = rgb;
-					else if (_wcsicmp(key, L"ErrorHighlightColor") == 0) ctx->theme.error_hi = rgb;
-					else if (_wcsicmp(key, L"ErrorTextColor") == 0) ctx->theme.error_text = rgb;
-					else if (_wcsicmp(key, L"InactiveSelColor") == 0) ctx->theme.inactive_sel = rgb;
-					else if (_wcsicmp(key, L"ZebraOddColor") == 0) ctx->theme.zebra_odd = rgb;
-					else if (_wcsicmp(key, L"ZebraEvenColor") == 0) ctx->theme.zebra_even = rgb;
+					if (_stricmp(key, "TextColor") == 0) ctx->theme.text = rgb;
+					else if (_stricmp(key, "ErrorBgColor") == 0) ctx->theme.error_bg = rgb;
+					else if (_stricmp(key, "ErrorBgHighlightColor") == 0) ctx->theme.error_bg_hi = rgb;
+					else if (_stricmp(key, "ErrorHighlightColor") == 0) ctx->theme.error_hi = rgb;
+					else if (_stricmp(key, "ErrorTextColor") == 0) ctx->theme.error_text = rgb;
+					else if (_stricmp(key, "InactiveSelColor") == 0) ctx->theme.inactive_sel = rgb;
+					else if (_stricmp(key, "ZebraOddColor") == 0) ctx->theme.zebra_odd = rgb;
+					else if (_stricmp(key, "ZebraEvenColor") == 0) ctx->theme.zebra_even = rgb;
 				}
 			}
 		}
