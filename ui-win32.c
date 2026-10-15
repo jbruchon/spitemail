@@ -145,7 +145,12 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 	int total_items;
 	StoreAccount *s_acc = NULL;
 	int32_t store_folder_id = folder_idx;
+	MessageListItem *mItem;
+	wchar_t *w_subject;
+	wchar_t *w_participant;
+	char date_buf[64];
 	wchar_t w_date[64];
+
 
 	if (folder_idx == INVALID_INDEX) return;
 	if (ctx->accounts.count > 0 && ctx->accounts.store_accounts) {
@@ -190,11 +195,6 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 
 	if (s_acc && store_fetch_folder_messages(s_acc, store_folder_id, &headers, &msg_count) == 0 && headers) {
 		for (i = 0; i < msg_count; i++) {
-			MessageListItem *mItem;
-			wchar_t *w_subject;
-			wchar_t *w_participant;
-			char date_buf[64];
-
 			mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
 			if (!mItem) continue;
 
@@ -205,8 +205,7 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 
 			w_subject = utf8_to_wide_dup(mItem->subject);
 			w_participant = utf8_to_wide_dup(mItem->participant);
-
-			store_format_timestamp(headers[i].timestamp, date_buf, sizeof(date_buf));
+			store_format_timestamp(mItem->timestamp, date_buf, sizeof(date_buf));
 			MultiByteToWideChar(CP_UTF8, 0, date_buf, -1, w_date, sizeof(w_date) / sizeof(wchar_t));
 
 			memset(&lvi, 0, sizeof(lvi));
@@ -229,15 +228,17 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 
 	/* Inject a synthetic invalid message ID item into the Inbox list for error testing */
 	if (folder_idx == ctx->accounts.root_folder_idx[0]) {
-		MessageListItem *mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
+		mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
 		if (mItem) {
 			mItem->id = 999999ULL;
 			strcpy_s(mItem->subject, sizeof(mItem->subject), "Totally not an invalid ID error test");
 			strcpy_s(mItem->participant, sizeof(mItem->participant), "Bug King <crasharoo@spitemail.com>");
 			mItem->timestamp = 1791244300ULL;
 
-			wchar_t *w_subject = utf8_to_wide_dup(mItem->subject);
-			wchar_t *w_participant = utf8_to_wide_dup(mItem->participant);
+			w_subject = utf8_to_wide_dup(mItem->subject);
+			w_participant = utf8_to_wide_dup(mItem->participant);
+			store_format_timestamp(mItem->timestamp, date_buf, sizeof(date_buf));
+			MultiByteToWideChar(CP_UTF8, 0, date_buf, -1, w_date, sizeof(w_date) / sizeof(wchar_t));
 
 			memset(&lvi, 0, sizeof(lvi));
 			lvi.mask = LVIF_TEXT | LVIF_PARAM;
