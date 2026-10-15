@@ -213,6 +213,38 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 		store_free_folder_messages(headers);
 	}
 
+	/* Inject a synthetic invalid message ID item into the Inbox list for error testing */
+	if (folder_idx == ctx->accounts.root_folder_idx[0]) {
+		MessageListItem *mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
+		if (mItem) {
+			mItem->id = 999999ULL;
+			strcpy_s(mItem->subject, sizeof(mItem->subject), "Totally not an invalid ID error test");
+			strcpy_s(mItem->participant, sizeof(mItem->participant), "Bug King <crasharoo@spitemail.com>");
+			strcpy_s(mItem->date_str, sizeof(mItem->date_str), "Tue, 6 Oct 2026");
+			mItem->timestamp = 20261006;
+
+			wchar_t *w_subject = utf8_to_wide_dup(mItem->subject);
+			wchar_t *w_participant = utf8_to_wide_dup(mItem->participant);
+			wchar_t *w_date = utf8_to_wide_dup(mItem->date_str);
+
+			memset(&lvi, 0, sizeof(lvi));
+			lvi.mask = LVIF_TEXT | LVIF_PARAM;
+			lvi.iItem = 0;
+			lvi.iSubItem = 0;
+			lvi.pszText = w_subject;
+			lvi.lParam = (LPARAM)mItem;
+
+			row = ListView_InsertItem(hwndList, &lvi);
+			ListView_SetItemText(hwndList, row, 1, w_participant);
+			ListView_SetItemText(hwndList, row, 2, w_date);
+
+			free(w_subject);
+			free(w_participant);
+			free(w_date);
+		}
+	}
+	/* End of invalid message ID injection */
+
 	/* Default sort: Date column (index 2), Descending */
 	{
 		LPARAM defaultSortParam = (2 << 1) | 0;
