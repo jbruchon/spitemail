@@ -109,6 +109,25 @@ static int CALLBACK MessageListCompare(LPARAM lParam1, LPARAM lParam2, LPARAM lP
 }
 
 
+static StoreAccount *get_folder_account(MailContext *ctx, int32_t folder_idx)
+{
+	uint32_t i;
+	if (folder_idx == INVALID_INDEX || ctx->accounts.count == 0) return NULL;
+
+	/* Find which account root folder or child tree owns this folder index */
+	for (i = 0; i < ctx->accounts.count; i++) {
+		int32_t root_f = ctx->accounts.root_folder_idx[i];
+		/* Simple check: if this folder index falls within this account's tree branch,
+		 * or we match by account index layout, return the corresponding store account. */
+		if (folder_idx == root_f || folder_idx == root_f + 1) {
+			return ctx->accounts.store_accounts ? ctx->accounts.store_accounts[i] : NULL;
+		}
+	}
+	/* Fallback to first account if unmatched */
+	return (ctx->accounts.store_accounts) ? ctx->accounts.store_accounts[0] : NULL;
+}
+
+
 static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *ctx, int32_t folder_idx, int select_row)
 {
 	uint32_t folder_flags;
@@ -119,8 +138,12 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 	int row;
 	LVITEMW lvi;
 	int total_items;
+	StoreAccount *s_acc = NULL;
 
 	if (folder_idx == INVALID_INDEX) return;
+	if (ctx->accounts.count > 0 && ctx->accounts.store_accounts) {
+		s_acc = get_folder_account(ctx, folder_idx);
+	}
 
 	folder_flags = ctx->folders.flags[folder_idx];
 
@@ -133,7 +156,7 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 	lvcCol.pszText = ISFLAG(folder_flags, SM_FOLDER_SENT) ? (LPWSTR)(uintptr_t)L"To" : (LPWSTR)(uintptr_t)L"From";
 	ListView_SetColumn(hwndList, 1, &lvcCol);
 
-	if (store_fetch_folder_messages(folder_idx, &headers, &msg_count) == 0 && headers) {
+	if (s_acc && store_fetch_folder_messages(s_acc, folder_idx, &headers, &msg_count) == 0 && headers) {
 		for (i = 0; i < msg_count; i++) {
 			MessageListItem *mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
 			if (!mItem) continue;
@@ -206,9 +229,23 @@ static void delete_selected_message(HWND hwndTree, HWND hwndList, HWND hwndReadi
 	int sel_idx = ListView_GetNextItem(hwndList, -1, LVNI_SELECTED);
 	HTREEITEM hSel;
 	TVITEMW tvti;
-	int32_t folder_idx;
+	int32_t folder_idx = INVALID_INDEX; /* Initialized to avoid warning */
+	StoreAccount *s_acc = NULL;
 
 	if (sel_idx == -1) return;
+
+	hSel = TreeView_GetSelection(hwndTree);
+	if (hSel) {
+		memset(&tvti, 0, sizeof(tvti));
+		tvti.hItem = hSel;
+		tvti.mask = TVIF_PARAM;
+		if (TreeView_GetItem(hwndTree, &tvti)) {
+			folder_idx = (int32_t)(intptr_t)tvti.lParam;
+		}
+	}
+
+	s_acc = get_folder_account(ctx, folder_idx);
+	if (!s_acc) return;
 
 	LVITEMW lvi;
 	memset(&lvi, 0, sizeof(lvi));
@@ -218,18 +255,9 @@ static void delete_selected_message(HWND hwndTree, HWND hwndList, HWND hwndReadi
 		MessageListItem *item = (MessageListItem *)lvi.lParam;
 		uint64_t msg_id = item->id;
 
-		if (store_delete_message(msg_id) == 0) {
-			hSel = TreeView_GetSelection(hwndTree);
-			if (hSel) {
-				memset(&tvti, 0, sizeof(tvti));
-				tvti.hItem = hSel;
-				tvti.mask = TVIF_PARAM;
-				if (TreeView_GetItem(hwndTree, &tvti)) {
-					folder_idx = (int32_t)(intptr_t)tvti.lParam;
-					int target_row = (sel_idx > 0) ? (sel_idx - 1) : 0;
-					load_folder_messages(hwndList, hwndReading, ctx, folder_idx, target_row);
-				}
-			}
+		if (store_delete_message(s_acc, msg_id) == 0) {
+			int target_row = (sel_idx > 0) ? (sel_idx - 1) : 0;
+			load_folder_messages(hwndList, hwndReading, ctx, folder_idx, target_row);
 		}
 	}
 }
@@ -454,7 +482,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			rcEdit.bottom -= g_rp_margin_size;
 			SendMessage(hwndReadingPane, EM_SETRECT, 0, (LPARAM)&rcEdit);
 
-			store_init(&g_mail_ctx);
 			tree_view_refresh(hwndFolderTree, &g_mail_ctx);
 
 			if (g_mail_ctx.accounts.count > 0 && g_ui_htree_items) {
@@ -591,7 +618,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						if (item) {
 							char *eml_data = NULL;
 							size_t eml_size = 0;
-							if (store_fetch_message(item->id, &eml_data, &eml_size) == 0 && eml_data) {
+							StoreAccount *s_acc;
+
+							s_acc = (g_mail_ctx.accounts.count > 0 && g_mail_ctx.accounts.store_accounts) ? g_mail_ctx.accounts.store_accounts[0] : NULL;
+							if (s_acc && store_fetch_message(s_acc, item->id, &eml_data, &eml_size) == 0 && eml_data) {
 								wchar_t *w_eml = utf8_to_wide_dup(eml_data);
 								g_reading_pane_state = 0;
 								SetWindowTextW(hwndReadingPane, w_eml ? w_eml : L"");
@@ -768,7 +798,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				g_ui_htree_capacity = 0;
 			}
 			mail_context_free(&g_mail_ctx);
-			store_cleanup();
 			PostQuitMessage(0);
 			return 0;
 		/* End of WM_DESTROY */

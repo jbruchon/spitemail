@@ -84,6 +84,8 @@ typedef struct FolderTable {
 	uint32_t   capacity;
 } FolderTable;
 
+typedef struct StoreAccount StoreAccount;
+
 typedef struct AccountTable {
 	uint32_t *name_offsets;
 	uint32_t *server_offsets;
@@ -91,6 +93,7 @@ typedef struct AccountTable {
 	uint32_t *ports;
 	int32_t  *root_folder_idx;
 	uint32_t *store_flags;
+	StoreAccount **store_accounts;
 	uint32_t  count;
 	uint32_t  capacity;
 } AccountTable;

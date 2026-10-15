@@ -95,6 +95,7 @@ static void add_parsed_account(MailContext *ctx, const char *name, const char *s
 		ctx->accounts.ports = (uint32_t *)realloc(ctx->accounts.ports, new_cap * sizeof(uint32_t));
 		ctx->accounts.root_folder_idx = (int32_t *)realloc(ctx->accounts.root_folder_idx, new_cap * sizeof(int32_t));
 		ctx->accounts.store_flags = (uint32_t *)realloc(ctx->accounts.store_flags, new_cap * sizeof(uint32_t));
+		ctx->accounts.store_accounts = (StoreAccount **)realloc(ctx->accounts.store_accounts, new_cap * sizeof(StoreAccount *));
 		ctx->accounts.capacity = new_cap;
 	}
 
@@ -127,6 +128,12 @@ static void add_parsed_account(MailContext *ctx, const char *name, const char *s
 	ctx->accounts.ports[a_idx] = (uint32_t)port;
 	ctx->accounts.root_folder_idx[a_idx] = inbox_idx;
 	ctx->accounts.store_flags[a_idx] = (strcasecmp(store, "ram") == 0) ? 1 : 1;
+
+	/* Open account store via datastore engine */
+	StoreAccount *s_acc = store_open_account(username);
+	if (!s_acc) s_acc = store_open_account(store);
+	ctx->accounts.store_accounts[a_idx] = s_acc;
+
 	(*acc_idx)++;
 
 	ctx->folders.name_offsets[inbox_idx] = inbox_off;
@@ -178,6 +185,7 @@ void load_app_configuration(MailContext *ctx)
 	ctx->accounts.ports = (uint32_t *)malloc(acc_capacity * sizeof(uint32_t));
 	ctx->accounts.root_folder_idx = (int32_t *)malloc(acc_capacity * sizeof(int32_t));
 	ctx->accounts.store_flags = (uint32_t *)malloc(acc_capacity * sizeof(uint32_t));
+	ctx->accounts.store_accounts = (StoreAccount **)malloc(acc_capacity * sizeof(StoreAccount *));
 
 	ctx->folders.capacity = fld_capacity;
 	ctx->folders.name_offsets = (uint32_t *)malloc(fld_capacity * sizeof(uint32_t));
@@ -224,7 +232,6 @@ void load_app_configuration(MailContext *ctx)
 			char *end_bracket = strchr(p, ']');
 			if (end_bracket) {
 				*end_bracket = '\0';
-				/* Parse directly with a field width limit matching current_section's size */
 				sscanf(p + 1, "%127s", current_section);
 				trim_whitespace(current_section);
 			}
@@ -266,7 +273,6 @@ void load_app_configuration(MailContext *ctx)
 					else if (strcasecmp(key, "ErrorHighlightColor") == 0) ctx->theme.error_hi = rgb;
 					else if (strcasecmp(key, "ErrorTextColor") == 0) ctx->theme.error_text = rgb;
 					else if (strcasecmp(key, "InactiveSelColor") == 0) ctx->theme.inactive_sel = rgb;
-					else if (strcasecmp(key, "InactiveSelColor") == 0) ctx->theme.inactive_sel = rgb;
 					else if (strcasecmp(key, "NoMsgBgColor") == 0) ctx->theme.nomsg_bg = rgb;
 					else if (strcasecmp(key, "ZebraOddColor") == 0) ctx->theme.zebra_odd = rgb;
 					else if (strcasecmp(key, "ZebraEvenColor") == 0) ctx->theme.zebra_even = rgb;
@@ -286,7 +292,14 @@ void load_app_configuration(MailContext *ctx)
 
 void mail_context_free(MailContext *ctx)
 {
+	uint32_t i;
 	if (!ctx) return;
+
+	for (i = 0; i < ctx->accounts.count; i++) {
+		if (ctx->accounts.store_accounts && ctx->accounts.store_accounts[i]) {
+			store_close_account(ctx->accounts.store_accounts[i]);
+		}
+	}
 
 	free(ctx->pool.data);
 	free(ctx->accounts.name_offsets);
@@ -295,6 +308,7 @@ void mail_context_free(MailContext *ctx)
 	free(ctx->accounts.ports);
 	free(ctx->accounts.root_folder_idx);
 	free(ctx->accounts.store_flags);
+	free(ctx->accounts.store_accounts);
 	free(ctx->folders.name_offsets);
 	free(ctx->folders.path_offsets);
 	free(ctx->folders.unread_counts);

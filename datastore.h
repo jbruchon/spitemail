@@ -12,6 +12,22 @@ extern "C" {
 #include <stddef.h>
 #include "spitemail.h"
 
+typedef enum FolderType {
+	FOLDER_TYPE_OTHER = 0,
+	FOLDER_TYPE_INBOX,
+	FOLDER_TYPE_SENT,
+	FOLDER_TYPE_OUTBOX,
+	FOLDER_TYPE_DRAFTS,
+	FOLDER_TYPE_JUNK,
+	FOLDER_TYPE_TRASH
+} FolderType;
+
+typedef struct FolderInfo {
+	int32_t    folder_id;      /* Numeric ID addressed under the hood */
+	FolderType type;           /* Functional folder type */
+	char       name[64];       /* Friendly display name */
+} FolderInfo;
+
 typedef struct StoreMsgHeader {
 	uint64_t id;
 	uint32_t mbox_offset;    /* Reserved for mbox/sidecar byte offsets */
@@ -32,26 +48,36 @@ typedef struct MessageListItem {
 	uint32_t timestamp;
 } MessageListItem;
 
+typedef struct StoreAccount StoreAccount;
 
-int store_init(MailContext *ctx);
-void store_cleanup(void);
+typedef struct StoreDriver {
+	const char *name;
+	int (*has_account)(const char *account_name);
+	StoreAccount *(*open_account)(const char *account_name);
+	void (*close_account)(StoreAccount *account);
+	int (*fetch_folders)(StoreAccount *account, FolderInfo **out_folders, uint32_t *out_folder_count);
+	void (*free_folders)(FolderInfo *folders);
+	int (*fetch_folder_messages)(StoreAccount *account, int32_t folder_idx, StoreMsgHeader **out_headers, uint32_t *out_count);
+	void (*free_folder_messages)(StoreMsgHeader *headers);
+	int (*fetch_message_range)(StoreAccount *account, int32_t folder_idx, uint64_t start_id, uint32_t max_count, StoreMsgHeader **out_headers, uint32_t *out_count);
+	int (*fetch_message)(StoreAccount *account, uint64_t msg_id, char **out_eml_data, size_t *out_size);
+	void (*free_message)(void *msg_data);
+	int (*add_message)(StoreAccount *account, int32_t folder_idx, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id);
+	int (*delete_message)(StoreAccount *account, uint64_t msg_id);
+} StoreDriver;
 
-/* Folder and message queries */
-int store_fetch_folder_messages(int32_t folder_idx, StoreMsgHeader **out_headers, uint32_t *out_count);
+
+StoreAccount *store_open_account(const char *account_name);
+void store_close_account(StoreAccount *account);
+int store_fetch_folders(StoreAccount *account, FolderInfo **out_folders, uint32_t *out_folder_count);
+void store_free_folders(FolderInfo *folders);
+int store_fetch_folder_messages(StoreAccount *account, int32_t folder_idx, StoreMsgHeader **out_headers, uint32_t *out_count);
 void store_free_folder_messages(StoreMsgHeader *headers);
-
-/* Range/ID-relative queries */
-int store_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_t max_count, StoreMsgHeader **out_headers, uint32_t *out_count);
-
-/* Returns EML format headers + body; memory is allocated by the backing store */
-int store_fetch_message(uint64_t msg_id, char **out_eml_data, size_t *out_size);
-
-/* General-purpose one-shot cleanup for store-allocated message data */
+int store_fetch_message_range(StoreAccount *account, int32_t folder_idx, uint64_t start_id, uint32_t max_count, StoreMsgHeader **out_headers, uint32_t *out_count);
+int store_fetch_message(StoreAccount *account, uint64_t msg_id, char **out_eml_data, size_t *out_size);
 void store_free_message(void *msg_data);
-
-/* Message mutation operations */
-int store_add_message(int32_t folder_idx, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id);
-int store_delete_message(uint64_t msg_id);
+int store_add_message(StoreAccount *account, int32_t folder_idx, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id);
+int store_delete_message(StoreAccount *account, uint64_t msg_id);
 
 #ifdef __cplusplus
 }

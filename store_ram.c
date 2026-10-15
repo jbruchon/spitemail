@@ -6,6 +6,7 @@
 #include "spitemail.h"
 #include "datastore.h"
 #include "store_ram.h"
+#include "dummy_data.h"
 
 
 typedef struct RamRecord {
@@ -18,111 +19,127 @@ typedef struct RamRecord {
 	char     to_addr[128];
 	char     date_str[32];
 	uint32_t timestamp;
-	char     eml_blob[2048];  /* Combined UTF-8 EML format: headers + body */
+	char     eml_blob[2048];
 } RamRecord;
 
 
-static RamRecord *ram_db = NULL;
-static size_t ram_db_count = 0;
-static size_t ram_db_capacity = 0;
-static uint64_t next_msg_id = 5000;
+typedef struct RamStorePriv {
+	RamRecord *ram_db;
+	size_t     ram_db_count;
+	size_t     ram_db_capacity;
+	uint64_t   next_msg_id;
+} RamStorePriv;
 
-static const RamRecord initial_ram_db[] = {
-	{
-		1001, 0, 0, 450,
-		"Welcome to Spite Mail (RAM Store)",
-		"Jody Bruchon <jody@jodybruchon.com>",
-		"root@spitemail.com",
-		"Tue, 6 Oct 2026", 20261006,
-		"From: Jody Bruchon <jody@jodybruchon.com>\r\n"
-		"To: root@spitemail.com\r\n"
-		"Subject: Welcome to Spite Mail\r\n"
-		"Date: Tue, 6 Oct 2026\r\n\r\n"
-		"Spite Mail is designed for speed, low overhead, and pure native Win32 controls."
-	},
-	{
-		1002, 0, 451, 320,
-		"Bend It Like Bloomberg: Micklethwait's Epic Soccer Mishap",
-		"Heat Street Staff <news@heatstreet.com>",
-		"root@spitemail.com",
-		"Fri, 29 Apr 2016", 20160429,
-		"From: Heat Street Staff <news@heatstreet.com>\r\n"
-		"To: root@spitemail.com\r\n"
-		"Subject: Bend It Like Bloomberg\r\n"
-		"Date: Fri, 29 Apr 2016\r\n\r\n"
-		"Archived news piece regarding John Micklethwait's soccer story."
-	},
-	{
-		2001, 1, 772, 280,
-		"Re: Bug report on jdupes memory usage",
-		"root@spitemail.com",
-		"Bug Reporter <reporter@example.com>",
-		"Mon, 5 Oct 2026", 20261005,
-		"From: root@spitemail.com\r\n"
-		"To: Bug Reporter <reporter@example.com>\r\n"
-		"Subject: Re: Bug report on jdupes memory usage\r\n"
-		"Date: Mon, 5 Oct 2026\r\n\r\n"
-		"Thanks for the report. Memory layout optimizations are being applied."
-	},
-	{
-		3001, 2, 1052, 260,
-		"Project Quark v0.1 released",
-		"Jody Bruchon <jody@gazingcat.com>",
-		"jody@gazingcat.com",
-		"Sun, 11 Oct 2026", 20261011,
-		"From: Jody Bruchon <jody@gazingcat.com>\r\n"
-		"To: jody@gazingcat.com\r\n"
-		"Subject: Project Quark v0.1 released\r\n"
-		"Date: Sun, 11 Oct 2026\r\n\r\n"
-		"Quark v0.1 source code and initial array iterators are now live."
-	},
-	{
-		4001, 3, 1312, 290,
-		"Inquiry regarding CRUX Linux package update",
-		"jody@gazingcat.com",
-		"CRUX Maintainer <maintainer@crux.nu>, Dev Team <dev@crux.nu>",
-		"Sat, 10 Oct 2026", 20261010,
-		"From: jody@gazingcat.com\r\n"
-		"To: CRUX Maintainer <maintainer@crux.nu>, Dev Team <dev@crux.nu>\r\n"
-		"Subject: Inquiry regarding CRUX Linux package update\r\n"
-		"Date: Sat, 10 Oct 2026\r\n\r\n"
-		"Checking on the status of the latest toolchain updates for port packaging."
-	}
+
+struct StoreAccount {
+	char         account_name[128];
+	StoreDriver  *driver;
+	FolderInfo   *folders;
+	uint32_t     folder_count;
+	void         *store_priv;
 };
+
+
+/*** Forward declarations ***/
+void store_ram_free_folders(FolderInfo *folders);
 
 
 /*** End definitions, begin code ***/
 
 
-int store_ram_init(MailContext *ctx)
+int store_ram_has_account(const char *account_name)
 {
-	size_t init_count = sizeof(initial_ram_db) / sizeof(initial_ram_db[0]);
-	(void)ctx;
-
-	ram_db_capacity = init_count + 8;
-	ram_db = (RamRecord *)malloc(ram_db_capacity * sizeof(RamRecord));
-	if (!ram_db) return -1;
-
-	memcpy(ram_db, initial_ram_db, init_count * sizeof(RamRecord));
-	ram_db_count = init_count;
+	if (!account_name) return 0;
+	if (strcmp(account_name, "ram") == 0 || strcmp(account_name, "RAM") == 0 || strchr(account_name, '@') != NULL) return 1;
 	return 0;
 }
 
 
-void store_ram_cleanup(void)
+StoreAccount *store_ram_open_account(const char *account_name)
 {
-	if (ram_db) {
-		free(ram_db);
-		ram_db = NULL;
+	StoreAccount *acc;
+	RamStorePriv *priv;
+
+	acc = (StoreAccount *)malloc(sizeof(StoreAccount));
+	if (!acc) return NULL;
+	memset(acc, 0, sizeof(StoreAccount));
+
+	priv = (RamStorePriv *)malloc(sizeof(RamStorePriv));
+	if (!priv) {
+		free(acc);
+		return NULL;
 	}
-	ram_db_count = 0;
-	ram_db_capacity = 0;
+	memset(priv, 0, sizeof(RamStorePriv));
+
+	strcpy_s(acc->account_name, sizeof(acc->account_name), account_name ? account_name : "ram");
+	acc->driver = &store_ram_driver;
+	acc->store_priv = priv;
+
+	priv->ram_db_capacity = 8;
+	priv->ram_db = (RamRecord *)malloc(priv->ram_db_capacity * sizeof(RamRecord));
+	if (!priv->ram_db) {
+		free(priv);
+		free(acc);
+		return NULL;
+	}
+	priv->ram_db_count = 0;
+	priv->next_msg_id = 1001;
+
+	if (get_dummy_folders(&acc->folders, &acc->folder_count) != 0) {
+		free(priv->ram_db);
+		free(priv);
+		free(acc);
+		return NULL;
+	}
+
+	if (populate_dummy_ram_store(acc) != 0) {
+		store_ram_free_folders(acc->folders);
+		free(priv->ram_db);
+		free(priv);
+		free(acc);
+		return NULL;
+	}
+
+	return acc;
 }
 
 
-int store_ram_fetch_folder_messages(int32_t folder_idx, StoreMsgHeader **out_headers, uint32_t *out_count)
+const char *store_ram_get_account_name(StoreAccount *account)
 {
-	return store_ram_fetch_message_range(folder_idx, 0, 0, out_headers, out_count);
+	if (!account) return NULL;
+	return account->account_name;
+}
+
+
+void store_ram_close_account(StoreAccount *account)
+{
+	if (!account) return;
+	if (account->store_priv) {
+		RamStorePriv *priv = (RamStorePriv *)account->store_priv;
+		if (priv->ram_db) free(priv->ram_db);
+		free(priv);
+	}
+	if (account->folders) free(account->folders);
+	free(account);
+}
+
+
+int store_ram_fetch_folders(StoreAccount *account, FolderInfo **out_folders, uint32_t *out_folder_count)
+{
+	if (!account || !out_folders || !out_folder_count) return -1;
+	return get_dummy_folders(out_folders, out_folder_count);
+}
+
+
+void store_ram_free_folders(FolderInfo *folders)
+{
+	if (folders) free(folders);
+}
+
+
+int store_ram_fetch_folder_messages(StoreAccount *account, int32_t folder_idx, StoreMsgHeader **out_headers, uint32_t *out_count)
+{
+	return store_ram_fetch_message_range(account, folder_idx, 0, 0, out_headers, out_count);
 }
 
 
@@ -132,28 +149,26 @@ void store_ram_free_folder_messages(StoreMsgHeader *headers)
 }
 
 
-int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_t max_count, StoreMsgHeader **out_headers, uint32_t *out_count)
+int store_ram_fetch_message_range(StoreAccount *account, int32_t folder_idx, uint64_t start_id, uint32_t max_count, StoreMsgHeader **out_headers, uint32_t *out_count)
 {
+	RamStorePriv *priv;
 	StoreMsgHeader *headers = NULL;
 	uint32_t count = 0;
 	size_t i;
 	int is_sent_folder;
 
-	if (!out_headers || !out_count) return -1;
+	if (!account || !account->store_priv || !out_headers || !out_count) return -1;
+	priv = (RamStorePriv *)account->store_priv;
 
 	is_sent_folder = (folder_idx == 1 || folder_idx == 3);
 
-	for (i = 0; i < ram_db_count; i++) {
-		if (ram_db[i].folder_idx == folder_idx) {
-			if (start_id == 0 || ram_db[i].id >= start_id) {
+	for (i = 0; i < priv->ram_db_count; i++) {
+		if (priv->ram_db[i].folder_idx == folder_idx) {
+			if (start_id == 0 || priv->ram_db[i].id >= start_id) {
 				count++;
 				if (max_count > 0 && count >= max_count) break;
 			}
 		}
-	}
-
-	if (folder_idx == 0 && (start_id == 0 || start_id <= 9999)) {
-		count++;
 	}
 
 	if (count == 0) {
@@ -167,38 +182,21 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 
 	{
 		uint32_t idx = 0;
-
-		if (folder_idx == 0 && (start_id == 0 || start_id <= 9999)) {
-			if (idx < count) {
-				headers[idx].id = 9999;
-				headers[idx].mbox_offset = 9999;
-				headers[idx].mbox_length = 0;
-				strcpy_s(headers[idx].subject, sizeof(headers[idx].subject), "[TEST] Trigger Error State");
-				strcpy_s(headers[idx].participant, sizeof(headers[idx].participant), "Error Tester");
-				strcpy_s(headers[idx].date_str, sizeof(headers[idx].date_str), "Today");
-				headers[idx].timestamp = 20261013;
-				idx++;
-			}
-		}
-
-		for (i = 0; i < ram_db_count; i++) {
-			if (ram_db[i].folder_idx == folder_idx) {
-				if (start_id == 0 || ram_db[i].id >= start_id) {
-					headers[idx].id = ram_db[i].id;
-					headers[idx].mbox_offset = ram_db[i].mbox_offset;
-					headers[idx].mbox_length = ram_db[i].mbox_length;
-					strcpy_s(headers[idx].subject, sizeof(headers[idx].subject), ram_db[i].subject);
-
+		for (i = 0; i < priv->ram_db_count; i++) {
+			if (priv->ram_db[i].folder_idx == folder_idx) {
+				if (start_id == 0 || priv->ram_db[i].id >= start_id) {
+					headers[idx].id = priv->ram_db[i].id;
+					headers[idx].mbox_offset = priv->ram_db[i].mbox_offset;
+					headers[idx].mbox_length = priv->ram_db[i].mbox_length;
+					strcpy_s(headers[idx].subject, sizeof(headers[idx].subject), priv->ram_db[i].subject);
 					if (is_sent_folder) {
-						strcpy_s(headers[idx].participant, sizeof(headers[idx].participant), ram_db[i].to_addr);
+						strcpy_s(headers[idx].participant, sizeof(headers[idx].participant), priv->ram_db[i].to_addr);
 					} else {
-						strcpy_s(headers[idx].participant, sizeof(headers[idx].participant), ram_db[i].from_addr);
+						strcpy_s(headers[idx].participant, sizeof(headers[idx].participant), priv->ram_db[i].from_addr);
 					}
-
-					strcpy_s(headers[idx].date_str, sizeof(headers[idx].date_str), ram_db[i].date_str);
-					headers[idx].timestamp = ram_db[i].timestamp;
+					strcpy_s(headers[idx].date_str, sizeof(headers[idx].date_str), priv->ram_db[i].date_str);
+					headers[idx].timestamp = priv->ram_db[i].timestamp;
 					idx++;
-
 					if (max_count > 0 && idx >= max_count) break;
 				}
 			}
@@ -211,24 +209,20 @@ int store_ram_fetch_message_range(int32_t folder_idx, uint64_t start_id, uint32_
 }
 
 
-int store_ram_fetch_message(uint64_t msg_id, char **out_eml_data, size_t *out_size)
+int store_ram_fetch_message(StoreAccount *account, uint64_t msg_id, char **out_eml_data, size_t *out_size)
 {
+	RamStorePriv *priv;
 	const char *src = NULL;
 	char *eml_copy = NULL;
 	size_t len;
 	size_t i;
 
-	if (!out_eml_data) return -1;
+	if (!account || !account->store_priv || !out_eml_data) return -1;
+	priv = (RamStorePriv *)account->store_priv;
 
-	if (msg_id == 9999) {
-		*out_eml_data = NULL;
-		if (out_size) *out_size = 0;
-		return -1;
-	}
-
-	for (i = 0; i < ram_db_count; i++) {
-		if (ram_db[i].id == msg_id) {
-			src = ram_db[i].eml_blob;
+	for (i = 0; i < priv->ram_db_count; i++) {
+		if (priv->ram_db[i].id == msg_id) {
+			src = priv->ram_db[i].eml_blob;
 			break;
 		}
 	}
@@ -256,26 +250,27 @@ void store_ram_free_message(void *msg_data)
 }
 
 
-int store_ram_add_message(int32_t folder_idx, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id)
+int store_ram_add_message(StoreAccount *account, int32_t folder_idx, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id)
 {
+	RamStorePriv *priv;
 	RamRecord *new_db;
 	int is_sent_folder;
 
-	if (!subject || !eml_data) return -1;
+	if (!account || !account->store_priv || !subject || !eml_data) return -1;
+	priv = (RamStorePriv *)account->store_priv;
 
-	if (ram_db_count >= ram_db_capacity) {
-		size_t new_cap = ram_db_capacity * 2;
-		new_db = (RamRecord *)realloc(ram_db, new_cap * sizeof(RamRecord));
+	if (priv->ram_db_count >= priv->ram_db_capacity) {
+		size_t new_cap = priv->ram_db_capacity * 2;
+		new_db = (RamRecord *)realloc(priv->ram_db, new_cap * sizeof(RamRecord));
 		if (!new_db) return -1;
-		ram_db = new_db;
-		ram_db_capacity = new_cap;
+		priv->ram_db = new_db;
+		priv->ram_db_capacity = new_cap;
 	}
 
 	is_sent_folder = (folder_idx == 1 || folder_idx == 3);
-
-	RamRecord *rec = &ram_db[ram_db_count];
+	RamRecord *rec = &priv->ram_db[priv->ram_db_count];
 	memset(rec, 0, sizeof(RamRecord));
-	rec->id = next_msg_id++;
+	rec->id = priv->next_msg_id++;
 	rec->folder_idx = folder_idx;
 	rec->timestamp = timestamp;
 	strcpy_s(rec->subject, sizeof(rec->subject), subject);
@@ -295,26 +290,46 @@ int store_ram_add_message(int32_t folder_idx, const char *subject, const char *p
 
 	strcpy_s(rec->eml_blob, sizeof(rec->eml_blob), eml_data);
 	rec->mbox_length = (uint32_t)strlen(eml_data);
-
-	ram_db_count++;
+	priv->ram_db_count++;
 
 	if (out_msg_id) *out_msg_id = rec->id;
 	return 0;
 }
 
 
-int store_ram_delete_message(uint64_t msg_id)
+int store_ram_delete_message(StoreAccount *account, uint64_t msg_id)
 {
+	RamStorePriv *priv;
 	size_t i, j;
 
-	for (i = 0; i < ram_db_count; i++) {
-		if (ram_db[i].id == msg_id) {
-			for (j = i; j < ram_db_count - 1; j++) {
-				ram_db[j] = ram_db[j + 1];
+	if (!account || !account->store_priv) return -1;
+	priv = (RamStorePriv *)account->store_priv;
+
+	for (i = 0; i < priv->ram_db_count; i++) {
+		if (priv->ram_db[i].id == msg_id) {
+			for (j = i; j < priv->ram_db_count - 1; j++) {
+				priv->ram_db[j] = priv->ram_db[j + 1];
 			}
-			ram_db_count--;
+			priv->ram_db_count--;
 			return 0;
 		}
 	}
 	return -1;
 }
+
+
+StoreDriver store_ram_driver = {
+	.name = "ram",
+	.has_account = store_ram_has_account,
+	.open_account = store_ram_open_account,
+	.close_account = store_ram_close_account,
+	.fetch_folders = store_ram_fetch_folders,
+	.free_folders = store_ram_free_folders,
+	.fetch_folder_messages = store_ram_fetch_folder_messages,
+	.free_folder_messages = store_ram_free_folder_messages,
+	.fetch_message_range = store_ram_fetch_message_range,
+	.fetch_message = store_ram_fetch_message,
+	.free_message = store_ram_free_message,
+	.add_message = store_ram_add_message,
+	.delete_message = store_ram_delete_message
+};
