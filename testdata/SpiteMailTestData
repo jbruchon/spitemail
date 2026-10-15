@@ -10,7 +10,7 @@ Authentication-Results: perfora.net; dkim=pass header.i=@n8n.connectalb.org
  policy.iprev=47.245.195.139
 Received: from static195-139.de.dm.aliyun.com ([47.245.195.139]) by
  mx.perfora.net (mxeueus004 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1MMnfc-1xLzPC2d76-00JQQ5 for <meow@gazingcat.com>; Sun, 13 Sep 2026 02:52:03
+ 1MMnfc-1xLzPC2d76-00JQQ5 for <woof@largebutt.com>; Sun, 13 Sep 2026 02:52:03
  +0200
 X-AliDM-RcptTo: bWVvd0BnYXppbmdjYXQuY29t
 Feedback-ID: default:connectalb@n8n.connectalb.org:alibabak_SmtpBatch:286481
@@ -26,11 +26,11 @@ X-EnvId: 27418048689
 Content-Type: multipart/alternative; boundary="===============4805529818079580763=="
 MIME-Version: 1.0
 From: CIoud Security <connectalb@n8n.connectalb.org>
-To: meow@gazingcat.com
+To: woof@largebutt.com
 Subject: =?utf-8?b?RmluYUkgTtC+dGljZTogQWNjb3VudCBEZWFjdGl2YXRpb24gfCDQoGjQvnTQvtGVICYgVtGWZNC10L7RlSBSZW1vdmVkIFRvZGF5?=
 Date: Sat, 12 Sep 2026 17:51:59 -0700
 Message-ID: <178926071986.6364.9872130397531845649@n8n.connectalb.org>
-Envelope-To: <meow@gazingcat.com>
+Envelope-To: <woof@largebutt.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:rlywAr5iSuA=;GeX111ywxO65XkEYqruNaFbtf+1h
  7ZCQ3KCzD5yMoYhencyx+h7mMIfK5TD4gfMI9y0MUJCghXkH7/PwnHEybtsVJkg5Np81KMBs9
@@ -256,15 +256,15 @@ X-Mozilla-Status2: 00000000
 X-Mozilla-Keys:                                                                                 
 Return-Path: <correos_lts@consperlab.com>
 Authentication-Results: perfora.net; dkim=pass
- header.i=correos_lts@consperlab.com header.s=s1-ionos; spf=pass
+ header.i=correos_lts@consperlab.com header.s=s1-booty; spf=pass
  smtp.mailfrom=correos_lts@consperlab.com; dmarc=pass
  header.from=consperlab.com policy.dmarc=none; iprev=pass
  policy.iprev=74.208.4.197
 Received: from mout.perfora.net ([74.208.4.197]) by mx.perfora.net (mxeueus012
  [74.208.114.66]) with ESMTPS (Nemesis) id 1N4NPm-1wdie04Beg-016FkY for
- <meow@gazingcat.com>; Sun, 13 Sep 2026 10:31:11 +0200
+ <woof@largebutt.com>; Sun, 13 Sep 2026 10:31:11 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=consperlab.com;
-	s=s1-ionos; t=1789288270; x=1789893070;
+	s=s1-booty; t=1789288270; x=1789893070;
 	i=correos_lts@consperlab.com;
 	bh=IS0UWhIfwXqA74iOCYTlinLgMtx1VWF8+wkQQdM1bT0=;
 	h=X-UI-Sender-Class:Date:To:From:Subject:Message-ID:MIME-Version:
@@ -279,9 +279,9 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=consperlab.com;
 X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
 Received: from client.hidden.invalid by mrelay.perfora.net (mreueus002
  [74.208.114.77]) with ESMTPSA (Nemesis) id 0Ma0N7-1xO0bx37kd-00TM8s for
- <meow@gazingcat.com>; Sun, 13 Sep 2026 10:31:10 +0200
+ <woof@largebutt.com>; Sun, 13 Sep 2026 10:31:10 +0200
 Date: Sun, 13 Sep 2026 04:31:10 -0400
-To: meow@gazingcat.com
+To: woof@largebutt.com
 From: Customer Service Notification <correos_lts@consperlab.com>
 Subject: Warning: Your domain has been deactivated
 Message-ID: <Q2E1DFVrs8gjoSowL3hWrWn82XgAqh8qaf3sciY@boycottprovenancehotels.com>
@@ -331,7 +331,7 @@ UI-OutboundReport: notjunk:1;M01:P0:+TS5HoZ9FNw=;o+oeNsnhjESy5wZbEMstWMxhBHh
  f6aBpjPVAAETyp++Y6pm00s3bDOrNLZ2UV8PPf+n2JZDhJf2+XZgzz8TluaFqgtf0X9EUCcqE
  yVOj0JAihWpG46lkJZ0ww+M0hhXegK1tOTvpp2i8ZTOLlu/ZQUbsCZpygV2ctieYkqEqMp7Kw
  ==
-Envelope-To: <meow@gazingcat.com>
+Envelope-To: <woof@largebutt.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:dOv+ndIbSaE=;in9684ZK7skvM7frLvHtDJYGux9C
  YR+9lKF3i292NmgD24RnlTRMLXjGGieM7PCzotHxFuJ1y4dKmkp70wd307R+AD93QfVm+b5Kw
@@ -433,28 +433,28 @@ Domain Deactivation Alert
 The term of your domain(s) will automatically be deactivated on the specif=
 ied date as scheduled:
 
-Domain: gazingcat.com
-Email Address: meow@gazingcat.com
+Domain: largebutt.com
+Email Address: woof@largebutt.com
 Renewal Date: 09/13/2026 04:31:10 am
 
 Have your domain renewed to avoid service interuption and termination
 We recommend checking the payment method and other details provided.
 
 Click the link below to start now:
-https://aginglifematters.com/iox.html?username=3Dmeow@gazingcat.com
+https://aginglifematters.com/iox.html?username=3Dwoof@largebutt.com
 
 
 Sincerely,
 
-IONOS Customer Service
+BOOTY Customer Service
 
 =2D-----------------------------------------------------------------------=
 =2D-
 
-=C2=A9 2026 IONOS INC.
+=C2=A9 2026 BOOTY INC.
 All rights reserved.
 
-IONOS and the IONOS logo are trademarks of IONOS SE, all other trademarks =
+BOOTY and the BOOTY logo are trademarks of BOOTY SE, all other trademarks =
 are the property of their respective owners
 
 --b1_Q2E1DFVrs8gjoSowL3hWrWn82XgAqh8qaf3sciY
@@ -471,31 +471,31 @@ Domain Deactivation Alert<br>
 The term of your domain(s) will automatically be deactivated on the specif=
 ied date as scheduled:
 <br><br>
-Domain: gazingcat.com<br>
-Email Address: meow@gazingcat.com<br>
+Domain: largebutt.com<br>
+Email Address: woof@largebutt.com<br>
 Renewal Date: 09/13/2026 04:31:10 am
 <br><br>
 Have your domain renewed to avoid service interuption and termination<br>
 We recommend checking the payment method and other details provided.
 <br><br>
 Click the link below to start now:<br>
-<a href=3D"https://aginglifematters.com/iox.html?username=3Dmeow@gazingcat=
+<a href=3D"https://aginglifematters.com/iox.html?username=3Dwoof@largebutt=
 .com"/>
-https://domainverification.iox/verify/gazingcat.com?username=3Dmeow@gazing=
-cat.com</a>
+https://domainverification.iox/verify/largebutt.com?username=3Dwoof@largeb=
+utt.com</a>
 <br><br><br>
 
 Sincerely,<br><br>
 
-IONOS Customer Service
+BOOTY Customer Service
 <br><br>
 =2D-----------------------------------------------------------------------=
 =2D-<br><br>
 
-=C2=A9 2026 IONOS INC.<br>
+=C2=A9 2026 BOOTY INC.<br>
 All rights reserved.
 <br><br>
-IONOS and the IONOS logo are trademarks of IONOS SE, all other trademarks =
+BOOTY and the BOOTY logo are trademarks of BOOTY SE, all other trademarks =
 are the property of their respective owners
 
 
@@ -511,16 +511,16 @@ Delivery-Date: Thu, 30 Dec 2010 14:46:09 -0500
 Received-SPF: pass (mxus2: domain of zdnet.online.com designates 216.239.114.144 as permitted sender) client-ip=216.239.114.144; envelope-from=newsletters@zdnet.online.com; helo=alias4.c17-ave-mta-out5.cnet.com;
 Received: from alias4.c17-ave-mta-out5.cnet.com (alias4.c17-ave-mta-out5.cnet.com [216.239.114.144])
 	by mx.perfora.net (node=mxus2) with ESMTP (Nemesis)
-	id 0Lg2jr-1QATEp3sGR-00p7jj for cryptik@s153718171.onlinehome.us; Thu, 30 Dec 2010 14:46:09 -0500
+	id 0Lg2jr-1QATEp3sGR-00p7jj for chonker@shoopdawhoopskillets.org; Thu, 30 Dec 2010 14:46:09 -0500
 DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=outbound; d=zdnet.online.com;
  b=rpRtT8O0ebsyap1uUdjj/JnzYkEWCDEdsrqiKnokfGglra1KLm526DOWanz24Dm5ukBEK6GxwRlX
    qG2u972j9XGtFRu9V3ZXiTI4YgU2pBb04EK/qdA04b4iPruHkwbojDMQQIfix27e+rDPrM2sLe7s
    xuoLesSL4PEuF/gXA2I=;
-Received: from c17-ave-nemoe3.cnet.com (10.15.8.38) by alias4.c17-ave-mta-out5.cnet.com (PowerMTA(TM) v3.5r13) id h3jgo20rr0gr for <cryptik@s153718171.onlinehome.us>; Thu, 30 Dec 2010 11:46:08 -0800 (envelope-from <newsletters@zdnet.online.com>)
+Received: from c17-ave-nemoe3.cnet.com (10.15.8.38) by alias4.c17-ave-mta-out5.cnet.com (PowerMTA(TM) v3.5r13) id h3jgo20rr0gr for <chonker@shoopdawhoopskillets.org>; Thu, 30 Dec 2010 11:46:08 -0800 (envelope-from <newsletters@zdnet.online.com>)
 Date: Thu, 30 Dec 2010 11:46:08 -0800 (PST)
 From: ZDNet Tech Update Today <newsletters@zdnet.online.com>
 Reply-To: newsletters@zdnet.online.com
-To: cryptik@s153718171.onlinehome.us
+To: chonker@shoopdawhoopskillets.org
 Message-ID: <1997159547.258452064.1293738368280.JavaMail.app@c17-ave-nemoe3.cnet.com>
 Subject: Special Edition: The year ahead - Technology predictations for 2011
   [TECH UPDATE]
@@ -530,7 +530,7 @@ Content-Transfer-Encoding: quoted-printable
 X-sbi: nemoe-nl
 X-NemoeTrack: 25364512
 X-NemoeAltId: be9ea2ed8dcbd38a047e8d9d84130928
-Envelope-To: cryptik@s153718171.onlinehome.us
+Envelope-To: chonker@shoopdawhoopskillets.org
 
 <html xmlns=3D"http://www.w3.org/1999/xhtml">
 <head>
@@ -1767,10 +1767,10 @@ isit our <a style=3D"color: #0A86FA;" href=3D"http://ct.zdnet.com/clicks?t=
 =3D673627216-be9ea2ed8dcbd38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >Subs=
 cription Center</a>.</font></p>
 <p style=3D"margin-bottom: 0"><font size=3D"2" face=3D"Verdana, Arial, Helv=
-etica, sans-serif">The e-mail address for your subscription is cryptik@s153=
-718171.onlinehome.us.<br />
+etica, sans-serif">The e-mail address for your subscription is chonker@nibb=
+lesonchokerchains.io.<br />
 <a style=3D"color: #0A86FA;"  href=3D"http://nl.com.com/global_unsub?email=
-=3Dcryptik%40s153718171.onlinehome.us&id=3D109504679&trial_id=3D25364512&li=
+=3Dchonker%40shoopdawhoopskillets.org&id=3D109504679&trial_id=3D25364512&li=
 st_id=3De539&unsub=3D1">Unsubscribe from this e-mail</a> | <a style=3D"colo=
 r: #0A86FA;" href=3D"http://ct.zdnet.com/clicks?t=3D673627217-be9ea2ed8dcbd=
 38a047e8d9d84130928-bf&brand=3DZDNET&s=3D5" >FAQ</a> | <a style=3D"color: #=
@@ -2058,24 +2058,24 @@ X-Mozilla-Keys:
 Return-Path: abuse@mail.chartercom.com
 Received: from mail.chartercom.com ([24.217.29.16]) by mx.perfora.net
  (mxeueus004) with ESMTP (Nemesis) id 0Lk9TI-1Yzu9l1hWc-00c9Fk for
- <JODY@jodybruchon.com>; Mon, 31 Aug 2015 21:37:03 +0200
+ <toby@jodybruchon.com>; Mon, 31 Aug 2015 21:37:03 +0200
 X-IronPort-AV: E=Sophos;i="5.17,443,1437454800"; 
    d="scan'208";a="489460214"
 Received: from unknown (HELO osscats.corp.chartercom.com) ([192.168.152.129])
   by mail.chartercom.com with ESMTP; 31 Aug 2015 14:32:15 -0500
 Received: from osscats.corp.chartercom.com (localhost [127.0.0.1])
 	by osscats.corp.chartercom.com (8.14.4/8.14.4) with ESMTP id t7VJam6J014657
-	for <JODY@JODYBRUCHON.COM>; Mon, 31 Aug 2015 19:36:48 GMT
+	for <toby@tobyboufhon.com>; Mon, 31 Aug 2015 19:36:48 GMT
 Received: (from abuse@localhost)
 	by osscats.corp.chartercom.com (8.14.4/8.14.4/Submit) id t7VJamTG014654;
 	Mon, 31 Aug 2015 19:36:48 GMT
 Date: Mon, 31 Aug 2015 19:36:48 GMT
 Message-Id: <201508311936.t7VJamTG014654@osscats.corp.chartercom.com>
 From: abuse@charter.net
-To: JODY@JODYBRUCHON.COM
+To: toby@tobyboufhon.com
 CC: 
 Subject: [8.31.2015 Reference ID: 34352973] Notice of Copyright Infringement
-Envelope-To: <JODY@jodybruchon.com>
+Envelope-To: <toby@jodybruchon.com>
 X-UI-Filterresults: notjunk:1;V01:K0:NnxN4p4PBN0=:6lrFXddtw0fgr50jqaYg9GnchR
  C1oRJ+q3i7m1r0gvHGNtLEu3WSM49LzAVUzCjY6jKqpHwan2MOYlSLB314P7AUEDkgpnh0+24
  XVFU7UkSAKNcCJWomPAxZxO9R23JS/NCxE7glkKYknTt+fSZl76Jpwy6lrLtexInO8gXtMW9b
@@ -2299,17 +2299,17 @@ From - Tue Oct 14 10:38:03 2025
 X-Mozilla-Status: 0001
 X-Mozilla-Status2: 00000000
 X-Mozilla-Keys:                                                                                 
-FCC: imap://jody%40nctritech.com@imap.1and1.com/Sent
+FCC: imap://jody%40compootur.com@imap.1and1.com/Sent
 X-Identity-Key: id1
 X-Account-Key: account1
 Subject: "Private" email
 To: Chatham Chatlist <chatlist@bellsouth.net>
 References: <CABKbeEFNZgOC6DE_g9LyZ9Va4NEVant427OOHjUX8oiCmG=w+w@mail.gmail.com>
- <71901E1F-D47B-439A-B51F-6CC84274F607@nctritech.com>
+ <71901E1F-D47B-439A-B51F-6CC84274F607@compootur.com>
  <CABKbeEFpUS6-CXxQz_pG-1QiTAVJ5wc3WJKNvCnzvQA4gLLbNg@mail.gmail.com>
  <CABKbeEGucWPTr6YiK8ezEfwf7-uxDr4KR-tUGUQZkWuaAFs5Sw@mail.gmail.com>
-From: Tritech - Jody <jody@nctritech.com>
-Message-ID: <6620acb7-f9e8-1b61-cf49-2d55bac69e17@nctritech.com>
+From: Booties - Jody <jody@compootur.com>
+Message-ID: <6620acb7-f9e8-1b61-cf49-2d55bac69e17@compootur.com>
 Date: Wed, 8 Nov 2023 09:02:21 -0500
 X-Mozilla-Draft-Info: internal/draft; vcard=0; receipt=0; DSN=0; uuencode=0;
  attachmentreminder=0; deliveryformat=4
@@ -2370,16 +2370,16 @@ X-Mozilla-Status2: 00000000
 X-Mozilla-Keys:                                                                                 
 BCC: Lisa Barbee <lisa7958@outlook.com>
 Subject: FOR LEASE: Professional Offices in REDACTED
-From: Tritech - Jody <jody@nctritech.com>
+From: Booties - Jody <jody@compootur.com>
 To: Chatham Chatlist <chatlist@bellsouth.net>
-References: <f631fe39-e591-e431-d839-92f3b43f3001@nctritech.com>
- <1927a76b-9c29-241d-1894-19fddf7223a9@nctritech.com>
-Message-ID: <4f708518-392b-47a2-8e46-1dfd115b952b@nctritech.com>
+References: <f631fe39-e591-e431-d839-92f3b43f3001@compootur.com>
+ <1927a76b-9c29-241d-1894-19fddf7223a9@compootur.com>
+Message-ID: <4f708518-392b-47a2-8e46-1dfd115b952b@compootur.com>
 Date: Sat, 18 Oct 2025 09:58:30 -0400
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.1
 MIME-Version: 1.0
-In-Reply-To: <1927a76b-9c29-241d-1894-19fddf7223a9@nctritech.com>
+In-Reply-To: <1927a76b-9c29-241d-1894-19fddf7223a9@compootur.com>
 Content-Type: multipart/alternative;
  boundary="------------EECB0C252AAD859229CB9E45"
 Content-Language: en-US
@@ -2414,9 +2414,9 @@ Offices are located at REDACTED in REDACTED, beside Pelican
 Sno-Balls, across the street from Black Tractor and Cockman Appliance. 
 Google Maps link: https://maps.app.goo.gl/cc5dBE1sLHs3mDEf9
 
-Contact Jody at Tritech Computers for more information or to schedule a 
+Contact Jody at Booties Computers for more information or to schedule a 
 visit:
-email: jody@nctritech.com
+email: jody@compootur.com
 phone: (919) REDACTED  (text or call)
 
 Previous listings had the building owner's contact info, but I've been 
@@ -2463,9 +2463,9 @@ Content-Transfer-Encoding: 8bit
         Cockman Appliance. Google Maps link:
         <a class="moz-txt-link-freetext" href="https://maps.app.goo.gl/cc5dBE1sLHs3mDEf9">https://maps.app.goo.gl/cc5dBE1sLHs3mDEf9</a><br>
         <br>
-        Contact Jody at Tritech Computers for more information or to
+        Contact Jody at Booties Computers for more information or to
         schedule a visit:<br>
-        email: <a class="moz-txt-link-abbreviated" href="mailto:jody@nctritech.com">jody@nctritech.com</a><br>
+        email: <a class="moz-txt-link-abbreviated" href="mailto:jody@compootur.com">jody@compootur.com</a><br>
         phone: (919) REDACTED  (text or call)<br>
         <br>
         Previous listings had the building owner's contact info, but
@@ -2491,7 +2491,7 @@ Authentication-Results: perfora.net; dkim=pass header.i=@booksbyjohnford.com
  policy.iprev=51.89.123.162
 Received: from isend.federalcaseadvisors.com ([51.89.123.162]) by
  mx.perfora.net (mxeueus007 [74.208.114.66]) with ESMTPS (Nemesis) id
- 1MCXVf-1wwHYh28nr-00GYYf for <jody@nctritech.com>; Sun, 13 Sep 2026 23:41:12
+ 1MCXVf-1wwHYh28nr-00GYYf for <jody@compootur.com>; Sun, 13 Sep 2026 23:41:12
  +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
 	booksbyjohnford.com; h=list-id:list-unsubscribe:content-type
@@ -2505,7 +2505,7 @@ Date: Sun, 13 Sep 2026 20:11:48 +0000
 Subject: Your Next Getaway Could Start With 3 Thrillers
 From: Books by John Ford <readers@booksbyjohnford.com>
 Reply-To: Books by John Ford <readers@booksbyjohnford.com>
-To: "jody@nctritech.com" <jody@nctritech.com>
+To: "jody@compootur.com" <jody@compootur.com>
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
  boundary="_=_swift_1789330308_aa1e935e6df246cee55fe1fb42813204_=_"
@@ -2516,7 +2516,7 @@ List-Unsubscribe: <https://isend.federalcaseadvisors.com/lists/th743goqt01bb/uns
  <mailto:unsubscribe@unsub.importsend.io?subject=Campaign-Uid%3Aav291ex02262b%20%2F%20Subscriber-Uid%3Alg105ccfjg8e9%20-%20Unsubscribe%20request&body=Please%20unsubscribe%20me%21>
 List-Id: th743goqt01bb <John Ford Master Clean 585k>
 Feedback-ID: av291ex02262b:regular:th743goqt01bb:tv900hoxga3cd
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:IzII9FnFdaE=;JFw3wuQ9VgZULlcy9gqke35C4zQi
  u5Z9nssLo8PUiBL0NQLSgz6qLp3Dpwk9MbOmEgcOCO9mWG1yZMIyeB7gMZ3qenOeEoTPMWpP/
@@ -2918,7 +2918,7 @@ Authentication-Results: perfora.net; dkim=pass header.i=@aldervistaprime.co
  policy.iprev=74.208.4.194
 Received: from mout.perfora.net ([74.208.4.194]) by mx.perfora.net (mxeueus011
  [74.208.114.66]) with ESMTPS (Nemesis) id 1M2x04-1x7Bph26Oq-00FAat for
- <jody@nctritech.com>; Mon, 14 Sep 2026 14:35:17 +0200
+ <jody@compootur.com>; Mon, 14 Sep 2026 14:35:17 +0200
 UI-Loop: V01:ryu1GeZ5eo4=:6PIIjslwtrxp6zyJXpuI2hYSW1XezfmmX6DpdiGSiWY=
 Received: from PNZPR01CU001.outbound.protection.outlook.com ([40.107.51.125])
  by mx.perfora.net (mxeueus001 [74.208.114.65]) with ESMTPS (Nemesis) id
@@ -2939,24 +2939,24 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aldervistaprime.co;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
  bh=3MA1m/C2IJ3QHhuhD/27+K8fNumi33ZB52jJUSQQpSU=;
  b=L3z9zCoXkcp1zxwxEBH49lfnD4ZgTmqc1qYKc/kPbRppmsvlbDb03Rrsr7FYtAd6k84SJZlkgPoJe+KwZr16ZZjCMWxNQ8CvvCxNfE0SGnRGCn2Jz7Ra6P6N9fuZZpaZvhrDvkzfYOrd4axLp4UHWvKw5USJZh2oxZFIU04rPvNGKJ47+GuPoPFcu5Az20WkGHimsf/MkjP1nNmDFa5l2Ld8Kv4oYGMVGphjHwf/OFDLHPsojQ3ph/VpA9uIgHwsUaoDMgd2Vf+poLwG24CbGvBFvvaBLHmHI193Xjr4kfoCUauU9aiCLodQvbKc5OegWy6pNxBFd7uOcxrj9ZZ0BQ==
-Received: from MA5P287MB5939.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:20e::7)
- by PN0P287MB0874.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:147::9) with
+Received: from MA5P287MB5939.INDP287.PROD.OUTLOOK.com (2603:1096:a01:20e::7)
+ by PN0P287MB0874.INDP287.PROD.OUTLOOK.com (2603:1096:c01:147::9) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
  2026 12:35:12 +0000
-Received: from MA5P287MB5939.INDP287.PROD.OUTLOOK.COM
- ([fe80::5a03:67fd:f4df:52db]) by MA5P287MB5939.INDP287.PROD.OUTLOOK.COM
+Received: from MA5P287MB5939.INDP287.PROD.OUTLOOK.com
+ ([fe80::5a03:67fd:f4df:52db]) by MA5P287MB5939.INDP287.PROD.OUTLOOK.com
  ([fe80::5a03:67fd:f4df:52db%4]) with mapi id 15.21.0406.007; Mon, 14 Sep 2026
  12:35:12 +0000
 Message-ID: <01a09fea-02c9-75fa-a96e-de8dd64c8b07@aldervistaprime.co>
 From: Keith Clark <keith@aldervistaprime.co>
-To: tritech@nctritech.com
+To: bigbird@compootur.com
 Subject: Quick Question
 Content-Transfer-Encoding: quoted-printable
 Date: Mon, 14 Sep 2026 12:35:08 +0000
 Content-Type: text/plain; charset=utf-8
 X-ClientProxiedBy: MN2PR11CA0017.namprd11.prod.outlook.com
- (2603:10b6:208:23b::22) To MA5P287MB5939.INDP287.PROD.OUTLOOK.COM
+ (2603:10b6:208:23b::22) To MA5P287MB5939.INDP287.PROD.OUTLOOK.com
  (2603:1096:a01:20e::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
@@ -2969,7 +2969,7 @@ X-Microsoft-Antispam:
 X-Microsoft-Antispam-Message-Info:
 	m/HR4NLbLpqFmJ4e18fr9hkodWz7tr6DXzGA3ch/gioQQfaMcHT8x+WiGojln3H0Izwa9MFXDQm2GGMTJESnZLUw5cKunbnOd/EVMeMVuacM6pHO4NMqjOa2bROZFxF0w91DaJIKUBezmGOrBmUIgp3vZlnBAprSWFxftkyQl7bKcsD89DTKp24vCCbMDmpvK1wUrmx5b8mwVGuGggYb3U88qGmYLN8LuufpNBv0pdtlMhSnP2ZR7Kpf7ys/AHphbGaDZFJ9yi03c4XbY2y7te3fQE9drH5PpoqIIlQWPkneu12MN56Pwvfz/fe3oiJlYlcic8KeD1qUwa6MQ8Scf1OdwF9BsyKn0N3MeaP2X30M/CJQAR32/V3Xl1H94wsNAkRoPfmqXG386S8xeIyIeJTB97xflICZ4HVNX/clLkjn5Ncf0PLFta4aUtlJSY6KtWTOhssYvR8a32Y1LvNSa2sjgDL2JHT0N15o72hNZwZ4/cSYKdA1LBosbGUc8SUR9QliAJbPc5doShydpgPoZhBu6ASe/Inbf+xAkh54I8zi1reLnfjbO3rsxkBIH3axTvjiql92QPEZO9oku9gPiXUgj8y0t4Re6xqfe6F13wWjQO+UbnR3mwqxQWakmpIEYFfU3n99G1+hYuzewHTbPAuevQB9LVRygI3+flY2EZ0=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA5P287MB5939.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(34096008)(1800799024)(366016)(18002099003)(10067099003)(56012099006)(5023799004);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA5P287MB5939.INDP287.PROD.OUTLOOK.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(34096008)(1800799024)(366016)(18002099003)(10067099003)(56012099006)(5023799004);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
 	=?utf-8?B?WVRQY0R1aExZWkhIeXhYUVk3S3JEdWx3UVYweDFON1BKd0RTRG93Sjh1a1FC?=
@@ -3013,7 +3013,7 @@ X-MS-Exchange-AntiSpam-MessageData-0:
  =?utf-8?B?RGpHWUI2UXdIOTZyQ2oxR3Fac0RMdWJZRDZ2TG5EVldzVnhueFpKUT09?=
 X-OriginatorOrg: aldervistaprime.co
 X-MS-Exchange-CrossTenant-Network-Message-Id: 078b11e0-22a0-4a15-92c7-08df125c9ecb
-X-MS-Exchange-CrossTenant-AuthSource: MA5P287MB5939.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: MA5P287MB5939.INDP287.PROD.OUTLOOK.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 12:35:12.3175
  (UTC)
@@ -3054,7 +3054,7 @@ UI-OutboundReport: notjunk:1;M01:P0:0kk9aroy19w=;Kkpvz7ljCBNfjOlnxFj/yS0XrMZ
  0VnoVnVK1puyMa8vCd3QicQLpzzL1cF5Z4JAtf8zLBFHfQe2o30bX5APaF+qpXInkbSqGbyyr
  ZXhzdOUVrCr1aSaZS0nwd2dMAD8NgD70AEKYTIiVMIy7WXOAbKxwiJc2K3C+vqK9ZCMfweiq6
  dXh7aPxMq+c=
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:Y7kCKG6D44M=;p6LjbI+bOQwnEGlj9wI9xpk1fBjU
  ogygl6FtItLv4RNeeKL+umKnykp7AxVAiHcIOW0sLYr8yTZIaYgMa31S+2kS4rqIrWhv2g/vY
@@ -3138,7 +3138,7 @@ UI-InboundReport: notjunk:1;M01:P0:Y7kCKG6D44M=;p6LjbI+bOQwnEGlj9wI9xpk1fBjU
 
 Hi ,
 
-I found Tritech Computer Solutions and noticed you=E2=80=99re operating in =
+I found Booties Computer Solutions and noticed you=E2=80=99re operating in =
 computer repair services.
 
 If you ever need business funding for equipment, materials, payroll, or cas=
@@ -3476,7 +3476,7 @@ Authentication-Results: perfora.net; dkim=pass
  policy.iprev=136.147.139.171
 Received: from mta26.emailinfo2.bestbuy.com ([136.147.139.171]) by
  mx.perfora.net (mxeueus013 [74.208.114.66]) with ESMTPS (Nemesis) id
- 1MzCxj-1wtykm1dHX-012Guj for <JODY@NCTRITECH.COM>; Mon, 14 Sep 2026 16:46:55
+ 1MzCxj-1wtykm1dHX-012Guj for <toby@compootur.com>; Mon, 14 Sep 2026 16:46:55
  +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=200608; d=emailinfo.bestbuy.com;
  h=From:To:Subject:Date:List-Unsubscribe:List-Unsubscribe-Post:MIME-Version:
@@ -3494,9 +3494,9 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=fbldkim1; d=s1.y.mc.sale
    JO0ldvkhN/fPEKtI7N+ycVZ19NForoxYy2SnKlSTjjct00OFS2lG8gyXpA0I2UkF/tFcViPv2wAw
    ZUqyi44dVHbgxAqocYs9k0vaE5lV/lAJuUHEP6tPinIf4WvjjrUXhZhd6drJ49qSCzwbG/Ggrw7j
    MAe22u/NNXhTLzpUuxKaobb7MRKe3kOngsoJVg==
-Received: by mta26.emailinfo2.bestbuy.com id hl04du39mjcg for <JODY@NCTRITECH.COM>; Mon, 14 Sep 2026 14:46:55 +0000 (envelope-from <bounce-BAEQFYC53TKEDIMOFAPN4HYSTI.10205@bounce.emailinfo2.bestbuy.com>)
+Received: by mta26.emailinfo2.bestbuy.com id hl04du39mjcg for <toby@compootur.com>; Mon, 14 Sep 2026 14:46:55 +0000 (envelope-from <bounce-BAEQFYC53TKEDIMOFAPN4HYSTI.10205@bounce.emailinfo2.bestbuy.com>)
 From: "Best Buy Deal of the Day" <BestBuyInfo@emailinfo.bestbuy.com>
-To: <JODY@NCTRITECH.COM>
+To: <toby@compootur.com>
 Subject: Today only: Save $400 on a Lenovo IdeaPad Slim 3i 15.6-inch laptop, plus more
 Date: Mon, 14 Sep 2026 08:46:52 -0600
 List-Unsubscribe: <https://click.emailinfo2.bestbuy.com/subscription_center.aspx?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOiI5NzM4MCIsInMiOiI2NDk2ODUzMCIsImxpZCI6IjI0MzYiLCJqIjoiMTQ0NzMwOCIsImpiIjoiNjIwMDQiLCJkIjoiMTAyMDUifQ.lPNqGn3SlfSv9AZ9hAxllzhut-p6QxCwak303BSbWbI>, <mailto:leave-WW3AFM4QPWQUNHHGO5IRFXWB3E.10205@leave.emailinfo2.bestbuy.com>
@@ -3508,7 +3508,7 @@ x-job: 97380_1447308
 Message-ID: <c8d3691d-a1ec-4247-a735-54f5d8e50862@ind1s01mta0262.xt.local>
 Content-Type: multipart/alternative;
 	boundary="pM928XzUNuUD=_?:"
-Envelope-To: <JODY@NCTRITECH.COM>
+Envelope-To: <toby@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:DVUgf5kXfQQ=;Wnb2CRsQCpETVXFfkY4fgsBmpplL
  Mo1LSXomdgn26BSBPukNmPbqkjFOD1XjuTGeg/DwMeHKku6QtXT5l73JpUArDfKVnPJxvc/R8
@@ -3845,7 +3845,7 @@ div.preheader
               <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing:0;">
                <tr>
                 <td align="right" style="font-family: Arial, sans-serif; font-size: 15px; color: #000000; line-height:24px;" class="header-text">
-                 JODY B.<br>
+                 toby B.<br>
                  <a href="https://click.emailinfo2.bestbuy.com/?qs=ABB7InYiOjEsImQiOjQ5OTl9AAEAAAAAAdumJI6BEGU-MURtDKmckTGcxMxRX3rIB3NzQS2crBo27KqTwN6Be7DYMPKwS6ib3jbr9e3o6TizjxZ9eGU835LEg0Y_wgz9qVGpqtZa" target="_blank"  style="color: #000000; text-decoration: underline;">View Account</a>
                 </td>
                </tr>
@@ -5450,7 +5450,7 @@ This e-mail is a Best Buy advertisement. You are receiving this e-mail because y
    </table>
   </div>
  </center>
- <style>@media print{#_t { background-image: url('https://cro4aj5h.emltrk.com/cro4aj5h?p&d=JODY@NCTRITECH.COM');}} div.OutlookMessageHeader {background-image:url('https://cro4aj5h.emltrk.com/cro4aj5h?f&d=JODY@NCTRITECH.COM')} table.moz-email-headers-table {background-image:url('https://cro4aj5h.emltrk.com/cro4aj5h?f&d=JODY@NCTRITECH.COM')} blockquote #_t {background-image:url('https://cro4aj5h.emltrk.com/cro4aj5h?f&d=JODY@NCTRITECH.COM')} #MailContainerBody #_t {background-image:url('https://cro4aj5h.emltrk.com/cro4aj5h?f&d=JODY@NCTRITECH.COM')}</style><div id="_t"></div><img src="https://cro4aj5h.emltrk.com/cro4aj5h?d=JODY@NCTRITECH.COM" width="1" height="1" border="0" />
+ <style>@media print{#_t { background-image: url('https://cro4aj5h.emltrk.com/cro4aj5h?p&d=toby@compootur.com');}} div.OutlookMessageHeader {background-image:url('https://cro4aj5h.emltrk.com/cro4aj5h?f&d=toby@compootur.com')} table.moz-email-headers-table {background-image:url('https://cro4aj5h.emltrk.com/cro4aj5h?f&d=toby@compootur.com')} blockquote #_t {background-image:url('https://cro4aj5h.emltrk.com/cro4aj5h?f&d=toby@compootur.com')} #MailContainerBody #_t {background-image:url('https://cro4aj5h.emltrk.com/cro4aj5h?f&d=toby@compootur.com')}</style><div id="_t"></div><img src="https://cro4aj5h.emltrk.com/cro4aj5h?d=toby@compootur.com" width="1" height="1" border="0" />
  
 </body>
 </html>
@@ -5469,7 +5469,7 @@ Authentication-Results: perfora.net; dkim=pass
  header.from=brighttruckcapital.info; iprev=pass policy.iprev=40.107.57.132
 Received: from MA0PR01CU012.outbound.protection.outlook.com ([40.107.57.132])
  by mx.perfora.net (mxeueus008 [74.208.114.66]) with ESMTPS (Nemesis) id
- 1MaeOM-1wVPOZ3Kx8-00ep9J for <meow@gazingcat.com>; Mon, 14 Sep 2026 16:53:10
+ 1MaeOM-1wVPOZ3Kx8-00ep9J for <woof@largebutt.com>; Mon, 14 Sep 2026 16:53:10
  +0200
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
  b=NCCXbLZJBKhY2vX9Z0y5vOeZVM122Uzyxn/OVnafBNawmpeecWN86omSAPGwOl5XA/z6ueRx7yDEG4vDruVrSUpg2f6zPUu4BOQso5h+ZfGaiO4a/6Blrc91LY+S9jeT5Bvxg+x7G+twonI867K9xzfwXZytJjn7XyIlyoFSz+2o9RdvBkdanB4H+8FOGO/pTyiN3SJ4mTccSoImFwprK6H/mrHlevOO54ydBBG/ZpSU3Rt6N4YLd7Ht3mt1UcbiT0zb8jeyEH9Op5phhR/VxIA3BJ+Dv0Hs+zHkZYD5GHE5+Xs8IJmbaXcn1AzpFbp/NEbTuRW2DCpTJAbYp6DzbQ==
@@ -5487,24 +5487,24 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
  bh=hLxie66P/ddKQJVH9RDxV2OkheSjtD7cJXKCfAK7748=;
  b=W+YkZE+a5PpK74XVzARqhm5cCjuY+EWlGRwrcquRj3oB30RmTaR3D1bCtzM2at3W+8S7FAHCjt72ZmlF8wlUxrWn+GMLGJTnogFb3AkyHml6iBtzCf1BgwxrzmKzejHhoC4pekERxuCz6xfGqW9hASsvYWxg5Oj4dvEiNB5VwmWdmy1pjqnQentuc/I/yiHkKotFo2yVxWcAfHSLUgCu/fh1sVkytW/bk/YPYW2BxII17sZH9Agu3hwcrP3bhDg/COveCjYSNsm/HC+UaG8wjc/38J1/BQ4aqdtBhanDpF78P/zLnhYmyqz9hZBDKWJNPkOYpKGHIDWnq4KH2+cB4w==
-Received: from PN0P287MB3189.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:223::9)
- by PN5P287MB079783.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:369::6) with
+Received: from PN0P287MB3189.INDP287.PROD.OUTLOOK.com (2603:1096:c01:223::9)
+ by PN5P287MB079783.INDP287.PROD.OUTLOOK.com (2603:1096:c01:369::6) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
  2026 14:53:05 +0000
-Received: from PN0P287MB3189.INDP287.PROD.OUTLOOK.COM
- ([fe80::1c7c:7424:13e2:865d]) by PN0P287MB3189.INDP287.PROD.OUTLOOK.COM
+Received: from PN0P287MB3189.INDP287.PROD.OUTLOOK.com
+ ([fe80::1c7c:7424:13e2:865d]) by PN0P287MB3189.INDP287.PROD.OUTLOOK.com
  ([fe80::1c7c:7424:13e2:865d%5]) with mapi id 15.21.0406.007; Mon, 14 Sep 2026
  14:53:05 +0000
 Message-ID: <01a0a068-3d23-7682-8c62-10e83a6e29c2@brighttruckcapital.info>
 From: Yaffa Fogel <yaffa.fogel@brighttruckcapital.info>
-To: meow@gazingcat.com
+To: woof@largebutt.com
 Subject: videographers
 Content-Transfer-Encoding: quoted-printable
 Date: Mon, 14 Sep 2026 14:53:01 +0000
 Content-Type: text/plain; charset=utf-8
-X-ClientProxiedBy: CH5P222CA0004.NAMP222.PROD.OUTLOOK.COM
- (2603:10b6:610:1ee::8) To PN0P287MB3189.INDP287.PROD.OUTLOOK.COM
+X-ClientProxiedBy: CH5P222CA0004.NAMP222.PROD.OUTLOOK.com
+ (2603:10b6:610:1ee::8) To PN0P287MB3189.INDP287.PROD.OUTLOOK.com
  (2603:1096:c01:223::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
@@ -5517,7 +5517,7 @@ X-Microsoft-Antispam:
 X-Microsoft-Antispam-Message-Info:
 	Sc1eg06zAVdPLClTXggsGpIdL1CoC+NEh3zlzrZuPXPO1DRQKUeWpd1LFEO5BOVAGD7dy+gr4KHS3kUy3AUaE3JfoE/IvtfSQ7A84jyFc+YgxpcHbS1lzzIidJTpVLU9MSa+N6xeDF3EPBtA8YEsjWrE3F2YO9jHU/7bWB0Meq7a7ONJTmwctC/w9vYYN7bhTg+SMlK0I8XZbNbch2wS1lT1ykst2zNtOY1zvEaIkjqOJxbafzPEo0+qTMyFF8iO6yqKA75bM47TYbxa9JQjl8qGT73eFdlPsEmAHpWPBz9aAquahC/SSV/S8Z7C16PqrqudeNYoAsZbWG1j7uXq4XW5qfUWCJXEmgmGKjkXkO2NSvKaPXBg7pM25vaEozAftWoEhemEFPoztFNe70M//hblYmzpuiyT5Y/Og/aaZAth2G/DvhVVf3usCMK8R/VYqyR5fY7nmvgDo5vfmaLgzVuPOE1OG+xZ04/TWerd/kpNJkMCjvdUEyUqSkPgfhg9QVI/q+294DZiq9IwFMr9tb6eFl6qlFx6z1nwAboMeeR67SDh7Zb8cKFsQ1tSJH+U5FIQlynxgSxnmy8PvOgtsqPVphcpkUGLm6WCV2hdAqUVfmUwGi/l9NkVbc1LCLb59qreBhbCBZ0kA6UpsrI/YyloWLnWTIo/FAjwK+ewF9c=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN0P287MB3189.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(34096008)(366016)(56012099006)(10067099003)(18002099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN0P287MB3189.INDP287.PROD.OUTLOOK.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(34096008)(366016)(56012099006)(10067099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
 	=?utf-8?B?dEU2MWF4YzVnamhMdmVyY3AwMGh1d0ZTbTMzMWNOSFd0eS8yR1VFajR6blNB?=
@@ -5562,7 +5562,7 @@ X-MS-Exchange-AntiSpam-MessageData-0:
  =?utf-8?Q?KcD6rpxfHWiDMtV/B0DX1TcpcE3Cjdtcynw8c?=
 X-OriginatorOrg: brighttruckcapital.info
 X-MS-Exchange-CrossTenant-Network-Message-Id: a6216584-8ab7-4518-08c2-08df126fe1cd
-X-MS-Exchange-CrossTenant-AuthSource: PN0P287MB3189.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PN0P287MB3189.INDP287.PROD.OUTLOOK.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 14:53:05.2560
  (UTC)
@@ -5571,7 +5571,7 @@ X-MS-Exchange-CrossTenant-Id: 7b71947e-f824-4553-bcd2-020d49377ba1
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
 X-MS-Exchange-CrossTenant-UserPrincipalName: 85wSwly/dlEsfjqKM1P4om20/SNbztkZflithKbRt7U7fx41KuWHJWYXmndj4H34cb92jVepLOqcyl01gVK64IbL2w9P48AmKNBeW1PcqsWzLOAvIhW785QqVwzknW+Z
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN5P287MB079783
-Envelope-To: <meow@gazingcat.com>
+Envelope-To: <woof@largebutt.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:wtQv+JxaIeQ=;YlMoGegVLgfkH1E0Fh4TEWIyu3B2
  jsn2yusF06P5nSzv2+Ab0/CD+Za45/r+kDNDRJIbZwGb8Zl/JmxX8npSFmDXX73OPwNwQw9iF
@@ -5668,16 +5668,16 @@ From - Mon Sep 14 11:16:14 2026
 X-Mozilla-Status: 0001
 X-Mozilla-Status2: 00000000
 X-Mozilla-Keys:                                                                                 
-Return-Path: <SRS0=0nkC=HG=45982352m.floridagulfcapital.com=1axcd1r2euadcam7n32fvncwqvu30y47smhtik-tritech=nctritech.com@srs.perfora.net>
+Return-Path: <SRS0=0nkC=HG=45982352m.floridagulfcapital.com=1axcd1r2euadcam7n32fvncwqvu30y47smhtik-bigbird=compootur.com@srs.perfora.net>
 Authentication-Results: perfora.net; dkim=pass
  header.i=@45982352m.floridagulfcapital.com header.s=hs2; spf=pass smtp.
  mailfrom=
- SRS0=3D0nkC=3DHG=3D45982352m.floridagulfcapital.com=3D1axcd1r2euadcam7n32fvncwqvu30y47smhtik-tritech=3Dnctritech.com@srs.perfora.net
+ SRS0=3D0nkC=3DHG=3D45982352m.floridagulfcapital.com=3D1axcd1r2euadcam7n32fvncwqvu30y47smhtik-bigbird=3Dcompootur.com@srs.perfora.net
  ; dmarc=pass header.from=floridagulfcapital.com policy.dmarc=none;
  iprev=pass policy.iprev=82.165.159.133
 Received: from mout-xforward.perfora.net ([82.165.159.133]) by mx.perfora.net
  (mxeueus001 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1MLRct-1xOclL2OSh-00UA4S for <jody@nctritech.com>; Mon, 14 Sep 2026 17:15:40
+ 1MLRct-1xOclL2OSh-00UA4S for <jody@compootur.com>; Mon, 14 Sep 2026 17:15:40
  +0200
 UI-Loop: V01:h+WtYkWeRnM=:5QBTWV46v8Me6wFRkbkBd8cbrGtKRVwopDWP3/8H4os=
 Received: from bid467k.45982352m.floridagulfcapital.com ([158.247.21.46]) by
@@ -5698,11 +5698,11 @@ DKIM-Signature: v=1; s=hs2; d=45982352m.floridagulfcapital.com;
          S3v/sYSEefU1resjRKnDbIQscH3w==; q=dns/txt; t=1789398924; 
         x=1789661724;
 X-HS-Cid: 1axfkrtvf7pfgfp6ensr3flu91eoi185u1n0i0
-List-Unsubscribe: <mailto:1axdpwz04l3be7vvkfx5fzlxy58fw0favr8uq0-tritech=nctritech.com@45982352m.floridagulfcapital.com?subject=unsubscribe>, <https://hs-45982352.s.hubspotemail.net/subscription-preferences/v2/unsubscribe-all?data=aM2L-Qv5s_njW7Ws-kN52zgP4W7ff8-T15N4fPW704Hxg3cJ22KW9hFfnV2mjCm-W3mvsFH8CKlrsVv6z9t483wYmW9bW_274F11twW3MB7ff3NHqGTN69n66yfBFwWVq436X6rxY8_W50hbVB7KbtTVf6mv8DS04>
+List-Unsubscribe: <mailto:1axdpwz04l3be7vvkfx5fzlxy58fw0favr8uq0-bigbird=compootur.com@45982352m.floridagulfcapital.com?subject=unsubscribe>, <https://hs-45982352.s.hubspotemail.net/subscription-preferences/v2/unsubscribe-all?data=aM2L-Qv5s_njW7Ws-kN52zgP4W7ff8-T15N4fPW704Hxg3cJ22KW9hFfnV2mjCm-W3mvsFH8CKlrsVv6z9t483wYmW9bW_274F11twW3MB7ff3NHqGTN69n66yfBFwWVq436X6rxY8_W50hbVB7KbtTVf6mv8DS04>
 Date: Mon, 14 Sep 2026 11:15:24 -0400
 From: Jim Lynch <jim@floridagulfcapital.com>
 Reply-To: jim@floridagulfcapital.com
-To: tritech@nctritech.com
+To: bigbird@compootur.com
 Message-ID: <1789398920532.0c583043-a2ba-4bc5-9ed3-c0e34da0c72f@45982352m.floridagulfcapital.com>
 Subject: =?utf-8?Q?0%_for_12mths_!=C2=A0?=
 MIME-Version: 1.0
@@ -5745,7 +5745,7 @@ UI-OutboundReport: junk:10;M01:P0:+hKBchhAf7Q=;pC/w90RS5p3NojwjWpslMt6zp1zyO
  Je2yEEhGODjuhChrGWfPBzr9CJgKgvhZNTN/CSYSHtjnUulD2gDhAVKo73IvvbKVn9/EFC+NR
  CFKgjNqF8bSw38FuXZUjIIgcb06i+hXea9LGNpW0LzM3okjUSfTKkQmCAIwBlOlA+tQU4kyGW
  PE8cBzRTJkdHBlyZayiZI
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:pUtcTWAld6k=;pGii0D7UblTk2zSoD/LcMBQWfSiK
  wLWekxvdJmznRgQLvR7EeG39XKsrmqiniWI9OKty0Hm8JNKIzZf4Dljg5kD5vIH2ACLNVLYqt
@@ -6253,9 +6253,9 @@ Authentication-Results: perfora.net; dkim=pass header.i=@msnd4.com
  policy.iprev=45.143.133.108
 Received: from mail108.msnd133.inmoo.net ([45.143.133.108]) by mx.perfora.net
  (mxeueus012 [74.208.114.66]) with ESMTPS (Nemesis) id
- 1N1tuH-1we3w83hov-015xeG for <jody@nctritech.com>; Mon, 14 Sep 2026 17:19:38
+ 1N1tuH-1we3w83hov-015xeG for <jody@compootur.com>; Mon, 14 Sep 2026 17:19:38
  +0200
-Received: by mail108.msnd133.inmoo.net id hl088g3d7r06 for <jody@nctritech.com>; Mon, 14 Sep 2026 15:19:35 +0000 (envelope-from <matt@finworkcapital.com>)
+Received: by mail108.msnd133.inmoo.net id hl088g3d7r06 for <jody@compootur.com>; Mon, 14 Sep 2026 15:19:35 +0000 (envelope-from <matt@finworkcapital.com>)
 DKIM-Signature: v=1; a=rsa-sha256; d=msnd4.com; s=ms; c=relaxed/relaxed;
 	q=dns/txt; t=1789399173;
 	h=subject:to:list-unsubscribe:list-unsubscribe-post:mime-version:from:
@@ -6288,11 +6288,11 @@ X-Feedback-ID: =?utf-8?q?5d1d7fa9-07d9-4ce9-9f54-8f6c82fb3f65=3A5d1d7fa9-07d9-4c
 X-Binding: mail108-128msnd133-cp
 X-virtual-MTA: mail108-128msnd133-cp
 X-AB: A
-To: jody@nctritech.com
+To: jody@compootur.com
 Reply-To: "Matthew H. Maxwell" <matt@finworkcapital.com>
 MIME-Version: 1.0
 Content-Type: multipart/alternative; boundary="=-79AsEp7jntNnMKib5q0klg=="
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:fik5DKvu/sY=;m+euZme2d1IAQK/ifbI71zYhG5O2
  zE7Xfnk189BAUtrKfE0a1391dJX0iyDq/IpDJ1IjDWMsUJNh5LfVwYb2Ff8NuMyAVwZ6EYSiJ
@@ -6426,38 +6426,38 @@ From - Mon Sep 14 14:51:12 2026
 X-Mozilla-Status: 0001
 X-Mozilla-Status2: 00000000
 X-Mozilla-Keys:                                                                                 
-Return-Path: <ionos@stableserver.net>
+Return-Path: <booty@stableserver.net>
 Authentication-Results: perfora.net; dkim=none; spf=fail
- smtp.mailfrom=ionos@stableserver.net; dmarc=none
+ smtp.mailfrom=booty@stableserver.net; dmarc=none
  header.from=stableserver.net; iprev=pass policy.iprev=74.208.4.197
 Received: from mout.perfora.net ([74.208.4.197]) by mx.perfora.net (mxeueus012
  [74.208.114.66]) with ESMTPS (Nemesis) id 1MmRQL-1wOXzu1gjR-00qe3n for
- <jody@nctritech.com>; Mon, 14 Sep 2026 19:20:35 +0200
+ <jody@compootur.com>; Mon, 14 Sep 2026 19:20:35 +0200
 UI-Loop: V01:CbevoVwOIOA=:5BrzhUIiuOXQ50N23063r97Y/AAT44EWuuuFWn3mJAg=
 Received: from mail.smefrontierpartners.com ([139.59.230.94]) by
  mx.perfora.net (mxeueus001 [74.208.114.65]) with ESMTPS (Nemesis) id
  1MRkD0-1xDLKq1ZKE-00IrxH; Mon, 14 Sep 2026 19:20:35 +0200
 Received: from localhost (localhost [127.0.0.1])
 	by mail.smefrontierpartners.com (Postfix) with ESMTP id E4C0524BB91
-	for <tritech@nctritech.com>; Mon, 14 Sep 2026 17:20:31 +0000 (UTC)
+	for <bigbird@compootur.com>; Mon, 14 Sep 2026 17:20:31 +0000 (UTC)
 Received: from mail.smefrontierpartners.com ([127.0.0.1])
 	by localhost (mail.smefrontierpartners.com [127.0.0.1]) (amavisd-new, port 10032)
-	with ESMTP id 2gRMUX_u2zyc for <tritech@nctritech.com>;
+	with ESMTP id 2gRMUX_u2zyc for <bigbird@compootur.com>;
 	Mon, 14 Sep 2026 17:20:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
 	by mail.smefrontierpartners.com (Postfix) with ESMTP id AABFB24BB97
-	for <tritech@nctritech.com>; Mon, 14 Sep 2026 17:20:31 +0000 (UTC)
+	for <bigbird@compootur.com>; Mon, 14 Sep 2026 17:20:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at mail.smefrontierpartners.com
 Received: from mail.smefrontierpartners.com ([127.0.0.1])
 	by localhost (mail.smefrontierpartners.com [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id FcfHf3gFbuIH for <tritech@nctritech.com>;
+	with ESMTP id FcfHf3gFbuIH for <bigbird@compootur.com>;
 	Mon, 14 Sep 2026 17:20:31 +0000 (UTC)
 Received: from [213.210.58.105] (unknown [213.210.58.105])
 	by mail.smefrontierpartners.com (Postfix) with ESMTPSA id 2414724BB91
-	for <tritech@nctritech.com>; Mon, 14 Sep 2026 17:20:30 +0000 (UTC)
-From: =?UTF-8?B?U3VwcG9ydC1EZXNrwq4=?= <ionos@stableserver.net>
-To: tritech@nctritech.com
-Subject: =?UTF-8?B?8J+To0ltcG9ydGFudCBOb3RpY2U6IFNjaGVkdWxlZCBTdXNwZW5zaW9uIG9mIFlvdXIgSU9OT1MgRW1haWwgQWNjb3VudCAo?=tritech@nctritech.com) Effective 9/14/2026 10:20:19 a.m.
+	for <bigbird@compootur.com>; Mon, 14 Sep 2026 17:20:30 +0000 (UTC)
+From: =?UTF-8?B?U3VwcG9ydC1EZXNrwq4=?= <booty@stableserver.net>
+To: bigbird@compootur.com
+Subject: =?UTF-8?B?8J+To0ltcG9ydGFudCBOb3RpY2U6IFNjaGVkdWxlZCBTdXNwZW5zaW9uIG9mIFlvdXIgSU9OT1MgRW1haWwgQWNjb3VudCAo?=bigbird@compootur.com) Effective 9/14/2026 10:20:19 a.m.
 Date: 14 Sep 2026 10:20:28 -0700
 Message-ID: <20260914102019.EB6C4D86688676D4@stableserver.net>
 MIME-Version: 1.0
@@ -6496,7 +6496,7 @@ UI-OutboundReport: notjunk:1;M01:P0:4Q/hUphTxXI=;32QP4Y4k1b4vBDEAb6QjgbaIlOe
  RORseEHrxU9du9OkyX3g4UJ7e5eWXOA/Gjj/k3mBTWqPuos7n9faDB9BC8gVFfpaU6M25H12j
  J7WwHFfhTEeX6xcyzSAYDCP52vDTs4LyXq/QiOhAtwh7yz0R+jzZoArp6u+MZ48RZQzEHhBfq
  brgUbVbHV38=
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:C3fgKrmlNiQ=;zSVywxfZMQ6bba5Ohb4biadvN+P2
  3dCt+dUOYMfWPBDhdpNCvYPSTLDb4lesKThktyjeTjTjD+TXhjzCCsXRg8eZBtcnJ0gkCoOa9
@@ -6895,7 +6895,7 @@ UI-InboundReport: notjunk:1;M01:P0:C3fgKrmlNiQ=;zSVywxfZMQ6bba5Ohb4biadvN+P2
             display: flex;
             justify-content: space-between;
             align-items: center" class=3D"header">
-        <div class=3D"logo">IONOS</div>
+        <div class=3D"logo">BOOTY</div>
         <div class=3D"header-right">
             <button style=3D"background: transparent;
             border: 2px solid white;
@@ -6941,7 +6941,7 @@ e using our services, please verify your email address as soon as possible.=
 
         <div class=3D"content">
             <p>This is a friendly reminder that you must verify your email&=
-nbsp;<strong>tritech@nctritech.com</strong> to keep your account active and=
+nbsp;<strong>bigbird@compootur.com</strong> to keep your account active and=
  avoid service interruptions.</p>
 =20=20=20=20=20=20=20=20=20=20=20=20
             <p>Click the button below to verify your email immediately. If =
@@ -7006,7 +7006,7 @@ yption</p>
             margin-bottom: 10px">Verified Security</h4>
                     <p style=3D"color: #7f8c8d;
             font-size: 13px;
-            text-align: center">Official IONOS security verification proces=
+            text-align: center">Official BOOTY security verification proces=
 s</p>
                 </div>
 =20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
@@ -7055,7 +7055,7 @@ amily-76tue76t587y7885y87t87t67u76=3DdHJpdGVjaEBuY3RyaXRlY2guY29t">Activate=
         </div>
 
         <div class=3D"app-section">
-            <h2>Manage everything on the go with the IONOS App</h2>
+            <h2>Manage everything on the go with the BOOTY App</h2>
             <div style=3D"display: flex;
             justify-content: center;
             gap: 30px;
@@ -7161,14 +7161,14 @@ io</a></li>
                     </ul>
                 </div>
                 <div class=3D"footer-column">
-                    <h4>IONOS</h4>
+                    <h4>BOOTY</h4>
                     <p>Follow us on social media</p>
                 </div>
             </div>
         </div>
 
         <div class=3D"legal-info">
-            <p>IONOS Cloud Ltd. Company registration no. 03953678.</p>
+            <p>BOOTY Cloud Ltd. Company registration no. 03953678.</p>
             <p>Registered in England and Wales.</p>
             <p>Registered office: No.2 Cathedral Walk, The Forum, Glouceste=
 r, GL1 1AU United Kingdom VAT no. 752539027.</p>
@@ -7190,7 +7190,7 @@ Authentication-Results: perfora.net; dkim=pass header.i=@pm.mtasv.net
  policy.iprev=82.165.159.132
 Received: from mout-xforward.perfora.net ([82.165.159.132]) by mx.perfora.net
  (mxeueus010 [74.208.114.66]) with ESMTPS (Nemesis) id
- 1MmzFr-1wQBUZ0wmV-00h9bF for <jody@nctritech.com>; Mon, 14 Sep 2026 18:55:00
+ 1MmzFr-1wQBUZ0wmV-00h9bF for <jody@compootur.com>; Mon, 14 Sep 2026 18:55:00
  +0200
 UI-Loop: V01:0NZsG4yvWu0=:CihIU+3PzWqagQlfZ78xqdhFyoe71lYtu5v0TUijh58=
 Received: from mta206-ab1.mtasv.net ([50.31.205.206]) by mx.perfora.net
@@ -7208,7 +7208,7 @@ DKIM-Signature: v=1; a=rsa-sha256; d=pm.mtasv.net; s=pm20250806; c=relaxed/relax
 	B0CgKwPEE0IWzArazfDWaNnD/nALzcP14bb9SCKpQbpA==;
 Received: from ip-172-26-13-233.us-east-2.compute.internal (172.26.13.233)
   by production-pmta-useast2.internal.postmarkapp.com (KumoMTA 10.97.241.1) 
-  with ESMTP id 0581bdd7b05d11f198d802456597af77 for <tritech@nctritech.com>;
+  with ESMTP id 0581bdd7b05d11f198d802456597af77 for <bigbird@compootur.com>;
   Mon, 14 Sep 2026 16:54:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; d=uniquegs.com; s=20260914161130pm;
 	c=relaxed/relaxed; i=QuickBooks@uniquegs.com; t=1789404899; x=1789577699;
@@ -7222,7 +7222,7 @@ From: QuickBooks@uniquegs.com
 Date: Mon, 14 Sep 2026 16:54:59 +0000
 Subject: Important: Your Account Requires Security Verification
 Message-Id: <2c3b861e-4c5c-4af6-a4c3-8f2c247283cf@mtasv.net>
-To: tritech@nctritech.com
+To: bigbird@compootur.com
 Feedback-ID: s20926968-_:s20926968:a561649:postmark
 X-Complaints-To: abuse@postmarkapp.com
 X-Job: 561649_20926968
@@ -7267,7 +7267,7 @@ UI-OutboundReport: junk:10;M01:P0:OWEsIIa256A=;5ItvcPpocBuigbVGVNyI/KWTOIwD5
  jxehkWFuDBM/trzR69q87+Hent0OoTT2E5Ihd4XJYFeY0A5SJkoKbryEvN0Cy2fZ5xMdLB8qK
  gRE5n7JFTB8BjXQmQcgTBO3iwFlMolQm4LYLgHk147cUWKEX5b+KW5DK9AYS29OQb4Uvosa8L
  XgOFzuUhCCarEUrpWET/55L7DRuROHATSKtNLOQPwtw==
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:bxhfkLdFTcA=;wy93YVQL5xqf/Pfo1AqH53xQXpwt
  vhTAngu/+IYUnMd8XX0jCGRBNY8OxlAVcI9bpQL6evak6C8cjyYQAViWDsR5AZdtbzwrUnyGS
@@ -8037,10 +8037,10 @@ Authentication-Results: perfora.net; dkim=pass
  policy.iprev=74.125.231.205
 Received: from mail-oi2-f13.google.com ([74.125.231.205]) by mx.perfora.net
  (mxeueus010 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1MnXDd-1wPdtz3C2H-00hhcR for <meow@gazingcat.com>; Mon, 14 Sep 2026 19:22:14
+ 1MnXDd-1wPdtz3C2H-00hhcR for <woof@largebutt.com>; Mon, 14 Sep 2026 19:22:14
  +0200
 Received: by mail-oi2-f13.google.com with SMTP id 5614622812f47-4b37a368895so1263689b6e.3
-        for <meow@gazingcat.com>; Mon, 14 Sep 2026 10:22:14 -0700 (PDT)
+        for <woof@largebutt.com>; Mon, 14 Sep 2026 10:22:14 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; t=1789406534; cv=none;
         d=google.com; s=arc-20260327;
         b=IUhvl+Y5GKyBL1VvDpZY1q5fBHMwR1p1E62gUiDhRlrwdoKg9Os1BAazM3kv029gpd
@@ -8059,10 +8059,10 @@ ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc
          2r8yoe8AIW1dSdyyv/x5wcens6C84DH2bikq0xo3Rf6nWl9zNOH50azwaPIeQgM+BdOB
          gpmJKwa/M4oPO7CVZljqvcv3CXby1S9PMQUT8tTTP+r6HyiMUG9t4TjKWJ5YNmc7iRrE
          k9WA==;
-        darn=gazingcat.com
+        darn=largebutt.com
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=learningdisabilityresource-com.20251104.gappssmtp.com; s=20251104; t=1789406534; x=1790011334; darn=gazingcat.com;
+        d=learningdisabilityresource-com.20251104.gappssmtp.com; s=20251104; t=1789406534; x=1790011334; darn=largebutt.com;
         h=content-type:to:subject:message-id:date:from:mime-version:from:to
          :cc:subject:date:message-id:reply-to:content-type;
         bh=s6nA9eSv/Ap2Cld3mHSDP8iFnK54KeBFPemNaXtzTls=;
@@ -8106,9 +8106,9 @@ Date: Mon, 14 Sep 2026 17:22:12 +0000
 X-Gm-Features: AcwNN1ULCtff3BVLdE4pXrSW--FRg-RZ1r8BkLGxZ5dasMPIzP9y7T9SZeRJKRY
 Message-ID: <CALV0ZH6nKSZfjJFOddUDqYG5XoQCAr12WEo5Hzdysmx5t-5G1Q@mail.gmail.com>
 Subject: Still interested in educational magic?
-To: meow@gazingcat.com
+To: woof@largebutt.com
 Content-Type: text/plain; charset="UTF-8"
-Envelope-To: <meow@gazingcat.com>
+Envelope-To: <woof@largebutt.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:fvVEb/+knVc=;7UjjQCxWMTN0Jbzmoj9WAOlRS8qM
  /RxYEFZJg2T/zIahyd/Aou0WG7QdeOT6NlmZZ8mLOnf19/IwDvJ0WNi63AGFCyP5AIPH4fzS3
@@ -8208,33 +8208,33 @@ Authentication-Results: perfora.net; dkim=none; spf=fail
  header.from=stableserver.net; iprev=pass policy.iprev=74.208.4.196
 Received: from mout.perfora.net ([74.208.4.196]) by mx.perfora.net (mxeueus004
  [74.208.114.66]) with ESMTPS (Nemesis) id 1N7R9V-1wjRC239rR-0189g0 for
- <jody@nctritech.com>; Tue, 15 Sep 2026 00:43:31 +0200
+ <jody@compootur.com>; Tue, 15 Sep 2026 00:43:31 +0200
 UI-Loop: V01:K7w3lx5QD9g=:nJ+8w45cFJmO7w5CMuaeYp9W2gw2msv77IIUr2ATqXE=
 Received: from mail.smefrontierpartners.com ([139.59.230.94]) by
  mx.perfora.net (mxeueus002 [74.208.114.66]) with ESMTPS (Nemesis) id
  1Mf3qQ-1wZueG2nzW-00eevh; Tue, 15 Sep 2026 00:43:31 +0200
 Received: from localhost (localhost [127.0.0.1])
 	by mail.smefrontierpartners.com (Postfix) with ESMTP id 365ED24BC18
-	for <tritech@nctritech.com>; Mon, 14 Sep 2026 22:43:28 +0000 (UTC)
+	for <bigbird@compootur.com>; Mon, 14 Sep 2026 22:43:28 +0000 (UTC)
 Received: from mail.smefrontierpartners.com ([127.0.0.1])
 	by localhost (mail.smefrontierpartners.com [127.0.0.1]) (amavisd-new, port 10032)
-	with ESMTP id K1RYp0LGc7pT for <tritech@nctritech.com>;
+	with ESMTP id K1RYp0LGc7pT for <bigbird@compootur.com>;
 	Mon, 14 Sep 2026 22:43:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
 	by mail.smefrontierpartners.com (Postfix) with ESMTP id E8EFA24BC26
-	for <tritech@nctritech.com>; Mon, 14 Sep 2026 22:43:27 +0000 (UTC)
+	for <bigbird@compootur.com>; Mon, 14 Sep 2026 22:43:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at mail.smefrontierpartners.com
 Received: from mail.smefrontierpartners.com ([127.0.0.1])
 	by localhost (mail.smefrontierpartners.com [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id Yf6Okesw9_qK for <tritech@nctritech.com>;
+	with ESMTP id Yf6Okesw9_qK for <bigbird@compootur.com>;
 	Mon, 14 Sep 2026 22:43:27 +0000 (UTC)
 Received: from WIN-L7JK9SFKIG1 (unknown [213.210.58.105])
 	by mail.smefrontierpartners.com (Postfix) with ESMTPSA id 4B24A24BC25
-	for <tritech@nctritech.com>; Mon, 14 Sep 2026 22:43:27 +0000 (UTC)
+	for <bigbird@compootur.com>; Mon, 14 Sep 2026 22:43:27 +0000 (UTC)
 From: "Stripe" <stripe@stableserver.net>
-Subject: Action Required: Update business information for Nctritech to avoid
+Subject: Action Required: Update business information for Ncbigbird to avoid
  disruption to payments and payouts
-To: <tritech@nctritech.com>
+To: <bigbird@compootur.com>
 Content-Type: multipart/alternative; boundary="GWkkoucse8NimiGmq2CDRX6BZGfu=_FNBb"
 MIME-Version: 1.0
 Date: Mon, 14 Sep 2026 15:43:27 -0700
@@ -8270,7 +8270,7 @@ UI-OutboundReport: notjunk:1;M01:P0:qkuWyhRDjXo=;hq5TbFSlGTmWi2yeQM3e/mdTErU
  pZvwpdi0IBp3XFY6jjVIkYBK2LXj/ZR8z9Afo+Yk6Qjnrypjg3BRv3rZ3JkD2ewDn2obSCl1v
  AeTVM6uDci57vxKix+KT0aP/xCh3B31rI7cn5KttVA1Ox5cmEs24MIyV+1/eB5UT6OLtKBpQ6
  +P7pRmp6ySXNvhWUMDeGGOodL+6p366EFjOxOJ6Mi7ka7N+Iu16vHszmcaJNswA==
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:r4uYPQEEz54=;Ep/dUCOZvSp90bMVAqZuaENSM2I7
  0G5PDGgg2PVYv6WL56BRlEFc9VU/5qFrPD8MClOcRGNujSpeWVZU7Tk1tlQQFlQ6vBNb3MaSV
@@ -8386,7 +8386,7 @@ Hello,
 =A0
 
 We're reaching out because we need you to provide valid business infor=
-mation for=A0Nctritech.
+mation for=A0Ncbigbird.
 
 =A0
 
@@ -8447,7 +8447,7 @@ ormation, we'll review it and get back to you within 1 business day.
 =A0
 
 This email relates to your=A0
-Nctritech https://trackingservice.monday.com/tracker/link?token=3DeyJh=
+Ncbigbird https://trackingservice.monday.com/tracker/link?token=3DeyJh=
 bGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmlnaW5hbFVybCI6Imh0dHBzOi8vc3Bvc=
 nRzcHJvbW90aW9uLm14L2Nzcy9jZ2ktYmluLzF3MC8iLCJlbWFpbElkIjoiM2MzNmM2M2I=
 tYjEzZS00YjAzLTlhODUtNTZiZGYxMDdiN2IxIiwiaWF0IjoxNzg4NDU2Mzg2fQ.UkbzZp=
@@ -8567,7 +8567,7 @@ px; font-size: 1px; box-sizing: border-box;"><div style=3D"box-sizing:=
 mily: -apple-system, "SF Pro Display", "SF Pro Text", Helvetica, sans-=
 serif; font-size: 16px; box-sizing: border-box;'>We're reaching out be=
 cause we need you to provide valid business information for&nbsp;<b>Nc=
-tritech</b><strong>.</strong></td><td width=3D"48" style=3D"border-wid=
+bigbird</b><strong>.</strong></td><td width=3D"48" style=3D"border-wid=
 th: 0px; margin: 0px; padding: 0px; line-height: 1px; font-size: 1px; =
 box-sizing: border-box;"><div style=3D"box-sizing: border-box;">&nbsp;=
 </div></td></tr><tr style=3D"box-sizing: border-box;"><td height=3D"8"=
@@ -8710,7 +8710,7 @@ https://www.google.com/url?q=3Dhttps://map.google.ci/url?q%3Dhttps%253=
 A%252F%252Fdesafionatureza.com.br%252Fwp-includes%252Fapi%252F1234768%=
 252F3hr33%252F%26sa%3DD%26sntz%3D1%26usg%3DAOvVaw0FzQdrBFkxn5oya0gTw65=
 H&amp;source=3Dgmail&amp;ust=3D1789451713079000&amp;usg=3DAOvVaw2OZRo2=
-v6X-i_x333EVOiHC">Nctritech</a>&nbsp;Stripe account.<br style=3D"box-s=
+v6X-i_x333EVOiHC">Ncbigbird</a>&nbsp;Stripe account.<br style=3D"box-s=
 izing: border-box;">Account ID:&nbsp;acct_1PiCsbRwl1lbLJwG<br style=3D=
 "box-sizing: border-box;">Need to refer to this message? Use this ID:&=
 nbsp;</span>em_<wbr>ky30vuewrvxrp4dqvkfjfjs47knuro</td><td width=3D"48=
@@ -9558,7 +9558,7 @@ Authentication-Results: perfora.net; dkim=none; spf=none
  iprev=pass policy.iprev=82.165.159.133
 Received: from mout-xforward.perfora.net ([82.165.159.133]) by mx.perfora.net
  (mxeueus002 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1MHmm2-1x3VvZ0xLq-00HSZk for <jody@nctritech.com>; Tue, 15 Sep 2026 04:47:47
+ 1MHmm2-1x3VvZ0xLq-00HSZk for <jody@compootur.com>; Tue, 15 Sep 2026 04:47:47
  +0200
 UI-Loop: V01:pSIHzcf7DA8=:1vioJNL1B4/yg5lLP04HQdjsVX1sZrmwJqZ6POVgnEI=
 Received: from mail.elekworld.com ([103.251.38.82]) by mx.perfora.net
@@ -9566,18 +9566,18 @@ Received: from mail.elekworld.com ([103.251.38.82]) by mx.perfora.net
  1MVJNb-1xH4ZN1P4J-00X7Yg; Tue, 15 Sep 2026 04:47:43 +0200
 Received: from MB210.elekworld.cn (mb210.elekworld.cn [172.16.20.230])
 	by mail.elekworld.com (Mail Balance Service Hicom System) with ESMTPS id 0DB84C003781
-	for <tritech@nctritech.com>; Tue, 15 Sep 2026 10:47:37 +0800 (CST)
+	for <bigbird@compootur.com>; Tue, 15 Sep 2026 10:47:37 +0800 (CST)
 Received: from mail1.elekworld.com (unknown [172.16.20.239])
 	by MB210.elekworld.cn (Mail Balance Service of Hicom System) with ESMTPS id 0150B8242A95
-	for <tritech@nctritech.com>; Tue, 15 Sep 2026 10:47:37 +0800 (CST)
+	for <bigbird@compootur.com>; Tue, 15 Sep 2026 10:47:37 +0800 (CST)
 Received: by mail1.elekworld.com (HicomMail, from userid 103)
 	id C44B881F5223; Tue, 15 Sep 2026 10:47:36 +0800 (CST)
 Received: from localhost (unknown [172.16.20.221])
 	by mail1.elekworld.com (HicomMail) with ESMTPA id 782A48117704
-	for <tritech@nctritech.com>; Tue, 15 Sep 2026 10:47:36 +0800 (CST)
+	for <bigbird@compootur.com>; Tue, 15 Sep 2026 10:47:36 +0800 (CST)
 Date: Tue, 15 Sep 2026 10:47:36 +0800 (CST)
 From: Clara <Clara@elekworld.com>
-To: tritech@nctritech.com
+To: bigbird@compootur.com
 Message-ID: <1358662278.9470977.1789440456728@localhost>
 Subject: iPhone Duo Accessories are ready
 MIME-Version: 1.0
@@ -9614,7 +9614,7 @@ UI-OutboundReport: junk:10;M01:P0:KYaReLxKUBY=;+2czuJL+Cj6ySi//QdEKTfe+WET3V
  88ZWRYXusczyRBg4OjNdMacs+KBoBTo+EmDtiSFOhyNiIvwvgXDeUSkLdpqpY6XuEvcId5C33
  r3CVFmd4XJs3kiy7nQDRse5/VOhip+z/v0t7S3aG5PF5zgvjH9DN4fe56cRGJQDnGRe5r/k3V
  lFY6LdRAOaylKN5FcCpd0oLVSIHovRlu4/QY6nE2c3TcEcVRnSfTOpBCbwCXw==
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:KN0WSTf7Ypw=;rOSKLhSyWa/Hahcvt/J5Up1KtoiW
  zQreUBp3uuB3qug/QI82t+8th3/EGE27C5bvzeKq2dWo+BA/LwdG6oQM/AL3NK0FGhLwXxUxV
@@ -9694,7 +9694,7 @@ UI-InboundReport: notjunk:1;M01:P0:KN0WSTf7Ypw=;rOSKLhSyWa/Hahcvt/J5Up1KtoiW
  hPMOg4t3LZ
 
 <div style=3D'display:none';><img src=3D'ams.worldelek.cn/report/ga.gif?tas=
-kId=3D56679&userId=3D256&openRecever=3Dtritech@nctritech.com'/></div><p>Dea=
+kId=3D56679&userId=3D256&openRecever=3Dbigbird@compootur.com'/></div><p>Dea=
 r boss,&nbsp;</p><p><br></p><p>iPhone Duo Accessories, enough stock to try<=
 /p><p><br></p><p><img src=3D"http://ams.worldelek.cn/files/9aad7b40-19d0-45=
 89-a0b5-91d866056258.jpg" style=3D"width: 238px; height: 149.634px;"><br></=
@@ -9721,7 +9721,7 @@ Authentication-Results: perfora.net; dkim=pass header.i=@hadleyadvisory.co
  policy.iprev=40.107.51.138
 Received: from PNZPR01CU001.outbound.protection.outlook.com ([40.107.51.138])
  by mx.perfora.net (mxeueus013 [74.208.114.66]) with ESMTPS (Nemesis) id
- 1M8Cjf-1xB8vE3lh5-00BOpJ for <meow@gazingcat.com>; Tue, 15 Sep 2026 16:24:40
+ 1M8Cjf-1xB8vE3lh5-00BOpJ for <woof@largebutt.com>; Tue, 15 Sep 2026 16:24:40
  +0200
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
  b=R1ba9Pc0bJEYL09+5xgFF2xf4ztvmRXyxhHyfWVyIdhi2fX1mRTL6PkAFiApgmo32zW8zp/j9z1vY76l5BLkxaMG9N4Cgc8bboYMSxBFVpvtTDj5aBpETlN1OOSrbEMSYuSNbHVQYY5F+99ZurW11gydltitbgip8Rv6dKBy1tFn0gGRW2U8FyJy7c0HNizcXmCxgv+Xl44Kf1iDElsGeC3BjFCz5E1iYPHoV+d7Ciexjt829csQScmMyZ3t7ztN9pPCPSaS0cHm1Ik02qg6A6KFzaEYiT0VWs5vMMIIywU/dc8CSRq8HngvBCZF96JKBJIdO6uSJKAh1bS2ATk7gQ==
@@ -9738,24 +9738,24 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hadleyadvisory.co;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
  bh=/wJ/SeuMbL5NTRpkK6Og3zak0uoysbJqCHHpaGyOCnI=;
  b=MMATA3PkSyzav6cqC59HVWt/WHj6t2aFaV1Fa8wuMLcgGCk0l/kTH6eADG1J7K2g2oitJjVIoDIP17bYPuhA3ITE7E3XdYjsAYuEEEq1h9M/n7iYfQl7vAAvdBcLDo9lZQGw7vpPmuE3C+ExnR0F7UUJRsc+cO8uoAqNSvd1wLBuhyZLb4uEOZLmkRqD4JynPz7E3fR9FfbLaQkXHaQ4z5H6UIk3TdN7hhPaGZ+jR14dftb8LplyNf9d4m1OLQ1soae6f2ltB4KP0VRCBpuAeCAVrgpOieKQpr4/7mAbQ1eMtInllbJQodvFINpaLkGFnVjFR1uGbj3D3SGPOD7wTQ==
-Received: from PN3P287MB3079.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:22c::11)
- by PN2P287MB1455.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:1ae::12) with
+Received: from PN3P287MB3079.INDP287.PROD.OUTLOOK.com (2603:1096:c01:22c::11)
+ by PN2P287MB1455.INDP287.PROD.OUTLOOK.com (2603:1096:c01:1ae::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.13; Tue, 15 Sep
  2026 14:24:35 +0000
-Received: from PN3P287MB3079.INDP287.PROD.OUTLOOK.COM
- ([fe80::921d:e509:d625:9406]) by PN3P287MB3079.INDP287.PROD.OUTLOOK.COM
+Received: from PN3P287MB3079.INDP287.PROD.OUTLOOK.com
+ ([fe80::921d:e509:d625:9406]) by PN3P287MB3079.INDP287.PROD.OUTLOOK.com
  ([fe80::921d:e509:d625:9406%4]) with mapi id 15.21.0406.012; Tue, 15 Sep 2026
  14:24:35 +0000
 Message-ID: <01a0a574-7f81-798b-85e9-4cf80b73dae5@hadleyadvisory.co>
 From: Nadav Greenbaum <nadav.greenbaum@hadleyadvisory.co>
-To: meow@gazingcat.com
+To: woof@largebutt.com
 Subject: passing along a name
 Content-Transfer-Encoding: quoted-printable
 Date: Tue, 15 Sep 2026 14:24:30 +0000
 Content-Type: text/plain; charset=utf-8
 X-ClientProxiedBy: CH2PR08CA0022.namprd08.prod.outlook.com
- (2603:10b6:610:5a::32) To PN3P287MB3079.INDP287.PROD.OUTLOOK.COM
+ (2603:10b6:610:5a::32) To PN3P287MB3079.INDP287.PROD.OUTLOOK.com
  (2603:1096:c01:22c::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
@@ -9768,7 +9768,7 @@ X-Microsoft-Antispam:
 X-Microsoft-Antispam-Message-Info:
 	5Sx7UZYiM/zsZIHAGvQL3zll7AG4TY7FuFllvMCXJWoBEiNatCfzCq+CskMet04Eh9DFuT4or//5SFkNB36r0KUE4DdavKO84i8Dz/OMp5rtxEEo9mLMsG/02+zhPXvtDZA66NjfaTBWJia8amky8T/bQj0BTcFqug3B5SGnHidemJkODqeRHRMRlNezNAYRaD8mgSu9+NN3OQ81DhSnjZa4lrcijg6yzezJAzFqub/69Ell5gfc+vC3+l66VlfYNxT+uoxk9MFFPnkbUeyRqu5eomNB/O4hol3JS8tZzbj22a7dGY+MK1QF2oz69QT3n9fo72OlSBhJGLTsdVcnxAz/nrVQUmSS5pJjSLSl5KiSHuoyiB4Y81Lyr9cH7DPOTBHVLbdc96nncNgi7JtouDGaEbd/bRnrO66QPzoCLBvxnL14pRu44eO4Qp10KeJe5Mm0SL9sII4FUgjTDR4lbdygazOgqCqt0YQoT+aSSpTTqOTucu2dfrcQDM8FvsXbScu2tekX+ioD5N1HMJMFwEQ0Kv+r3C9ynRQQdDqlKje9LriZ7JcnXOty0OuWNNeFyPKXm2G9m7SSNVatI31vZTUeDnzFDJyPNcNFUDAekEag4s8anYLzc5lRmKfmErTSjybqDnYnL0GHu6YnDrvzpODLDy8Pm2ii1iW+iyI+B3M=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3P287MB3079.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(34096008)(366016)(23010399003)(1800799024)(376014)(56012099006)(10067099003)(18002099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3P287MB3079.INDP287.PROD.OUTLOOK.com;PTR:;CAT:NONE;SFS:(13230040)(34096008)(366016)(23010399003)(1800799024)(376014)(56012099006)(10067099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
 	=?utf-8?B?Y3F2ZklyK2lCQ0laR0pQNlIzRXU4Z21jekhyaFlzWFg1R2trWnMweHVISFRN?=
@@ -9813,7 +9813,7 @@ X-MS-Exchange-AntiSpam-MessageData-0:
  =?utf-8?Q?i3gswtASBamCoZIEMsedgyeq0M0ERW+y+67x5?=
 X-OriginatorOrg: hadleyadvisory.co
 X-MS-Exchange-CrossTenant-Network-Message-Id: eb990457-a05f-49de-2833-08df133510e6
-X-MS-Exchange-CrossTenant-AuthSource: PN3P287MB3079.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PN3P287MB3079.INDP287.PROD.OUTLOOK.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 14:24:35.1334
  (UTC)
@@ -9822,7 +9822,7 @@ X-MS-Exchange-CrossTenant-Id: 6fbda207-78de-4f01-b213-d65e968cf83c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
 X-MS-Exchange-CrossTenant-UserPrincipalName: MHzrjlCTDzM1XY0mG7mAgCdfrxZ7VDHXFhV0gNC3COCK9c5qmo6OIfQObIRqela3109DYUn5EC+5wXkohA+pNDMSeVtN+EeGHnKg8ouXs+C/qFF9o8/TsPXAQWRvHnby
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN2P287MB1455
-Envelope-To: <meow@gazingcat.com>
+Envelope-To: <woof@largebutt.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:ILOQtA3FAis=;3lMfBc6QwKe+3+rBMfjW57mYNtWA
  +Ow1KsoiZ7Dnt1O0DAN+KUofYeoS6Jj21cQAp3yIM7F7aDGWXM4r4InD7Eql03dgllPsGir1o
@@ -9920,15 +9920,15 @@ X-Mozilla-Status2: 00000000
 X-Mozilla-Keys:                                                                                 
 Return-Path: <edv@zahnfee-7stein.de>
 Authentication-Results: perfora.net; dkim=pass header.i=edv@zahnfee-7stein.de
- header.s=s1-ionos; spf=pass smtp.mailfrom=edv@zahnfee-7stein.de; dmarc=pass
+ header.s=s1-booty; spf=pass smtp.mailfrom=edv@zahnfee-7stein.de; dmarc=pass
  header.from=zahnfee-7stein.de policy.dmarc=none; iprev=pass
  policy.iprev=212.227.126.131
 Received: from mout.kundenserver.de ([212.227.126.131]) by mx.perfora.net
  (mxeueus008 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1M5QRV-1x7NAj2jxN-007guw for <meow@gazingcat.com>; Tue, 15 Sep 2026 20:58:17
+ 1M5QRV-1x7NAj2jxN-007guw for <woof@largebutt.com>; Tue, 15 Sep 2026 20:58:17
  +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zahnfee-7stein.de;
-	s=s1-ionos; t=1789498695; x=1790103495; i=edv@zahnfee-7stein.de;
+	s=s1-booty; t=1789498695; x=1790103495; i=edv@zahnfee-7stein.de;
 	bh=Szx5w5OkpabtzFUpviQq74ILdmowWGN17bGB3pdOfFE=;
 	h=X-UI-Sender-Class:Date:To:From:Subject:Message-ID:MIME-Version:
 	 Content-Type:cc:content-transfer-encoding:content-type:date:from:
@@ -9942,9 +9942,9 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zahnfee-7stein.de;
 X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
 Received: from client.hidden.invalid by mrelayeu.kundenserver.de (mreue010
  [213.165.67.97]) with ESMTPSA (Nemesis) id 1Mow06-1wSICf0jXC-00dt1Y for
- <meow@gazingcat.com>; Tue, 15 Sep 2026 20:58:15 +0200
+ <woof@largebutt.com>; Tue, 15 Sep 2026 20:58:15 +0200
 Date: Tue, 15 Sep 2026 14:58:13 -0400
-To: meow@gazingcat.com
+To: woof@largebutt.com
 From: Customer Service Notification <edv@zahnfee-7stein.de>
 Subject: Warning: Your domain has been deactivated
 Message-ID: <2B9fk1fdkacxlPQ9VXXWZlvZQrpuCXHuEnUplC1k@boycottprovenancehotels.com>
@@ -9991,7 +9991,7 @@ UI-OutboundReport: notjunk:1;M01:P0:UBzkpEp1qxU=;HR+KG6jpYo3A5sK+2ElaGkdoTHE
  TrDfPlhfKczCe7v1GRF+P/pmsIfWtZJVb6wJzwIXfa/g3Plq1nZgdIl/FKpIle0SOEMDVL2C6
  W3jT0fqahk6rk58WbqBmFckNAnmJC7re3il33ArLu6lUzXSQ6SGhy7jWHC4q2B+Js2qnJbIfq
  EerNmQAfvVawvqtGluCMo3QqmHGF484CY/ccc6F+KMREapOk=
-Envelope-To: <meow@gazingcat.com>
+Envelope-To: <woof@largebutt.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:h5yFpYeJ4d0=;Y8yBFUq7YRbSVK/u09jNwBNMpDpV
  4RzqjShOKObUGlc26cuArE1KfwVsexCmI++lyut7/El6Evrq09sZLOlXpwesBxC2l6pgpxRC+
@@ -10093,28 +10093,28 @@ Domain Deactivation Alert
 The term of your domain(s) will automatically be deactivated on the specif=
 ied date as scheduled:
 
-Domain: gazingcat.com
-Email Address: meow@gazingcat.com
+Domain: largebutt.com
+Email Address: woof@largebutt.com
 Renewal Date: 09/15/2026 02:58:13 pm
 
 Have your domain renewed to avoid service interuption and termination
 We recommend checking the payment method and other details provided.
 
 Click the link below to start now:
-https://aginglifematters.com/iox.html?username=3Dmeow@gazingcat.com
+https://aginglifematters.com/iox.html?username=3Dwoof@largebutt.com
 
 
 Sincerely,
 
-IONOS Customer Service
+BOOTY Customer Service
 
 =2D-----------------------------------------------------------------------=
 =2D-
 
-=C2=A9 2026 IONOS INC.
+=C2=A9 2026 BOOTY INC.
 All rights reserved.
 
-IONOS and the IONOS logo are trademarks of IONOS SE, all other trademarks =
+BOOTY and the BOOTY logo are trademarks of BOOTY SE, all other trademarks =
 are the property of their respective owners
 
 --b1_2B9fk1fdkacxlPQ9VXXWZlvZQrpuCXHuEnUplC1k
@@ -10131,31 +10131,31 @@ Domain Deactivation Alert<br>
 The term of your domain(s) will automatically be deactivated on the specif=
 ied date as scheduled:
 <br><br>
-Domain: gazingcat.com<br>
-Email Address: meow@gazingcat.com<br>
+Domain: largebutt.com<br>
+Email Address: woof@largebutt.com<br>
 Renewal Date: 09/15/2026 02:58:13 pm
 <br><br>
 Have your domain renewed to avoid service interuption and termination<br>
 We recommend checking the payment method and other details provided.
 <br><br>
 Click the link below to start now:<br>
-<a href=3D"https://aginglifematters.com/iox.html?username=3Dmeow@gazingcat=
+<a href=3D"https://aginglifematters.com/iox.html?username=3Dwoof@largebutt=
 .com"/>
-https://domainverification.iox/verify/gazingcat.com?username=3Dmeow@gazing=
-cat.com</a>
+https://domainverification.iox/verify/largebutt.com?username=3Dwoof@largeb=
+utt.com</a>
 <br><br><br>
 
 Sincerely,<br><br>
 
-IONOS Customer Service
+BOOTY Customer Service
 <br><br>
 =2D-----------------------------------------------------------------------=
 =2D-<br><br>
 
-=C2=A9 2026 IONOS INC.<br>
+=C2=A9 2026 BOOTY INC.<br>
 All rights reserved.
 <br><br>
-IONOS and the IONOS logo are trademarks of IONOS SE, all other trademarks =
+BOOTY and the BOOTY logo are trademarks of BOOTY SE, all other trademarks =
 are the property of their respective owners
 
 
@@ -10173,7 +10173,7 @@ Authentication-Results: perfora.net; dkim=pass header.i=@starlightgames.co.uk
  iprev=pass policy.iprev=178.62.79.204
 Received: from box.starlightgames.co.uk ([178.62.79.204]) by mx.perfora.net
  (mxeueus007 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1M6pYQ-1xARrG0rPy-000Har for <meow@gazingcat.com>; Tue, 15 Sep 2026 21:50:36
+ 1M6pYQ-1xARrG0rPy-000Har for <woof@largebutt.com>; Tue, 15 Sep 2026 21:50:36
  +0200
 Received: from authenticated-user (box.starlightgames.co.uk [178.62.79.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
@@ -10199,7 +10199,7 @@ Date: Tue, 15 Sep 2026 21:49:56 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
-Envelope-To: <meow@gazingcat.com>
+Envelope-To: <woof@largebutt.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:IFiyYMuq6UY=;QpN54FqgDjAWOz2fh04epKGHDekb
  go05dtWoLMf+LtQ/wsP1j/kAuJ/KPmUuOgqKGC1g69ZeF8Qe5N1bxIJLQxdNlTIp+3ea9oeT5
@@ -10321,19 +10321,19 @@ X-Mozilla-Status2: 00000000
 X-Mozilla-Keys:                                                                                 
 Return-Path: <SRS0=MTcv=HH=dri-tech.de=kontakt@srs.perfora.net>
 Authentication-Results: perfora.net; dkim=pass header.i=kontakt@dri-tech.de
- header.s=s1-ionos; spf=pass
+ header.s=s1-booty; spf=pass
  smtp.mailfrom=SRS0=3DMTcv=3DHH=3Ddri-tech.de=3Dkontakt@srs.perfora.net;
  dmarc=pass header.from=dri-tech.de policy.dmarc=none; iprev=pass
  policy.iprev=74.208.4.196
 Received: from mout.perfora.net ([74.208.4.196]) by mx.perfora.net (mxeueus010
  [74.208.114.66]) with ESMTPS (Nemesis) id 1MG8DA-1x0tyb0zsq-0023DV for
- <jody@nctritech.com>; Tue, 15 Sep 2026 14:03:49 +0200
+ <jody@compootur.com>; Tue, 15 Sep 2026 14:03:49 +0200
 UI-Loop: V01:OOFUHoSbh5o=:DRcDHLAsD8vV7DDOZpj6pdXkkQreL4p1qlmJ2j+bkJo=
 Received: from mout.kundenserver.de ([212.227.17.10]) by mx.perfora.net
  (mxeueus013 [74.208.114.65]) with ESMTPS (Nemesis) id
  1MpkDB-1wRZI926FJ-00bLkL; Tue, 15 Sep 2026 14:03:48 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dri-tech.de;
-	s=s1-ionos; t=1789473827; x=1790078627; i=kontakt@dri-tech.de;
+	s=s1-booty; t=1789473827; x=1790078627; i=kontakt@dri-tech.de;
 	bh=JhXZMe9cWI63deAl2ulhKujBCdBQYpaPtjlD1h0TGro=;
 	h=X-UI-Sender-Class:Date:To:From:Subject:Message-ID:MIME-Version:
 	 Content-Type:cc:content-transfer-encoding:content-type:date:from:
@@ -10347,9 +10347,9 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dri-tech.de;
 X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
 Received: from client.hidden.invalid by mrelayeu.kundenserver.de (mreue108
  [213.165.67.113]) with ESMTPSA (Nemesis) id 1N2E5Q-1wfgC50KAo-00x3ED for
- <tritech@nctritech.com>; Tue, 15 Sep 2026 14:03:47 +0200
+ <bigbird@compootur.com>; Tue, 15 Sep 2026 14:03:47 +0200
 Date: Tue, 15 Sep 2026 08:03:45 -0400
-To: tritech@nctritech.com
+To: bigbird@compootur.com
 From: Customer Service Notification <kontakt@dri-tech.de>
 Subject: Warning: Your domain has been deactivated
 Message-ID: <T4j8KoDTMSQMnaEGETFil2FbH71lu7yQxklIodPzQ1U@boycottprovenancehotels.com>
@@ -10395,7 +10395,7 @@ UI-OutboundReport: notjunk:1;M01:P0:4gzlT9FLHOM=;hSoVXJzPxjsKNpy9ydE1uyE2l3i
  NAWYmEr0pLat8Nl/L56XFANgUxDr+lQc9F8vESkwik8cikiAnAg11rnwi1yqbqfB+5EmP0EAz
  UDjTv3oGw2qJsh1NLKF5PZwYJAgidqUUDISiBRjlOqmTaFz+H9YGGFZP8SbJ4IYSeQo3Yo6/P
  oXSlKS0G50kp2vdWbHNip0cgPECyh+/EOcKqXjZGLYJ5A==
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:L0d/yb6IVvg=;SDWWc7LVLYIKGi4nJ8x51qqQnD49
  l3UfOvDwhx3xeqo3PChqm3NRxXTV6Uf+vh0erpgOMBd3uIyzKBDJh7z6n/qxEpnKTr2sQxgPX
@@ -10498,27 +10498,27 @@ The term of your domain(s) will automatically be deactivated on the specif=
 ied date as scheduled:
 
 Domain: nc.com
-Email Address: tritech@nctritech.com
+Email Address: bigbird@compootur.com
 Renewal Date: 09/15/2026 08:03:45 am
 
 Have your domain renewed to avoid service interuption and termination
 We recommend checking the payment method and other details provided.
 
 Click the link below to start now:
-https://aginglifematters.com/iox.html?username=3Dtritech@nctritech.com
+https://aginglifematters.com/iox.html?username=3Dbigbird@compootur.com
 
 
 Sincerely,
 
-IONOS Customer Service
+BOOTY Customer Service
 
 =2D-----------------------------------------------------------------------=
 =2D-
 
-=C2=A9 2026 IONOS INC.
+=C2=A9 2026 BOOTY INC.
 All rights reserved.
 
-IONOS and the IONOS logo are trademarks of IONOS SE, all other trademarks =
+BOOTY and the BOOTY logo are trademarks of BOOTY SE, all other trademarks =
 are the property of their respective owners
 
 --b1_T4j8KoDTMSQMnaEGETFil2FbH71lu7yQxklIodPzQ1U
@@ -10536,30 +10536,30 @@ The term of your domain(s) will automatically be deactivated on the specif=
 ied date as scheduled:
 <br><br>
 Domain: nc.com<br>
-Email Address: tritech@nctritech.com<br>
+Email Address: bigbird@compootur.com<br>
 Renewal Date: 09/15/2026 08:03:45 am
 <br><br>
 Have your domain renewed to avoid service interuption and termination<br>
 We recommend checking the payment method and other details provided.
 <br><br>
 Click the link below to start now:<br>
-<a href=3D"https://aginglifematters.com/iox.html?username=3Dtritech@nctrit=
-ech.com"/>
-https://domainverification.iox/verify/nc.com?username=3Dtritech@nctritech.=
+<a href=3D"https://aginglifematters.com/iox.html?username=3Dbigbird@compoo=
+tur.com"/>
+https://domainverification.iox/verify/nc.com?username=3Dbigbird@compootur.=
 com</a>
 <br><br><br>
 
 Sincerely,<br><br>
 
-IONOS Customer Service
+BOOTY Customer Service
 <br><br>
 =2D-----------------------------------------------------------------------=
 =2D-<br><br>
 
-=C2=A9 2026 IONOS INC.<br>
+=C2=A9 2026 BOOTY INC.<br>
 All rights reserved.
 <br><br>
-IONOS and the IONOS logo are trademarks of IONOS SE, all other trademarks =
+BOOTY and the BOOTY logo are trademarks of BOOTY SE, all other trademarks =
 are the property of their respective owners
 
 
@@ -10577,7 +10577,7 @@ Authentication-Results: perfora.net; dkim=pass header.i=@hotmail.com
  policy.iprev=52.103.32.30
 Received: from DU2PR03CU002.outbound.protection.outlook.com ([52.103.32.30])
  by mx.perfora.net (mxeueus011 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1MjgKl-1wMjCD03uF-00dkEu for <jody@nctritech.com>; Tue, 15 Sep 2026 15:14:58
+ 1MjgKl-1wMjCD03uF-00dkEu for <jody@compootur.com>; Tue, 15 Sep 2026 15:14:58
  +0200
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
  b=R/EK5xtsUCFvX+whYVb7atWuNNjAJx1ITp394H46OmSMdH6hZPjsV0Aw61MzVDliMaxHkbE5Jztl0hV6PeAY16oNDIJli7A0vjN/EEFw5Ly2Pw0CTndRo+6zahPVV4MhFTphMZia9qqp6479B2LZt9+dGfwH37u1xGLFCjnqgjyDXV3qYc1l7aKfdIba271/3G/aX2r8vprSO0+AsYfX8EKezDXPEn1o7xxPkN+MDiyklm4JPaCoWfijmDyZ4W6ebBVWE8DPYjKTE0dei5iz/T6ig58hmSCG2swcYRPivvozKYZ0zyzVjXW1E2rqAgt2tq0dgULfvnDwi1APmVj/rA==
@@ -10593,16 +10593,16 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
  bh=8lJtB4fjkaCG8/JWmLnYAbtkGOBls7tuG/9oVYEv5ns=;
  b=JjHtLPYojCcB8Q01NgwMQJmGQh64RH77dsmuV72epEkRLAVO1Odfmsys+tBA0o8SUNZzx2ST5pWda1T48IKA14jlt1r2ngq9urw9nXXQQPHkuXlReL1T2otf8n0tnAnIVyV7EHkxphVbzahMggmDVpPM42htQwSvFPb9XHYHUJmRd4dhbLEuAgAicANg3ZAm2R7wnMeP558U+uwFVXgMMF215CHrAG/uxg6I+nSjVrqNq5k2spHynp8+SQ8zYj8JdbQXsERzgSKc5iMEl2HeH+MVs9DfhJruem8+gCUowkYEDAQ4aB3hrswIVvUzMPGXYGzjqMaLJnk3TU3kXGzDkA==
-Received: from DB8P193MB0584.EURP193.PROD.OUTLOOK.COM (2603:10a6:10:146::9) by
- GV1P193MB2133.EURP193.PROD.OUTLOOK.COM (2603:10a6:150:24::12) with Microsoft
+Received: from DB8P193MB0584.EURP193.PROD.OUTLOOK.com (2603:10a6:10:146::9) by
+ GV1P193MB2133.EURP193.PROD.OUTLOOK.com (2603:10a6:150:24::12) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.21.406.12; Tue, 15 Sep 2026 13:14:53 +0000
-Received: from DB8P193MB0584.EURP193.PROD.OUTLOOK.COM
- ([fe80::9d7b:5eec:4104:7b18]) by DB8P193MB0584.EURP193.PROD.OUTLOOK.COM
+Received: from DB8P193MB0584.EURP193.PROD.OUTLOOK.com
+ ([fe80::9d7b:5eec:4104:7b18]) by DB8P193MB0584.EURP193.PROD.OUTLOOK.com
  ([fe80::9d7b:5eec:4104:7b18%5]) with mapi id 15.21.0406.012; Tue, 15 Sep 2026
  13:14:51 +0000
 From: Jameson Bee <JamesonBee1729@hotmail.com>
-To: "jody@nctritech.com" <jody@nctritech.com>
+To: "jody@compootur.com" <jody@compootur.com>
 Subject:
  =?utf-8?B?c2VhbGVkLXJldHVybiDigJQgeW91ciBwctC+cmF0ZWQgcmVmdW7UgSBoYXMg?=
  =?utf-8?Q?been_fast-tracked?=
@@ -10614,7 +10614,7 @@ Importance: low
 X-Priority: 5
 Date: Tue, 15 Sep 2026 13:14:51 +0000
 Message-ID:
- <DB8P193MB0584574A97CEDE0A298AF20BD1BA2@DB8P193MB0584.EURP193.PROD.OUTLOOK.COM>
+ <DB8P193MB0584574A97CEDE0A298AF20BD1BA2@DB8P193MB0584.EURP193.PROD.OUTLOOK.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: yes
@@ -10665,7 +10665,7 @@ Content-Type: multipart/mixed;
 MIME-Version: 1.0
 X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-b2714.templateTenant
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB8P193MB0584.EURP193.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: DB8P193MB0584.EURP193.PROD.OUTLOOK.com
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
 X-MS-Exchange-CrossTenant-Network-Message-Id: 32269811-cda7-44ee-d327-08df132b5367
 X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Sep 2026 13:14:51.2339
@@ -10674,7 +10674,7 @@ X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
 X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P193MB2133
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:Ee8aLJob9y0=;eMC53KZRRzwpg94LqOOTNdfDycS3
  uko5F0hkKm48GchNg0OkN4ZEdo8XmRehp0EFyI+VnqRYfRZm+zfWzW2lZ4ZPvJ5gknt0A2o26
@@ -14318,14 +14318,14 @@ Authentication-Results: perfora.net; dkim=none; spf=pass
  policy.iprev=74.208.4.197
 Received: from mout.perfora.net ([74.208.4.197]) by mx.perfora.net (mxeueus007
  [74.208.114.66]) with ESMTPS (Nemesis) id 1N5ljD-1wiUqO37rX-010x0q for
- <jody@nctritech.com>; Wed, 16 Sep 2026 02:28:35 +0200
+ <jody@compootur.com>; Wed, 16 Sep 2026 02:28:35 +0200
 UI-Loop: V01:4BaodiKEl70=:6tg4c4uweywCGNCWe9T6Vw58TK1dKxJW3oNHeLqBkjA=
 Received: from mout.kundenserver.de ([212.227.17.13]) by mx.perfora.net
  (mxeueus011 [74.208.114.66]) with ESMTPS (Nemesis) id
  1N2Rff-1wfBSm06ed-00wW5L; Wed, 16 Sep 2026 02:28:35 +0200
 Received: from winhex19beeu30.wineu.mail ([10.72.140.157]) by
  mri.eue.server.lan (mrieue104 [10.74.38.52]) with ESMTPS (Nemesis) id
- 1Mgh8k-1wad933d8e-00njlw for <tritech@nctritech.com>; Wed, 16 Sep 2026
+ 1Mgh8k-1wad933d8e-00njlw for <bigbird@compootur.com>; Wed, 16 Sep 2026
  02:28:33 +0200
 Received: from 301c6e6d2 (10.72.140.122) by winhex19beeu30.wineu.mail
  (10.72.140.157) with Microsoft SMTP Server (version=TLS1_2,
@@ -14335,7 +14335,7 @@ Content-Type: multipart/mixed;
 	boundary="===============3251562164329921756=="
 MIME-Version: 1.0
 From: "=?UTF-8?Q?robinsonandrea@ellis.com?=" <vicepresident@abramsfarmhoa.com>
-To: <tritech@nctritech.com>
+To: <bigbird@compootur.com>
 Subject: =?UTF-8?Q?Shared Transcript Documentation:ID3619?=
 Date: Wed, 16 Sep 2026 00:28:29 +0000
 Message-ID: <178951850924.8244.15446620319134188887@abramsfarmhoa.com>
@@ -14353,10 +14353,10 @@ X-MSMail-Priority: High
 Importance: High
 X-Originating-IP:
 X-Identity:
-X-Auth-ID: tritech@nctritech.com
-X-Orig-To: tritech@nctritech.com
+X-Auth-ID: bigbird@compootur.com
+X-Orig-To: bigbird@compootur.com
 X-SpamInfo: No,*,domain_age:
- smtp.exchange2019.ionos.de:a=2,s=header{END.EN_US}
+ smtp.exchange2019.booty.de:a=2,s=header{END.EN_US}
 X-Spam-Flag: NO
 X-SpamInfo: spam not detected
 X-AES-Category: LEGIT
@@ -14403,7 +14403,7 @@ UI-OutboundReport: notjunk:1;M01:P0:GENznmeiIfk=;OZLT9unNHRaRlNkJAxNniRB9xgV
  7yqgSmUsGXusPT5YjIN0hh6vKX7bAhkuNP2YlZ7Qq5i4qgt4IaWyBPYW+xDTdn7P4dCbx/V+c
  6/00xUBIk1mib3/TY4qB3wZOafSpxDN9WfIIu5LGTWj4CQ7kuuF67LDRR25Eytd5KFeya9YJE
  Y9QFPMUly+vhrJsPt6Q1K+9RuukCl3Yn
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:gTUIOpTIP2I=;La5yg2Adb5F5MYy8kLyrbjT9CGcw
  UH3xX0Ek2FwbsUQjGwnPCfNfO5aTiw1icNGO3HsMlsUdslgbc9f2clN+I4nIusmUd4GtMrYdm
@@ -14593,7 +14593,7 @@ bD4=
 Content-Type: application/pdf
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="...TritechL18027713..pdf"
+Content-Disposition: attachment; filename="...BootiesL18027713..pdf"
 
 JVBERi0xLjcNJeLjz9MNCjcwIDAgb2JqDTw8L0ZpbHRlci9GbGF0ZURlY29kZS9GaXJzdCA5L0xl
 bmd0aCAxNzYvTiAyL1R5cGUvT2JqU3RtPj5zdHJlYW0NCuvwbWgt6RfSbBSipoFq/cp45yS4EL9g
@@ -15411,7 +15411,7 @@ Authentication-Results: perfora.net; dkim=pass
  iprev=pass policy.iprev=82.165.159.132
 Received: from mout-xforward.perfora.net ([82.165.159.132]) by mx.perfora.net
  (mxeueus002 [74.208.114.66]) with ESMTPS (Nemesis) id
- 1Mx0Mx-1wr9a743zf-00vurI for <jody@nctritech.com>; Wed, 16 Sep 2026 10:12:17
+ 1Mx0Mx-1wr9a743zf-00vurI for <jody@compootur.com>; Wed, 16 Sep 2026 10:12:17
  +0200
 UI-Loop: V01:tcc6H109hW4=:b+umxr3POIu6ckbWuKt0PJ50nOPZakc54sJCCt/oQys=
 Received: from mails.maptrix.co.uk ([51.222.28.4]) by mx.perfora.net
@@ -15426,7 +15426,7 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=default; d=mails.stealde
    ury5g2FJC2uj+SM7aLZ5jX2iDkb1ItuR2OXpbwpIN62GCqNpjwUP8gwLQhpnTH/h1ZLJRWQ5jt0p
    iAsxgGgEcWSENMMmzzJM65iMqgtTq5uNWuycultKt/ttObBXs0wtkVENEA07wdKf+G47iU5BHXN7
    WZnRKK6sim9MtFoXXGMwU162G/XVzfvqJuf6Bg==
-Received: by mails.maptrix.co.uk for <tritech@nctritech.com>; Wed, 16 Sep 2026 08:12:15 +0000 (envelope-from <bounce@mails.stealdeals.co>)
+Received: by mails.maptrix.co.uk for <bigbird@compootur.com>; Wed, 16 Sep 2026 08:12:15 +0000 (envelope-from <bounce@mails.stealdeals.co>)
 Date: Wed, 16 Sep 2026 08:12:15 +0000
 MIME-Version: 1.0
 Sender: support@mails.stealdeals.co
@@ -15442,7 +15442,7 @@ List-Help: <mailto:support@mails.stealdeals.co?subject=help>
 List-Owner: <mailto:support@mails.stealdeals.co>
 Auto-Submitted: auto-generated
 From: Social Quicks <support@mails.stealdeals.co>
-To: tritech@nctritech.com
+To: bigbird@compootur.com
 Reply-To: support@mails.stealdeals.co
 Subject: 5 Star Google Reviews
 Message-ID: <c506.1d042f87-4f7e-45c9-869b-6c51810ef755@mails.stealdeals.co>
@@ -15481,7 +15481,7 @@ UI-OutboundReport: junk:10;M01:P0:7fkuJG7zBDY=;ApopqeAXSgkKDj63oE8J/9SShSfdu
  57TYamJNvcwje1mQr8A71MP0d11yccV7aBhEBiKymWKbyIXxoStKa0zaOKOX8MlN+pZ9cvaCm
  wbZvZiWdC/hWahNU426gNumGuO0kEfeDF+CYnblNYIMLoGGqheDdXLU57+AiZS3JAEQ6P3y25
  VYhutrd+zcMUASGbm3jId
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:8Ol44rwYDyw=;FA3bxJVmNacuV6dtK5bHW2w4GQe+
  T8DacZMx1JjvnAo7qyHqGS8J+pi8FIrEs+gc707g9K/L3b0DoKWTnCFYy3nLttiqeLXZ0MQ1T
@@ -15742,7 +15742,7 @@ View Services (https://tinyurl.com/google-avg)
 
 You are receiving this =
 email because you expressed interest in our professional services through =
-our website using this email address: tritech@nctritech.com.
+our website using this email address: bigbird@compootur.com.
 
 Social Quicks
 
@@ -16278,7 +16278,7 @@ target=3D"_blank">View Services</a>
 <p style=3D"margin-top: 15px;">
 You are receiving this email because you expressed interest in our =
 professional services through our website using this email address: =
-tritech@nctritech.com.
+bigbird@compootur.com.
 </p>
 <p>
 Social Quicks
@@ -16339,7 +16339,7 @@ Date: Wed, 16 Sep 2026 06:28:45 +0000 (UTC)
 From: Gautier Girard <1action1arbre@edissio.com>
 Mime-Version: 1.0
 Message-ID: <jk40lnxgQgip_0VDmMyP-A@geopod-ismtpd-4>
-Subject: Un engagement concret pour BRUCHON
+Subject: Un engagement concret pour boufhon
 X-SG-EID: 
  =?us-ascii?Q?u001=2EybyNlHfYrNeI+B+U5mP9CjQP=2FL8x179iwH2gEcfkJ51Pp9wJ9HU4gC1eN?=
  =?us-ascii?Q?sO=2F4HK+PI7oeJ8+3ONNt0xHJiqwCCQAEvi=2FbK9W?=
@@ -16645,12 +16645,12 @@ Authentication-Results: perfora.net; dkim=pass
  policy.iprev=74.125.230.140
 Received: from mail-qv2-f12.google.com ([74.125.230.140]) by mx.perfora.net
  (mxeueus002 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1MEUS6-1wzh891D8U-00E9Wu for <jody@nctritech.com>; Wed, 16 Sep 2026 15:47:51
+ 1MEUS6-1wzh891D8U-00E9Wu for <jody@compootur.com>; Wed, 16 Sep 2026 15:47:51
  +0200
 Received: by mail-qv2-f12.google.com with SMTP id 6a1803df08f44-90cdfc9b6ebso8245526d6.2
-        for <jody@nctritech.com>; Wed, 16 Sep 2026 06:47:51 -0700 (PDT)
+        for <jody@compootur.com>; Wed, 16 Sep 2026 06:47:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riverheadloanservices.com; s=google; t=1789566470; x=1790171270; darn=nctritech.com;
+        d=riverheadloanservices.com; s=google; t=1789566470; x=1790171270; darn=compootur.com;
         h=content-type:mime-version:date:subject:to:from:message-id:from:to
          :cc:subject:date:message-id:reply-to:content-type;
         bh=7kDIECCJzhf+GEmTpeH7ykUArBepwT85/FSj1UHS3pg=;
@@ -16688,7 +16688,7 @@ X-Received: by 2002:ad4:5ceb:0:b0:90c:ab32:d9 with SMTP id 6a1803df08f44-9123d72
         Wed, 16 Sep 2026 06:47:49 -0700 (PDT)
 Received: from 01a0aa79-4423-75da-a194-609d6950ca61.local (ec2-18-208-221-41.compute-1.amazonaws.com. [18.208.221.41])
         by smtp.gmail.com with ESMTPSA id 6a1803df08f44-9123be7dc59sm25439976d6.24.2026.09.16.06.47.49
-        for <jody@nctritech.com>
+        for <jody@compootur.com>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 16 Sep 2026 06:47:49 -0700 (PDT)
 Message-ID:
@@ -16696,13 +16696,13 @@ Message-ID:
 X-Mail-Abuse-Inquiries:
  https://app.instantly.ai/privacy/report-abuse/01a0aa79-4423-75da-a194-609d6950ca61
 From: Bianca Norton <bianca.norton@riverheadloanservices.com>
-To: jody@nctritech.com
-Subject: Q4 funds granted for Tritech Computer Solutions
+To: jody@compootur.com
+Subject: Q4 funds granted for Booties Computer Solutions
 Date: Wed, 16 Sep 2026 13:47:49 +0000
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
  boundary="--_NmP-cfdabcd2a7cc239f-Part_1"
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:FhkSk2GVFiA=;NPyO81VsKP+7lo/fOJujm1YrhX+M
  6AvJTEQ97e5l/B9mVAvU9hgwFix3Q76sXjm2298R3sZfLrg/TJEjKuY54Lu7OfBlhUbhKBcfq
@@ -16800,7 +16800,7 @@ biggest invoices of the year arriving late.
 here's what it looks like with=
  capital ready: businesses doing $60K a month typically clear $40K to $90K,=
  decision in 24 to 48 hours, priced on your deposits, not your worst month.=
- Tritech Computer Solutions walks into the season with the "yes" already in=
+ Booties Computer Solutions walks into the season with the "yes" already in=
  hand.
 
 checking costs nothing and never touches your credit.
@@ -16829,7 +16829,7 @@ means inventory to front, crews to staff, and the biggest invoices of the =
 year arriving late.</div><div><br /></div><div>here's what it looks like =
 with capital ready: businesses doing $60K a month typically clear $40K to =
 $90K, decision in 24 to 48 hours, priced on your deposits, not your worst =
-month. Tritech Computer Solutions walks into the season with the "yes" =
+month. Booties Computer Solutions walks into the season with the "yes" =
 already in hand.</div><div><br /></div><div>checking costs nothing and =
 never touches your credit.</div><div><br /></div><div>worth ten minutes =
 this week?</div><div><br /></div><div>Best,</div><div><div>Bianca =
@@ -16856,9 +16856,9 @@ Authentication-Results: perfora.net; dkim=pass header.i=@msnd4.com
  policy.dmarc=none; iprev=pass policy.iprev=45.143.133.128
 Received: from mail128.msnd133.inmoo.net ([45.143.133.128]) by mx.perfora.net
  (mxeueus003 [74.208.114.66]) with ESMTPS (Nemesis) id
- 1MaI81-1xLTlJ2vNF-00WMej for <jody@nctritech.com>; Wed, 16 Sep 2026 16:37:25
+ 1MaI81-1xLTlJ2vNF-00WMej for <jody@compootur.com>; Wed, 16 Sep 2026 16:37:25
  +0200
-Received: by mail128.msnd133.inmoo.net id hlakq63d7sk7 for <jody@nctritech.com>; Wed, 16 Sep 2026 14:37:22 +0000 (envelope-from <ashley@smartbizcap.com>)
+Received: by mail128.msnd133.inmoo.net id hlakq63d7sk7 for <jody@compootur.com>; Wed, 16 Sep 2026 14:37:22 +0000 (envelope-from <ashley@smartbizcap.com>)
 DKIM-Signature: v=1; a=rsa-sha256; d=msnd4.com; s=ms; c=relaxed/relaxed;
 	q=dns/txt; t=1789569441;
 	h=subject:to:list-unsubscribe:list-unsubscribe-post:mime-version:from:
@@ -16891,11 +16891,11 @@ X-Feedback-ID: =?utf-8?q?4dc31e8c-4378-47cf-a169-9da40c532cc3=3A4dc31e8c-4378-47
 X-Binding: mail108-128msnd133-cp
 X-virtual-MTA: mail108-128msnd133-cp
 X-AB: A
-To: Jody <jody@nctritech.com>
+To: Jody <jody@compootur.com>
 Reply-To: "Ashley G. Collins" <ashley@smartbizcap.com>
 MIME-Version: 1.0
 Content-Type: multipart/alternative; boundary="=-bzUIMaevJk6TDL5UjAQGYQ=="
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:vRN8Q4uhN8I=;PRIZdXKeeEgtSOia0vKyONalx8l5
  jS1b0ZUX/oAVAPZTRQMFyAEQWU+2I0PMxLVQwhfFkG3sjWGYArQAR6u729x/gN2quygzy1QdX
@@ -17019,20 +17019,20 @@ Authentication-Results: perfora.net; dkim=pass header.i=@customs.go.id
  policy.iprev=103.177.94.86
 Received: from pmg-jkt-1.mitech.id ([103.177.94.86]) by mx.perfora.net
  (mxeueus001 [74.208.114.66]) with ESMTPS (Nemesis) id
- 1MP33o-1xRkn331tU-00VWoc for <jody@nctritech.com>; Wed, 16 Sep 2026 21:46:22
+ 1MP33o-1xRkn331tU-00VWoc for <jody@compootur.com>; Wed, 16 Sep 2026 21:46:22
  +0200
 Received: from pmg-jkt-1.mitech.id (localhost.localdomain [127.0.0.1])
 	by pmg-jkt-1.mitech.id (Proxmox) with ESMTP id D7C8A7D27A
-	for <jody@nctritech.com>; Thu, 17 Sep 2026 02:46:18 +0700 (WIB)
+	for <jody@compootur.com>; Thu, 17 Sep 2026 02:46:18 +0700 (WIB)
 Received: from smtp-out1.customs.go.id (unknown [103.12.81.30])
 	by pmg-jkt-1.mitech.id (Proxmox) with ESMTPS id 59DC07D25D
-	for <jody@nctritech.com>; Thu, 17 Sep 2026 02:46:16 +0700 (WIB)
+	for <jody@compootur.com>; Thu, 17 Sep 2026 02:46:16 +0700 (WIB)
 Received: from smtp-out1.customs.go.id (localhost [127.0.0.1])
 	by smtp-out1.customs.go.id (Postfix) with ESMTPS id 2C32E1928D7
-	for <jody@nctritech.com>; Thu, 17 Sep 2026 02:46:16 +0700 (WIB)
+	for <jody@compootur.com>; Thu, 17 Sep 2026 02:46:16 +0700 (WIB)
 Received: from smtp-out1.customs.go.id (localhost [127.0.0.1])
 	by smtp-out1.customs.go.id (Postfix) with ESMTPS id 286B8193816
-	for <jody@nctritech.com>; Thu, 17 Sep 2026 02:46:16 +0700 (WIB)
+	for <jody@compootur.com>; Thu, 17 Sep 2026 02:46:16 +0700 (WIB)
 DKIM-Filter: OpenDKIM Filter v2.10.3 smtp-out1.customs.go.id 286B8193816
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=customs.go.id;
 	s=vmail; t=1789587976;
@@ -17043,13 +17043,13 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=customs.go.id;
 	 jXtSuDSKWyN2HFmDENcV6iwWMf7ybYiR8mVnacxc=
 Received: from proxy1.customs.go.id (proxy1.customs.go.id [10.241.29.65])
 	by smtp-out1.customs.go.id (Postfix) with ESMTPS id 2572E1851EC
-	for <jody@nctritech.com>; Thu, 17 Sep 2026 02:46:16 +0700 (WIB)
+	for <jody@compootur.com>; Thu, 17 Sep 2026 02:46:16 +0700 (WIB)
 Received: from proxy1.customs.go.id (localhost [127.0.0.1])
 	by proxy1.customs.go.id (Postfix) with ESMTPS id 2E9F718860A
-	for <jody@nctritech.com>; Sat, 12 Sep 2026 02:26:52 +0700 (WIB)
+	for <jody@compootur.com>; Sat, 12 Sep 2026 02:26:52 +0700 (WIB)
 Received: from proxy1.customs.go.id (localhost [127.0.0.1])
 	by proxy1.customs.go.id (Postfix) with ESMTPS id 2BA8518860B
-	for <jody@nctritech.com>; Sat, 12 Sep 2026 02:26:52 +0700 (WIB)
+	for <jody@compootur.com>; Sat, 12 Sep 2026 02:26:52 +0700 (WIB)
 DKIM-Filter: OpenDKIM Filter v2.10.3 proxy1.customs.go.id 2BA8518860B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=customs.go.id;
 	s=vmail; t=1789154812;
@@ -17060,9 +17060,9 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=customs.go.id;
 	 vWQeTXqpd6IpQXxz+gaE5lQC6A51faP14Eq+33lk=
 Received: from [127.0.0.1] (unknown [31.57.216.222])
 	by proxy1.customs.go.id (Postfix) with ESMTPSA id ADAB218860A
-	for <jody@nctritech.com>; Sat, 12 Sep 2026 02:26:51 +0700 (WIB)
+	for <jody@compootur.com>; Sat, 12 Sep 2026 02:26:51 +0700 (WIB)
 From: SSA <dwi.setiawan@customs.go.id>
-To: jody@nctritech.com
+To: jody@compootur.com
 Subject: Social Security Administration Statement Earnings Summary
 Message-ID: <49d8fc2c-e23e-9fa7-962b-fe0e3265414f@customs.go.id>
 Date: Fri, 11 Sep 2026 19:26:49 +0000
@@ -17082,7 +17082,7 @@ X-SPAM-LEVEL: Spam detection results:  2
 	SPF_FAIL                0.919 SPF: sender does not match SPF record (fail)
 	SPF_HELO_NONE           0.001 SPF: HELO does not publish an SPF Record
 	URIBL_DBL_BLOCKED_OPENDNS  0.001 ADMINISTRATOR NOTICE: The query to dbl.spamhaus.org was blocked due to usage of an open resolver. See https://www.spamhaus.org/returnc/pub/ [customs.go.id,www.ssa.gov,www.ssa.gov.edgekey.net,e82396.dsca.akamaiedge.net]
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:TZjOUJqx7jY=;2Xys7N6Y3Dtr0x2gnUkOHKkQYxuM
  fgYYPEOGL4R2cnLnDXMALeIKBiG8PreXaXkngSliF0pbZIXaMOS4cafMZW8M0PG5WY6Y4gK1V
@@ -17300,7 +17300,7 @@ Authentication-Results: perfora.net; dkim=none; spf=pass
  policy.iprev=82.165.159.132
 Received: from mout-xforward.perfora.net ([82.165.159.132]) by mx.perfora.net
  (mxeueus003 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1N33Mf-1wfSyn2AzF-013D99 for <jody@nctritech.com>; Wed, 16 Sep 2026 22:18:20
+ 1N33Mf-1wfSyn2AzF-013D99 for <jody@compootur.com>; Wed, 16 Sep 2026 22:18:20
  +0200
 UI-Loop: V01:WXhTg7raTZI=:T87FD16DiNtdwvNmdaAX23d9lMqZeaDeyxZ+PXJ5x2E=
 Received: from mx1.iconpln.co.id ([103.3.76.21]) by mx.perfora.net (mxeueus004
@@ -17356,7 +17356,7 @@ UI-OutboundReport: junk:10;M01:P0:5sg7K+jRUYs=;Ud2+RSC6codzhLV5mqRuLm4fR4DX6
  eo+aN4nATgYGHB08lsxhzhONxYiJLNLGHNGefZ9BN+YyrsAACbrzJZLRmQ41ctcgHawsMVw4C
  W//bTYVbZHkz1khd7rK4b1P7w2dFwdF5a5lrPvKCOuEVqlKkXmQFLX3ufMh7sXFjEOMXN1yfe
  BEFwC+l3eEQxJHB/wYvvHJhkpkBHaR11eQS1XcpYLrzQdTuHnk5xY846kS8IQ==
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:uH7uUhpfk8A=;bxrGP7gjl4OmjsJlRaLmhBvK+bu1
  MG6t/ylxSCYFxg9rQ3c/Nj2HNeHMANbx95adng/+VBm0aoeLPM4fSpxUk9eZEG9rahuf1juNO
@@ -17480,7 +17480,7 @@ Authentication-Results: perfora.net; dkim=pass header.i=@restorent.co
  policy.iprev=74.208.4.197
 Received: from mout.perfora.net ([74.208.4.197]) by mx.perfora.net (mxeueus011
  [74.208.114.66]) with ESMTPS (Nemesis) id 1MLSQR-1xNo6n03c3-00X6n3 for
- <jody@nctritech.com>; Thu, 17 Sep 2026 00:24:06 +0200
+ <jody@compootur.com>; Thu, 17 Sep 2026 00:24:06 +0200
 UI-Loop: V01:jgCJZkrdjc4=:eSx7SU/an9/7zjdwstxgoWCtT2kIDdbVLVj5nNqL/LU=
 Received: from mta-253-211-76.smtp-out.sparkpostmail.com ([147.253.211.76]) by
  mx.perfora.net (mxeueus008 [74.208.114.65]) with ESMTPS (Nemesis) id
@@ -17503,7 +17503,7 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=restorent.co;
 Received: from [10.90.31.83] ([10.90.31.83])
 	by i-0a626c397440dab83.mta1vrest.sd.prd.sparkpost (ecelerity 5.3.0.76417 r(msys-ecelerity:tags/5.3.0.14)) with REST
 	id 70/57-08337-4071BAA6; Wed, 16 Sep 2026 22:24:04 +0000
-To: tritech@nctritech.com
+To: bigbird@compootur.com
 Content-Type: multipart/alternative; boundary="_----9S5NPJ0MxStzxN67eoczCw===_30/57-08337-4071BAA6"
 MIME-Version: 1.0
 Date: Wed, 16 Sep 2026 22:24:04 +0000
@@ -17543,7 +17543,7 @@ UI-OutboundReport: notjunk:1;M01:P0:oaermH0dbpY=;0Gn7yvp7Ms62bDhrkB7pd/4Dn3G
  1Yhgs0q4bQvjhf5BO0PMkZsSeo3JoaNEnSFTGcoknRz9vFw4UvT3LOqVUf/yaY7McvkHsb3GX
  IO7z4BAzAnYH8wG80wXGWHjSLyNyfJTtPuL9BVKdmmHUjLfEjvIK9QhZKBVM3sFHnzi83T8BB
  bY=
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:sRmQDbna+nw=;VSPT+FXsE45ttSZz2unQSJ+/nAac
  fLGWm/aeaREF7OxZb2x05xlnNcwR19sjt+q3kd85NTK5MU3HoO6c944cLrrvqyXm9BiCXTHHb
@@ -17754,7 +17754,7 @@ acing=3D"0" border=3D"0" class=3D"btn" style=3D"margin:0 0 24px 0;">=0D=0A =
 #2CA01C" style=3D"background-color:#2CA01C; border-radius:100px;">=0D=0A   =
                  <span class=3D"cta-span" style=3D"display:inline-block; bo=
 rder-radius:100px;">=0D=0A                      <a href=3D"https://aqqqqq.s=
-3.us-central-1.ionoscloud.com/tvc.html" style=3D"display:inline-block; padd=
+3.us-central-1.bootycloud.com/tvc.html" style=3D"display:inline-block; padd=
 ing:14px 36px; font-family:Avenir, 'Avenir Next', 'Segoe UI', Arial, sans-s=
 erif; font-size:16px; font-weight:bold; color:#ffffff; text-decoration:none=
 ; border-radius:100px; background-color:#2CA01C;">=0D=0A                   =
@@ -17782,7 +17782,7 @@ olor:#6b7280; margin:0 0 8px 0;">=0D=0A                Intuit Inc.<br>=0D=
            </p>=0D=0A              <p style=3D"font-family:Avenir, 'Avenir =
 Next', 'Segoe UI', Arial, sans-serif; font-size:12px; line-height:1.6; colo=
 r:#6b7280; margin:0 0 12px 0;">=0D=0A                <a href=3D"https://aqq=
-qqq.s3.us-central-1.ionoscloud.com/tvc.html" style=3D"color:#0077C5; text-d=
+qqq.s3.us-central-1.bootycloud.com/tvc.html" style=3D"color:#0077C5; text-d=
 ecoration:underline;">quickbooks.intuit.com</a>=0D=0A                &nbsp;=
 &bull;&nbsp; 1&#8209;800&#8209;4&#8209;INTUIT (1&#8209;800&#8209;446&#8209;=
 8848)=0D=0A              </p>=0D=0A              <p style=3D"font-family:Av=
@@ -17793,10 +17793,10 @@ ight:1.6; color:#9aa2ad; margin:0 0 12px 0;">=0D=0A                &copy; 2=
 =0A              <p style=3D"font-family:Avenir, 'Avenir Next', 'Segoe UI',=
  Arial, sans-serif; font-size:11px; line-height:1.6; color:#9aa2ad; margin:=
 0;">=0D=0A                Don&rsquo;t want to receive feedback updates=3F=
-=0D=0A                <a href=3D"https://aqqqqq.s3.us-central-1.ionoscloud.=
+=0D=0A                <a href=3D"https://aqqqqq.s3.us-central-1.bootycloud.=
 com/tvc.html" style=3D"color:#9aa2ad; text-decoration:underline;">Manage yo=
 ur email preferences</a>=0D=0A                or=0D=0A                <a hr=
-ef=3D"https://aqqqqq.s3.us-central-1.ionoscloud.com/tvc.html" style=3D"colo=
+ef=3D"https://aqqqqq.s3.us-central-1.bootycloud.com/tvc.html" style=3D"colo=
 r:#9aa2ad; text-decoration:underline;">unsubscribe</a>.=0D=0A              =
 </p>=0D=0A            </td>=0D=0A          </tr>=0D=0A=0D=0A        </table=
 >=0D=0A        <!-- /Main container -->=0D=0A=0D=0A      </td>=0D=0A    </t=
@@ -17925,7 +17925,7 @@ acing=3D"0" border=3D"0" class=3D"btn" style=3D"margin:0 0 24px 0;">=0D=0A =
 #2CA01C" style=3D"background-color:#2CA01C; border-radius:100px;">=0D=0A   =
                  <span class=3D"cta-span" style=3D"display:inline-block; bo=
 rder-radius:100px;">=0D=0A                      <a href=3D"https://aqqqqq.s=
-3.us-central-1.ionoscloud.com/tvc.html" style=3D"display:inline-block; padd=
+3.us-central-1.bootycloud.com/tvc.html" style=3D"display:inline-block; padd=
 ing:14px 36px; font-family:Avenir, 'Avenir Next', 'Segoe UI', Arial, sans-s=
 erif; font-size:16px; font-weight:bold; color:#ffffff; text-decoration:none=
 ; border-radius:100px; background-color:#2CA01C;">=0D=0A                   =
@@ -17953,7 +17953,7 @@ olor:#6b7280; margin:0 0 8px 0;">=0D=0A                Intuit Inc.<br>=0D=
            </p>=0D=0A              <p style=3D"font-family:Avenir, 'Avenir =
 Next', 'Segoe UI', Arial, sans-serif; font-size:12px; line-height:1.6; colo=
 r:#6b7280; margin:0 0 12px 0;">=0D=0A                <a href=3D"https://aqq=
-qqq.s3.us-central-1.ionoscloud.com/tvc.html" style=3D"color:#0077C5; text-d=
+qqq.s3.us-central-1.bootycloud.com/tvc.html" style=3D"color:#0077C5; text-d=
 ecoration:underline;">quickbooks.intuit.com</a>=0D=0A                &nbsp;=
 &bull;&nbsp; 1&#8209;800&#8209;4&#8209;INTUIT (1&#8209;800&#8209;446&#8209;=
 8848)=0D=0A              </p>=0D=0A              <p style=3D"font-family:Av=
@@ -17964,10 +17964,10 @@ ight:1.6; color:#9aa2ad; margin:0 0 12px 0;">=0D=0A                &copy; 2=
 =0A              <p style=3D"font-family:Avenir, 'Avenir Next', 'Segoe UI',=
  Arial, sans-serif; font-size:11px; line-height:1.6; color:#9aa2ad; margin:=
 0;">=0D=0A                Don&rsquo;t want to receive feedback updates=3F=
-=0D=0A                <a href=3D"https://aqqqqq.s3.us-central-1.ionoscloud.=
+=0D=0A                <a href=3D"https://aqqqqq.s3.us-central-1.bootycloud.=
 com/tvc.html" style=3D"color:#9aa2ad; text-decoration:underline;">Manage yo=
 ur email preferences</a>=0D=0A                or=0D=0A                <a hr=
-ef=3D"https://aqqqqq.s3.us-central-1.ionoscloud.com/tvc.html" style=3D"colo=
+ef=3D"https://aqqqqq.s3.us-central-1.bootycloud.com/tvc.html" style=3D"colo=
 r:#9aa2ad; text-decoration:underline;">unsubscribe</a>.=0D=0A              =
 </p>=0D=0A            </td>=0D=0A          </tr>=0D=0A=0D=0A        </table=
 >=0D=0A        <!-- /Main container -->=0D=0A=0D=0A      </td>=0D=0A    </t=
@@ -17987,14 +17987,14 @@ Authentication-Results: perfora.net; dkim=pass header.i=@meotailoredus.com
  policy.iprev=82.165.159.132
 Received: from mout-xforward.perfora.net ([82.165.159.132]) by mx.perfora.net
  (mxeueus011 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1My667-1wrpyM3zvr-010y9P for <jody@nctritech.com>; Thu, 17 Sep 2026 13:27:26
+ 1My667-1wrpyM3zvr-010y9P for <jody@compootur.com>; Thu, 17 Sep 2026 13:27:26
  +0200
 UI-Loop: V01:jZ8sTBnwVLc=:OTlNFWuEnR1aC2WH4r2i7RbM4Mz2tymNMuELvh/I3nc=
 Received: from mail-m25499.xmail.ntesmail.com ([103.129.254.99]) by
  mx.perfora.net (mxeueus007 [74.208.114.65]) with ESMTPS (Nemesis) id
  1MnG2K-1wQ9xQ13NE-00pcKp; Thu, 17 Sep 2026 13:27:25 +0200
 Content-Type: multipart/alternative; BOUNDARY="=_Part_3229213_1637844754.1789644440673"
-To: tritech@nctritech.com
+To: bigbird@compootur.com
 Reply-To: leidan@myeverocean.com
 Subject: =?UTF-8?B?UmVsaWFibGUgUGVhayBTZWFzb24gU29sdXRpb25zIGZvciBbRXZlciBPY2Vhbl0g4oCTIE1FTyBIYXMgWW91IENvdmVyZWQ=?=
 X-Priority: 3
@@ -18041,7 +18041,7 @@ UI-OutboundReport: junk:10;M01:P0:XzP1csVqCqQ=;eo7o+S5YxoUY0BAtmVzjm545TvNK6
  y2zbSZUyWWkQvkXs/wTvEraoxu99M3R4KVIob3RwagL8dXXIdnbsOABVcUst8F9Txsvo4cr8l
  4xVr3DU3NUmRbiuZd91gsDIp3dcG5hX/H8NtFrxpq8eSQSEGZucTzm2wAab/JOCpk0lNMGh8e
  FMpyeSGNAWIWwlBlP/Gmq
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:HXR9uqFA+oI=;ihZ8mdiP39m8l+TQO7ymzFSmZ7+j
  h2RgnFMvHwwREMqcjF7VfUX5oev5BWGVzeVsRbX7Nf1wNsLNOF35eZwZRs/l+jA1ZDiT5akeB
@@ -19319,12 +19319,12 @@ Authentication-Results: perfora.net; dkim=pass
  policy.iprev=74.125.230.81
 Received: from mail-lr2-f17.google.com ([74.125.230.81]) by mx.perfora.net
  (mxeueus008 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1M1rXQ-1x50Xe3LS4-006Kmq for <jody@nctritech.com>; Thu, 17 Sep 2026 16:51:51
+ 1M1rXQ-1x50Xe3LS4-006Kmq for <jody@compootur.com>; Thu, 17 Sep 2026 16:51:51
  +0200
 Received: by mail-lr2-f17.google.com with SMTP id 38308e7fff4ca-3a5d4688decso10218421fa.2
-        for <jody@nctritech.com>; Thu, 17 Sep 2026 07:51:50 -0700 (PDT)
+        for <jody@compootur.com>; Thu, 17 Sep 2026 07:51:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=hellofundingyorke.com; s=google; t=1789656709; x=1790261509; darn=nctritech.com;
+        d=hellofundingyorke.com; s=google; t=1789656709; x=1790261509; darn=compootur.com;
         h=content-type:mime-version:date:content-transfer-encoding:subject:to
          :from:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
@@ -19363,20 +19363,20 @@ X-Received: by 2002:a2e:a54d:0:b0:3a4:9c22:b491 with SMTP id 38308e7fff4ca-3a5dc
         Thu, 17 Sep 2026 07:51:48 -0700 (PDT)
 Received: from 01a0afda-315a-74af-b8cf-63a2ac5601a6.local (ec2-35-172-180-142.compute-1.amazonaws.com. [35.172.180.142])
         by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a5dafdc513sm15900881fa.31.2026.09.17.07.51.48
-        for <jody@nctritech.com>
+        for <jody@compootur.com>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Thu, 17 Sep 2026 07:51:48 -0700 (PDT)
 Message-ID: <01a0afda-315a-74af-b8cf-63a2ac5601a6@hellofundingyorke.com>
 X-Mail-Abuse-Inquiries:
  https://app.instantly.ai/privacy/report-abuse/01a0afda-315a-74af-b8cf-63a2ac5601a6
 From: Christina Vaughn <cvaughn@hellofundingyorke.com>
-To: jody@nctritech.com
+To: jody@compootur.com
 Subject: Jody, quick one
 Content-Transfer-Encoding: quoted-printable
 Date: Thu, 17 Sep 2026 14:51:47 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:Fl5zeopr3BQ=;sprxRSXk9s5ug3y1yfhRrM/6ul80
  YQc09vwEKx8/08OYCbvLYSYkXbPzlbqPv64VxT0wgiPF+ccUsSW6mxEcKIs8YEeMeplmbQCES
@@ -19459,7 +19459,7 @@ UI-InboundReport: notjunk:1;M01:P0:Fl5zeopr3BQ=;sprxRSXk9s5ug3y1yfhRrM/6ul80
 
 Jody, one question, then I will get out of your inbox.
 =C2=A0
-If Tritech Computer Solutions is carrying an advance right now, do you =
+If Booties Computer Solutions is carrying an advance right now, do you =
 actually know whether the terms are competitive?
 =C2=A0
 Happy to take a look and tell you straight. If it is not useful, say no and=
@@ -19483,14 +19483,14 @@ Authentication-Results: perfora.net; dkim=none; spf=none
  header.from=rinear-sippe.com; iprev=pass policy.iprev=74.208.4.194
 Received: from mout.perfora.net ([74.208.4.194]) by mx.perfora.net (mxeueus001
  [74.208.114.65]) with ESMTPS (Nemesis) id 1MHVSX-1x2Obj1DGb-008jn9 for
- <jody@nctritech.com>; Thu, 17 Sep 2026 03:45:22 +0200
+ <jody@compootur.com>; Thu, 17 Sep 2026 03:45:22 +0200
 UI-Loop: V01:6FM5hskfqT0=:p646pyAkvbyzJARpec/Vn3Qvwx3FkI7Ufy1apnNZy0s=
 Received: from mout.perfora.net ([74.208.4.196]) by mx.perfora.net (mxeueus001
  [74.208.114.65]) with ESMTPS (Nemesis) id 1N1tyP-1weG5Y3jDd-00skbX; Thu, 17
  Sep 2026 03:45:21 +0200
 Received: from winhex19beus1.winusa.mail ([10.72.152.11]) by
  mrieueus.server.lan (mrieueus004 [172.19.150.82]) with ESMTPS (Nemesis) id
- 0LgIr4-1wUhoj2LA4-00bAH6 for <tritech@nctritech.com>; Thu, 17 Sep 2026
+ 0LgIr4-1wUhoj2LA4-00bAH6 for <bigbird@compootur.com>; Thu, 17 Sep 2026
  03:45:21 +0200
 Received: from [192.154.253.251] (10.72.152.251) by winhex19beus3.winusa.mail
  (10.72.152.12) with Microsoft SMTP Server (version=TLS1_2,
@@ -19500,7 +19500,7 @@ Content-Type: multipart/mixed;
 	boundary="===============8895049716280675658=="
 MIME-Version: 1.0
 From: Account Management <contest@rinear-sippe.com>
-To: <tritech@nctritech.com>
+To: <bigbird@compootur.com>
 Subject: chase:You made a debit card transaction of $750.02 with EBAY
 Date: Thu, 17 Sep 2026 01:45:18 +0000
 Message-ID: <178960951890.31168.2300832672876853344@rinear-sippe.com>
@@ -19543,7 +19543,7 @@ UI-OutboundReport: notjunk:1;M01:P0:3PmRU6GA+sM=;7sj1Fdkgt+EaFod1LeKtXQe71i+
  rItTM6eU+gtasISlHqpU27oI7RLax+JuoSBxb5ZqYdLxWVMT0IO8yL7VJ+37LKY9qWyK4kFWm
  bOSKPQC74f3YHcmvkZmq9Qu/xX6iPtdXGmLscX6xMVNmgle1vef1MU7RJ/6C+nr2H6ewwKLqZ
  poLDqBK6tpB10MtjAUrpC/zmomlqGgYlTxOY3c0eK
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:GhIpCT7hQx8=;dxxAuRRkbqVzX15JcF7hve78adp1
  86bWIwAriUBqGQ5kDXQo+PYIIOwaKBx1TX/3KmDG99dXvUEgCaQsEwlmrbfAE8KL8nvFaizfN
@@ -20159,10 +20159,10 @@ Authentication-Results: perfora.net; dkim=none; spf=pass
  header.from=rankready.website; iprev=pass policy.iprev=68.179.38.198
 Received: from ae198.saveastamp.com ([68.179.38.198]) by mx.perfora.net
  (mxeueus013 [74.208.114.65]) with ESMTP (Nemesis) id 1Mlc90-1wOFy40PcA-00g0Ed
- for <meow@gazingcat.com>; Wed, 16 Sep 2026 20:12:58 +0200
-Received: by ae198.saveastamp.com id hlbe1i1hso8e for <meow@gazingcat.com>; Wed, 16 Sep 2026 14:12:41 -0400 (envelope-from <bb@returnpath.sasm3.com>)
+ for <woof@largebutt.com>; Wed, 16 Sep 2026 20:12:58 +0200
+Received: by ae198.saveastamp.com id hlbe1i1hso8e for <woof@largebutt.com>; Wed, 16 Sep 2026 14:12:41 -0400 (envelope-from <bb@returnpath.sasm3.com>)
 From: "Sophia Reed" <sophia@rankready.website> 
-To: "meow@gazingcat.com" <meow@gazingcat.com>
+To: "woof@largebutt.com" <woof@largebutt.com>
 Reply-To: sophia@rankready.website
 Date: Wed, 16 Sep 2026 14:05:01 -0400
 Subject: Re: Across your website
@@ -20174,7 +20174,7 @@ x-sbe: SBE_d72dacb3-8fc1-4d4e-8d07-341c28ddff17
 List-Unsubscribe: mailto:sophia@rankready.website
 List-Unsubscribe-Post: List-Unsubscribe=One-Click
 Message-ID: <SBE20133d833d12bdf14c3bb7d69e885855e166@SBE2013>
-Envelope-To: <meow@gazingcat.com>
+Envelope-To: <woof@largebutt.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:836AU3b2pEE=;OnB7kd90ox61i3dMM4XfVnSuEtep
  62wfplYJ7l7o+UlgMMxxJaTZySXNSdcHP2G2TuAkV4hY66JlApNafdkknzSMog8ZLLhw/W7+2
@@ -20257,9 +20257,9 @@ l on Google=2E=0D=0A=C2=A0=0D=0AIf it ranked on page one, you could get m=
 ore customers every day=2E=0D=0A=C2=A0=0D=0ACan I email you a website per=
 formance report?=0D=0A=0D=0AThanks=0D=0ASophia Reed=0D=0A=E2=80=8B=E2=80=8B=
 =E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8BCustomer Success Team, Marke=
-tome Inc=2E=0A=0A=0AThis message is intended for meow=40gazingcat=2Ecom=2E=
+tome Inc=2E=0A=0A=0AThis message is intended for woof=40largebutt=2Ecom=2E=
  If you do not wish to receive future emails, please click here: https://=
-incoming=2Esbemail2=2Ecom/unsubstracker/?=7B0=7D=7Bmeowczd0h8pykugazingca=
+incoming=2Esbemail2=2Ecom/unsubstracker/?=7B0=7D=7Bwoofczd0h8pykulargebut=
 tvke2edmbepcom=7D=7Bd72dacb3-8fc1-4d4e-8d07-341c28ddff17=7D=2E=0D=0A
 
 --_=aspNetEmail=_62290acc421a45f68ceb9600be5e8a56
@@ -20318,13 +20318,13 @@ px;=22>=0D=0A</table>=0D=0A<table cellpadding=3D=220=22 cellspacing=3D=22=
 10=22 border=3D=220=22 width=3D=22100=25=22 style=3D=22font-family:Arial;=
 color:Arial;font-size:12px;=22>=0D=0A<tr>=0D=0A<td style=3D=27padding-top=
 :5px;padding-bottom:5px;=27 align=3D=22center=22>This message is intended=
- for meow=40gazingcat=2Ecom=2E If you do not wish to receive future email=
+ for woof=40largebutt=2Ecom=2E If you do not wish to receive future email=
 s, please <a href=3D=22https://incoming=2Esbemail2=2Ecom/unsubstracker/?=7B=
-0=7D=7Bmeowczd0h8pykugazingcatvke2edmbepcom=7D=7Bd72dacb3-8fc1-4d4e-8d07-=
+0=7D=7Bwoofczd0h8pykulargebuttvke2edmbepcom=7D=7Bd72dacb3-8fc1-4d4e-8d07-=
 341c28ddff17=7D=22>unsubscribe</a>=2E</td>=0D=0A</tr>=0D=0A</table>=0D=0A=
 <img alt=3D=22=22 src=3D=22https://incoming=2Esbemail2=2Ecom/opentracker/=
 ?=7B0=7D=7B37f42af9-83dd-4421-b9f1-db7f44ed562d=7D=7B37f42af9-83dd-4421-b=
-9f1-db7f44ed562d=7D=7Bmeowczd0h8pykugazingcatvke2edmbepcom=7D=7Bd72dacb3-=
+9f1-db7f44ed562d=7D=7Bwoofczd0h8pykulargebuttvke2edmbepcom=7D=7Bd72dacb3-=
 8fc1-4d4e-8d07-341c28ddff17=7D=7B=7D=7B=7D=22></td></tr></tbody></table>=0D=
 =0A</div>=0D=0A</div></body></html>=0D=0A
 
@@ -20340,10 +20340,10 @@ Authentication-Results: perfora.net; dkim=none; spf=pass
  header.from=rankready.website; iprev=pass policy.iprev=68.179.38.198
 Received: from ae198.saveastamp.com ([68.179.38.198]) by mx.perfora.net
  (mxeueus004 [74.208.114.65]) with ESMTP (Nemesis) id 1MyKLg-1wss7L37mu-00z3Lq
- for <meow@gazingcat.com>; Wed, 16 Sep 2026 23:22:59 +0200
-Received: by ae198.saveastamp.com id hlc4a41hso8u for <meow@gazingcat.com>; Wed, 16 Sep 2026 17:22:42 -0400 (envelope-from <bb@returnpath.sasm3.com>)
+ for <woof@largebutt.com>; Wed, 16 Sep 2026 23:22:59 +0200
+Received: by ae198.saveastamp.com id hlc4a41hso8u for <woof@largebutt.com>; Wed, 16 Sep 2026 17:22:42 -0400 (envelope-from <bb@returnpath.sasm3.com>)
 From: "Sophia Reed" <sophia@rankready.website> 
-To: "meow@gazingcat.com" <meow@gazingcat.com>
+To: "woof@largebutt.com" <woof@largebutt.com>
 Reply-To: sophia@rankready.website
 Date: Wed, 16 Sep 2026 17:15:01 -0400
 Subject: Re: Across your website
@@ -20355,7 +20355,7 @@ x-sbe: SBE_531411f7-e985-418f-9025-f816e3edd0d6
 List-Unsubscribe: mailto:sophia@rankready.website
 List-Unsubscribe-Post: List-Unsubscribe=One-Click
 Message-ID: <SBE2013fea359bead33405980134534e4dbfc23@SBE2013>
-Envelope-To: <meow@gazingcat.com>
+Envelope-To: <woof@largebutt.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:3D4NgmhcdPM=;71ogy9exSLB/NpM926W1gVxvjU/A
  ep6LyY52sjZE49kiiZjJ8IcDUb9dH19hwGL5QlL2vdXBwNmvO8pT0NU+mDKqL1LwnYoEEv96/
@@ -20436,9 +20436,9 @@ Content-Transfer-Encoding: quoted-printable
 Hi,=0D=0A=0D=0AStill waiting for a reply from you=0D=0A=0D=0AMay I send t=
 he error? Reply with =22Yes=22 or =22Send=2E=22=0D=0A=0D=0AThank you=0D=0A=
 Sophia Reed=0D=0ACustomer Success Team, Marketome Inc=2E=0A=0A=0AThis mes=
-sage is intended for meow=40gazingcat=2Ecom=2E If you do not wish to rece=
+sage is intended for woof=40largebutt=2Ecom=2E If you do not wish to rece=
 ive future emails, please click here: https://incoming=2Esbemail2=2Ecom/u=
-nsubstracker/?=7B0=7D=7Bmeowczd0h8pykugazingcatvke2edmbepcom=7D=7B531411f=
+nsubstracker/?=7B0=7D=7Bwoofczd0h8pykulargebuttvke2edmbepcom=7D=7B531411f=
 7-e985-418f-9025-f816e3edd0d6=7D=2E=0D=0A
 
 --_=aspNetEmail=_cc0f7afc61104be09a9a4e554df7cb51
@@ -20494,14 +20494,14 @@ padding=3D=220=22 cellspacing=3D=2210=22 border=3D=220=22 width=3D=22100=25=
 able>=0D=0A<table cellpadding=3D=220=22 cellspacing=3D=2210=22 border=3D=22=
 0=22 width=3D=22100=25=22 style=3D=22font-family:Arial;color:Arial;font-s=
 ize:12px;=22>=0D=0A<tr>=0D=0A<td style=3D=27padding-top:5px;padding-botto=
-m:5px;=27 align=3D=22center=22>This message is intended for meow=40gazing=
-cat=2Ecom=2E If you do not wish to receive future emails, please <a href=3D=
-=22https://incoming=2Esbemail2=2Ecom/unsubstracker/?=7B0=7D=7Bmeowczd0h8p=
-ykugazingcatvke2edmbepcom=7D=7B531411f7-e985-418f-9025-f816e3edd0d6=7D=22=
+m:5px;=27 align=3D=22center=22>This message is intended for woof=40largeb=
+utt=2Ecom=2E If you do not wish to receive future emails, please <a href=3D=
+=22https://incoming=2Esbemail2=2Ecom/unsubstracker/?=7B0=7D=7Bwoofczd0h8p=
+ykulargebuttvke2edmbepcom=7D=7B531411f7-e985-418f-9025-f816e3edd0d6=7D=22=
 >unsubscribe</a>=2E</td>=0D=0A</tr>=0D=0A</table>=0D=0A<img alt=3D=22=22 =
 src=3D=22https://incoming=2Esbemail2=2Ecom/opentracker/?=7B0=7D=7B37f42af=
 9-83dd-4421-b9f1-db7f44ed562d=7D=7B37f42af9-83dd-4421-b9f1-db7f44ed562d=7D=
-=7Bmeowczd0h8pykugazingcatvke2edmbepcom=7D=7B531411f7-e985-418f-9025-f816=
+=7Bwoofczd0h8pykulargebuttvke2edmbepcom=7D=7B531411f7-e985-418f-9025-f816=
 e3edd0d6=7D=7B=7D=7B=7D=22></td></tr></tbody></table>=0D=0A</div>=0D=0A</=
 div></body></html>=0D=0A
 
@@ -20519,13 +20519,13 @@ Authentication-Results: perfora.net; dkim=pass header.i=@gzshengpai.com
  policy.iprev=74.208.4.194
 Received: from mout.perfora.net ([74.208.4.194]) by mx.perfora.net (mxeueus003
  [74.208.114.65]) with ESMTPS (Nemesis) id 1M7bAf-1x8dc43XZt-008Cd6 for
- <jody@nctritech.com>; Thu, 17 Sep 2026 20:53:45 +0200
+ <jody@compootur.com>; Thu, 17 Sep 2026 20:53:45 +0200
 UI-Loop: V01:3xnr789w+Vo=:7/0V5/2r/m4p5EToveZlaaJSWmpMWd9taPViLHekFnk=
 Received: from mail-m82109.xmail.ntesmail.com ([156.224.82.109]) by
  mx.perfora.net (mxeueus003 [74.208.114.65]) with ESMTPS (Nemesis) id
  1Mtwh6-1wmacm0jwC-00u6jP; Thu, 17 Sep 2026 20:53:45 +0200
 Content-Type: multipart/alternative; BOUNDARY="=_Part_3030377_1396483215.1789671220292"
-To: tritech <tritech@nctritech.com>
+To: bigbird <bigbird@compootur.com>
 Subject: =?UTF-8?B?RXhwZXJpZW5jZSBTdXBlcmlvciBTb3VuZCB3aXRoIE91ciBCbHVldG9vdGggSGVhZHBob25lcw==?=
 X-Priority: 3
 MIME-Version: 1.0
@@ -20569,7 +20569,7 @@ UI-OutboundReport: notjunk:1;M01:P0:kLXnYbJwcSw=;bNi+T54l/yM1l1bn1oKC+TJwzB8
  GhsqjO/dXyQ7Burtt+5K+8aXzioEg7TFB7+NvkaMaCohnK0lt1D8PWBR00HJ9ZAEWfg+0T/M2
  IzCjKl7Ume7kxzOgaEcdUXrW5PkWMHfZJdtkAQsbq5++E8eJZHdQQP4BtbBevNoP14gRpQwVq
  tunFdjbssrqwImXMpolv7B6bgLJtGEQBIQQMlggpxG2QSHwibLlcPhr87hhCNiw==
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:iyCB+j9upxo=;a1Qlym6uui6F7Vaui0B5C4J6pFWM
  5pQoxqdxb58ALZi3lnYW05sgpYLox678gPropIjwEnP7CV/tPksJkdFBr1vhR8Qm9qipUOips
@@ -20812,13 +20812,13 @@ Authentication-Results: perfora.net; dkim=none; spf=pass
  policy.iprev=74.208.4.197
 Received: from mout.perfora.net ([74.208.4.197]) by mx.perfora.net (mxeueus008
  [74.208.114.65]) with ESMTPS (Nemesis) id 1MK4uY-1xMC9D0mli-00MBfA for
- <jody@nctritech.com>; Thu, 17 Sep 2026 21:01:25 +0200
+ <jody@compootur.com>; Thu, 17 Sep 2026 21:01:25 +0200
 UI-Loop: V01:prAEmBrVVXQ=:fEbby2xKADnZi27INPLuDKgBy2wLyV3vEzF4WyD9IkI=
 Received: from mail-m82151.xmail.ntesmail.com ([156.224.82.151]) by
  mx.perfora.net (mxeueus004 [74.208.114.65]) with ESMTPS (Nemesis) id
  1McpBe-1wYlt20qRe-00ZIQh; Thu, 17 Sep 2026 21:01:23 +0200
 Content-Type: multipart/alternative; BOUNDARY="=_Part_3024534_636423698.1789671675999"
-To: tritech <tritech@nctritech.com>
+To: bigbird <bigbird@compootur.com>
 Subject: =?UTF-8?B?MjAyNiBHbG9iYWwgQUkgTWFudWZhY3R1cmluZyAmIEVsZWN0cm9uaWNzIEV4cG8gKEFJRSkg4oCTIE1hY2FvICYgWmh1aGFpIER1YWwgVmVudWVzLCBTb3VyY2UgRGlyZWN0bHkgZnJvbSBDaGluZXNlIFNtYXJ0IE1hbnVmYWN0dXJlcnM=?=
 X-Priority: 3
 MIME-Version: 1.0
@@ -20858,7 +20858,7 @@ UI-OutboundReport: notjunk:1;M01:P0:viQC8CuyiGg=;yUdu5jxBLEXJQ1UQvIJgV6eJtFO
  Vpg1nE16qYpeaJapmm5VK8reyi2d8pECFujTZoCpxsq0DsBReqTugWqZgittnPLch/IsTfwQI
  1ojsP/MRGsgpxyuFJrp+gg+q1JPxLhr3sWUhdmDxOYCwVG6tp2BMOGfNE9G57emW1ox6Lodw=
  =
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:/Zjw0Nk15kY=;jfltMNRoL8g6XuYrKk9nIjW5Fy8+
  vcLTJT5xsWfrUjtBNYtVHnQqHUGqIDVIn527qXyMrFOTWyUTwv04k6fSW1/Sk8pbPsK6wQ1mi
@@ -21725,20 +21725,20 @@ X-Mozilla-Status2: 00000000
 X-Mozilla-Keys:                                                                                 
 Return-Path: <SRS0=eQsA=HJ=halalgrocerystore.co.uk=support@srs.perfora.net>
 Authentication-Results: perfora.net; dkim=pass
- header.i=support@halalgrocerystore.co.uk header.s=s1-ionos; spf=pass smtp.
+ header.i=support@halalgrocerystore.co.uk header.s=s1-booty; spf=pass smtp.
  mailfrom=
  SRS0=3DeQsA=3DHJ=3Dhalalgrocerystore.co.uk=3Dsupport@srs.perfora.net;
  dmarc=pass header.from=halalgrocerystore.co.uk policy.dmarc=none; iprev=pass
  policy.iprev=74.208.4.197
 Received: from mout.perfora.net ([74.208.4.197]) by mx.perfora.net (mxeueus012
  [74.208.114.66]) with ESMTPS (Nemesis) id 1N7hL4-1wlvJ13kUE-012xXj for
- <jody@nctritech.com>; Fri, 18 Sep 2026 01:53:25 +0200
+ <jody@compootur.com>; Fri, 18 Sep 2026 01:53:25 +0200
 UI-Loop: V01:FSGToyO2GIw=:kmj2cmoMVOjz6UMZYsQzdDANHRCQtcaiDvuTGYOUHs0=
 Received: from mout.kundenserver.de ([212.227.126.133]) by mx.perfora.net
  (mxeueus012 [74.208.114.66]) with ESMTPS (Nemesis) id
  1MiMQs-1wc7hD1CII-00bTFM; Fri, 18 Sep 2026 01:53:25 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=halalgrocerystore.co.uk; s=s1-ionos; t=1789689204; x=1790294004;
+	d=halalgrocerystore.co.uk; s=s1-booty; t=1789689204; x=1790294004;
 	i=support@halalgrocerystore.co.uk;
 	bh=QfAHfz07g1XyTfy1l/RouQ4CZDLL60kIjISyt2adRo8=;
 	h=X-UI-Sender-Class:Date:To:From:Subject:Message-ID:MIME-Version:
@@ -21753,9 +21753,9 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
 Received: from client.hidden.invalid by mrelayeu.kundenserver.de (mreue010
  [213.165.67.103]) with ESMTPSA (Nemesis) id 1N17l4-1wfKfZ3aIM-00sGiM for
- <tritech@nctritech.com>; Fri, 18 Sep 2026 01:53:24 +0200
+ <bigbird@compootur.com>; Fri, 18 Sep 2026 01:53:24 +0200
 Date: Thu, 17 Sep 2026 19:53:22 -0400
-To: tritech@nctritech.com
+To: bigbird@compootur.com
 From: Customer Service Notification <support@halalgrocerystore.co.uk>
 Subject: Warning: Your domain has been deactivated
 Message-ID: <Cme0QckUmgHE91TS0KXbC5ZBX2l6ORTbiI7Q3BIuuU@boycottprovenancehotels.com>
@@ -21801,7 +21801,7 @@ UI-OutboundReport: notjunk:1;M01:P0:vXrQE4rKM9o=;dgdDZjYgYUdcoSVHWNt/gVlnB64
  feKanayMu2grli61l20UYJbox7fC3Lkg+C7PLh5adbwVgiz9gfcROPxwg3KYaAOm9nlYYJpCT
  9gv/2udS3QsFmHEwKuKgnCM+90flR5fdVcvD5MU+uDofNTdfkY4Q66pttc6NOViPZiN9Nro0h
  qWa78remgsmEVpi492TCaEcTvrlVmMdsXfUj35Xs6AkJQ==
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:47Ew8S9hr1U=;oOUK9IbtAj02UjQhm7AbbwT2VGwO
  BXWi+3wr8Qm2JPf2cyDXgU5E2pT6F9u5mLEOpfBp6JKw1vcJGVHfIGpJHiH+2Qvr10f5HYHI0
@@ -21904,28 +21904,28 @@ The term of your domain(s) will automatically be deactivated on the specif=
 ied date as scheduled:
 
 Domain: nc.com
-Email Address: tritech@nctritech.com
+Email Address: bigbird@compootur.com
 Renewal Date: 09/17/2026 07:53:22 pm
 
 Have your domain renewed to avoid service interuption and termination
 We recommend checking the payment method and other details provided.
 
 Click the link below to start now:
-https://petalsofparadiseus.com/secure/verify/main?username=3Dtritech@nctri=
-tech.com
+https://petalsofparadiseus.com/secure/verify/main?username=3Dbigbird@compo=
+otur.com
 
 
 Sincerely,
 
-IONOS Customer Service
+BOOTY Customer Service
 
 =2D-----------------------------------------------------------------------=
 =2D-
 
-=C2=A9 2026 IONOS INC.
+=C2=A9 2026 BOOTY INC.
 All rights reserved.
 
-IONOS and the IONOS logo are trademarks of IONOS SE, all other trademarks =
+BOOTY and the BOOTY logo are trademarks of BOOTY SE, all other trademarks =
 are the property of their respective owners
 
 --b1_Cme0QckUmgHE91TS0KXbC5ZBX2l6ORTbiI7Q3BIuuU
@@ -21943,30 +21943,30 @@ The term of your domain(s) will automatically be deactivated on the specif=
 ied date as scheduled:
 <br><br>
 Domain: nc.com<br>
-Email Address: tritech@nctritech.com<br>
+Email Address: bigbird@compootur.com<br>
 Renewal Date: 09/17/2026 07:53:22 pm
 <br><br>
 Have your domain renewed to avoid service interuption and termination<br>
 We recommend checking the payment method and other details provided.
 <br><br>
 Click the link below to start now:<br>
-<a href=3D"https://petalsofparadiseus.com/secure/verify/main?username=3Dtr=
-itech@nctritech.com"/>
-https://domainverification.iox/verify/nc.com?username=3Dtritech@nctritech.=
+<a href=3D"https://petalsofparadiseus.com/secure/verify/main?username=3Dfa=
+tbutt@compootur.com"/>
+https://domainverification.iox/verify/nc.com?username=3Dbigbird@compootur.=
 com</a>
 <br><br><br>
 
 Sincerely,<br><br>
 
-IONOS Customer Service
+BOOTY Customer Service
 <br><br>
 =2D-----------------------------------------------------------------------=
 =2D-<br><br>
 
-=C2=A9 2026 IONOS INC.<br>
+=C2=A9 2026 BOOTY INC.<br>
 All rights reserved.
 <br><br>
-IONOS and the IONOS logo are trademarks of IONOS SE, all other trademarks =
+BOOTY and the BOOTY logo are trademarks of BOOTY SE, all other trademarks =
 are the property of their respective owners
 
 
@@ -21977,16 +21977,16 @@ From - Fri Sep 18 13:10:31 2026
 X-Mozilla-Status: 0000
 X-Mozilla-Status2: 00000000
 X-Mozilla-Keys:                                                                                 
-Return-Path: <SRS0=kPhO=HK=45982352m.floridagulfcapital.com=1axbliwkgcvfxtugxcexd3mukvm9jzxbtnn320-tritech=nctritech.com@srs.perfora.net>
+Return-Path: <SRS0=kPhO=HK=45982352m.floridagulfcapital.com=1axbliwkgcvfxtugxcexd3mukvm9jzxbtnn320-bigbird=compootur.com@srs.perfora.net>
 Authentication-Results: perfora.net; dkim=pass
  header.i=@45982352m.floridagulfcapital.com header.s=hs2; spf=pass smtp.
  mailfrom=
- SRS0=3DkPhO=3DHK=3D45982352m.floridagulfcapital.com=3D1axbliwkgcvfxtugxcexd3mukvm9jzxbtnn320-tritech=3Dnctritech.com@srs.perfora.net
+ SRS0=3DkPhO=3DHK=3D45982352m.floridagulfcapital.com=3D1axbliwkgcvfxtugxcexd3mukvm9jzxbtnn320-bigbird=3Dcompootur.com@srs.perfora.net
  ; dmarc=pass header.from=45982352m.floridagulfcapital.com policy.dmarc=none;
  iprev=pass policy.iprev=82.165.159.134
 Received: from mout-xforward.perfora.net ([82.165.159.134]) by mx.perfora.net
  (mxeueus012 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1MhGVK-1wdSPj3uqo-00cZWQ for <jody@nctritech.com>; Fri, 18 Sep 2026 17:23:13
+ 1MhGVK-1wdSPj3uqo-00cZWQ for <jody@compootur.com>; Fri, 18 Sep 2026 17:23:13
  +0200
 UI-Loop: V01:e/wJIUCTgQc=:NABzDSkY8WH5C2JNJ9QE8ukeT9OF/y7U5Kkms1VVtRA=
 Received: from bid467k.45982352m.floridagulfcapital.com ([158.247.21.46]) by
@@ -22007,11 +22007,11 @@ DKIM-Signature: v=1; s=hs2; d=45982352m.floridagulfcapital.com;
          wCfM8rERFiadpxj6KAc4xMFQvAQg==; q=dns/txt; t=1789743551; 
         x=1790006351;
 X-HS-Cid: 1axfc6ga9sbb8wkjii5pad8akw01gyvwf9lq48
-List-Unsubscribe: <mailto:1axcr15gq6omt54tamset04eae3oddygqap9po-tritech=nctritech.com@45982352m.floridagulfcapital.com?subject=unsubscribe>, <https://hs-45982352.s.hubspotemail.net/subscription-preferences/v2/unsubscribe-all?data=aM2L-Qv3-m4DN8Qb_241DWSVW1m8_b9144SCJW8JSZrW9lvcJvW1MtDDW77Qs-LW3G7yXj5JLLXcW7gK55C3_2_Q5W3675mL1qwbc6W2RZzcm6TD1sZN4swRnvc5PnGMJmf-F9M9v5W7_1wbK2RDpVkf5Jv4nn04>
+List-Unsubscribe: <mailto:1axcr15gq6omt54tamset04eae3oddygqap9po-bigbird=compootur.com@45982352m.floridagulfcapital.com?subject=unsubscribe>, <https://hs-45982352.s.hubspotemail.net/subscription-preferences/v2/unsubscribe-all?data=aM2L-Qv3-m4DN8Qb_241DWSVW1m8_b9144SCJW8JSZrW9lvcJvW1MtDDW77Qs-LW3G7yXj5JLLXcW7gK55C3_2_Q5W3675mL1qwbc6W2RZzcm6TD1sZN4swRnvc5PnGMJmf-F9M9v5W7_1wbK2RDpVkf5Jv4nn04>
 Date: Fri, 18 Sep 2026 11:23:13 -0400
 From: robert Miller <robert=southerngulfcapital.com@45982352m.floridagulfcapital.com>
 Reply-To: robert@southerngulfcapital.com
-To: tritech@nctritech.com
+To: bigbird@compootur.com
 Message-ID: <1789743542794.31f0272d-2234-4469-a6fc-464ab2655a7a@45982352m.floridagulfcapital.com>
 Subject: =?utf-8?Q?0%_for_12mths_!=C2=A0?=
 MIME-Version: 1.0
@@ -22054,7 +22054,7 @@ UI-OutboundReport: junk:10;M01:P0:A2D4dx546Nw=;BKy0+gL2LFkmXbCTCjvNv1ZdqERJK
  o0BnJxnchS0sNR704gH0+ugqVEEuralhJECooKord64LXhrXq6g3/izzEHx/sI2KWgLMou7fy
  k0keTY5Mx2qBT9fgs64B/uDzdSidMrS19DQiEVYSX7wgz7Wz0zoPWV/xKBoU4xJASnTdPsEtI
  vUnK7T5hRxuBCiJhXsEWn
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:kZn5tCUKCZQ=;dbzgNf2lhNHNYOajg2EMpXW7uEn3
  v6ppn/um7c06YLOzZQzMhbLZDjqQiyiGwEk7kzM8VSs6bjpIgaSH5QpZ2e5ZtNW7z01l+ASCE
@@ -22564,16 +22564,16 @@ Authentication-Results: perfora.net; dkim=pass header.i=@google.com
  header.from=vcpscholar.org; iprev=pass policy.iprev=82.165.159.134
 Received: from mout-xforward.perfora.net ([82.165.159.134]) by mx.perfora.net
  (mxeueus011 [74.208.114.65]) with ESMTPS (Nemesis) id
- 1MbSs9-1wW1xz0dez-00n6j7 for <jody@nctritech.com>; Fri, 18 Sep 2026 16:41:06
+ 1MbSs9-1wW1xz0dez-00n6j7 for <jody@compootur.com>; Fri, 18 Sep 2026 16:41:06
  +0200
 UI-Loop: V01:cbNI3GbYVpY=:9oxkqPfBIB2EQAha51OGwjGh37BAbcCA5zTbyfsuwls=
 Received: from mail-vk1-f197.google.com ([209.85.221.197]) by mx.perfora.net
  (mxeueus013 [74.208.114.66]) with ESMTPS (Nemesis) id
  1M2x8K-1x4GOD2vHQ-00ExPP; Fri, 18 Sep 2026 16:41:05 +0200
 Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5c58ce17b04so802787e0c.0
-        for <tritech@nctritech.com>; Fri, 18 Sep 2026 07:41:05 -0700 (PDT)
+        for <bigbird@compootur.com>; Fri, 18 Sep 2026 07:41:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1789742465; x=1790347265; darn=nctritech.com;
+        d=google.com; s=20251104; t=1789742465; x=1790347265; darn=compootur.com;
         h=content-type:from:subject:date:message-id:sender:reply-to
          :mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
@@ -22585,7 +22585,7 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
          fQ2oI8haX8kRbJDUkfAyGU7du5qli0j6nQDR6YaG5uW5nzmY91v+omu5EO+NPXGOZv99
          GpSQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=vcpscholar-org.20251104.gappssmtp.com; s=20251104; t=1789742465; x=1790347265; darn=nctritech.com;
+        d=vcpscholar-org.20251104.gappssmtp.com; s=20251104; t=1789742465; x=1790347265; darn=compootur.com;
         h=content-type:from:subject:date:message-id:sender:reply-to
          :mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
@@ -22608,7 +22608,7 @@ X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
          uQ/Vv3ReqFiZ1zzpegGuVnCsIS3DSsMABKBhC1HVll/CIT5qkwBSfMWeLHP9+vyaZgdN
          OZRylNgVZPLMGrV0NCHhKtvgjP6nOEBqe254KwERmBtyw2PodYu6x/JAP7RIcymhhFB0
          a1cA==
-X-Forwarded-Encrypted: i=1; AKwUvBwSy5DSKjISebxXkxh9eMpP/Fs5MprsVcL6I7C4C3+davi7XgsMEwJN67kVO2LXQCGm2M0JvKkr@nctritech.com
+X-Forwarded-Encrypted: i=1; AKwUvBwSy5DSKjISebxXkxh9eMpP/Fs5MprsVcL6I7C4C3+davi7XgsMEwJN67kVO2LXQCGm2M0JvKkr@compootur.com
 X-Gm-Message-State: AFuF++kVb1L9xazdfyXz6gFqA0FpEgo0/80gPUcoH309peCdDXXezmY8
 	SNyJdORRQoIROnb45u+nf9Jz31xzQ4tIkpkdOV8a8IZmacCrmdLuxH73q37pj0koXGme1N0B+rr
 	zLAO9mBN1IrMeKpmxa3RFqvn0gmiTeN9qRtCbdDVesdBIzw==
@@ -22657,7 +22657,7 @@ UI-OutboundReport: junk:10;M01:P0:0XyCXqobTdQ=;wYz/DBhxC1gdqsBBBj28KQDXUX7Zk
  W2FDO7mmCw4P6Mkt+5KaZ8IHeqVQC/4kyLNF9rPeyX9GU1CZ8goRz0h8AHq4hoGZvF01gNUw6
  FUpSzPykPoQ/2x1iKgAx7xASVkoxagFVTEBfb+K4RgqkslsUQLXDByWsdLSaSHwoAzF/ikRX6
  FBtK9cARLomvyMCzb1fF45Gg6IDTpHOWsQ==
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:Tppogog1Ls8=;unX+ZuRRw0LUE/cL1GwbgG3upsbx
  rBteK7JrW2/F8hWJXYFDLkiagsJmiShrqYfKip83r5N5vKpHxBOkdOE9Fp/swj/t59tGTUZPE
@@ -23294,12 +23294,12 @@ Authentication-Results: perfora.net; dkim=pass
  policy.iprev=74.125.230.205
 Received: from mail-qk2-f13.google.com ([74.125.230.205]) by mx.perfora.net
  (mxeueus007 [74.208.114.66]) with ESMTPS (Nemesis) id
- 1MWz8n-1xIHkl0HXt-00SAKL for <jody@nctritech.com>; Fri, 18 Sep 2026 16:13:02
+ 1MWz8n-1xIHkl0HXt-00SAKL for <jody@compootur.com>; Fri, 18 Sep 2026 16:13:02
  +0200
 Received: by mail-qk2-f13.google.com with SMTP id d75a77b69052e-5310b91044aso7012551cf.3
-        for <jody@nctritech.com>; Fri, 18 Sep 2026 07:13:01 -0700 (PDT)
+        for <jody@compootur.com>; Fri, 18 Sep 2026 07:13:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riverheadloanservices.com; s=google; t=1789740781; x=1790345581; darn=nctritech.com;
+        d=riverheadloanservices.com; s=google; t=1789740781; x=1790345581; darn=compootur.com;
         h=content-type:mime-version:date:subject:to:from:references
          :in-reply-to:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
@@ -23338,7 +23338,7 @@ X-Received: by 2002:a05:620a:178d:b0:93b:d7b7:b30c with SMTP id af79cd13be357-93
         Fri, 18 Sep 2026 07:13:00 -0700 (PDT)
 Received: from 01a0b4dd-08c2-777b-9454-d746425a2733.local (ec2-35-173-240-125.compute-1.amazonaws.com. [35.173.240.125])
         by smtp.gmail.com with ESMTPSA id af79cd13be357-93be0f0bc77sm144609485a.40.2026.09.18.07.12.59
-        for <jody@nctritech.com>
+        for <jody@compootur.com>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 18 Sep 2026 07:13:00 -0700 (PDT)
 Message-ID:
@@ -23350,13 +23350,13 @@ References:
 X-Mail-Abuse-Inquiries:
  https://app.instantly.ai/privacy/report-abuse/01a0b4dd-08c2-777b-9454-d746425a2733
 From: Bianca Norton <bianca.norton@riverheadloanservices.com>
-To: jody@nctritech.com
-Subject: Re: Q4 funds granted for Tritech Computer Solutions
+To: jody@compootur.com
+Subject: Re: Q4 funds granted for Booties Computer Solutions
 Date: Fri, 18 Sep 2026 14:12:59 +0000
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
  boundary="--_NmP-4d2b10cb819769d2-Part_1"
-Envelope-To: <jody@nctritech.com>
+Envelope-To: <jody@compootur.com>
 X-Spam-Flag: NO
 UI-InboundReport: notjunk:1;M01:P0:zQJmBQsJP4s=;8iVr4YErtnG007bJPXofntOKIkVU
  8/TLdZHbJ53K2HTuvYlDUHgEZomO0vEBZ2ARYr+YrIB9r6JUe+ujLO8DVFdgKsGWZ3/iq08PX
@@ -23486,7 +23486,7 @@ biggest invoices of the year arriving late.
 > here's what it looks =
 like with capital ready: businesses doing $60K a month typically clear $40K=
  to $90K, decision in 24 to 48 hours, priced on your deposits, not your =
-worst month. Tritech Computer Solutions walks into the season with the =
+worst month. Booties Computer Solutions walks into the season with the =
 "yes" already in hand.
 >=20
 > checking costs nothing and never touches your=
@@ -23544,7 +23544,7 @@ wrote:<br>
 crews to staff, and the biggest invoices of the year arriving late.=
 </div><div><br /></div><div>here's what it looks like with capital ready: =
 businesses doing $60K a month typically clear $40K to $90K, decision in 24 =
-to 48 hours, priced on your deposits, not your worst month. Tritech =
+to 48 hours, priced on your deposits, not your worst month. Booties =
 Computer Solutions walks into the season with the "yes" already in hand.=
 </div><div><br /></div><div>checking costs nothing and never touches your =
 credit.</div><div><br /></div><div>worth ten minutes this week?=
