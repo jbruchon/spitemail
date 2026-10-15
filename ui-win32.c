@@ -22,6 +22,14 @@ static HBRUSH hbrNoMsgBg = NULL;
 int debugconsole = 1;  /* Set to 0 to disable debug console by default */
 HWND hwndConsole;
 
+/* Pane sizing */
+static int col1Width = SM_VV_FOLDER_PANE_WIDTH;
+static int col2Width = SM_VV_MESSAGE_PANE_WIDTH;
+static int col3Width;
+static int mp_subject_width = SM_MP_SUBJECT_WIDTH;
+static int mp_fromto_width = SM_MP_FROMTO_WIDTH;
+static int mp_date_width = SM_MP_DATE_WIDTH;
+
 static HTREEITEM *g_ui_htree_items = NULL;
 static uint32_t g_ui_htree_capacity = 0;
 
@@ -423,12 +431,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	int tbHeight;
 	int contentTop;
 	int contentHeight;
-	static int col1Width;
-	static int col2Width;
-	static int col3Width;
-	static int mp_subject_width = SM_MP_SUBJECT_WIDTH;
-	static int mp_fromto_width = SM_MP_FROMTO_WIDTH;
-	static int mp_date_width = SM_MP_DATE_WIDTH;
 	HDWP hdwp;
 	MINMAXINFO *minMax;
 	LVCOLUMNW lvc;
@@ -503,7 +505,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			hwndReadingPane = CreateWindowEx(
 				0, L"EDIT", L"Reading Pane",
-				WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_BORDER | WS_TABSTOP,
+				WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_READONLY | WS_BORDER | WS_TABSTOP,
 				0, 0, 0, 0, hwnd, (HMENU)4, hInstance, NULL
 			);
 			SendMessage(hwndReadingPane, WM_SETFONT, (WPARAM)hUiFont, TRUE);
@@ -618,17 +620,44 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			contentTop = tbHeight;
 			contentHeight = cy - contentTop;
 
-			col1Width = SM_VV_FOLDER_PANE_WIDTH;
-			col2Width = SM_VV_MESSAGE_PANE_WIDTH;
-			if (cx < SM_WINDOW_WIDTH) {
-				col1Width = (int)(((unsigned long)cx * SM_VV_FOLDER_PANE_WIDTH) / SM_WINDOW_WIDTH);
-				col2Width = (int)(((unsigned long)cx * SM_VV_MESSAGE_PANE_WIDTH) / SM_WINDOW_WIDTH);
+			/* Slow growth curve for the folder tree */
+			{
+				int extra_width = cx - SM_WINDOW_WIDTH;
+				if (extra_width < 0) extra_width = 0;
+				col1Width = SM_VV_FOLDER_PANE_WIDTH + (extra_width / 8);
+				if (col1Width > 300) col1Width = 300;
 				if (col1Width < SM_VV_MIN_FOLDER_PANE_WIDTH) col1Width = SM_VV_MIN_FOLDER_PANE_WIDTH;
-				if (col2Width < SM_VV_MIN_MESSAGE_PANE_WIDTH) col2Width = SM_VV_MIN_MESSAGE_PANE_WIDTH;
 			}
 
-			col3Width = cx - col1Width - col2Width;
-			if (col3Width < SM_VV_MIN_READING_PANE_WIDTH) col3Width = SM_VV_MIN_READING_PANE_WIDTH;
+			/* Distribute remaining space between message list (col2) and reading pane (col3) */
+			{
+				int remaining_width = cx - col1Width;
+				col2Width = (remaining_width * 50) / 100;
+				if (col2Width < SM_VV_MIN_MESSAGE_PANE_WIDTH) col2Width = SM_VV_MIN_MESSAGE_PANE_WIDTH;
+
+				col3Width = remaining_width - col2Width;
+				if (col3Width < SM_VV_MIN_READING_PANE_WIDTH) {
+					col3Width = SM_VV_MIN_READING_PANE_WIDTH;
+					col2Width = remaining_width - col3Width;
+					if (col2Width < SM_VV_MIN_MESSAGE_PANE_WIDTH) {
+						col2Width = SM_VV_MIN_MESSAGE_PANE_WIDTH;
+					}
+				}
+
+				/* Scale message list columns proportionally based on new col2Width */
+				{
+					int msg_extra = col2Width - SM_VV_MESSAGE_PANE_WIDTH;
+					if (msg_extra < -100) msg_extra = -100;
+
+					mp_subject_width = SM_MP_SUBJECT_WIDTH + (msg_extra * 54) / 100;
+					mp_fromto_width  = SM_MP_FROMTO_WIDTH  + (msg_extra * 34) / 100;
+					mp_date_width    = SM_MP_DATE_WIDTH    + (msg_extra * 10) / 100;
+
+					ListView_SetColumnWidth(hwndMessageList, 0, mp_subject_width);
+					ListView_SetColumnWidth(hwndMessageList, 1, mp_fromto_width);
+					ListView_SetColumnWidth(hwndMessageList, 2, mp_date_width);
+				}
+			}
 
 			hdwp = BeginDeferWindowPos(3);
 			MoveWindow(hwndToolbar, 0, 0, cx, tbHeight, TRUE);
@@ -859,7 +888,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		default:
 			return DefWindowProc(hwnd, uMsg, wParam, lParam);
-	}
+	}  /* End of WndProc switch() */
 }
 
 
