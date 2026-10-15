@@ -145,6 +145,7 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 	int total_items;
 	StoreAccount *s_acc = NULL;
 	int32_t store_folder_id = folder_idx;
+	wchar_t w_date[64];
 
 	if (folder_idx == INVALID_INDEX) return;
 	if (ctx->accounts.count > 0 && ctx->accounts.store_accounts) {
@@ -189,18 +190,24 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 
 	if (s_acc && store_fetch_folder_messages(s_acc, store_folder_id, &headers, &msg_count) == 0 && headers) {
 		for (i = 0; i < msg_count; i++) {
-			MessageListItem *mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
+			MessageListItem *mItem;
+			wchar_t *w_subject;
+			wchar_t *w_participant;
+			char date_buf[64];
+
+			mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
 			if (!mItem) continue;
 
 			mItem->id = headers[i].id;
 			strcpy_s(mItem->subject, sizeof(mItem->subject), headers[i].subject);
 			strcpy_s(mItem->participant, sizeof(mItem->participant), headers[i].participant);
-			strcpy_s(mItem->date_str, sizeof(mItem->date_str), headers[i].date_str);
 			mItem->timestamp = headers[i].timestamp;
 
-			wchar_t *w_subject = utf8_to_wide_dup(mItem->subject);
-			wchar_t *w_participant = utf8_to_wide_dup(mItem->participant);
-			wchar_t *w_date = utf8_to_wide_dup(mItem->date_str);
+			w_subject = utf8_to_wide_dup(mItem->subject);
+			w_participant = utf8_to_wide_dup(mItem->participant);
+
+			store_format_timestamp(headers[i].timestamp, date_buf, sizeof(date_buf));
+			MultiByteToWideChar(CP_UTF8, 0, date_buf, -1, w_date, sizeof(w_date) / sizeof(wchar_t));
 
 			memset(&lvi, 0, sizeof(lvi));
 			lvi.mask = LVIF_TEXT | LVIF_PARAM;
@@ -215,7 +222,6 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 
 			free(w_subject);
 			free(w_participant);
-			free(w_date);
 		}
 
 		store_free_folder_messages(headers);
@@ -228,12 +234,10 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 			mItem->id = 999999ULL;
 			strcpy_s(mItem->subject, sizeof(mItem->subject), "Totally not an invalid ID error test");
 			strcpy_s(mItem->participant, sizeof(mItem->participant), "Bug King <crasharoo@spitemail.com>");
-			strcpy_s(mItem->date_str, sizeof(mItem->date_str), "Tue, 6 Oct 2026");
-			mItem->timestamp = 20261006;
+			mItem->timestamp = 1791244300ULL;
 
 			wchar_t *w_subject = utf8_to_wide_dup(mItem->subject);
 			wchar_t *w_participant = utf8_to_wide_dup(mItem->participant);
-			wchar_t *w_date = utf8_to_wide_dup(mItem->date_str);
 
 			memset(&lvi, 0, sizeof(lvi));
 			lvi.mask = LVIF_TEXT | LVIF_PARAM;
@@ -248,7 +252,6 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 
 			free(w_subject);
 			free(w_participant);
-			free(w_date);
 		}
 	}
 	/* End of invalid message ID injection */

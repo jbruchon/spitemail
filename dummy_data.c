@@ -94,21 +94,21 @@ int populate_dummy_ram_store(StoreAccount *account)
 
 	if (strcmp(acc_name, "default") == 0 || strstr(acc_name, "root") != NULL) {
 		/* First account: 2 in Inbox, 1 in Sent */
-		if (store_ram_add_message(account, inbox_id, "Welcome to Spite Mail (RAM Store)", "Jody Bruchon <jody@jodybruchon.com>", "Tue, 6 Oct 2026", 20261006,
+		if (store_ram_add_message(account, inbox_id, "Welcome to Spite Mail (RAM Store)", "Jody Bruchon <jody@jodybruchon.com>", 1791244800ULL,
 			"From: Jody Bruchon <jody@jodybruchon.com>\r\n"
 			"To: root@spitemail.com\r\n"
 			"Subject: Welcome to Spite Mail\r\n"
 			"Date: Tue, 6 Oct 2026\r\n\r\n"
 			"Spite Mail is designed for speed, low overhead, and pure native Win32 controls.", &new_id) != 0) return -1;
 
-		if (store_ram_add_message(account, inbox_id, "Second Inbox Message", "Test User <test@example.com>", "Tue, 6 Oct 2026", 20261007,
+		if (store_ram_add_message(account, inbox_id, "Second Inbox Message", "Test User <test@example.com>", 1791320900ULL,
 			"From: Test User <test@example.com>\r\n"
 			"To: root@spitemail.com\r\n"
 			"Subject: Second Inbox Message\r\n"
 			"Date: Tue, 6 Oct 2026\r\n\r\n"
 			"This is the second test message in the inbox.", &new_id) != 0) return -1;
 
-		if (store_ram_add_message(account, sent_id, "Re: Bug report on jdupes memory usage", "Bug Reporter <reporter@example.com>", "Mon, 5 Oct 2026", 20261005,
+		if (store_ram_add_message(account, sent_id, "Re: Bug report on jdupes memory usage", "Bug Reporter <reporter@example.com>", 1791158400ULL,
 			"From: root@spitemail.com\r\n"
 			"To: Bug Reporter <reporter@example.com>\r\n"
 			"Subject: Re: Bug report on jdupes memory usage\r\n"
@@ -117,20 +117,19 @@ int populate_dummy_ram_store(StoreAccount *account)
 
 	} else {
 		/* Subsequent accounts: 1 in Inbox, 1 in Sent */
-		if (store_ram_add_message(account, inbox_id, "Inbox Message for Account", "Sender <sender@example.com>", "Wed, 7 Oct 2026", 20261007,
+		if (store_ram_add_message(account, inbox_id, "Inbox Message for Account", "Sender <sender@example.com>", 1791320000ULL,
 			"From: Sender <sender@example.com>\r\n"
 			"To: user@spitemail.com\r\n"
 			"Subject: Inbox Message for Account\r\n"
 			"Date: Wed, 7 Oct 2026\r\n\r\n"
 			"Secondary account inbox test content.", &new_id) != 0) return -1;
 
-		if (store_ram_add_message(account, sent_id, "Sent Message for Account", "Recipient <recipient@example.com>", "Wed, 7 Oct 2026", 20261008,
+		if (store_ram_add_message(account, sent_id, "Sent Message for Account", "Recipient <recipient@example.com>", 1791417600ULL,
 			"From: user@spitemail.com\r\n"
 			"To: Recipient <recipient@example.com>\r\n"
 			"Subject: Sent Message for Account\r\n"
 			"Date: Wed, 7 Oct 2026\r\n\r\n"
 			"Secondary account sent test content.", &new_id) != 0) return -1;
 	}
-
 	return 0;
 }

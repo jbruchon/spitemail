@@ -22,7 +22,7 @@ void store_ram_free_folder_messages(StoreMsgHeader *headers);
 int store_ram_fetch_message_range(StoreAccount *account, int32_t folder_id, uint64_t start_id, uint32_t max_count, StoreMsgHeader **out_headers, uint32_t *out_count);
 int store_ram_fetch_message(StoreAccount *account, uint64_t msg_id, char **out_eml_data, size_t *out_size);
 void store_ram_free_message(void *msg_data);
-int store_ram_add_message(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id);
+int store_ram_add_message(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, uint64_t timestamp, const char *eml_data, uint64_t *out_msg_id);
 int store_ram_delete_message(StoreAccount *account, uint64_t msg_id);
 
 

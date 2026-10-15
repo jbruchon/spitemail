@@ -16,8 +16,7 @@ typedef struct RamRecord {
 	char     subject[128];
 	char     from_addr[128];
 	char     to_addr[128];
-	char     date_str[32];
-	uint32_t timestamp;
+	uint64_t timestamp;
 	char     eml_blob[2048];
 } RamRecord;
 
@@ -189,7 +188,6 @@ int store_ram_fetch_message_range(StoreAccount *account, int32_t folder_id, uint
 					} else {
 						strcpy_s(headers[idx].participant, sizeof(headers[idx].participant), priv->ram_db[i].from_addr);
 					}
-					strcpy_s(headers[idx].date_str, sizeof(headers[idx].date_str), priv->ram_db[i].date_str);
 					headers[idx].timestamp = priv->ram_db[i].timestamp;
 					idx++;
 					if (max_count > 0 && idx >= max_count) break;
@@ -245,7 +243,7 @@ void store_ram_free_message(void *msg_data)
 }
 
 
-int store_ram_add_message(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id)
+int store_ram_add_message(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, uint64_t timestamp, const char *eml_data, uint64_t *out_msg_id)
 {
 	RamStorePriv *priv;
 	RamRecord *new_db;
@@ -278,11 +276,6 @@ int store_ram_add_message(StoreAccount *account, int32_t folder_id, const char *
 	rec->folder_id = folder_id;
 	rec->timestamp = timestamp;
 	strcpy_s(rec->subject, sizeof(rec->subject), subject);
-	if (date_str) {
-		strcpy_s(rec->date_str, sizeof(rec->date_str), date_str);
-	} else {
-		strcpy_s(rec->date_str, sizeof(rec->date_str), "Today");
-	}
 
 	if (is_sent_folder) {
 		strcpy_s(rec->to_addr, sizeof(rec->to_addr), participant ? participant : "recipient@spitemail.com");

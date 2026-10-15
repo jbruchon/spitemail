@@ -32,8 +32,7 @@ typedef struct StoreMsgHeader {
 	uint32_t mbox_length;
 	char     subject[128];
 	char     participant[128];
-	char     date_str[32];
-	uint32_t timestamp;
+	uint64_t timestamp;
 } StoreMsgHeader;
 
 typedef struct MessageListItem {
@@ -42,8 +41,7 @@ typedef struct MessageListItem {
 	uint32_t mbox_length;
 	char     subject[128];
 	char     participant[128];
-	char     date_str[32];
-	uint32_t timestamp;
+	uint64_t timestamp;
 } MessageListItem;
 
 typedef struct StoreDriver {
@@ -57,7 +55,7 @@ typedef struct StoreDriver {
 	int (*fetch_message_range)(StoreAccount *account, int32_t folder_id, uint64_t start_id, uint32_t max_count, StoreMsgHeader **out_headers, uint32_t *out_count);
 	int (*fetch_message)(StoreAccount *account, uint64_t msg_id, char **out_eml_data, size_t *out_size);
 	void (*free_message)(void *msg_data);
-	int (*add_message)(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id);
+	int (*add_message)(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, uint64_t timestamp, const char *eml_data, uint64_t *out_msg_id);
 	int (*delete_message)(StoreAccount *account, uint64_t msg_id);
 } StoreDriver;
 
@@ -81,7 +79,7 @@ void store_free_folder_messages(StoreMsgHeader *headers);
 int store_fetch_message_range(StoreAccount *account, int32_t folder_id, uint64_t start_id, uint32_t max_count, StoreMsgHeader **out_headers, uint32_t *out_count);
 int store_fetch_message(StoreAccount *account, uint64_t msg_id, char **out_eml_data, size_t *out_size);
 void store_free_message(void *msg_data);
-int store_add_message(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id);
+int store_add_message(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, uint64_t timestamp, const char *eml_data, uint64_t *out_msg_id);
 int store_delete_message(StoreAccount *account, uint64_t msg_id);
 
 #ifdef __cplusplus

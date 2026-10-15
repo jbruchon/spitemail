@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "version.h"
 #include "spitemail.h"
 #include "datastore.h"
@@ -46,6 +47,27 @@ uint32_t pool_add_str(StringPool *pool, const char *str)
 char *pool_get_str(const StringPool *pool, uint32_t offset)
 {
 	return pool->data + offset;
+}
+
+
+/* Convert 64-bit epoch to formatted date string */
+int store_format_timestamp(uint64_t timestamp, char *buf, size_t buflen)
+{
+	time_t t = (time_t)timestamp;
+	struct tm tm_info;
+
+	if (timestamp == 0 || buflen == 0) {
+		if (buflen > 0) buf[0] = '\0';
+		return 0;
+	}
+
+#ifdef ON_WINDOWS
+	localtime_s(&tm_info, &t);
+#else
+	localtime_r(&t, &tm_info);
+#endif
+
+	return (int)strftime(buf, buflen, "%Y-%m-%d %H:%M", &tm_info);
 }
 
 

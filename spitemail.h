@@ -125,7 +125,7 @@ typedef struct MailContext {
 typedef struct {
     char     subject[128];
     char     sender[128];
-    uint32_t timestamp;
+    uint64_t timestamp;
 } MailItem;
 
 extern MailContext g_mail_ctx;
@@ -134,6 +134,7 @@ extern MailContext g_mail_ctx;
 /*** Function prototypes (Defined AFTER MailContext) ***/
 uint32_t pool_add_str(StringPool *pool, const char *str);
 char *pool_get_str(const StringPool *pool, uint32_t offset);
+int store_format_timestamp(uint64_t timestamp, char *buf, size_t buflen);
 void load_app_configuration(MailContext *ctx);
 void mail_context_init(MailContext *ctx);
 void mail_context_free(MailContext *ctx);

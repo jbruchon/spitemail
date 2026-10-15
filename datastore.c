@@ -81,10 +81,10 @@ void store_free_message(void *msg_data)
 }
 
 
-int store_add_message(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id)
+int store_add_message(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, uint64_t timestamp, const char *eml_data, uint64_t *out_msg_id)
 {
 	if (!account || !account->driver || !account->driver->add_message) return -1;
-	return account->driver->add_message(account, folder_id, subject, participant, date_str, timestamp, eml_data, out_msg_id);
+	return account->driver->add_message(account, folder_id, subject, participant, timestamp, eml_data, out_msg_id);
 }
 
 
