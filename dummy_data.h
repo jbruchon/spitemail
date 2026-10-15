@@ -10,7 +10,7 @@ extern "C" {
 
 #include "datastore.h"
 
-int get_dummy_folders(FolderInfo **out_folders, uint32_t *out_count);
+int populate_dummy_account_folders(StoreAccount *account);
 int populate_dummy_ram_store(StoreAccount *account);
 
 #ifdef __cplusplus

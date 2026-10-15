@@ -114,16 +114,13 @@ static StoreAccount *get_folder_account(MailContext *ctx, int32_t folder_idx)
 	uint32_t i;
 	if (folder_idx == INVALID_INDEX || ctx->accounts.count == 0) return NULL;
 
-	/* Find which account root folder or child tree owns this folder index */
 	for (i = 0; i < ctx->accounts.count; i++) {
 		int32_t root_f = ctx->accounts.root_folder_idx[i];
-		/* Simple check: if this folder index falls within this account's tree branch,
-		 * or we match by account index layout, return the corresponding store account. */
-		if (folder_idx == root_f || folder_idx == root_f + 1) {
+		if (folder_idx >= root_f && folder_idx < root_f + 2) {
 			return ctx->accounts.store_accounts ? ctx->accounts.store_accounts[i] : NULL;
 		}
 	}
-	/* Fallback to first account if unmatched */
+
 	return (ctx->accounts.store_accounts) ? ctx->accounts.store_accounts[0] : NULL;
 }
 
@@ -139,10 +136,36 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 	LVITEMW lvi;
 	int total_items;
 	StoreAccount *s_acc = NULL;
+	int32_t store_folder_id = folder_idx;
 
 	if (folder_idx == INVALID_INDEX) return;
 	if (ctx->accounts.count > 0 && ctx->accounts.store_accounts) {
 		s_acc = get_folder_account(ctx, folder_idx);
+	}
+
+	/* Map global folder table index to store account folder ID if needed */
+	if (s_acc) {
+		FolderType *s_types = NULL;
+		int32_t *s_ids = NULL;
+		char **s_names = NULL;
+		uint32_t *s_offsets = NULL;
+		uint32_t s_count = 0;
+
+		if (store_fetch_folders(s_acc, &s_types, &s_ids, &s_names, &s_offsets, &s_count) == 0) {
+			for (i = 0; i < s_count; i++) {
+				if (i < 2) { /* Maps Inbox (0) and Sent (1) relative to account root pair */
+					int32_t expected_local_idx = ctx->accounts.root_folder_idx[0];
+					uint32_t acc_idx = (folder_idx >= ctx->accounts.root_folder_idx[1]) ? 1 : 0;
+					if (acc_idx < ctx->accounts.count) {
+						expected_local_idx = ctx->accounts.root_folder_idx[acc_idx];
+					}
+					if (folder_idx == expected_local_idx + (int32_t)i) {
+						store_folder_id = s_ids[i];
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	folder_flags = ctx->folders.flags[folder_idx];
@@ -156,7 +179,7 @@ static void load_folder_messages(HWND hwndList, HWND hwndReading, MailContext *c
 	lvcCol.pszText = ISFLAG(folder_flags, SM_FOLDER_SENT) ? (LPWSTR)(uintptr_t)L"To" : (LPWSTR)(uintptr_t)L"From";
 	ListView_SetColumn(hwndList, 1, &lvcCol);
 
-	if (s_acc && store_fetch_folder_messages(s_acc, folder_idx, &headers, &msg_count) == 0 && headers) {
+	if (s_acc && store_fetch_folder_messages(s_acc, store_folder_id, &headers, &msg_count) == 0 && headers) {
 		for (i = 0; i < msg_count; i++) {
 			MessageListItem *mItem = (MessageListItem *)malloc(sizeof(MessageListItem));
 			if (!mItem) continue;

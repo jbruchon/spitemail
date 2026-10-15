@@ -8,10 +8,9 @@
 #include "store_ram.h"
 #include "dummy_data.h"
 
-
 typedef struct RamRecord {
 	uint64_t id;
-	int32_t  folder_idx;
+	int32_t  folder_id;
 	uint32_t mbox_offset;
 	uint32_t mbox_length;
 	char     subject[128];
@@ -22,29 +21,12 @@ typedef struct RamRecord {
 	char     eml_blob[2048];
 } RamRecord;
 
-
 typedef struct RamStorePriv {
 	RamRecord *ram_db;
 	size_t     ram_db_count;
 	size_t     ram_db_capacity;
 	uint64_t   next_msg_id;
 } RamStorePriv;
-
-
-struct StoreAccount {
-	char         account_name[128];
-	StoreDriver  *driver;
-	FolderInfo   *folders;
-	uint32_t     folder_count;
-	void         *store_priv;
-};
-
-
-/*** Forward declarations ***/
-void store_ram_free_folders(FolderInfo *folders);
-
-
-/*** End definitions, begin code ***/
 
 
 int store_ram_has_account(const char *account_name)
@@ -72,6 +54,7 @@ StoreAccount *store_ram_open_account(const char *account_name)
 	memset(priv, 0, sizeof(RamStorePriv));
 
 	strcpy_s(acc->account_name, sizeof(acc->account_name), account_name ? account_name : "ram");
+	strcpy_s(acc->display_name, sizeof(acc->display_name), acc->account_name);
 	acc->driver = &store_ram_driver;
 	acc->store_priv = priv;
 
@@ -85,7 +68,7 @@ StoreAccount *store_ram_open_account(const char *account_name)
 	priv->ram_db_count = 0;
 	priv->next_msg_id = 1001;
 
-	if (get_dummy_folders(&acc->folders, &acc->folder_count) != 0) {
+	if (populate_dummy_account_folders(acc) != 0) {
 		free(priv->ram_db);
 		free(priv);
 		free(acc);
@@ -93,7 +76,10 @@ StoreAccount *store_ram_open_account(const char *account_name)
 	}
 
 	if (populate_dummy_ram_store(acc) != 0) {
-		store_ram_free_folders(acc->folders);
+		if (acc->folder_types) free(acc->folder_types);
+		if (acc->folder_ids) free(acc->folder_ids);
+		if (acc->folder_names) free(acc->folder_names);
+		if (acc->folder_name_offsets) free(acc->folder_name_offsets);
 		free(priv->ram_db);
 		free(priv);
 		free(acc);
@@ -119,27 +105,29 @@ void store_ram_close_account(StoreAccount *account)
 		if (priv->ram_db) free(priv->ram_db);
 		free(priv);
 	}
-	if (account->folders) free(account->folders);
+	if (account->folder_types) free(account->folder_types);
+	if (account->folder_ids) free(account->folder_ids);
+	if (account->folder_names) free(account->folder_names);
+	if (account->folder_name_offsets) free(account->folder_name_offsets);
 	free(account);
 }
 
 
-int store_ram_fetch_folders(StoreAccount *account, FolderInfo **out_folders, uint32_t *out_folder_count)
+int store_ram_fetch_folders(StoreAccount *account, FolderType **out_types, int32_t **out_folder_ids, char ***out_names, uint32_t **out_name_offsets, uint32_t *out_folder_count)
 {
-	if (!account || !out_folders || !out_folder_count) return -1;
-	return get_dummy_folders(out_folders, out_folder_count);
+	if (!account || !out_types || !out_folder_ids || !out_names || !out_name_offsets || !out_folder_count) return -1;
+	*out_types = account->folder_types;
+	*out_folder_ids = account->folder_ids;
+	*out_names = account->folder_names;
+	*out_name_offsets = account->folder_name_offsets;
+	*out_folder_count = account->folder_count;
+	return 0;
 }
 
 
-void store_ram_free_folders(FolderInfo *folders)
+int store_ram_fetch_folder_messages(StoreAccount *account, int32_t folder_id, StoreMsgHeader **out_headers, uint32_t *out_count)
 {
-	if (folders) free(folders);
-}
-
-
-int store_ram_fetch_folder_messages(StoreAccount *account, int32_t folder_idx, StoreMsgHeader **out_headers, uint32_t *out_count)
-{
-	return store_ram_fetch_message_range(account, folder_idx, 0, 0, out_headers, out_count);
+	return store_ram_fetch_message_range(account, folder_id, 0, 0, out_headers, out_count);
 }
 
 
@@ -149,21 +137,28 @@ void store_ram_free_folder_messages(StoreMsgHeader *headers)
 }
 
 
-int store_ram_fetch_message_range(StoreAccount *account, int32_t folder_idx, uint64_t start_id, uint32_t max_count, StoreMsgHeader **out_headers, uint32_t *out_count)
+int store_ram_fetch_message_range(StoreAccount *account, int32_t folder_id, uint64_t start_id, uint32_t max_count, StoreMsgHeader **out_headers, uint32_t *out_count)
 {
 	RamStorePriv *priv;
 	StoreMsgHeader *headers = NULL;
 	uint32_t count = 0;
 	size_t i;
-	int is_sent_folder;
+	int is_sent_folder = 0;
 
 	if (!account || !account->store_priv || !out_headers || !out_count) return -1;
 	priv = (RamStorePriv *)account->store_priv;
 
-	is_sent_folder = (folder_idx == 1 || folder_idx == 3);
+	for (i = 0; i < account->folder_count; i++) {
+		if (account->folder_ids[i] == folder_id) {
+			if (account->folder_types[i] == FOLDER_TYPE_SENT || account->folder_types[i] == FOLDER_TYPE_OUTBOX) {
+				is_sent_folder = 1;
+			}
+			break;
+		}
+	}
 
 	for (i = 0; i < priv->ram_db_count; i++) {
-		if (priv->ram_db[i].folder_idx == folder_idx) {
+		if (priv->ram_db[i].folder_id == folder_id) {
 			if (start_id == 0 || priv->ram_db[i].id >= start_id) {
 				count++;
 				if (max_count > 0 && count >= max_count) break;
@@ -183,7 +178,7 @@ int store_ram_fetch_message_range(StoreAccount *account, int32_t folder_idx, uin
 	{
 		uint32_t idx = 0;
 		for (i = 0; i < priv->ram_db_count; i++) {
-			if (priv->ram_db[i].folder_idx == folder_idx) {
+			if (priv->ram_db[i].folder_id == folder_id) {
 				if (start_id == 0 || priv->ram_db[i].id >= start_id) {
 					headers[idx].id = priv->ram_db[i].id;
 					headers[idx].mbox_offset = priv->ram_db[i].mbox_offset;
@@ -250,11 +245,12 @@ void store_ram_free_message(void *msg_data)
 }
 
 
-int store_ram_add_message(StoreAccount *account, int32_t folder_idx, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id)
+int store_ram_add_message(StoreAccount *account, int32_t folder_id, const char *subject, const char *participant, const char *date_str, uint32_t timestamp, const char *eml_data, uint64_t *out_msg_id)
 {
 	RamStorePriv *priv;
 	RamRecord *new_db;
-	int is_sent_folder;
+	int is_sent_folder = 0;
+	size_t i;
 
 	if (!account || !account->store_priv || !subject || !eml_data) return -1;
 	priv = (RamStorePriv *)account->store_priv;
@@ -267,11 +263,19 @@ int store_ram_add_message(StoreAccount *account, int32_t folder_idx, const char 
 		priv->ram_db_capacity = new_cap;
 	}
 
-	is_sent_folder = (folder_idx == 1 || folder_idx == 3);
+	for (i = 0; i < account->folder_count; i++) {
+		if (account->folder_ids[i] == folder_id) {
+			if (account->folder_types[i] == FOLDER_TYPE_SENT || account->folder_types[i] == FOLDER_TYPE_OUTBOX) {
+				is_sent_folder = 1;
+			}
+			break;
+		}
+	}
+
 	RamRecord *rec = &priv->ram_db[priv->ram_db_count];
 	memset(rec, 0, sizeof(RamRecord));
 	rec->id = priv->next_msg_id++;
-	rec->folder_idx = folder_idx;
+	rec->folder_id = folder_id;
 	rec->timestamp = timestamp;
 	strcpy_s(rec->subject, sizeof(rec->subject), subject);
 	if (date_str) {
@@ -324,7 +328,6 @@ StoreDriver store_ram_driver = {
 	.open_account = store_ram_open_account,
 	.close_account = store_ram_close_account,
 	.fetch_folders = store_ram_fetch_folders,
-	.free_folders = store_ram_free_folders,
 	.fetch_folder_messages = store_ram_fetch_folder_messages,
 	.free_folder_messages = store_ram_free_folder_messages,
 	.fetch_message_range = store_ram_fetch_message_range,

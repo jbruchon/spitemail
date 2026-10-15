@@ -23,10 +23,10 @@ extern "C" {
 #endif /* Win32 */
 
 #include <stdint.h>
+#include "datastore.h"
 
 
 /*** Helpful general-purpose definitions ***/
-
 #define ISFLAG(a,b) ((a & b) == b)
 #define SETFLAG(a,b) (a |= b)
 #define CLEARFLAG(a,b) (a &= (~b))
@@ -83,8 +83,6 @@ typedef struct FolderTable {
 	uint32_t   count;
 	uint32_t   capacity;
 } FolderTable;
-
-typedef struct StoreAccount StoreAccount;
 
 typedef struct AccountTable {
 	uint32_t *name_offsets;
